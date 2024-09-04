@@ -1,30 +1,8 @@
 "use client";
+import { edt, edtTemplatInterface } from "@/app/model";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
-import { edtTemplate } from "./TemplateEdt";
-
-interface edt {
-	date: Date;
-	tranche_horaire: string;
-	ue: string;
-	salle: string;
-	prof: string;
-	niveau: string;
-}
-interface caseInterface {
-	ue: string | null;
-	salle: string | null;
-	prof: string | null;
-	niveau: string | null;
-}
-interface cours {
-	tranche_horaire: string;
-	case: caseInterface[];
-}
-interface edtTemplatInterface {
-	date: string | null;
-	cours: cours[];
-}
+import { edtTemplate } from "../EDT/TemplateEdt";
 
 const data: edt[] = [
 	{
