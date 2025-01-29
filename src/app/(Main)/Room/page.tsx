@@ -21,6 +21,8 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Room, initialRooms } from "@/lib/Room_utils";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { Edit, FileDown, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -63,10 +65,17 @@ export default function Home() {
 	};
 
 	const handleExportPDF = () => {
-		// Ici, vous implémenteriez la logique pour exporter en PDF
-		console.log("Exporting to PDF...");
-		// Pour l'instant, nous allons simplement afficher une alerte
-		alert("Fonctionnalité d'export en PDF à implémenter");
+		const doc = new jsPDF();
+		autoTable(doc, {
+			head: [["ID", "Nom", "Abréviation", "Capacité"]],
+			body: rooms.map((room) => [
+				room.room_id,
+				room.room_name,
+				room.room_abr,
+				room.room_capacity,
+			]),
+		});
+		doc.save("liste_des_salles.pdf");
 	};
 
 	return (

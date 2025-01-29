@@ -1,0 +1,10002 @@
+[
+	{
+		"id": "1",
+		"level": "M2 ASR",
+		"start_hours": "08:00",
+		"end_hours": "11:45",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "2",
+		"level": "M1 IG grp2",
+		"start_hours": "07:45",
+		"end_hours": "12:45",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "3",
+		"level": "L2 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:00",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "4",
+		"level": "M2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "5",
+		"level": "M1 ASR",
+		"start_hours": "12:30",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "6",
+		"level": "L1 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "7",
+		"level": "L3 ASR",
+		"start_hours": "13:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "8",
+		"level": "L1 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "9",
+		"level": "M2 IG grp1",
+		"start_hours": "12:45",
+		"end_hours": "15:15",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "10",
+		"level": "L3 IG grp2",
+		"start_hours": "11:30",
+		"end_hours": "15:45",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "BRC",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "11",
+		"level": "M1 ASR",
+		"start_hours": "10:15",
+		"end_hours": "15:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "12",
+		"level": "M1 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "13",
+		"level": "L1 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "14",
+		"level": "M2 GB grp2",
+		"start_hours": "13:15",
+		"end_hours": "15:30",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "15",
+		"level": "L3 IG grp1",
+		"start_hours": "07:00",
+		"end_hours": "12:15",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "16",
+		"level": "M2 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "17:00",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "17",
+		"level": "L2 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "13:30",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "18",
+		"level": "L3 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:30",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "19",
+		"level": "M1 ASR",
+		"start_hours": "07:15",
+		"end_hours": "10:00",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "20",
+		"level": "M1 ASR",
+		"start_hours": "13:15",
+		"end_hours": "15:00",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "21",
+		"level": "M2 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "13:00",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "22",
+		"level": "M1 IG grp2",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "23",
+		"level": "M1 ASR",
+		"start_hours": "07:00",
+		"end_hours": "09:30",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "24",
+		"level": "M2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "13:30",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "25",
+		"level": "L1 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "09:00",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "26",
+		"level": "M1 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "12:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "27",
+		"level": "M1 IG grp2",
+		"start_hours": "11:00",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "28",
+		"level": "M2 ASR",
+		"start_hours": "13:45",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "29",
+		"level": "L2 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "15:45",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "30",
+		"level": "L2 GB grp2",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "31",
+		"level": "M2 ASR",
+		"start_hours": "10:30",
+		"end_hours": "15:30",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "32",
+		"level": "M2 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "16:45",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "33",
+		"level": "L1 IG grp2",
+		"start_hours": "12:30",
+		"end_hours": "16:45",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "34",
+		"level": "M2 IG grp2",
+		"start_hours": "10:15",
+		"end_hours": "12:00",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "35",
+		"level": "M1 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "36",
+		"level": "M1 GB grp1",
+		"start_hours": "09:00",
+		"end_hours": "11:30",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "37",
+		"level": "L3 IG grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "38",
+		"level": "M2 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "11:15",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "39",
+		"level": "M1 IG grp1",
+		"start_hours": "15:15",
+		"end_hours": "17:00",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "40",
+		"level": "L3 ASR",
+		"start_hours": "08:30",
+		"end_hours": "10:45",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "41",
+		"level": "M2 GB grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "42",
+		"level": "M1 IG grp1",
+		"start_hours": "10:15",
+		"end_hours": "14:00",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "43",
+		"level": "M2 ASR",
+		"start_hours": "13:15",
+		"end_hours": "17:00",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "44",
+		"level": "L1 ASR",
+		"start_hours": "11:30",
+		"end_hours": "16:30",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "45",
+		"level": "M2 ASR",
+		"start_hours": "07:45",
+		"end_hours": "09:15",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "46",
+		"level": "M1 ASR",
+		"start_hours": "08:15",
+		"end_hours": "11:45",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "47",
+		"level": "M2 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "48",
+		"level": "L2 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "11:45",
+		"ue": "Base Info",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "49",
+		"level": "L1 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "50",
+		"level": "L1 ASR",
+		"start_hours": "10:45",
+		"end_hours": "12:45",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "51",
+		"level": "L3 ASR",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "52",
+		"level": "L1 IG grp1",
+		"start_hours": "12:00",
+		"end_hours": "16:00",
+		"ue": "ASDA",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "53",
+		"level": "M2 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "13:45",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "54",
+		"level": "L1 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "55",
+		"level": "M2 IG grp1",
+		"start_hours": "11:15",
+		"end_hours": "16:15",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "56",
+		"level": "M1 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "13:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "57",
+		"level": "L2 IG grp1",
+		"start_hours": "08:15",
+		"end_hours": "11:45",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "58",
+		"level": "L2 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "13:15",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "59",
+		"level": "L3 ASR",
+		"start_hours": "08:45",
+		"end_hours": "11:15",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "60",
+		"level": "L1 GB grp2",
+		"start_hours": "08:00",
+		"end_hours": "12:15",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "61",
+		"level": "M2 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "13:00",
+		"ue": "ASDA",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "62",
+		"level": "L2 GB grp1",
+		"start_hours": "10:00",
+		"end_hours": "12:15",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "63",
+		"level": "L2 ASR",
+		"start_hours": "13:15",
+		"end_hours": "16:30",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "64",
+		"level": "M2 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:15",
+		"ue": "Archi log",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "65",
+		"level": "M1 IG grp2",
+		"start_hours": "07:15",
+		"end_hours": "10:00",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "66",
+		"level": "L2 ASR",
+		"start_hours": "15:00",
+		"end_hours": "17:30",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "67",
+		"level": "M2 IG grp1",
+		"start_hours": "09:00",
+		"end_hours": "11:15",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "68",
+		"level": "L1 ASR",
+		"start_hours": "13:30",
+		"end_hours": "15:15",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "69",
+		"level": "M1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "15:30",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "70",
+		"level": "L3 IG grp1",
+		"start_hours": "08:00",
+		"end_hours": "13:45",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "71",
+		"level": "M1 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "13:45",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "72",
+		"level": "L1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "73",
+		"level": "M2 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "74",
+		"level": "L3 ASR",
+		"start_hours": "11:30",
+		"end_hours": "14:30",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "75",
+		"level": "L1 ASR",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "76",
+		"level": "M2 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "12:45",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "77",
+		"level": "M2 ASR",
+		"start_hours": "10:15",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "78",
+		"level": "L2 GB grp2",
+		"start_hours": "13:45",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "79",
+		"level": "M2 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "11:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "80",
+		"level": "L2 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "81",
+		"level": "M2 IG grp1",
+		"start_hours": "11:30",
+		"end_hours": "15:30",
+		"ue": "Base Info",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "82",
+		"level": "M1 GB grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:15",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "83",
+		"level": "L1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "16:30",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "84",
+		"level": "L3 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "85",
+		"level": "L2 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "86",
+		"level": "M1 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:30",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "87",
+		"level": "L2 ASR",
+		"start_hours": "11:45",
+		"end_hours": "16:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "88",
+		"level": "M1 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "17:15",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "89",
+		"level": "L3 IG grp1",
+		"start_hours": "07:00",
+		"end_hours": "11:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "90",
+		"level": "L1 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "91",
+		"level": "M1 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "92",
+		"level": "M2 ASR",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "93",
+		"level": "L1 ASR",
+		"start_hours": "11:00",
+		"end_hours": "15:45",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "94",
+		"level": "L2 ASR",
+		"start_hours": "07:15",
+		"end_hours": "11:15",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "95",
+		"level": "L2 ASR",
+		"start_hours": "07:00",
+		"end_hours": "12:15",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "96",
+		"level": "M1 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "14:30",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "97",
+		"level": "M2 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "16:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "98",
+		"level": "L2 IG grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "99",
+		"level": "L1 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "16:45",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "100",
+		"level": "L2 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "101",
+		"level": "L2 ASR",
+		"start_hours": "08:00",
+		"end_hours": "13:15",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "102",
+		"level": "L2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "14:30",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "103",
+		"level": "L2 ASR",
+		"start_hours": "12:15",
+		"end_hours": "14:00",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "104",
+		"level": "L3 IG grp1",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "105",
+		"level": "M1 IG grp1",
+		"start_hours": "11:00",
+		"end_hours": "14:45",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "106",
+		"level": "L2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "107",
+		"level": "L1 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "14:00",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "108",
+		"level": "M2 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "13:45",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "109",
+		"level": "M2 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "10:00",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "110",
+		"level": "L3 IG grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "111",
+		"level": "L2 IG grp1",
+		"start_hours": "08:15",
+		"end_hours": "13:45",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "112",
+		"level": "M1 IG grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "113",
+		"level": "L3 ASR",
+		"start_hours": "09:00",
+		"end_hours": "11:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "114",
+		"level": "L2 IG grp2",
+		"start_hours": "08:00",
+		"end_hours": "11:15",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "115",
+		"level": "M2 IG grp2",
+		"start_hours": "08:30",
+		"end_hours": "13:15",
+		"ue": "RO",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "116",
+		"level": "M2 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "13:45",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "117",
+		"level": "M1 IG grp2",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "118",
+		"level": "L2 ASR",
+		"start_hours": "11:00",
+		"end_hours": "14:15",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "119",
+		"level": "M2 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "14:30",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "120",
+		"level": "L3 IG grp2",
+		"start_hours": "08:00",
+		"end_hours": "13:15",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "121",
+		"level": "L3 IG grp1",
+		"start_hours": "11:30",
+		"end_hours": "15:00",
+		"ue": "BDA",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "122",
+		"level": "M1 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "16:45",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "123",
+		"level": "L2 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "16:00",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "124",
+		"level": "L3 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "13:45",
+		"ue": "Base Info",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "125",
+		"level": "L2 IG grp2",
+		"start_hours": "10:30",
+		"end_hours": "14:45",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "126",
+		"level": "M1 ASR",
+		"start_hours": "13:15",
+		"end_hours": "16:15",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "127",
+		"level": "L1 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "14:45",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "128",
+		"level": "L2 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:30",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "129",
+		"level": "M1 IG grp1",
+		"start_hours": "11:30",
+		"end_hours": "16:45",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "130",
+		"level": "L2 IG grp1",
+		"start_hours": "08:15",
+		"end_hours": "11:00",
+		"ue": "BDA",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "131",
+		"level": "L2 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:45",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "132",
+		"level": "L3 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "16:15",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "133",
+		"level": "L1 IG grp1",
+		"start_hours": "12:30",
+		"end_hours": "16:15",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "134",
+		"level": "M1 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "17:45",
+		"ue": "Java",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "135",
+		"level": "M2 ASR",
+		"start_hours": "12:45",
+		"end_hours": "15:45",
+		"ue": "IA",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "136",
+		"level": "M1 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:45",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "137",
+		"level": "L3 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "17:30",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "138",
+		"level": "M1 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "12:45",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "139",
+		"level": "M1 GB grp1",
+		"start_hours": "12:45",
+		"end_hours": "15:00",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "140",
+		"level": "L3 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "17:15",
+		"ue": "Base Info",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "141",
+		"level": "M2 IG grp1",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "142",
+		"level": "L3 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "10:15",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "143",
+		"level": "M2 ASR",
+		"start_hours": "14:45",
+		"end_hours": "16:45",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "144",
+		"level": "L1 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "10:45",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "145",
+		"level": "L2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "146",
+		"level": "M1 GB grp2",
+		"start_hours": "14:45",
+		"end_hours": "16:30",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "147",
+		"level": "L2 ASR",
+		"start_hours": "09:15",
+		"end_hours": "12:45",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "148",
+		"level": "M1 IG grp1",
+		"start_hours": "09:00",
+		"end_hours": "11:15",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "149",
+		"level": "M1 ASR",
+		"start_hours": "09:45",
+		"end_hours": "13:00",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "150",
+		"level": "M1 GB grp1",
+		"start_hours": "09:15",
+		"end_hours": "12:45",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "151",
+		"level": "M1 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:00",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "152",
+		"level": "M1 ASR",
+		"start_hours": "15:30",
+		"end_hours": "17:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "153",
+		"level": "L1 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:45",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "154",
+		"level": "M2 GB grp1",
+		"start_hours": "09:30",
+		"end_hours": "13:45",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "155",
+		"level": "L1 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "11:45",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "156",
+		"level": "L3 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "11:30",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "157",
+		"level": "L3 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "16:15",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "158",
+		"level": "M2 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "16:30",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "159",
+		"level": "L3 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "17:00",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "160",
+		"level": "L1 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:15",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "161",
+		"level": "L1 GB grp2",
+		"start_hours": "10:15",
+		"end_hours": "14:45",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "162",
+		"level": "M2 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "163",
+		"level": "L2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "164",
+		"level": "L1 ASR",
+		"start_hours": "12:30",
+		"end_hours": "15:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "MAD",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "165",
+		"level": "M2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "166",
+		"level": "L2 IG grp2",
+		"start_hours": "09:30",
+		"end_hours": "12:45",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "167",
+		"level": "L3 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "12:45",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "168",
+		"level": "L3 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:30",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "169",
+		"level": "M1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "170",
+		"level": "L1 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "16:30",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "171",
+		"level": "M1 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "13:30",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "172",
+		"level": "L1 GB grp1",
+		"start_hours": "13:45",
+		"end_hours": "16:45",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "173",
+		"level": "L2 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "174",
+		"level": "M1 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "09:00",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "175",
+		"level": "M1 GB grp2",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "176",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "17:45",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "177",
+		"level": "L1 ASR",
+		"start_hours": "09:45",
+		"end_hours": "14:30",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "178",
+		"level": "M1 ASR",
+		"start_hours": "08:30",
+		"end_hours": "13:45",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "179",
+		"level": "L2 ASR",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "180",
+		"level": "L3 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "12:00",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "181",
+		"level": "L1 GB grp2",
+		"start_hours": "07:45",
+		"end_hours": "10:00",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "182",
+		"level": "M2 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "09:00",
+		"ue": "ASDA",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "183",
+		"level": "L1 IG grp1",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "184",
+		"level": "L2 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "185",
+		"level": "L1 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "13:30",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "186",
+		"level": "L2 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "10:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "187",
+		"level": "L2 ASR",
+		"start_hours": "07:45",
+		"end_hours": "12:30",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "188",
+		"level": "L3 GB grp1",
+		"start_hours": "07:45",
+		"end_hours": "09:45",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "189",
+		"level": "M1 ASR",
+		"start_hours": "09:00",
+		"end_hours": "12:15",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "190",
+		"level": "L2 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:15",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "191",
+		"level": "L3 ASR",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "192",
+		"level": "M1 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "09:30",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "193",
+		"level": "M1 GB grp2",
+		"start_hours": "09:15",
+		"end_hours": "13:45",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "194",
+		"level": "L1 ASR",
+		"start_hours": "08:00",
+		"end_hours": "12:45",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "195",
+		"level": "M2 GB grp2",
+		"start_hours": "10:30",
+		"end_hours": "13:45",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "196",
+		"level": "M1 GB grp1",
+		"start_hours": "12:00",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "197",
+		"level": "L3 ASR",
+		"start_hours": "07:45",
+		"end_hours": "10:00",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "198",
+		"level": "L2 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "12:45",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "199",
+		"level": "M1 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "14:00",
+		"ue": "GLog",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "200",
+		"level": "L2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:30",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "201",
+		"level": "M1 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "202",
+		"level": "M2 ASR",
+		"start_hours": "11:00",
+		"end_hours": "13:15",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "203",
+		"level": "M2 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "17:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "204",
+		"level": "L1 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:30",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "205",
+		"level": "M1 ASR",
+		"start_hours": "12:45",
+		"end_hours": "14:45",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "206",
+		"level": "L2 IG grp2",
+		"start_hours": "11:30",
+		"end_hours": "16:15",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "207",
+		"level": "M1 IG grp1",
+		"start_hours": "13:45",
+		"end_hours": "17:15",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "208",
+		"level": "M2 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "11:45",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "209",
+		"level": "M1 ASR",
+		"start_hours": "07:15",
+		"end_hours": "12:45",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "210",
+		"level": "L2 GB grp2",
+		"start_hours": "12:15",
+		"end_hours": "16:00",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "211",
+		"level": "M2 GB grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "212",
+		"level": "L3 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "13:00",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "HJS",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "213",
+		"level": "L2 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "214",
+		"level": "L1 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "215",
+		"level": "L1 GB grp2",
+		"start_hours": "08:30",
+		"end_hours": "10:45",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "216",
+		"level": "L3 IG grp1",
+		"start_hours": "10:15",
+		"end_hours": "13:30",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "217",
+		"level": "L2 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "13:30",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "218",
+		"level": "L1 ASR",
+		"start_hours": "11:30",
+		"end_hours": "15:30",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "219",
+		"level": "M2 ASR",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "220",
+		"level": "L2 IG grp1",
+		"start_hours": "12:30",
+		"end_hours": "17:00",
+		"ue": "ASDA",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "221",
+		"level": "L1 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "13:15",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "222",
+		"level": "L1 IG grp2",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "223",
+		"level": "M1 GB grp1",
+		"start_hours": "07:45",
+		"end_hours": "10:15",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "224",
+		"level": "M1 GB grp1",
+		"start_hours": "14:30",
+		"end_hours": "17:15",
+		"ue": "RO",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "225",
+		"level": "M1 GB grp2",
+		"start_hours": "07:45",
+		"end_hours": "09:00",
+		"ue": "ANG",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "226",
+		"level": "L2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:45",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "227",
+		"level": "L2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "228",
+		"level": "M2 IG grp1",
+		"start_hours": "14:30",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "229",
+		"level": "M2 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "230",
+		"level": "L3 GB grp1",
+		"start_hours": "15:45",
+		"end_hours": "17:15",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "231",
+		"level": "L3 GB grp1",
+		"start_hours": "09:30",
+		"end_hours": "11:30",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "232",
+		"level": "M1 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "233",
+		"level": "M1 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "12:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "234",
+		"level": "M1 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "12:30",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "235",
+		"level": "M1 ASR",
+		"start_hours": "14:30",
+		"end_hours": "17:15",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "236",
+		"level": "L3 ASR",
+		"start_hours": "10:30",
+		"end_hours": "15:15",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "237",
+		"level": "M1 ASR",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "238",
+		"level": "M1 GB grp2",
+		"start_hours": "07:45",
+		"end_hours": "09:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "239",
+		"level": "L1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "240",
+		"level": "L3 IG grp1",
+		"start_hours": "09:00",
+		"end_hours": "11:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "241",
+		"level": "L1 GB grp2",
+		"start_hours": "10:15",
+		"end_hours": "15:45",
+		"ue": "IA",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "242",
+		"level": "L3 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:00",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "243",
+		"level": "M1 ASR",
+		"start_hours": "12:45",
+		"end_hours": "14:15",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "244",
+		"level": "M1 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "13:45",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "245",
+		"level": "L1 ASR",
+		"start_hours": "12:15",
+		"end_hours": "16:15",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "246",
+		"level": "L2 ASR",
+		"start_hours": "08:15",
+		"end_hours": "11:00",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "247",
+		"level": "L2 GB grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "248",
+		"level": "L2 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:30",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "249",
+		"level": "M2 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "250",
+		"level": "M1 IG grp1",
+		"start_hours": "10:15",
+		"end_hours": "13:15",
+		"ue": "Base Info",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "251",
+		"level": "L2 ASR",
+		"start_hours": "09:30",
+		"end_hours": "13:30",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "252",
+		"level": "L1 GB grp1",
+		"start_hours": "11:15",
+		"end_hours": "16:15",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "253",
+		"level": "L3 ASR",
+		"start_hours": "09:30",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "254",
+		"level": "L3 GB grp2",
+		"start_hours": "12:15",
+		"end_hours": "17:45",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "255",
+		"level": "L1 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "13:00",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "256",
+		"level": "M2 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "257",
+		"level": "M2 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:15",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "258",
+		"level": "L1 IG grp1",
+		"start_hours": "14:30",
+		"end_hours": "17:30",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "259",
+		"level": "L2 GB grp1",
+		"start_hours": "12:45",
+		"end_hours": "17:00",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "260",
+		"level": "L2 ASR",
+		"start_hours": "10:30",
+		"end_hours": "15:15",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "261",
+		"level": "L1 IG grp2",
+		"start_hours": "14:15",
+		"end_hours": "17:45",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "262",
+		"level": "L2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "17:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "263",
+		"level": "L1 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "264",
+		"level": "M1 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "15:45",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "265",
+		"level": "M2 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "12:15",
+		"ue": "Base Info",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "266",
+		"level": "L1 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "09:30",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "267",
+		"level": "L2 IG grp1",
+		"start_hours": "10:15",
+		"end_hours": "13:00",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "268",
+		"level": "L3 GB grp2",
+		"start_hours": "07:45",
+		"end_hours": "09:45",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "269",
+		"level": "L2 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "15:45",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "270",
+		"level": "L1 IG grp2",
+		"start_hours": "14:30",
+		"end_hours": "16:15",
+		"ue": "ASDA",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "271",
+		"level": "L2 ASR",
+		"start_hours": "13:45",
+		"end_hours": "17:15",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "272",
+		"level": "L2 GB grp1",
+		"start_hours": "10:00",
+		"end_hours": "13:00",
+		"ue": "BDA",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "273",
+		"level": "L3 ASR",
+		"start_hours": "09:30",
+		"end_hours": "14:15",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "274",
+		"level": "L2 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "12:45",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "275",
+		"level": "L2 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "14:15",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "276",
+		"level": "M1 IG grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "277",
+		"level": "M2 GB grp2",
+		"start_hours": "14:45",
+		"end_hours": "16:00",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "278",
+		"level": "M2 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:15",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "279",
+		"level": "M1 GB grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "280",
+		"level": "L2 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "14:15",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "281",
+		"level": "L3 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "12:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "282",
+		"level": "M1 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "283",
+		"level": "M2 GB grp1",
+		"start_hours": "12:45",
+		"end_hours": "16:30",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "284",
+		"level": "L3 ASR",
+		"start_hours": "14:00",
+		"end_hours": "17:00",
+		"ue": "RO",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "285",
+		"level": "M2 GB grp2",
+		"start_hours": "10:15",
+		"end_hours": "12:30",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "286",
+		"level": "M2 IG grp2",
+		"start_hours": "09:30",
+		"end_hours": "11:00",
+		"ue": "IA",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "287",
+		"level": "M2 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:45",
+		"ue": "GLog",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "288",
+		"level": "M2 GB grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "289",
+		"level": "L3 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "290",
+		"level": "M2 IG grp2",
+		"start_hours": "13:00",
+		"end_hours": "15:00",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "291",
+		"level": "L3 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "292",
+		"level": "L3 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "12:15",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "293",
+		"level": "M2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "294",
+		"level": "M1 ASR",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "295",
+		"level": "L1 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "296",
+		"level": "M2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "16:00",
+		"ue": "ANG",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "297",
+		"level": "M1 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "10:15",
+		"ue": "ANG",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "298",
+		"level": "M1 GB grp1",
+		"start_hours": "10:45",
+		"end_hours": "14:00",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "299",
+		"level": "M2 IG grp2",
+		"start_hours": "14:30",
+		"end_hours": "17:45",
+		"ue": "RO",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "300",
+		"level": "M2 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "15:15",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "301",
+		"level": "L3 ASR",
+		"start_hours": "11:30",
+		"end_hours": "13:15",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "302",
+		"level": "L1 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "303",
+		"level": "M2 ASR",
+		"start_hours": "10:45",
+		"end_hours": "13:15",
+		"ue": "Base Info",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "304",
+		"level": "L1 ASR",
+		"start_hours": "14:45",
+		"end_hours": "16:00",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "305",
+		"level": "L3 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "306",
+		"level": "L1 GB grp1",
+		"start_hours": "12:00",
+		"end_hours": "14:45",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "307",
+		"level": "M1 IG grp2",
+		"start_hours": "10:30",
+		"end_hours": "13:15",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "308",
+		"level": "L1 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:00",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "309",
+		"level": "L2 ASR",
+		"start_hours": "12:00",
+		"end_hours": "16:15",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "310",
+		"level": "M1 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "17:15",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "HJS",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "311",
+		"level": "M1 GB grp1",
+		"start_hours": "07:30",
+		"end_hours": "10:00",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "312",
+		"level": "L1 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "313",
+		"level": "M1 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "15:45",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "314",
+		"level": "L1 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "315",
+		"level": "M2 ASR",
+		"start_hours": "10:15",
+		"end_hours": "13:30",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "316",
+		"level": "M2 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "14:00",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "317",
+		"level": "L1 ASR",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "318",
+		"level": "M2 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "319",
+		"level": "L2 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "12:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "320",
+		"level": "L2 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "321",
+		"level": "M2 IG grp2",
+		"start_hours": "13:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "322",
+		"level": "L2 ASR",
+		"start_hours": "09:15",
+		"end_hours": "13:45",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "323",
+		"level": "M1 ASR",
+		"start_hours": "09:45",
+		"end_hours": "11:00",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "324",
+		"level": "L2 GB grp1",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "325",
+		"level": "M1 GB grp1",
+		"start_hours": "08:30",
+		"end_hours": "11:15",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "326",
+		"level": "M2 ASR",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "327",
+		"level": "L3 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "328",
+		"level": "L3 ASR",
+		"start_hours": "14:00",
+		"end_hours": "16:45",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "329",
+		"level": "M2 GB grp1",
+		"start_hours": "13:15",
+		"end_hours": "17:15",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "330",
+		"level": "L3 IG grp2",
+		"start_hours": "12:15",
+		"end_hours": "17:15",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "331",
+		"level": "L2 GB grp1",
+		"start_hours": "07:45",
+		"end_hours": "09:45",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "332",
+		"level": "L1 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "17:30",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "333",
+		"level": "M1 GB grp2",
+		"start_hours": "07:15",
+		"end_hours": "11:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "334",
+		"level": "L3 IG grp1",
+		"start_hours": "08:00",
+		"end_hours": "13:15",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "335",
+		"level": "L3 ASR",
+		"start_hours": "14:15",
+		"end_hours": "16:45",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "336",
+		"level": "M2 GB grp1",
+		"start_hours": "11:15",
+		"end_hours": "14:00",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "337",
+		"level": "L1 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "15:30",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "338",
+		"level": "L1 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "12:30",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "339",
+		"level": "M1 IG grp2",
+		"start_hours": "10:15",
+		"end_hours": "13:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "340",
+		"level": "L1 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "341",
+		"level": "L1 ASR",
+		"start_hours": "07:30",
+		"end_hours": "10:30",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "342",
+		"level": "L1 GB grp2",
+		"start_hours": "08:30",
+		"end_hours": "13:00",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "343",
+		"level": "L2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "344",
+		"level": "M1 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "15:15",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "345",
+		"level": "M2 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "11:30",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "346",
+		"level": "L1 ASR",
+		"start_hours": "09:15",
+		"end_hours": "11:00",
+		"ue": "BDA",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "347",
+		"level": "M1 GB grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "348",
+		"level": "M1 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "17:45",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "349",
+		"level": "M2 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "11:45",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "350",
+		"level": "L1 ASR",
+		"start_hours": "11:45",
+		"end_hours": "15:00",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "351",
+		"level": "L1 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "HJS",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "352",
+		"level": "L3 ASR",
+		"start_hours": "12:15",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "353",
+		"level": "M1 IG grp2",
+		"start_hours": "07:30",
+		"end_hours": "12:00",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "354",
+		"level": "M2 IG grp1",
+		"start_hours": "11:00",
+		"end_hours": "13:00",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "355",
+		"level": "M2 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "11:00",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "356",
+		"level": "L3 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "11:15",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "357",
+		"level": "L1 GB grp2",
+		"start_hours": "13:00",
+		"end_hours": "17:15",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "358",
+		"level": "M1 ASR",
+		"start_hours": "09:00",
+		"end_hours": "12:30",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "359",
+		"level": "L1 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "12:45",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "360",
+		"level": "L1 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "16:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "361",
+		"level": "L1 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "17:30",
+		"ue": "Archi log",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "362",
+		"level": "L3 IG grp1",
+		"start_hours": "15:15",
+		"end_hours": "17:15",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "363",
+		"level": "L1 IG grp2",
+		"start_hours": "12:45",
+		"end_hours": "17:30",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "364",
+		"level": "L3 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "17:45",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "365",
+		"level": "L1 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "14:45",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "366",
+		"level": "L1 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "367",
+		"level": "M1 ASR",
+		"start_hours": "09:15",
+		"end_hours": "14:45",
+		"ue": "Base Info",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "368",
+		"level": "L1 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "15:15",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "369",
+		"level": "L3 ASR",
+		"start_hours": "10:00",
+		"end_hours": "14:45",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "370",
+		"level": "L2 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:15",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "371",
+		"level": "L3 IG grp2",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "372",
+		"level": "M2 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "10:45",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "373",
+		"level": "L2 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:00",
+		"ue": "IA",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "374",
+		"level": "L3 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "13:45",
+		"ue": "ASDA",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "375",
+		"level": "M1 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "15:45",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "376",
+		"level": "L3 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "377",
+		"level": "M1 IG grp2",
+		"start_hours": "12:15",
+		"end_hours": "17:45",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "378",
+		"level": "M1 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "15:15",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "379",
+		"level": "M2 IG grp2",
+		"start_hours": "09:15",
+		"end_hours": "12:15",
+		"ue": "IA",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "380",
+		"level": "M2 ASR",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "381",
+		"level": "M1 ASR",
+		"start_hours": "15:30",
+		"end_hours": "17:15",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "382",
+		"level": "L1 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "383",
+		"level": "M1 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "16:45",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "384",
+		"level": "L2 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "385",
+		"level": "L1 GB grp2",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "386",
+		"level": "L3 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "10:45",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "387",
+		"level": "M1 IG grp2",
+		"start_hours": "10:30",
+		"end_hours": "15:30",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "388",
+		"level": "M2 ASR",
+		"start_hours": "09:30",
+		"end_hours": "12:45",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "389",
+		"level": "M2 IG grp2",
+		"start_hours": "13:30",
+		"end_hours": "15:45",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "390",
+		"level": "L3 ASR",
+		"start_hours": "13:00",
+		"end_hours": "16:15",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "391",
+		"level": "L2 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "12:15",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "392",
+		"level": "L3 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "16:15",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "393",
+		"level": "L2 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "13:45",
+		"ue": "IA",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "394",
+		"level": "L3 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "14:30",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "395",
+		"level": "L2 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "17:45",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "396",
+		"level": "M1 ASR",
+		"start_hours": "13:45",
+		"end_hours": "17:30",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "397",
+		"level": "L3 ASR",
+		"start_hours": "09:15",
+		"end_hours": "12:45",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "398",
+		"level": "L3 GB grp2",
+		"start_hours": "12:15",
+		"end_hours": "15:15",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "399",
+		"level": "L1 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "HJS",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "400",
+		"level": "L2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "16:15",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "401",
+		"level": "L3 IG grp2",
+		"start_hours": "07:15",
+		"end_hours": "12:30",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "402",
+		"level": "L1 IG grp1",
+		"start_hours": "11:15",
+		"end_hours": "15:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "403",
+		"level": "M2 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:45",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "404",
+		"level": "L1 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "405",
+		"level": "L3 GB grp1",
+		"start_hours": "09:00",
+		"end_hours": "14:15",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "406",
+		"level": "L3 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "407",
+		"level": "M1 GB grp2",
+		"start_hours": "09:30",
+		"end_hours": "11:30",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "408",
+		"level": "L3 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "11:45",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "409",
+		"level": "L2 GB grp2",
+		"start_hours": "08:00",
+		"end_hours": "11:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "410",
+		"level": "L3 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "411",
+		"level": "M1 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "14:00",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "412",
+		"level": "L3 IG grp2",
+		"start_hours": "08:30",
+		"end_hours": "11:30",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "413",
+		"level": "M1 ASR",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "414",
+		"level": "L2 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "13:00",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "415",
+		"level": "L3 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "17:15",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "416",
+		"level": "L3 IG grp1",
+		"start_hours": "14:30",
+		"end_hours": "17:45",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "417",
+		"level": "L2 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "13:00",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "418",
+		"level": "M2 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "13:45",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "419",
+		"level": "M2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "14:45",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "420",
+		"level": "L2 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "16:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "421",
+		"level": "M1 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "422",
+		"level": "L2 IG grp1",
+		"start_hours": "09:00",
+		"end_hours": "12:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "423",
+		"level": "M2 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "424",
+		"level": "L1 GB grp2",
+		"start_hours": "10:15",
+		"end_hours": "13:00",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "425",
+		"level": "L2 GB grp2",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "426",
+		"level": "M1 GB grp2",
+		"start_hours": "07:15",
+		"end_hours": "11:45",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "427",
+		"level": "L2 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "428",
+		"level": "M2 ASR",
+		"start_hours": "08:15",
+		"end_hours": "11:30",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "429",
+		"level": "L3 IG grp1",
+		"start_hours": "07:00",
+		"end_hours": "09:30",
+		"ue": "IA",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "430",
+		"level": "L3 GB grp1",
+		"start_hours": "15:30",
+		"end_hours": "17:45",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "431",
+		"level": "M1 ASR",
+		"start_hours": "15:00",
+		"end_hours": "17:00",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "432",
+		"level": "L3 GB grp1",
+		"start_hours": "12:45",
+		"end_hours": "15:15",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "433",
+		"level": "M1 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "16:45",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "434",
+		"level": "L1 GB grp1",
+		"start_hours": "09:30",
+		"end_hours": "14:15",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "435",
+		"level": "L3 ASR",
+		"start_hours": "07:00",
+		"end_hours": "12:00",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "436",
+		"level": "M2 ASR",
+		"start_hours": "12:30",
+		"end_hours": "16:30",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "437",
+		"level": "M1 IG grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "438",
+		"level": "L2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "439",
+		"level": "L1 IG grp2",
+		"start_hours": "12:30",
+		"end_hours": "14:30",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "440",
+		"level": "L2 IG grp2",
+		"start_hours": "11:00",
+		"end_hours": "15:00",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "441",
+		"level": "M2 GB grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "442",
+		"level": "M1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "14:15",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "443",
+		"level": "L2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "444",
+		"level": "L3 IG grp2",
+		"start_hours": "09:30",
+		"end_hours": "11:30",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "445",
+		"level": "M1 ASR",
+		"start_hours": "07:15",
+		"end_hours": "12:00",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "446",
+		"level": "M2 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "12:45",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "447",
+		"level": "L1 ASR",
+		"start_hours": "10:00",
+		"end_hours": "15:15",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "448",
+		"level": "M2 IG grp2",
+		"start_hours": "15:15",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "449",
+		"level": "M2 IG grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "450",
+		"level": "L2 IG grp1",
+		"start_hours": "09:30",
+		"end_hours": "13:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "MAD",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "451",
+		"level": "L3 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "16:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "452",
+		"level": "M1 IG grp1",
+		"start_hours": "12:00",
+		"end_hours": "15:15",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "453",
+		"level": "L2 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "11:15",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "454",
+		"level": "L2 IG grp2",
+		"start_hours": "10:00",
+		"end_hours": "12:15",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "455",
+		"level": "L3 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "14:00",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "456",
+		"level": "L3 IG grp2",
+		"start_hours": "11:00",
+		"end_hours": "14:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "457",
+		"level": "L1 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "11:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "458",
+		"level": "L1 ASR",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "459",
+		"level": "M1 IG grp2",
+		"start_hours": "12:30",
+		"end_hours": "15:45",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "460",
+		"level": "L2 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "15:30",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "461",
+		"level": "M2 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "16:15",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "462",
+		"level": "L3 ASR",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "463",
+		"level": "L2 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "12:45",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "464",
+		"level": "L3 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "12:15",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "465",
+		"level": "M2 IG grp2",
+		"start_hours": "12:15",
+		"end_hours": "14:15",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "466",
+		"level": "L2 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "467",
+		"level": "M2 ASR",
+		"start_hours": "10:30",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "468",
+		"level": "L2 ASR",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "469",
+		"level": "L2 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "11:30",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "HJS",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "470",
+		"level": "M2 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "471",
+		"level": "L1 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "14:45",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "472",
+		"level": "L2 IG grp1",
+		"start_hours": "10:45",
+		"end_hours": "12:15",
+		"ue": "ANG",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "473",
+		"level": "M1 ASR",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "474",
+		"level": "L1 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "475",
+		"level": "L1 GB grp2",
+		"start_hours": "12:15",
+		"end_hours": "16:45",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "476",
+		"level": "L1 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:00",
+		"ue": "ASDA",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "477",
+		"level": "M1 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "17:15",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "478",
+		"level": "M2 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "479",
+		"level": "L2 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "14:45",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "480",
+		"level": "L2 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "11:30",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "481",
+		"level": "M2 ASR",
+		"start_hours": "12:15",
+		"end_hours": "14:15",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "482",
+		"level": "L1 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:00",
+		"ue": "IA",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "483",
+		"level": "L3 GB grp1",
+		"start_hours": "15:00",
+		"end_hours": "17:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "484",
+		"level": "L1 GB grp2",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "485",
+		"level": "L2 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "16:15",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "486",
+		"level": "L2 IG grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "487",
+		"level": "L1 ASR",
+		"start_hours": "14:15",
+		"end_hours": "17:30",
+		"ue": "ANG",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "488",
+		"level": "L2 GB grp1",
+		"start_hours": "15:45",
+		"end_hours": "17:45",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "489",
+		"level": "L1 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:15",
+		"ue": "RO",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "490",
+		"level": "M2 ASR",
+		"start_hours": "08:00",
+		"end_hours": "10:15",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "491",
+		"level": "L2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:45",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "492",
+		"level": "L1 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "17:00",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "493",
+		"level": "L1 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "494",
+		"level": "L1 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "495",
+		"level": "L3 GB grp1",
+		"start_hours": "09:15",
+		"end_hours": "12:45",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "496",
+		"level": "L1 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "14:00",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "497",
+		"level": "M2 IG grp1",
+		"start_hours": "07:00",
+		"end_hours": "12:15",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "498",
+		"level": "L1 ASR",
+		"start_hours": "07:00",
+		"end_hours": "11:30",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "499",
+		"level": "L2 IG grp1",
+		"start_hours": "09:00",
+		"end_hours": "14:15",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "500",
+		"level": "M2 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:30",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "501",
+		"level": "M1 IG grp2",
+		"start_hours": "07:30",
+		"end_hours": "10:15",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "502",
+		"level": "M2 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "12:30",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "503",
+		"level": "L1 IG grp1",
+		"start_hours": "11:15",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "HJS",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "504",
+		"level": "M2 GB grp2",
+		"start_hours": "08:30",
+		"end_hours": "13:45",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "505",
+		"level": "M2 GB grp1",
+		"start_hours": "09:00",
+		"end_hours": "13:45",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "506",
+		"level": "M1 GB grp1",
+		"start_hours": "12:00",
+		"end_hours": "14:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "507",
+		"level": "L1 ASR",
+		"start_hours": "10:15",
+		"end_hours": "12:15",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "508",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "17:15",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "509",
+		"level": "M1 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:30",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "510",
+		"level": "L2 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "511",
+		"level": "M2 IG grp2",
+		"start_hours": "10:30",
+		"end_hours": "12:45",
+		"ue": "ASDA",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "512",
+		"level": "M2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:30",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "513",
+		"level": "M2 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "514",
+		"level": "M2 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "17:00",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "515",
+		"level": "M1 GB grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "516",
+		"level": "L3 IG grp2",
+		"start_hours": "07:30",
+		"end_hours": "10:45",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "517",
+		"level": "L2 IG grp1",
+		"start_hours": "10:30",
+		"end_hours": "15:45",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "518",
+		"level": "M1 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "17:15",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "519",
+		"level": "L2 IG grp1",
+		"start_hours": "09:15",
+		"end_hours": "13:15",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "520",
+		"level": "L1 GB grp1",
+		"start_hours": "12:15",
+		"end_hours": "14:45",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "521",
+		"level": "L2 IG grp2",
+		"start_hours": "13:00",
+		"end_hours": "17:45",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "522",
+		"level": "M1 GB grp2",
+		"start_hours": "10:30",
+		"end_hours": "15:45",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "523",
+		"level": "M1 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "15:45",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "524",
+		"level": "L1 ASR",
+		"start_hours": "09:30",
+		"end_hours": "12:45",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "525",
+		"level": "L1 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "526",
+		"level": "M2 GB grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "527",
+		"level": "L1 GB grp2",
+		"start_hours": "12:30",
+		"end_hours": "14:00",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "528",
+		"level": "L2 GB grp2",
+		"start_hours": "10:00",
+		"end_hours": "13:00",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "529",
+		"level": "L3 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "15:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "530",
+		"level": "M2 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "15:30",
+		"ue": "Base Info",
+		"room_abr": "S007",
+		"teacher": "BRC",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "531",
+		"level": "L3 GB grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "532",
+		"level": "L2 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:45",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "533",
+		"level": "L3 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "534",
+		"level": "L3 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "17:45",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "535",
+		"level": "L3 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "11:00",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "536",
+		"level": "M2 GB grp1",
+		"start_hours": "13:00",
+		"end_hours": "15:00",
+		"ue": "BDA",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "537",
+		"level": "L1 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "538",
+		"level": "L3 ASR",
+		"start_hours": "12:45",
+		"end_hours": "17:30",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "539",
+		"level": "L2 ASR",
+		"start_hours": "08:15",
+		"end_hours": "11:15",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "540",
+		"level": "L3 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "12:45",
+		"ue": "Java",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "541",
+		"level": "M2 IG grp1",
+		"start_hours": "08:00",
+		"end_hours": "10:45",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "542",
+		"level": "L1 ASR",
+		"start_hours": "13:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "543",
+		"level": "M1 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "14:15",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "544",
+		"level": "M1 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "10:15",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "545",
+		"level": "L1 IG grp1",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "546",
+		"level": "L3 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "547",
+		"level": "L2 IG grp1",
+		"start_hours": "11:45",
+		"end_hours": "14:15",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "548",
+		"level": "L2 GB grp1",
+		"start_hours": "13:45",
+		"end_hours": "16:00",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "549",
+		"level": "L2 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "550",
+		"level": "M2 ASR",
+		"start_hours": "08:30",
+		"end_hours": "10:30",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "551",
+		"level": "L3 IG grp2",
+		"start_hours": "08:30",
+		"end_hours": "13:15",
+		"ue": "RO",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "552",
+		"level": "L1 ASR",
+		"start_hours": "12:00",
+		"end_hours": "14:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "553",
+		"level": "L3 ASR",
+		"start_hours": "15:30",
+		"end_hours": "17:30",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "554",
+		"level": "M1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "555",
+		"level": "M1 ASR",
+		"start_hours": "13:15",
+		"end_hours": "17:30",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "HJS",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "556",
+		"level": "L1 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "15:00",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "557",
+		"level": "L3 GB grp2",
+		"start_hours": "11:00",
+		"end_hours": "14:00",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "558",
+		"level": "L2 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:15",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "559",
+		"level": "L1 IG grp2",
+		"start_hours": "13:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "560",
+		"level": "L3 IG grp1",
+		"start_hours": "12:45",
+		"end_hours": "14:15",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "BRC",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "561",
+		"level": "M2 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:45",
+		"ue": "Base Info",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "562",
+		"level": "L3 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "563",
+		"level": "L1 IG grp1",
+		"start_hours": "10:30",
+		"end_hours": "14:30",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "564",
+		"level": "L1 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "13:00",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "565",
+		"level": "L2 IG grp2",
+		"start_hours": "11:00",
+		"end_hours": "16:45",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "566",
+		"level": "L3 GB grp1",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "567",
+		"level": "L2 ASR",
+		"start_hours": "07:15",
+		"end_hours": "09:00",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "568",
+		"level": "M2 ASR",
+		"start_hours": "10:30",
+		"end_hours": "12:30",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "569",
+		"level": "L3 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "14:45",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "570",
+		"level": "L2 GB grp2",
+		"start_hours": "07:45",
+		"end_hours": "11:30",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "571",
+		"level": "L1 IG grp1",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "572",
+		"level": "M2 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "573",
+		"level": "M1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "15:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "574",
+		"level": "L3 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:15",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "575",
+		"level": "L3 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "576",
+		"level": "L1 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "16:00",
+		"ue": "Archi log",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "577",
+		"level": "L1 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "09:45",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "578",
+		"level": "M1 GB grp1",
+		"start_hours": "13:15",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "579",
+		"level": "M1 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "580",
+		"level": "L2 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "12:00",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "581",
+		"level": "M2 GB grp1",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "582",
+		"level": "M1 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "583",
+		"level": "M1 IG grp2",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "584",
+		"level": "L3 GB grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "585",
+		"level": "L3 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "13:30",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "586",
+		"level": "L2 IG grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "587",
+		"level": "M1 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "12:00",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "588",
+		"level": "M2 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "14:30",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "589",
+		"level": "L1 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "16:45",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "590",
+		"level": "L3 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "10:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "591",
+		"level": "L1 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "10:30",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "592",
+		"level": "L3 ASR",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "593",
+		"level": "M2 GB grp2",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "594",
+		"level": "L3 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "595",
+		"level": "M1 GB grp2",
+		"start_hours": "09:15",
+		"end_hours": "14:15",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "596",
+		"level": "L2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:00",
+		"ue": "RO",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "597",
+		"level": "M2 ASR",
+		"start_hours": "07:00",
+		"end_hours": "09:15",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "598",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "17:45",
+		"ue": "RO",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "599",
+		"level": "L3 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "13:15",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "600",
+		"level": "M2 GB grp1",
+		"start_hours": "09:30",
+		"end_hours": "12:30",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "601",
+		"level": "M2 ASR",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "602",
+		"level": "L2 GB grp2",
+		"start_hours": "10:15",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "603",
+		"level": "M1 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "16:15",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "604",
+		"level": "M2 GB grp2",
+		"start_hours": "13:00",
+		"end_hours": "17:30",
+		"ue": "Base Info",
+		"room_abr": "S210",
+		"teacher": "HJS",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "605",
+		"level": "L3 IG grp1",
+		"start_hours": "11:15",
+		"end_hours": "14:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "606",
+		"level": "M1 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "16:00",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "607",
+		"level": "L2 ASR",
+		"start_hours": "07:00",
+		"end_hours": "09:45",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "608",
+		"level": "L3 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "10:30",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "609",
+		"level": "M2 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "09:45",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "610",
+		"level": "L1 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "11:15",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "611",
+		"level": "L3 IG grp2",
+		"start_hours": "08:00",
+		"end_hours": "11:45",
+		"ue": "IA",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "612",
+		"level": "L3 ASR",
+		"start_hours": "14:30",
+		"end_hours": "17:00",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "613",
+		"level": "L1 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "614",
+		"level": "L2 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "615",
+		"level": "M2 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "12:15",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "616",
+		"level": "M1 ASR",
+		"start_hours": "08:15",
+		"end_hours": "11:45",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "617",
+		"level": "M1 IG grp2",
+		"start_hours": "07:15",
+		"end_hours": "11:15",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "618",
+		"level": "L2 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "12:30",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "619",
+		"level": "L3 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "11:30",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "620",
+		"level": "L2 GB grp2",
+		"start_hours": "13:15",
+		"end_hours": "16:15",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "621",
+		"level": "M2 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "13:45",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "622",
+		"level": "M1 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "623",
+		"level": "L1 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "624",
+		"level": "M1 GB grp1",
+		"start_hours": "10:00",
+		"end_hours": "14:45",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "625",
+		"level": "L1 ASR",
+		"start_hours": "09:45",
+		"end_hours": "12:30",
+		"ue": "ASDA",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "626",
+		"level": "M2 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "09:45",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "627",
+		"level": "L1 ASR",
+		"start_hours": "07:45",
+		"end_hours": "12:00",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "628",
+		"level": "L3 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "12:45",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "629",
+		"level": "L1 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "630",
+		"level": "M1 IG grp2",
+		"start_hours": "07:15",
+		"end_hours": "11:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "631",
+		"level": "M2 GB grp1",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "632",
+		"level": "M2 GB grp2",
+		"start_hours": "09:15",
+		"end_hours": "13:45",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "633",
+		"level": "L3 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "12:15",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "634",
+		"level": "L1 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "16:15",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "635",
+		"level": "M2 IG grp2",
+		"start_hours": "12:45",
+		"end_hours": "15:30",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "636",
+		"level": "L1 ASR",
+		"start_hours": "08:00",
+		"end_hours": "11:30",
+		"ue": "GLog",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "637",
+		"level": "M1 IG grp1",
+		"start_hours": "15:00",
+		"end_hours": "17:45",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "638",
+		"level": "L3 ASR",
+		"start_hours": "09:00",
+		"end_hours": "13:45",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "639",
+		"level": "M2 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "640",
+		"level": "M1 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "641",
+		"level": "M1 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "10:00",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "642",
+		"level": "L2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:15",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "643",
+		"level": "M2 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:00",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "644",
+		"level": "L3 ASR",
+		"start_hours": "14:45",
+		"end_hours": "16:30",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "645",
+		"level": "L1 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "646",
+		"level": "M1 GB grp2",
+		"start_hours": "10:00",
+		"end_hours": "13:30",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "647",
+		"level": "M2 IG grp2",
+		"start_hours": "07:30",
+		"end_hours": "09:15",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "648",
+		"level": "L3 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:30",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "649",
+		"level": "M1 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "650",
+		"level": "L3 IG grp2",
+		"start_hours": "09:30",
+		"end_hours": "14:45",
+		"ue": "Base Info",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "651",
+		"level": "L2 ASR",
+		"start_hours": "10:30",
+		"end_hours": "15:45",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "BRC",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "652",
+		"level": "L1 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "12:30",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "653",
+		"level": "L3 GB grp1",
+		"start_hours": "13:00",
+		"end_hours": "16:15",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "654",
+		"level": "L3 GB grp1",
+		"start_hours": "11:00",
+		"end_hours": "16:30",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "655",
+		"level": "L2 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "15:15",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "656",
+		"level": "M2 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "14:45",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "657",
+		"level": "L3 IG grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "658",
+		"level": "L2 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "12:00",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "659",
+		"level": "M2 GB grp1",
+		"start_hours": "07:00",
+		"end_hours": "09:15",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "660",
+		"level": "M2 GB grp1",
+		"start_hours": "10:30",
+		"end_hours": "14:15",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "661",
+		"level": "M2 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "12:30",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "662",
+		"level": "L3 IG grp1",
+		"start_hours": "15:30",
+		"end_hours": "17:30",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "663",
+		"level": "L1 IG grp1",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "664",
+		"level": "M1 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "12:45",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "665",
+		"level": "L3 IG grp1",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "666",
+		"level": "M2 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "667",
+		"level": "M2 GB grp2",
+		"start_hours": "11:00",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "668",
+		"level": "L1 IG grp2",
+		"start_hours": "08:45",
+		"end_hours": "12:45",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "669",
+		"level": "M2 GB grp2",
+		"start_hours": "09:00",
+		"end_hours": "11:30",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "670",
+		"level": "L1 ASR",
+		"start_hours": "10:15",
+		"end_hours": "12:15",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "671",
+		"level": "M1 IG grp1",
+		"start_hours": "12:00",
+		"end_hours": "17:30",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "672",
+		"level": "L1 GB grp2",
+		"start_hours": "09:15",
+		"end_hours": "14:45",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "673",
+		"level": "M1 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:45",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "674",
+		"level": "M2 ASR",
+		"start_hours": "09:30",
+		"end_hours": "14:45",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "675",
+		"level": "L1 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "676",
+		"level": "L1 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "17:45",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "677",
+		"level": "L1 ASR",
+		"start_hours": "12:00",
+		"end_hours": "17:45",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "678",
+		"level": "M2 GB grp1",
+		"start_hours": "08:30",
+		"end_hours": "13:45",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "679",
+		"level": "M1 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "MAD",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "680",
+		"level": "L2 GB grp2",
+		"start_hours": "10:30",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "681",
+		"level": "L1 GB grp1",
+		"start_hours": "15:45",
+		"end_hours": "17:15",
+		"ue": "C#",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "682",
+		"level": "M2 IG grp2",
+		"start_hours": "08:45",
+		"end_hours": "13:45",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "683",
+		"level": "M1 GB grp2",
+		"start_hours": "13:30",
+		"end_hours": "16:30",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "684",
+		"level": "L2 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "14:00",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "685",
+		"level": "L1 GB grp2",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "686",
+		"level": "L1 IG grp2",
+		"start_hours": "08:45",
+		"end_hours": "13:15",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "687",
+		"level": "L1 ASR",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "688",
+		"level": "L1 ASR",
+		"start_hours": "08:30",
+		"end_hours": "11:15",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "689",
+		"level": "L3 IG grp1",
+		"start_hours": "13:15",
+		"end_hours": "17:45",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "690",
+		"level": "M1 GB grp1",
+		"start_hours": "10:00",
+		"end_hours": "12:00",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "BRC",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "691",
+		"level": "M2 ASR",
+		"start_hours": "12:45",
+		"end_hours": "16:30",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "692",
+		"level": "L3 GB grp1",
+		"start_hours": "10:45",
+		"end_hours": "14:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "693",
+		"level": "M1 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "694",
+		"level": "L3 ASR",
+		"start_hours": "13:30",
+		"end_hours": "15:45",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "695",
+		"level": "L2 GB grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "696",
+		"level": "L1 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "697",
+		"level": "M1 IG grp2",
+		"start_hours": "08:00",
+		"end_hours": "12:45",
+		"ue": "Base Info",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "698",
+		"level": "L1 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "11:15",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "699",
+		"level": "L2 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "16:15",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "700",
+		"level": "L2 IG grp1",
+		"start_hours": "12:30",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "701",
+		"level": "L2 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "14:30",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "702",
+		"level": "L3 IG grp2",
+		"start_hours": "10:15",
+		"end_hours": "12:00",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "703",
+		"level": "M1 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "16:15",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "704",
+		"level": "L1 IG grp1",
+		"start_hours": "14:15",
+		"end_hours": "17:00",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "705",
+		"level": "M2 GB grp1",
+		"start_hours": "13:00",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "706",
+		"level": "M2 GB grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "707",
+		"level": "L2 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "15:00",
+		"ue": "ANG",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "708",
+		"level": "M2 ASR",
+		"start_hours": "14:15",
+		"end_hours": "17:45",
+		"ue": "GLog",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "709",
+		"level": "L3 GB grp2",
+		"start_hours": "12:15",
+		"end_hours": "14:45",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "HJS",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "710",
+		"level": "L1 GB grp2",
+		"start_hours": "10:00",
+		"end_hours": "12:15",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "711",
+		"level": "L1 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "712",
+		"level": "L1 ASR",
+		"start_hours": "14:15",
+		"end_hours": "16:45",
+		"ue": "PatronC",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "713",
+		"level": "L1 GB grp1",
+		"start_hours": "09:00",
+		"end_hours": "12:15",
+		"ue": "ANG",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "714",
+		"level": "M1 ASR",
+		"start_hours": "07:00",
+		"end_hours": "11:15",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "715",
+		"level": "M1 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "16:00",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "716",
+		"level": "L3 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "16:30",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "BRC",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "717",
+		"level": "L2 GB grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "718",
+		"level": "M1 ASR",
+		"start_hours": "13:30",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "719",
+		"level": "M1 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "720",
+		"level": "M1 GB grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "MAD",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "721",
+		"level": "L1 ASR",
+		"start_hours": "12:00",
+		"end_hours": "16:00",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "722",
+		"level": "M2 IG grp1",
+		"start_hours": "09:15",
+		"end_hours": "13:30",
+		"ue": "Algo",
+		"room_abr": "S008",
+		"teacher": "MAD",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "723",
+		"level": "L3 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "724",
+		"level": "M2 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "11:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "725",
+		"level": "L3 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "16:45",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "BRC",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "726",
+		"level": "M2 IG grp2",
+		"start_hours": "14:30",
+		"end_hours": "17:45",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "THM",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "727",
+		"level": "M2 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "14:30",
+		"ue": "IA",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "728",
+		"level": "M2 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "14:45",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "729",
+		"level": "L3 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "730",
+		"level": "M2 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "731",
+		"level": "M2 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "10:00",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "732",
+		"level": "L1 ASR",
+		"start_hours": "10:45",
+		"end_hours": "14:45",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "SIK",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "733",
+		"level": "L1 GB grp2",
+		"start_hours": "13:30",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "734",
+		"level": "L2 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "12:00",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "735",
+		"level": "M2 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "14:30",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "736",
+		"level": "L3 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "13:00",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "737",
+		"level": "L2 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "11:30",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "738",
+		"level": "L3 GB grp1",
+		"start_hours": "13:15",
+		"end_hours": "15:30",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "739",
+		"level": "L2 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "14:30",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "740",
+		"level": "L2 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "16:00",
+		"ue": "ANG",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "741",
+		"level": "L3 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "742",
+		"level": "L3 GB grp1",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "743",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "MAD",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "744",
+		"level": "L2 ASR",
+		"start_hours": "12:15",
+		"end_hours": "15:15",
+		"ue": "IA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "745",
+		"level": "L3 IG grp1",
+		"start_hours": "09:45",
+		"end_hours": "14:00",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "746",
+		"level": "L3 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "14:15",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "747",
+		"level": "M1 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "748",
+		"level": "M1 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "749",
+		"level": "L2 GB grp2",
+		"start_hours": "11:00",
+		"end_hours": "16:15",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "750",
+		"level": "L3 GB grp1",
+		"start_hours": "08:30",
+		"end_hours": "10:45",
+		"ue": "ASDA",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "751",
+		"level": "L2 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "17:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "752",
+		"level": "L1 GB grp2",
+		"start_hours": "10:30",
+		"end_hours": "13:30",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "753",
+		"level": "M2 ASR",
+		"start_hours": "09:30",
+		"end_hours": "12:00",
+		"ue": "GLog",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "754",
+		"level": "M2 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "755",
+		"level": "L1 IG grp2",
+		"start_hours": "12:45",
+		"end_hours": "16:45",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "756",
+		"level": "L2 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "16:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "RAL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "757",
+		"level": "M1 IG grp1",
+		"start_hours": "14:00",
+		"end_hours": "16:45",
+		"ue": "ASDA",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "758",
+		"level": "M2 ASR",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "759",
+		"level": "L3 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "15:15",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "760",
+		"level": "L1 GB grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:30",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "761",
+		"level": "L1 IG grp2",
+		"start_hours": "12:45",
+		"end_hours": "16:30",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "762",
+		"level": "L1 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "16:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "763",
+		"level": "L3 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "15:00",
+		"ue": "ANG",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "764",
+		"level": "L2 GB grp1",
+		"start_hours": "07:45",
+		"end_hours": "10:45",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "SIK",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "765",
+		"level": "L2 ASR",
+		"start_hours": "12:30",
+		"end_hours": "17:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "766",
+		"level": "M2 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "16:00",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "767",
+		"level": "L3 GB grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "768",
+		"level": "L1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "14:00",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "769",
+		"level": "L3 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "11:15",
+		"ue": "ASDA",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "770",
+		"level": "L1 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "771",
+		"level": "L2 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "772",
+		"level": "L3 GB grp1",
+		"start_hours": "13:00",
+		"end_hours": "16:00",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "773",
+		"level": "M2 ASR",
+		"start_hours": "12:30",
+		"end_hours": "15:00",
+		"ue": "Archi",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "774",
+		"level": "L1 GB grp1",
+		"start_hours": "09:15",
+		"end_hours": "11:30",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "CYP",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "775",
+		"level": "M2 GB grp1",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "776",
+		"level": "L1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "777",
+		"level": "L1 ASR",
+		"start_hours": "08:45",
+		"end_hours": "11:30",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "778",
+		"level": "L1 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "12:15",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "779",
+		"level": "L2 GB grp1",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "780",
+		"level": "L3 IG grp2",
+		"start_hours": "13:00",
+		"end_hours": "16:15",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "781",
+		"level": "M1 ASR",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "782",
+		"level": "L2 ASR",
+		"start_hours": "07:45",
+		"end_hours": "10:15",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "783",
+		"level": "L1 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "784",
+		"level": "M1 ASR",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "785",
+		"level": "L2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "15:15",
+		"ue": "PatronC",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "786",
+		"level": "L2 GB grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "787",
+		"level": "L3 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "10:30",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "788",
+		"level": "L3 GB grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "789",
+		"level": "M1 IG grp2",
+		"start_hours": "08:30",
+		"end_hours": "12:45",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "790",
+		"level": "L3 GB grp1",
+		"start_hours": "14:45",
+		"end_hours": "16:45",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "791",
+		"level": "M1 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "792",
+		"level": "L1 IG grp1",
+		"start_hours": "11:45",
+		"end_hours": "13:15",
+		"ue": "IA",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "793",
+		"level": "L2 GB grp1",
+		"start_hours": "14:30",
+		"end_hours": "16:45",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "CYP",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "794",
+		"level": "L3 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "12:15",
+		"ue": "C#",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "795",
+		"level": "M1 IG grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "796",
+		"level": "L1 ASR",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "797",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "798",
+		"level": "L2 GB grp1",
+		"start_hours": "12:30",
+		"end_hours": "14:15",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "799",
+		"level": "L2 IG grp1",
+		"start_hours": "07:15",
+		"end_hours": "09:30",
+		"ue": "RO",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "800",
+		"level": "L2 IG grp2",
+		"start_hours": "13:00",
+		"end_hours": "17:45",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "801",
+		"level": "L1 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "17:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "802",
+		"level": "L2 IG grp2",
+		"start_hours": "08:00",
+		"end_hours": "13:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "803",
+		"level": "L3 ASR",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "804",
+		"level": "M1 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "BRC",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "805",
+		"level": "L2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "16:15",
+		"ue": "ASDA",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "806",
+		"level": "M2 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "807",
+		"level": "M1 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "808",
+		"level": "M2 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "16:15",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "809",
+		"level": "M1 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "12:00",
+		"ue": "Algo",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "810",
+		"level": "M1 IG grp1",
+		"start_hours": "12:45",
+		"end_hours": "15:30",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "811",
+		"level": "L2 ASR",
+		"start_hours": "07:00",
+		"end_hours": "11:45",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "812",
+		"level": "M1 ASR",
+		"start_hours": "13:00",
+		"end_hours": "17:15",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "813",
+		"level": "M1 ASR",
+		"start_hours": "09:00",
+		"end_hours": "12:00",
+		"ue": "BDA",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "814",
+		"level": "L3 IG grp2",
+		"start_hours": "13:30",
+		"end_hours": "16:15",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "815",
+		"level": "M1 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "816",
+		"level": "L2 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:45",
+		"ue": "Base Info",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "817",
+		"level": "L1 IG grp1",
+		"start_hours": "11:00",
+		"end_hours": "15:00",
+		"ue": "ANG",
+		"room_abr": "S210",
+		"teacher": "HAJ",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "818",
+		"level": "L1 IG grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "819",
+		"level": "M2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:15",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "820",
+		"level": "L1 IG grp2",
+		"start_hours": "11:00",
+		"end_hours": "14:15",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "821",
+		"level": "L3 GB grp1",
+		"start_hours": "07:30",
+		"end_hours": "12:15",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "822",
+		"level": "M1 GB grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "823",
+		"level": "M1 ASR",
+		"start_hours": "08:45",
+		"end_hours": "10:15",
+		"ue": "BDA",
+		"room_abr": "S102",
+		"teacher": "LEA",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "824",
+		"level": "M1 GB grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "825",
+		"level": "L2 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "17:00",
+		"ue": "PatronC",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "826",
+		"level": "L3 ASR",
+		"start_hours": "11:15",
+		"end_hours": "16:00",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "827",
+		"level": "L2 IG grp2",
+		"start_hours": "10:45",
+		"end_hours": "12:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "828",
+		"level": "L2 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "13:00",
+		"ue": "ANG",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-03"
+	},
+	{
+		"id": "829",
+		"level": "L1 GB grp1",
+		"start_hours": "10:15",
+		"end_hours": "13:15",
+		"ue": "BDA",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-02-21"
+	},
+	{
+		"id": "830",
+		"level": "L2 GB grp2",
+		"start_hours": "13:00",
+		"end_hours": "16:30",
+		"ue": "PatronC",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "831",
+		"level": "M1 GB grp2",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-01-05"
+	},
+	{
+		"id": "832",
+		"level": "M2 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "17:30",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "RAL",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "833",
+		"level": "M2 GB grp2",
+		"start_hours": "07:00",
+		"end_hours": "11:15",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "834",
+		"level": "L2 GB grp2",
+		"start_hours": "13:00",
+		"end_hours": "17:45",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "835",
+		"level": "L2 IG grp2",
+		"start_hours": "10:00",
+		"end_hours": "12:15",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "836",
+		"level": "M2 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "BEN",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "837",
+		"level": "M1 IG grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:00",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "838",
+		"level": "L2 GB grp2",
+		"start_hours": "13:45",
+		"end_hours": "18:00",
+		"ue": "ASDA",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "839",
+		"level": "L1 GB grp1",
+		"start_hours": "08:00",
+		"end_hours": "12:00",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "840",
+		"level": "L2 IG grp1",
+		"start_hours": "07:45",
+		"end_hours": "09:30",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "841",
+		"level": "M1 IG grp1",
+		"start_hours": "07:30",
+		"end_hours": "10:45",
+		"ue": "ASDA",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "842",
+		"level": "L2 ASR",
+		"start_hours": "11:15",
+		"end_hours": "14:45",
+		"ue": "ASDA",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "843",
+		"level": "L3 ASR",
+		"start_hours": "07:45",
+		"end_hours": "11:45",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "844",
+		"level": "M2 GB grp1",
+		"start_hours": "08:30",
+		"end_hours": "10:15",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "845",
+		"level": "L2 GB grp1",
+		"start_hours": "13:45",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-02-06"
+	},
+	{
+		"id": "846",
+		"level": "L2 IG grp1",
+		"start_hours": "10:30",
+		"end_hours": "13:15",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "LEA",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "847",
+		"level": "L3 ASR",
+		"start_hours": "09:30",
+		"end_hours": "11:45",
+		"ue": "RO",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "848",
+		"level": "L1 GB grp1",
+		"start_hours": "11:15",
+		"end_hours": "16:30",
+		"ue": "Archi log",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "849",
+		"level": "M1 GB grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "850",
+		"level": "L2 ASR",
+		"start_hours": "08:00",
+		"end_hours": "12:30",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "851",
+		"level": "L2 IG grp2",
+		"start_hours": "14:45",
+		"end_hours": "16:45",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "852",
+		"level": "L2 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "853",
+		"level": "L2 ASR",
+		"start_hours": "11:15",
+		"end_hours": "14:15",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "854",
+		"level": "L1 IG grp1",
+		"start_hours": "10:00",
+		"end_hours": "13:45",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "BEN",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "855",
+		"level": "L3 ASR",
+		"start_hours": "09:45",
+		"end_hours": "14:15",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "856",
+		"level": "M2 ASR",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "857",
+		"level": "L3 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "16:45",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-01-19"
+	},
+	{
+		"id": "858",
+		"level": "L1 GB grp1",
+		"start_hours": "14:15",
+		"end_hours": "16:45",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "859",
+		"level": "L3 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "860",
+		"level": "M1 ASR",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "HAJ",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "861",
+		"level": "L1 IG grp2",
+		"start_hours": "09:45",
+		"end_hours": "14:15",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "862",
+		"level": "M1 GB grp1",
+		"start_hours": "13:15",
+		"end_hours": "15:15",
+		"ue": "ASDA",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "863",
+		"level": "L1 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "12:15",
+		"ue": "GLog",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "864",
+		"level": "M1 GB grp2",
+		"start_hours": "12:00",
+		"end_hours": "14:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "VOL",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "865",
+		"level": "L2 GB grp1",
+		"start_hours": "12:00",
+		"end_hours": "14:00",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "866",
+		"level": "M2 GB grp2",
+		"start_hours": "08:15",
+		"end_hours": "11:45",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "867",
+		"level": "L3 ASR",
+		"start_hours": "09:45",
+		"end_hours": "11:15",
+		"ue": "C#",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "868",
+		"level": "M1 GB grp1",
+		"start_hours": "11:45",
+		"end_hours": "13:00",
+		"ue": "Java",
+		"room_abr": "S102",
+		"teacher": "HAJ",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "869",
+		"level": "L3 ASR",
+		"start_hours": "11:15",
+		"end_hours": "13:45",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "BRC",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "870",
+		"level": "L3 ASR",
+		"start_hours": "07:00",
+		"end_hours": "11:45",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "871",
+		"level": "L2 ASR",
+		"start_hours": "13:45",
+		"end_hours": "17:30",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "LEA",
+		"date": "2025-01-25"
+	},
+	{
+		"id": "872",
+		"level": "M2 ASR",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "873",
+		"level": "M1 GB grp2",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "874",
+		"level": "L2 GB grp1",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "875",
+		"level": "M2 ASR",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "THM",
+		"date": "2025-02-15"
+	},
+	{
+		"id": "876",
+		"level": "L3 GB grp1",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "877",
+		"level": "M1 GB grp1",
+		"start_hours": "14:30",
+		"end_hours": "16:30",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "LEA",
+		"date": "2025-02-01"
+	},
+	{
+		"id": "878",
+		"level": "M1 GB grp1",
+		"start_hours": "08:15",
+		"end_hours": "10:45",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "879",
+		"level": "L2 GB grp2",
+		"start_hours": "09:30",
+		"end_hours": "12:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "CYP",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "880",
+		"level": "L2 GB grp2",
+		"start_hours": "14:15",
+		"end_hours": "18:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "881",
+		"level": "M2 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S106",
+		"teacher": "VOL",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "882",
+		"level": "L1 IG grp1",
+		"start_hours": "09:30",
+		"end_hours": "13:45",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "THM",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "883",
+		"level": "L3 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "884",
+		"level": "M2 IG grp2",
+		"start_hours": "07:30",
+		"end_hours": "12:00",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "885",
+		"level": "L3 IG grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "BEN",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "886",
+		"level": "L3 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "13:15",
+		"ue": "C#",
+		"room_abr": "S007",
+		"teacher": "THM",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "887",
+		"level": "L3 IG grp1",
+		"start_hours": "10:45",
+		"end_hours": "12:15",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "888",
+		"level": "L2 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "16:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "889",
+		"level": "L1 GB grp1",
+		"start_hours": "11:00",
+		"end_hours": "15:45",
+		"ue": "Archi log",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-01-24"
+	},
+	{
+		"id": "890",
+		"level": "L1 IG grp1",
+		"start_hours": "08:45",
+		"end_hours": "11:30",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "HAJ",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "891",
+		"level": "M2 IG grp2",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "892",
+		"level": "M2 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "15:15",
+		"ue": "Algo",
+		"room_abr": "S004",
+		"teacher": "RAL",
+		"date": "2025-02-04"
+	},
+	{
+		"id": "893",
+		"level": "L2 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "10:45",
+		"ue": "RO",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "894",
+		"level": "L2 ASR",
+		"start_hours": "12:30",
+		"end_hours": "16:30",
+		"ue": "Java",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "895",
+		"level": "L2 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "RAL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "896",
+		"level": "M2 IG grp2",
+		"start_hours": "12:30",
+		"end_hours": "14:45",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "897",
+		"level": "M1 GB grp1",
+		"start_hours": "10:45",
+		"end_hours": "12:30",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "898",
+		"level": "M1 ASR",
+		"start_hours": "12:45",
+		"end_hours": "15:15",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "899",
+		"level": "M1 GB grp1",
+		"start_hours": "11:30",
+		"end_hours": "16:15",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "900",
+		"level": "L3 ASR",
+		"start_hours": "14:45",
+		"end_hours": "17:45",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-01-15"
+	},
+	{
+		"id": "901",
+		"level": "M1 GB grp1",
+		"start_hours": "07:15",
+		"end_hours": "11:30",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "HAJ",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "902",
+		"level": "L2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "MAD",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "903",
+		"level": "L1 IG grp2",
+		"start_hours": "08:45",
+		"end_hours": "13:30",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "904",
+		"level": "M2 GB grp2",
+		"start_hours": "08:30",
+		"end_hours": "11:15",
+		"ue": "Archi",
+		"room_abr": "S102",
+		"teacher": "HJS",
+		"date": "2025-02-13"
+	},
+	{
+		"id": "905",
+		"level": "M2 GB grp2",
+		"start_hours": "09:15",
+		"end_hours": "13:30",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-02-17"
+	},
+	{
+		"id": "906",
+		"level": "M1 IG grp1",
+		"start_hours": "15:15",
+		"end_hours": "17:30",
+		"ue": "IA",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "907",
+		"level": "L2 GB grp2",
+		"start_hours": "11:15",
+		"end_hours": "15:15",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "VOL",
+		"date": "2025-02-26"
+	},
+	{
+		"id": "908",
+		"level": "M2 GB grp1",
+		"start_hours": "13:00",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "BEN",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "909",
+		"level": "L1 GB grp1",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-02-24"
+	},
+	{
+		"id": "910",
+		"level": "M2 ASR",
+		"start_hours": "08:00",
+		"end_hours": "13:30",
+		"ue": "Algo",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "911",
+		"level": "M2 GB grp2",
+		"start_hours": "15:15",
+		"end_hours": "17:00",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "912",
+		"level": "L3 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "17:45",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-02-12"
+	},
+	{
+		"id": "913",
+		"level": "M2 IG grp1",
+		"start_hours": "13:00",
+		"end_hours": "15:15",
+		"ue": "Algo",
+		"room_abr": "S009",
+		"teacher": "HJS",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "914",
+		"level": "L3 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "LEA",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "915",
+		"level": "M2 IG grp1",
+		"start_hours": "13:30",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S210",
+		"teacher": "SIK",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "916",
+		"level": "M2 ASR",
+		"start_hours": "13:45",
+		"end_hours": "15:15",
+		"ue": "ASDA",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "917",
+		"level": "M2 ASR",
+		"start_hours": "14:45",
+		"end_hours": "16:45",
+		"ue": "BDA",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "918",
+		"level": "M1 IG grp2",
+		"start_hours": "12:15",
+		"end_hours": "14:30",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "919",
+		"level": "L3 GB grp2",
+		"start_hours": "08:30",
+		"end_hours": "10:00",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "CYP",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "920",
+		"level": "L2 GB grp2",
+		"start_hours": "09:30",
+		"end_hours": "13:00",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "RAL",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "921",
+		"level": "M1 IG grp2",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Base Info",
+		"room_abr": "S001",
+		"teacher": "RAL",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "922",
+		"level": "L1 IG grp1",
+		"start_hours": "16:15",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "MAD",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "923",
+		"level": "L1 ASR",
+		"start_hours": "11:00",
+		"end_hours": "13:15",
+		"ue": "Archi",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "924",
+		"level": "M1 ASR",
+		"start_hours": "14:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "925",
+		"level": "L1 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "15:45",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "926",
+		"level": "L3 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "14:45",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-02-03"
+	},
+	{
+		"id": "927",
+		"level": "L3 IG grp2",
+		"start_hours": "15:15",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S106",
+		"teacher": "MAD",
+		"date": "2025-01-29"
+	},
+	{
+		"id": "928",
+		"level": "L3 ASR",
+		"start_hours": "14:15",
+		"end_hours": "17:45",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "929",
+		"level": "M1 IG grp1",
+		"start_hours": "13:45",
+		"end_hours": "15:30",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-01-18"
+	},
+	{
+		"id": "930",
+		"level": "L1 ASR",
+		"start_hours": "08:15",
+		"end_hours": "12:15",
+		"ue": "PatronC",
+		"room_abr": "S112",
+		"teacher": "HJS",
+		"date": "2025-02-16"
+	},
+	{
+		"id": "931",
+		"level": "L3 IG grp1",
+		"start_hours": "12:30",
+		"end_hours": "14:00",
+		"ue": "Archi log",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "932",
+		"level": "L1 IG grp1",
+		"start_hours": "11:45",
+		"end_hours": "16:15",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "LEA",
+		"date": "2025-01-30"
+	},
+	{
+		"id": "933",
+		"level": "L2 ASR",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S106",
+		"teacher": "HJS",
+		"date": "2025-01-20"
+	},
+	{
+		"id": "934",
+		"level": "M1 ASR",
+		"start_hours": "11:15",
+		"end_hours": "15:15",
+		"ue": "Base Info",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-18"
+	},
+	{
+		"id": "935",
+		"level": "L2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "C#",
+		"room_abr": "S106",
+		"teacher": "RAL",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "936",
+		"level": "M1 ASR",
+		"start_hours": "11:00",
+		"end_hours": "14:00",
+		"ue": "Algo",
+		"room_abr": "S112",
+		"teacher": "CYP",
+		"date": "2025-02-27"
+	},
+	{
+		"id": "937",
+		"level": "L1 IG grp1",
+		"start_hours": "09:15",
+		"end_hours": "13:30",
+		"ue": "Algo",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "938",
+		"level": "M1 GB grp2",
+		"start_hours": "07:30",
+		"end_hours": "12:00",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "HJS",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "939",
+		"level": "M2 GB grp1",
+		"start_hours": "09:00",
+		"end_hours": "14:00",
+		"ue": "Base Info",
+		"room_abr": "S004",
+		"teacher": "LEA",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "940",
+		"level": "L2 ASR",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S009",
+		"teacher": "CYP",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "941",
+		"level": "L3 GB grp1",
+		"start_hours": "13:30",
+		"end_hours": "15:45",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "942",
+		"level": "L3 IG grp2",
+		"start_hours": "15:00",
+		"end_hours": "17:00",
+		"ue": "IA",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "943",
+		"level": "L1 IG grp2",
+		"start_hours": "09:30",
+		"end_hours": "12:00",
+		"ue": "Base Info",
+		"room_abr": "S106",
+		"teacher": "THM",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "944",
+		"level": "M1 IG grp1",
+		"start_hours": "11:45",
+		"end_hours": "14:45",
+		"ue": "Algo",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "945",
+		"level": "L3 GB grp2",
+		"start_hours": "11:30",
+		"end_hours": "13:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-02-02"
+	},
+	{
+		"id": "946",
+		"level": "M1 GB grp1",
+		"start_hours": "10:45",
+		"end_hours": "13:45",
+		"ue": "RO",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "947",
+		"level": "M2 ASR",
+		"start_hours": "08:45",
+		"end_hours": "13:30",
+		"ue": "IA",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "948",
+		"level": "M1 GB grp2",
+		"start_hours": "13:00",
+		"end_hours": "15:45",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "RAL",
+		"date": "2025-02-07"
+	},
+	{
+		"id": "949",
+		"level": "M2 IG grp2",
+		"start_hours": "15:30",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "950",
+		"level": "L3 IG grp1",
+		"start_hours": "13:15",
+		"end_hours": "15:45",
+		"ue": "Archi",
+		"room_abr": "S210",
+		"teacher": "VOL",
+		"date": "2025-02-22"
+	},
+	{
+		"id": "951",
+		"level": "M1 IG grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "GLog",
+		"room_abr": "S007",
+		"teacher": "CYP",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "952",
+		"level": "M1 IG grp2",
+		"start_hours": "14:30",
+		"end_hours": "16:45",
+		"ue": "ANG",
+		"room_abr": "S106",
+		"teacher": "BRC",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "953",
+		"level": "L2 IG grp2",
+		"start_hours": "15:45",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-02-25"
+	},
+	{
+		"id": "954",
+		"level": "L1 GB grp2",
+		"start_hours": "12:45",
+		"end_hours": "17:00",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "CYP",
+		"date": "2025-01-02"
+	},
+	{
+		"id": "955",
+		"level": "M1 GB grp2",
+		"start_hours": "11:45",
+		"end_hours": "14:00",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-22"
+	},
+	{
+		"id": "956",
+		"level": "M1 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "17:30",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "RAL",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "957",
+		"level": "L2 IG grp2",
+		"start_hours": "12:00",
+		"end_hours": "16:00",
+		"ue": "GLog",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "958",
+		"level": "L2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "17:45",
+		"ue": "Java",
+		"room_abr": "S210",
+		"teacher": "BEN",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "959",
+		"level": "M2 ASR",
+		"start_hours": "08:45",
+		"end_hours": "13:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "LEA",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "960",
+		"level": "L2 GB grp2",
+		"start_hours": "08:45",
+		"end_hours": "10:30",
+		"ue": "RO",
+		"room_abr": "S004",
+		"teacher": "THM",
+		"date": "2025-01-14"
+	},
+	{
+		"id": "961",
+		"level": "L2 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "16:00",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "SIK",
+		"date": "2025-02-08"
+	},
+	{
+		"id": "962",
+		"level": "M2 GB grp1",
+		"start_hours": "08:45",
+		"end_hours": "10:00",
+		"ue": "IA",
+		"room_abr": "S106",
+		"teacher": "BEN",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "963",
+		"level": "L2 ASR",
+		"start_hours": "11:45",
+		"end_hours": "13:45",
+		"ue": "Archi",
+		"room_abr": "S008",
+		"teacher": "THM",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "964",
+		"level": "L1 GB grp2",
+		"start_hours": "10:00",
+		"end_hours": "12:15",
+		"ue": "GLog",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-28"
+	},
+	{
+		"id": "965",
+		"level": "L3 ASR",
+		"start_hours": "11:45",
+		"end_hours": "16:45",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-01-12"
+	},
+	{
+		"id": "966",
+		"level": "M2 IG grp1",
+		"start_hours": "12:15",
+		"end_hours": "15:00",
+		"ue": "Archi log",
+		"room_abr": "S112",
+		"teacher": "VOL",
+		"date": "2025-01-17"
+	},
+	{
+		"id": "967",
+		"level": "L2 GB grp2",
+		"start_hours": "10:45",
+		"end_hours": "13:30",
+		"ue": "C#",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "968",
+		"level": "L3 ASR",
+		"start_hours": "16:30",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-07"
+	},
+	{
+		"id": "969",
+		"level": "L2 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S001",
+		"teacher": "HAJ",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "970",
+		"level": "M2 GB grp2",
+		"start_hours": "14:30",
+		"end_hours": "18:00",
+		"ue": "ANG",
+		"room_abr": "S112",
+		"teacher": "SIK",
+		"date": "2025-01-31"
+	},
+	{
+		"id": "971",
+		"level": "L2 GB grp1",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "972",
+		"level": "M1 GB grp2",
+		"start_hours": "08:00",
+		"end_hours": "11:45",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "MAD",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "973",
+		"level": "L2 IG grp2",
+		"start_hours": "13:45",
+		"end_hours": "15:00",
+		"ue": "ASDA",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-10"
+	},
+	{
+		"id": "974",
+		"level": "L2 GB grp1",
+		"start_hours": "10:45",
+		"end_hours": "15:15",
+		"ue": "RO",
+		"room_abr": "S007",
+		"teacher": "VOL",
+		"date": "2025-02-14"
+	},
+	{
+		"id": "975",
+		"level": "L3 ASR",
+		"start_hours": "12:30",
+		"end_hours": "15:30",
+		"ue": "PatronC",
+		"room_abr": "S009",
+		"teacher": "SIK",
+		"date": "2025-01-28"
+	},
+	{
+		"id": "976",
+		"level": "L2 IG grp1",
+		"start_hours": "13:15",
+		"end_hours": "18:00",
+		"ue": "Archi",
+		"room_abr": "S106",
+		"teacher": "HAJ",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "977",
+		"level": "M2 IG grp1",
+		"start_hours": "14:45",
+		"end_hours": "17:30",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "BEN",
+		"date": "2025-02-20"
+	},
+	{
+		"id": "978",
+		"level": "L2 GB grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Java",
+		"room_abr": "S009",
+		"teacher": "BEN",
+		"date": "2025-02-11"
+	},
+	{
+		"id": "979",
+		"level": "L2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "16:15",
+		"ue": "Archi",
+		"room_abr": "S112",
+		"teacher": "BEN",
+		"date": "2025-02-05"
+	},
+	{
+		"id": "980",
+		"level": "M2 GB grp2",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S009",
+		"teacher": "MAD",
+		"date": "2025-02-23"
+	},
+	{
+		"id": "981",
+		"level": "L2 IG grp2",
+		"start_hours": "09:00",
+		"end_hours": "12:00",
+		"ue": "C#",
+		"room_abr": "S004",
+		"teacher": "MAD",
+		"date": "2025-01-16"
+	},
+	{
+		"id": "982",
+		"level": "M2 IG grp2",
+		"start_hours": "11:15",
+		"end_hours": "16:30",
+		"ue": "Archi",
+		"room_abr": "S009",
+		"teacher": "THM",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "983",
+		"level": "M1 IG grp2",
+		"start_hours": "11:45",
+		"end_hours": "15:45",
+		"ue": "RO",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-01-09"
+	},
+	{
+		"id": "984",
+		"level": "M2 GB grp1",
+		"start_hours": "14:30",
+		"end_hours": "16:30",
+		"ue": "BDA",
+		"room_abr": "S001",
+		"teacher": "SIK",
+		"date": "2025-01-04"
+	},
+	{
+		"id": "985",
+		"level": "L1 IG grp2",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "986",
+		"level": "M2 GB grp1",
+		"start_hours": "09:45",
+		"end_hours": "14:00",
+		"ue": "Archi",
+		"room_abr": "S004",
+		"teacher": "HAJ",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "987",
+		"level": "L2 IG grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "BDA",
+		"room_abr": "S008",
+		"teacher": "HJS",
+		"date": "2025-01-27"
+	},
+	{
+		"id": "988",
+		"level": "L1 IG grp1",
+		"start_hours": "14:00",
+		"end_hours": "18:00",
+		"ue": "Algo",
+		"room_abr": "S102",
+		"teacher": "BRC",
+		"date": "2025-02-10"
+	},
+	{
+		"id": "989",
+		"level": "L3 IG grp2",
+		"start_hours": "16:00",
+		"end_hours": "18:00",
+		"ue": "Archi log",
+		"room_abr": "S102",
+		"teacher": "VOL",
+		"date": "2025-02-19"
+	},
+	{
+		"id": "990",
+		"level": "L1 IG grp2",
+		"start_hours": "08:15",
+		"end_hours": "10:00",
+		"ue": "ASDA",
+		"room_abr": "S004",
+		"teacher": "SIK",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "991",
+		"level": "L2 ASR",
+		"start_hours": "16:45",
+		"end_hours": "18:00",
+		"ue": "PatronC",
+		"room_abr": "S008",
+		"teacher": "VOL",
+		"date": "2025-01-01"
+	},
+	{
+		"id": "992",
+		"level": "M1 ASR",
+		"start_hours": "11:45",
+		"end_hours": "15:00",
+		"ue": "Archi log",
+		"room_abr": "S001",
+		"teacher": "THM",
+		"date": "2025-01-23"
+	},
+	{
+		"id": "993",
+		"level": "L2 IG grp2",
+		"start_hours": "07:00",
+		"end_hours": "12:45",
+		"ue": "Java",
+		"room_abr": "S004",
+		"teacher": "VOL",
+		"date": "2025-01-08"
+	},
+	{
+		"id": "994",
+		"level": "M1 GB grp2",
+		"start_hours": "09:45",
+		"end_hours": "11:00",
+		"ue": "ANG",
+		"room_abr": "S007",
+		"teacher": "HAJ",
+		"date": "2025-01-11"
+	},
+	{
+		"id": "995",
+		"level": "L2 ASR",
+		"start_hours": "07:45",
+		"end_hours": "11:00",
+		"ue": "Java",
+		"room_abr": "S001",
+		"teacher": "CYP",
+		"date": "2025-01-26"
+	},
+	{
+		"id": "996",
+		"level": "M1 ASR",
+		"start_hours": "15:00",
+		"end_hours": "17:45",
+		"ue": "Archi log",
+		"room_abr": "S210",
+		"teacher": "MAD",
+		"date": "2025-02-09"
+	},
+	{
+		"id": "997",
+		"level": "L3 ASR",
+		"start_hours": "15:00",
+		"end_hours": "18:00",
+		"ue": "IA",
+		"room_abr": "S001",
+		"teacher": "HJS",
+		"date": "2025-01-21"
+	},
+	{
+		"id": "998",
+		"level": "L3 IG grp1",
+		"start_hours": "10:30",
+		"end_hours": "15:45",
+		"ue": "ASDA",
+		"room_abr": "S007",
+		"teacher": "SIK",
+		"date": "2025-01-06"
+	},
+	{
+		"id": "999",
+		"level": "L3 IG grp2",
+		"start_hours": "07:45",
+		"end_hours": "10:30",
+		"ue": "BDA",
+		"room_abr": "S007",
+		"teacher": "LEA",
+		"date": "2025-01-13"
+	},
+	{
+		"id": "1000",
+		"level": "M1 GB grp2",
+		"start_hours": "13:15",
+		"end_hours": "15:45",
+		"ue": "Java",
+		"room_abr": "S008",
+		"teacher": "BRC",
+		"date": "2025-01-25"
+	}
+]

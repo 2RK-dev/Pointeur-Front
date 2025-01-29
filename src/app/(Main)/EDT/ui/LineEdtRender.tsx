@@ -1,5 +1,5 @@
-import { BASE_SLOT_HEIGHT, Horaire } from "@/lib/edt_utils";
-import { timeToMinutes } from "@/lib/utils";
+import { BASE_SLOT_HEIGHT, Horaire, timeToMinutes } from "@/lib/edt_utils";
+
 import HoraireCard from "./HoraireCard";
 
 interface RenderHorairesProps {

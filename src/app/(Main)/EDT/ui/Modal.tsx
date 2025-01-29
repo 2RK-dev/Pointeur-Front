@@ -16,8 +16,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { initialRooms } from "@/lib/Room_utils";
 
-import { Horaire, days, groupes, initialHoraire } from "@/lib/edt_utils";
+import { Horaire, days, initialHoraire, prof, ue } from "@/lib/edt_utils";
+import { initialLevels } from "@/lib/niveau_utils";
 import { useEffect, useState } from "react";
 
 interface ModalProps {
@@ -62,6 +64,15 @@ export default function Modal({
 		}
 	};
 
+	useEffect(() => {
+		console.log(horaire);
+		// Split the string by spaces
+		const parts = horaire.id_grp.split(" ");
+		// Combine the parts after the first split
+		const id_grp = parts.slice(1).join(" ");
+		console.log(id_grp);
+	}, [horaire]);
+
 	return (
 		<Dialog open={isOpen} onOpenChange={onOpenChange}>
 			<DialogContent>
@@ -100,22 +111,28 @@ export default function Modal({
 
 					{/* Groupe Select */}
 					<Select
-						value={horaire.id_grp}
+						value={horaire.id_grp.split(" ").slice(1).join(" ")}
 						onValueChange={(value) => {
-							setHoraire({ ...horaire, id_grp: value });
+							setHoraire({ ...horaire, id_grp: selectedNiveau + " " + value });
 						}}>
 						<SelectTrigger>
 							<SelectValue placeholder="Groupe" />
 						</SelectTrigger>
 						<SelectContent>
-							{groupes[selectedNiveau].map((groupe: any) => (
-								<SelectItem
-									key={groupe}
-									value={groupe}
-									onSelect={() => setHoraire({ ...horaire, id_grp: groupe })}>
-									{groupe}
-								</SelectItem>
-							))}
+							{initialLevels.map(
+								(level) =>
+									level.title === selectedNiveau &&
+									level.groups.map((group, index) => (
+										<SelectItem
+											key={index}
+											value={group}
+											onSelect={() =>
+												setHoraire({ ...horaire, id_grp: group })
+											}>
+											{group}
+										</SelectItem>
+									))
+							)}
 						</SelectContent>
 					</Select>
 					<div className="flex gap-4">
@@ -158,54 +175,47 @@ export default function Modal({
 							<SelectValue placeholder="UE" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem
-								value="ue1"
-								onSelect={() => setHoraire({ ...horaire, id_ue: "ue1" })}>
-								UE1
-							</SelectItem>
-							<SelectItem
-								value="ue2"
-								onSelect={() => setHoraire({ ...horaire, id_ue: "ue2" })}>
-								UE2
-							</SelectItem>
+							{ue.map((ue, index) => (
+								<SelectItem key={index} value={ue}>
+									{ue}
+								</SelectItem>
+							))}
 						</SelectContent>
 					</Select>
 
 					{/* Salle Select */}
-					<Select>
+					<Select
+						value={horaire.id_salle}
+						onValueChange={(value) =>
+							setHoraire({ ...horaire, id_salle: value })
+						}>
 						<SelectTrigger>
-							<SelectValue>{horaire.id_salle}</SelectValue>
+							<SelectValue placeholder="Salle" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem
-								value="salle1"
-								onSelect={() => setHoraire({ ...horaire, id_salle: "salle1" })}>
-								Salle 1
-							</SelectItem>
-							<SelectItem
-								value="salle2"
-								onSelect={() => setHoraire({ ...horaire, id_salle: "salle2" })}>
-								Salle 2
-							</SelectItem>
+							{initialRooms.map((room, index) => (
+								<SelectItem key={index} value={room.room_abr}>
+									{room.room_name}
+								</SelectItem>
+							))}
 						</SelectContent>
 					</Select>
 
 					{/* Prof Select */}
-					<Select>
+					<Select
+						value={horaire.id_prof}
+						onValueChange={(value) => {
+							setHoraire({ ...horaire, id_prof: value });
+						}}>
 						<SelectTrigger>
-							<SelectValue>{horaire.id_prof}</SelectValue>
+							<SelectValue placeholder="Prof" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem
-								value="prof1"
-								onSelect={() => setHoraire({ ...horaire, id_prof: "prof1" })}>
-								Prof 1
-							</SelectItem>
-							<SelectItem
-								value="prof2"
-								onSelect={() => setHoraire({ ...horaire, id_prof: "prof2" })}>
-								Prof 2
-							</SelectItem>
+							{prof.map((prof, index) => (
+								<SelectItem key={index} value={prof}>
+									{prof}
+								</SelectItem>
+							))}
 						</SelectContent>
 					</Select>
 

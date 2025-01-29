@@ -1,5 +1,4 @@
-import { Horaire } from "@/lib/Model/edt";
-import { days, getStyleHours, hours } from "@/lib/edt_utils";
+import { Horaire, days, getStyleHours, hours } from "@/lib/edt_utils";
 import RenderHoraires from "./LineEdtRender";
 
 interface props {

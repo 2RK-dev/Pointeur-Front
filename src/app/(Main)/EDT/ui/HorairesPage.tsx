@@ -9,18 +9,21 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import { Horaire, groupes } from "@/lib/edt_utils";
 import {
+	Horaire,
 	getCurrentWeekNumber,
 	getWeekDateRange,
 	getWeekOptions,
-} from "@/lib/utils";
+	groupes,
+} from "@/lib/edt_utils";
+
+import { initialLevels } from "@/lib/niveau_utils";
+import { getedt } from "@/server/edt";
 import { jsPDF } from "jspdf";
 import { CirclePlus, FileText } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import Modal from "./Modal";
-import mockData from "./mockData.json";
 
 export const initialHoraire: Horaire = {
 	id: "",
@@ -35,7 +38,8 @@ export const initialHoraire: Horaire = {
 };
 
 export default function HorairesPage() {
-	const [horaires, setHoraires] = useState<Horaire[]>(mockData.horaires);
+	const [Originalhoraires, setOriginalHoraires] = useState<Horaire[]>([]);
+	const [horaires, setHoraires] = useState<Horaire[]>([]);
 	const [selectedWeek, setSelectedWeek] = useState<string>(
 		getCurrentWeekNumber().toString()
 	);
@@ -47,6 +51,40 @@ export default function HorairesPage() {
 		setEditingHoraire(horaire);
 		console.log(horaire);
 		setIsModalOpen(true);
+	};
+
+	useEffect(() => {
+		const data = getedt(getCurrentWeekNumber(), new Date().getFullYear());
+		setOriginalHoraires(data);
+		const filteredData = filterHorairesByLvl(data, "L1");
+		setHoraires(filteredData);
+	}, []);
+
+	useEffect(() => {
+		if (selectedWeek) {
+			console.log(selectedWeek);
+			console.log(getedt(parseInt(selectedWeek), new Date().getFullYear()));
+			const data = getedt(parseInt(selectedWeek), new Date().getFullYear());
+			setOriginalHoraires(data);
+			const filteredData = filterHorairesByLvl(data, selectedNiveau);
+			setHoraires(filteredData);
+		}
+	}, [selectedWeek]);
+
+	useEffect(() => {
+		if (selectedNiveau) {
+			const filteredData = filterHorairesByLvl(
+				Originalhoraires,
+				selectedNiveau
+			);
+			setHoraires(filteredData);
+		}
+	}, [selectedNiveau]);
+
+	const filterHorairesByLvl = (data: Horaire[], lvl: string) => {
+		return data.filter((item) => {
+			return lvl === item.id_grp.split(" ")[0];
+		});
 	};
 
 	const handleAdd = () => {
@@ -127,9 +165,11 @@ export default function HorairesPage() {
 						<SelectValue placeholder="Sélectionner le niveau" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="L1">L1</SelectItem>
-						<SelectItem value="L2">L2</SelectItem>
-						<SelectItem value="L3">L3</SelectItem>
+						{initialLevels.map((level) => (
+							<SelectItem key={level.id} value={level.title}>
+								{level.title}
+							</SelectItem>
+						))}
 					</SelectContent>
 				</Select>
 				<div className=" space-x-4">

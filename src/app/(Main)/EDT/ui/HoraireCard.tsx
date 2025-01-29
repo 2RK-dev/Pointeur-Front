@@ -1,11 +1,11 @@
-import { Horaire } from "@/lib/Model/edt";
-import { BASE_SLOT_HEIGHT } from "@/lib/edt_utils";
 import {
+	BASE_SLOT_HEIGHT,
+	Horaire,
 	calculatePosition,
 	calculateWidth,
 	formatDuration,
 	generateColorByGroup,
-} from "@/lib/utils";
+} from "@/lib/edt_utils";
 
 interface HoraireCardProps {
 	horaire: Horaire;
