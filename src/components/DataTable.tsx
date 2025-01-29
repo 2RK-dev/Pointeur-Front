@@ -28,6 +28,8 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	columnsRech?: string;
 	placeholderInput?: string;
+	columnsRech2?: string;
+	placeholderInput2?: string;
 	data: TData[];
 	children?: React.ReactNode;
 }
@@ -36,6 +38,8 @@ export function DataTable<TData, TValue>({
 	columns,
 	columnsRech,
 	placeholderInput,
+	columnsRech2,
+	placeholderInput2,
 	data,
 	children,
 }: DataTableProps<TData, TValue>) {
@@ -71,6 +75,23 @@ export function DataTable<TData, TValue>({
 							}
 							onChange={(event) =>
 								table.getColumn(columnsRech)?.setFilterValue(event.target.value)
+							}
+							className="max-w-sm"
+						/>
+					)}
+				</div>
+				<div className="flex items-center py-4">
+					{columnsRech2 && (
+						<Input
+							placeholder={placeholderInput2}
+							value={
+								(table.getColumn(columnsRech2)?.getFilterValue() as string) ??
+								""
+							}
+							onChange={(event) =>
+								table
+									.getColumn(columnsRech2)
+									?.setFilterValue(event.target.value)
 							}
 							className="max-w-sm"
 						/>
@@ -131,14 +152,14 @@ export function DataTable<TData, TValue>({
 					size="sm"
 					onClick={() => table.previousPage()}
 					disabled={!table.getCanPreviousPage()}>
-					Previous
+					Précédent
 				</Button>
 				<Button
 					variant="outline"
 					size="sm"
 					onClick={() => table.nextPage()}
 					disabled={!table.getCanNextPage()}>
-					Next
+					Suivant
 				</Button>
 			</div>
 		</div>

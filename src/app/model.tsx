@@ -24,3 +24,29 @@ export interface Semaine {
 	debut: Date;
 	fin: Date;
 }
+export interface Salle {
+	Abr_Salle: string;
+	Designation_Salle: string;
+}
+export interface UE {
+	Designation_UE: string;
+	Abr_UE: string;
+	Niveau_Assigner: string;
+}
+export interface Etudiant {
+	Matricule: string;
+	Nom: string;
+	Niveau: string;
+	Groupe: string;
+}
+export interface Prof {
+	Abr_Prof: string;
+	Nom_Prof: string;
+}
+
+export interface Abs {
+	MATRICULE: string;
+	NOM: string;
+	DESIGNATION_NIVEAU: string;
+	Etat: string;
+}
