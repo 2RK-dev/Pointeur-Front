@@ -1,13 +1,10 @@
 version: "3.8"
 
 services:
-  nextjs-app:
-    build: .
+  nextjs:
+    image: hhh # Si vous avez déjà une image construite
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - "3000:3000" # Utilisation du port défini dans .env
     environment:
-      - NODE_ENV=development
-    command: ["npm", "run", "dev"]
+      - PORT=3000
+      - API_URL=http://192.168.201.215:8000

@@ -1,35 +1,37 @@
-# Utiliser une image de base officielle Node.js
-FROM node:16-alpine AS builder
+# Étape 1 : Construction de l'application
+FROM node:18 AS builder
 
 # Définir le répertoire de travail
 WORKDIR /app
 
 # Copier les fichiers package.json et package-lock.json
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN npm install --force
 
-# Copier le reste du code source
+
+# Copier tout le projet dans le conteneur
 COPY . .
 
-# Construire l'application
+# Construire le projet Next.js
 RUN npm run build
 
-# Utiliser une image plus légère pour servir l'application
-FROM node:16-alpine
+# Étape 2 : Préparer l'image pour la production
+FROM node:18-alpine
 
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier uniquement les fichiers nécessaires pour exécuter l'application
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
+# Copier les fichiers nécessaires de l'étape de build
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/package-lock.json ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
 
-# Exposer le port sur lequel Next.js s'exécute
+# Exposer le port utilisé par Next.js
 EXPOSE 3000
 
-# Démarrer l'application
+# Commande pour démarrer l'application
 CMD ["npm", "run", "start"]
