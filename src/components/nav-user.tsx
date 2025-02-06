@@ -37,18 +37,18 @@ export function NavUser({
 					<Avatar className="max-h-8 max-w-8">
 						<AvatarImage src={user.avatar} alt={"username"} />
 						<AvatarFallback>
-							{"Ryan".charAt(0).toLocaleUpperCase()}
+							{"Manager".charAt(0).toLocaleUpperCase()}
 						</AvatarFallback>
 					</Avatar>
 					<div className="flex flex-col items-start text-left">
-						<span className="text-sm font-medium">{"Ryan"}</span>
+						<span className="text-sm font-medium">{"Manager"}</span>
 					</div>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56" align="end" forceMount>
 				<DropdownMenuLabel className="font-normal">
 					<div className="flex flex-col space-y-1">
-						<p className="text-sm font-medium leading-none">{"Ryan"}</p>
+						<p className="text-sm font-medium leading-none">{"Manager"}</p>
 					</div>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />

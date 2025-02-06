@@ -54,21 +54,33 @@ export default function HorairesPage() {
 	};
 
 	useEffect(() => {
-		const data = getedt(getCurrentWeekNumber(), new Date().getFullYear());
-		setOriginalHoraires(data);
-		const filteredData = filterHorairesByLvl(data, "L1");
-		setHoraires(filteredData);
+		const fetch = async () => {
+			const data = await getedt(
+				getCurrentWeekNumber(),
+				new Date().getFullYear()
+			);
+			setOriginalHoraires(data);
+			const filteredData = filterHorairesByLvl(data, "L1");
+			setHoraires(filteredData);
+		};
+		fetch();
 	}, []);
 
 	useEffect(() => {
-		if (selectedWeek) {
-			console.log(selectedWeek);
-			console.log(getedt(parseInt(selectedWeek), new Date().getFullYear()));
-			const data = getedt(parseInt(selectedWeek), new Date().getFullYear());
-			setOriginalHoraires(data);
-			const filteredData = filterHorairesByLvl(data, selectedNiveau);
-			setHoraires(filteredData);
-		}
+		const fetch = async () => {
+			if (selectedWeek) {
+				console.log(selectedWeek);
+				console.log(getedt(parseInt(selectedWeek), new Date().getFullYear()));
+				const data = await getedt(
+					parseInt(selectedWeek),
+					new Date().getFullYear()
+				);
+				setOriginalHoraires(data);
+				const filteredData = filterHorairesByLvl(data, selectedNiveau);
+				setHoraires(filteredData);
+			}
+		};
+		fetch();
 	}, [selectedWeek]);
 
 	useEffect(() => {

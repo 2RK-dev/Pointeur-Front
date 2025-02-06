@@ -1,0 +1,170 @@
+[
+	{
+		"Level": "L1",
+		"Matter": [
+			{ "name": "Algebre", "Abr_Matter": "ALG" },
+			{ "name": "Analyse", "Abr_Matter": "ANA" },
+			{ "name": "Probabilité et Statistique", "Abr_Matter": "PS" },
+			{ "name": "Mathématiques discretes", "Abr_Matter": "MD" },
+			{ "name": "Algorithmique et structure de données", "Abr_Matter": "ASD" },
+			{ "name": "Langage C", "Abr_Matter": "C" },
+			{
+				"name": "Initiation à la Programmation Orienté Objet",
+				"Abr_Matter": "IPO"
+			},
+			{
+				"name": "Développement de site web en HTML/CSS",
+				"Abr_Matter": "WEB-HTML"
+			},
+			{ "name": "Technologie XML et DHTML", "Abr_Matter": "XML-DHTML" },
+			{ "name": "Système d'exploitation Unix", "Abr_Matter": "UNIX" },
+			{ "name": "Système d'exploitation Windows", "Abr_Matter": "WIN" },
+			{ "name": "Théorie des réseaux", "Abr_Matter": "TR" },
+			{ "name": "Architecture des ordinateurs", "Abr_Matter": "ARCHI" },
+			{ "name": "Technologies des réseaux", "Abr_Matter": "TECH-RES" },
+			{ "name": "Electronique analogique", "Abr_Matter": "ELEC-ANA" },
+			{ "name": "Electronique numérique", "Abr_Matter": "ELEC-NUM" },
+			{ "name": "Introduction aux systèmes embarqués", "Abr_Matter": "EMB" },
+			{ "name": "Base de l'Informatique", "Abr_Matter": "BASE-INFO" },
+			{ "name": "Comptabilité générale", "Abr_Matter": "COMPTA" },
+			{ "name": "Anglais", "Abr_Matter": "ANG" },
+			{ "name": "Français", "Abr_Matter": "FR" }
+		]
+	},
+	{
+		"Level": "L2",
+		"Matter": [
+			{ "name": "Algebre", "Abr_Matter": "ALG" },
+			{ "name": "Analyse", "Abr_Matter": "ANA" },
+			{ "name": "Probabilité et Statistique 2", "Abr_Matter": "PS2" },
+			{ "name": "Programmation linéaire", "Abr_Matter": "PROG-LIN" },
+			{
+				"name": "Algorithmique et structure de données avancés",
+				"Abr_Matter": "ASD-A"
+			},
+			{ "name": "Programmation Orienté Objet en C++", "Abr_Matter": "POO-CPP" },
+			{ "name": "Langage Java", "Abr_Matter": "JAVA" },
+			{ "name": "Langage Python", "Abr_Matter": "PYTHON" },
+			{ "name": "Technologie PHP", "Abr_Matter": "PHP" },
+			{ "name": "MERISE", "Abr_Matter": "MERISE" },
+			{ "name": "Base de données relationnelles", "Abr_Matter": "BD-REL" },
+			{ "name": "Base de données avancées", "Abr_Matter": "BD-A" },
+			{ "name": "SGBD MySQL et PostGreSQL", "Abr_Matter": "SGBD-MySQL" },
+			{ "name": "Développement d'Aplication SPA", "Abr_Matter": "SPA" },
+			{ "name": "Développement d'Aplication en C#", "Abr_Matter": "C#" },
+			{ "name": "Comptabilité analytique", "Abr_Matter": "COMPTA-A" },
+			{ "name": "Administration système Linux", "Abr_Matter": "ADM-LINUX" },
+			{ "name": "Administration système Microsoft", "Abr_Matter": "ADM-WIN" },
+			{ "name": "Administration système Unix", "Abr_Matter": "ADM-UNIX" },
+			{ "name": "Electronique analogique 2", "Abr_Matter": "ELEC-ANA2" },
+			{ "name": "Programmation des microcontrôleurs", "Abr_Matter": "MICRO" },
+			{ "name": "Méthode de Travail Universitaire", "Abr_Matter": "MTU" },
+			{ "name": "Technique de communication", "Abr_Matter": "COMM" }
+		]
+	},
+	{
+		"Level": "L3",
+		"Matter": [
+			{ "name": "Technologie JAVA", "Abr_Matter": "TECH-JAVA" },
+			{ "name": "Technologie Python", "Abr_Matter": "TECH-PY" },
+			{ "name": "Technologies JSP et Servlet", "Abr_Matter": "JSP-SERV" },
+			{ "name": "Développement Web API", "Abr_Matter": "API" },
+			{ "name": "Développement mobile", "Abr_Matter": "MOBILE" },
+			{ "name": "Génie Logiciel", "Abr_Matter": "GL" },
+			{ "name": "Administration SGBD Oracle", "Abr_Matter": "ADM-ORACLE" },
+			{ "name": "UML", "Abr_Matter": "UML" },
+			{ "name": "Patrons de conception", "Abr_Matter": "PATRON" },
+			{ "name": "Interaction Homme-Machine", "Abr_Matter": "IHM" },
+			{ "name": "Téléphonie sur IP", "Abr_Matter": "VOIP" },
+			{
+				"name": "Architecture des réseaux mobiles",
+				"Abr_Matter": "ARCH-MOBILE"
+			},
+			{
+				"name": "Administration réseaux Unix avancée",
+				"Abr_Matter": "ADM-UNIX-A"
+			},
+			{
+				"name": "Administration réseaux Microsoft",
+				"Abr_Matter": "ADM-WIN-RES"
+			},
+			{ "name": "Base de la cybersécurité", "Abr_Matter": "CYBER" },
+			{ "name": "Assembleur appliqué", "Abr_Matter": "ASM" },
+			{ "name": "Marketing", "Abr_Matter": "MARKET" },
+			{ "name": "Organisation et Management", "Abr_Matter": "ORG-MGT" },
+			{ "name": "Entreupeunariat", "Abr_Matter": "ENTREP" },
+			{ "name": "Gestion de Projet", "Abr_Matter": "GEST-PROJ" },
+			{ "name": "Droit des affaires et du travail", "Abr_Matter": "DROIT" }
+		]
+	},
+	{
+		"Level": "M1",
+		"Matter": [
+			{ "name": "Recherche opérationnelle", "Abr_Matter": "RO" },
+			{ "name": "Analyse des données", "Abr_Matter": "ANAL-DATA" },
+			{ "name": "Analyse numérique", "Abr_Matter": "ANAL-NUM" },
+			{
+				"name": "Réseau de Pétri et programmation multi-tâche",
+				"Abr_Matter": "PETRI"
+			},
+			{ "name": "Algorithmique avancé", "Abr_Matter": "ALGO-A" },
+			{ "name": "Technologie avancée en Java", "Abr_Matter": "JAVA-A" },
+			{ "name": "Technologie web avancée", "Abr_Matter": "WEB-A" },
+			{ "name": "Intégration Web-SIG", "Abr_Matter": "WEB-SIG" },
+			{ "name": "Ingénièrie des besoins", "Abr_Matter": "ING-BESOIN" },
+			{ "name": "Intelligence artificielle", "Abr_Matter": "IA" },
+			{ "name": "Python pour Machine Learning", "Abr_Matter": "PY-ML" },
+			{
+				"name": "Programmation parallèle et distribuée",
+				"Abr_Matter": "PARALLEL"
+			},
+			{ "name": "Programmation des réseaux", "Abr_Matter": "PROG-RES" },
+			{ "name": "Systèmes embarqués et temps réels", "Abr_Matter": "EMB-TR" },
+			{ "name": "Sécurité sous Unix", "Abr_Matter": "SEC-UNIX" },
+			{
+				"name": "Administration système et réseau avancée",
+				"Abr_Matter": "ADM-A"
+			},
+			{ "name": "Anglais techniques", "Abr_Matter": "ANG-TECH" },
+			{ "name": "Gestion financière et budgétaire", "Abr_Matter": "GEST-FIN" }
+		]
+	},
+	{
+		"Level": "M2",
+		"Matter": [
+			{
+				"name": "Réutilisation logiciel & frameworks",
+				"Abr_Matter": "REUSE-FRAMEWORK"
+			},
+			{ "name": "Architecture Orienté Service", "Abr_Matter": "SOA" },
+			{
+				"name": "Administration avancée de base de données",
+				"Abr_Matter": "ADM-BD-A"
+			},
+			{ "name": "Machine Learning et Deep Learning", "Abr_Matter": "ML-DL" },
+			{
+				"name": "Technologie de virtualisation et SDN",
+				"Abr_Matter": "VIRT-SDN"
+			},
+			{ "name": "Internet des Objets", "Abr_Matter": "IoT" },
+			{ "name": "GRID et CLUSTER", "Abr_Matter": "GRID" },
+			{ "name": "Sécurité avancée", "Abr_Matter": "SEC-A" },
+			{ "name": "MPLS et QoS", "Abr_Matter": "MPLS-QoS" },
+			{ "name": "Téléphonie sur IP avancée", "Abr_Matter": "VOIP-A" },
+			{ "name": "Réseau mobile avancé", "Abr_Matter": "RES-MOBILE-A" },
+			{ "name": "Méthodes Agile", "Abr_Matter": "AGILE" },
+			{ "name": "Système d’Information décisionnelle", "Abr_Matter": "SID" },
+			{
+				"name": "Aide à la décision et optimisation multi-critère",
+				"Abr_Matter": "AD-OPTIM"
+			},
+			{ "name": "Modélisation mathématique", "Abr_Matter": "MODELE-MATH" },
+			{ "name": "Système multi-agents", "Abr_Matter": "SMA" },
+			{
+				"name": "Méthodologie d'élaboration de mémoires",
+				"Abr_Matter": "MEMOIRE"
+			},
+			{ "name": "Méthodologie de recherche", "Abr_Matter": "RECHERCHE" }
+		]
+	}
+]

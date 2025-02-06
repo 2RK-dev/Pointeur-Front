@@ -32,7 +32,7 @@ export default function HoraireCard({
 		<div
 			key={horaire.id}
 			className={`absolute border rounded p-1 text-xs cursor-pointer  ${generateColorByGroup(
-				horaire.id_grp
+				horaire.id_grp.split(" ").slice(1).join(" ")
 			)}`}
 			style={{
 				left: `${left}%`,

@@ -235,7 +235,17 @@ export function generateColorByGroup(groupName: string): string {
 		"bg-purple-100 hover:bg-purple-200",
 		"bg-pink-100 hover:bg-pink-200",
 		"bg-orange-100 hover:bg-orange-200",
+		"bg-teal-100 hover:bg-teal-200",
+		"bg-indigo-100 hover:bg-indigo-200",
 	];
-	const index = parseInt(groupName.replace(/[^\d]/g, "")) % colors.length;
+
+	// Crée un hash simple du nom du groupe
+	let hash = 0;
+	for (let i = 0; i < groupName.length; i++) {
+		hash = groupName.charCodeAt(i) + ((hash << 5) - hash);
+	}
+
+	// Assure que l'index est positif et dans les limites du tableau
+	const index = Math.abs(hash) % colors.length;
 	return colors[index];
 }

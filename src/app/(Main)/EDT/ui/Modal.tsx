@@ -18,8 +18,10 @@ import {
 } from "@/components/ui/select";
 import { initialRooms } from "@/lib/Room_utils";
 
-import { Horaire, days, initialHoraire, prof, ue } from "@/lib/edt_utils";
+import { Horaire, days, initialHoraire } from "@/lib/edt_utils";
 import { initialLevels } from "@/lib/niveau_utils";
+import { getMatterForLevel } from "@/server/Matter";
+import { getTeacher } from "@/server/Teacher";
 import { useEffect, useState } from "react";
 
 interface ModalProps {
@@ -42,6 +44,24 @@ export default function Modal({
 	const [horaire, setHoraire] = useState<Horaire>(
 		editingHoraire || initialHoraire
 	);
+	const [MatterOption, setMatterOption] = useState<Matter[]>([]);
+	const [TeacherOption, setTeacherOption] = useState<Teacher[]>([]);
+
+	useEffect(() => {
+		async function fetchMatter() {
+			const matter = await getMatterForLevel(selectedNiveau);
+			setMatterOption(matter);
+		}
+		fetchMatter();
+	}, [selectedNiveau]);
+
+	useEffect(() => {
+		async function fetchTeacher() {
+			const teacher = await getTeacher();
+			setTeacherOption(teacher);
+		}
+		fetchTeacher();
+	}, []);
 
 	useEffect(() => {
 		if (editingHoraire) {
@@ -175,9 +195,9 @@ export default function Modal({
 							<SelectValue placeholder="UE" />
 						</SelectTrigger>
 						<SelectContent>
-							{ue.map((ue, index) => (
-								<SelectItem key={index} value={ue}>
-									{ue}
+							{MatterOption.map((Matter, index) => (
+								<SelectItem key={index} value={Matter.Abr_Matter}>
+									{Matter.name}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -211,9 +231,9 @@ export default function Modal({
 							<SelectValue placeholder="Prof" />
 						</SelectTrigger>
 						<SelectContent>
-							{prof.map((prof, index) => (
-								<SelectItem key={index} value={prof}>
-									{prof}
+							{TeacherOption.map((teacher, index) => (
+								<SelectItem key={index} value={teacher.Abr_Teacher}>
+									{teacher.name}
 								</SelectItem>
 							))}
 						</SelectContent>

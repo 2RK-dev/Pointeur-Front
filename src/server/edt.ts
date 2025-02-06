@@ -13,11 +13,10 @@ interface hourly {
 	date: string;
 }
 
-/*filter the hourly by the week number and the year from the data in json file "data/edt.json"
-firt take the week range use the function getWeekRange
-then filter the data by the weeb range
-return the filtered data*/
-export function getedt(weekNumber: number, year: number): Horaire[] {
+export async function getedt(
+	weekNumber: number,
+	year: number
+): Promise<Horaire[]> {
 	const edt: hourly[] = require("./data/edt.json");
 	const weekRange = getWeekDateRange(weekNumber, year);
 	let data: hourly[] = edt.filter((item) => {
