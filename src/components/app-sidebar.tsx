@@ -54,14 +54,14 @@ const data = {
 	navMain: [
 		{
 			title: "Tableau de bord",
-			url: "http://localhost:4444/Dashboard",
+			url: "http://localhost:3000/Dashboard",
 			icon: Layers,
 			access: "Dashboard",
 		},
 		{
 			title: "Absence",
 			icon: Frown,
-			url: "http://localhost:4444/Abs",
+			url: "http://localhost:3000/Abs",
 			access: "Abs",
 		},
 		{
@@ -71,18 +71,18 @@ const data = {
 			items: [
 				{
 					title: "Emploi du temp",
-					url: "http://localhost:4444/EDT",
+					url: "http://localhost:3000/EDT",
 				},
 				{
 					title: "UE",
 					icon: Book,
-					url: "http://localhost:4444/UE",
+					url: "http://localhost:3000/UE",
 					access: "UE",
 				},
 				{
 					title: "Salle",
 					icon: DoorClosed,
-					url: "http://localhost:4444/Room",
+					url: "http://localhost:3000/Room",
 					access: "UE",
 				},
 			],
@@ -95,33 +95,33 @@ const data = {
 				{
 					title: "Etudiant",
 					icon: UserRound,
-					url: "http://localhost:4444/Etudiant",
+					url: "http://localhost:3000/Etudiant",
 					access: "UE",
 				},
 				{
 					title: "Professeur",
 					icon: GraduationCap,
-					url: "http://localhost:4444/Prof",
+					url: "http://localhost:3000/Prof",
 					access: "UE",
 				},
 				{
 					title: "Niveau",
 					icon: School,
-					url: "http://localhost:4444/Level",
+					url: "http://localhost:3000/Level",
 					access: "UE",
 				},
 			],
 		},
 		{
 			title: "Transfére de données",
-			url: "http://localhost:4444/DataTransfere",
+			url: "http://localhost:3000/DataTransfere",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
 		},
 
 		{
 			title: "Paramétre",
-			url: "http://localhost:4444/Setting",
+			url: "http://localhost:3000/Setting",
 			icon: Settings2,
 			access: "Setting",
 		},

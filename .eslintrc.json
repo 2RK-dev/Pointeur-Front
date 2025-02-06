@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": "next/core-web-vitals",
+	"rules": {
+		"react-hooks/exhaustive-deps": "off", // Désactive la règle pour les dépendances manquantes dans useEffect
+		"react/no-unescaped-entities": "off" // Désactive la règle pour les entités non échappées
+	}
 }

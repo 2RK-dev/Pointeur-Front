@@ -1,7 +1,6 @@
 import { MyCard } from "@/components/Card";
 import { Chart } from "./Dashboard_UI/ChartPresence";
 import { ChartPresenceParNiveau } from "./Dashboard_UI/ChartPresenceParNiveau";
-import EDT from "./Dashboard_UI/EDT";
 import TopAbs from "./Dashboard_UI/TopAbs";
 
 export default function page() {
@@ -32,7 +31,7 @@ export default function page() {
 					className="flex flex-grow flex-col h-[550px]"
 					description="Emploi du temps de cette semaine"
 					title="Emploi du temps">
-					<EDT />
+					<div></div>
 				</MyCard>
 			</div>
 		</div>

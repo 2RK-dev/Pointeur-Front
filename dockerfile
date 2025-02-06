@@ -1,19 +1,35 @@
-FROM node:18-alpine
+# Utiliser une image de base officielle Node.js
+FROM node:16-alpine AS builder
 
-# Set the working directory inside the container
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if present)
+# Copier les fichiers package.json et package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Installer les dépendances
 RUN npm install
 
-# Copy the rest of the application code
+# Copier le reste du code source
 COPY . .
 
-# Expose the port on which Next.js runs
-EXPOSE 4444
+# Construire l'application
+RUN npm run build
 
-# Start the application
-CMD ["npm", "run", "dev"]
+# Utiliser une image plus légère pour servir l'application
+FROM node:16-alpine
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier uniquement les fichiers nécessaires pour exécuter l'application
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# Exposer le port sur lequel Next.js s'exécute
+EXPOSE 3000
+
+# Démarrer l'application
+CMD ["npm", "run", "start"]
