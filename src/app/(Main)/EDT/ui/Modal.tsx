@@ -54,6 +54,7 @@ export default function Modal({
 	);
 	const [MatterOption, setMatterOption] = useState<Matter[]>([]);
 	const [TeacherOption, setTeacherOption] = useState<Teacher[]>([]);
+	const [isActiveSubmit, setIsActiveSubmit] = useState(false);
 
 	useEffect(() => {
 		async function fetchMatter() {
@@ -77,10 +78,28 @@ export default function Modal({
 		}
 	}, [editingHoraire]);
 
+	useEffect(() => {
+		if (
+			horaire.date != "" &&
+			horaire.level != "" &&
+			horaire.start_hours != "" &&
+			horaire.end_hours != "" &&
+			horaire.ue != "" &&
+			horaire.room_abr != "" &&
+			horaire.teacher != ""
+		) {
+			setIsActiveSubmit(true);
+		} else {
+			setIsActiveSubmit(false);
+		}
+	}, [horaire]);
+
 	// Handle submit logic
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		onSubmit(horaire);
+		//clear form
+		setHoraire(initialHoraire);
 		onOpenChange(false);
 	};
 
@@ -93,7 +112,12 @@ export default function Modal({
 	};
 
 	return (
-		<Dialog open={isOpen} onOpenChange={onOpenChange}>
+		<Dialog
+			open={isOpen}
+			onOpenChange={(value) => {
+				onOpenChange(value);
+				setHoraire(initialHoraire);
+			}}>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>
@@ -109,7 +133,9 @@ export default function Modal({
 				<form onSubmit={handleSubmit} className="space-y-4">
 					{/* Jour Select */}
 					<Select
-						value={getDayNumber(horaire.date).toString()}
+						value={
+							(horaire.date = " " ? "0" : getDayNumber(horaire.date).toString())
+						}
 						onValueChange={(value) => {
 							setHoraire({
 								...horaire,
@@ -183,14 +209,14 @@ export default function Modal({
 						</div>
 					</div>
 
-					{/* UE Select */}
+					{/* EC Select */}
 					<Select
 						value={horaire.ue}
 						onValueChange={(value) => {
 							setHoraire({ ...horaire, ue: value });
 						}}>
 						<SelectTrigger>
-							<SelectValue placeholder="UE" />
+							<SelectValue placeholder="EC" />
 						</SelectTrigger>
 						<SelectContent>
 							{MatterOption.map((Matter, index) => (
@@ -238,12 +264,13 @@ export default function Modal({
 					</Select>
 
 					<div className="flex justify-between">
-						<Button type="submit">
+						<Button type="submit" disabled={!isActiveSubmit}>
 							{editingHoraire ? "Modifier" : "Enregistrer"}
 						</Button>
 
 						{editingHoraire && onDelete && (
 							<Button
+								disabled={!isActiveSubmit}
 								type="button"
 								variant="destructive"
 								onClick={handleDelete}>
