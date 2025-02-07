@@ -1,9 +1,9 @@
-import { Horaire, days, getStyleHours, hours } from "@/lib/edt_utils";
+import { days, getStyleHours, hourly, hours } from "@/lib/edt_utils";
 import RenderHoraires from "./LineEdtRender";
 
 interface props {
-	horaires: Horaire[];
-	onEdit: (horaire: Horaire) => void;
+	horaires: hourly[];
+	onEdit: (horaire: hourly) => void;
 }
 
 export default function EdtEncapsuler({ horaires, onEdit }: props) {

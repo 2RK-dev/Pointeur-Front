@@ -10,11 +10,10 @@ import {
 } from "@/components/ui/select";
 
 import {
-	Horaire,
 	getCurrentWeekNumber,
 	getWeekDateRange,
 	getWeekOptions,
-	groupes,
+	hourly,
 } from "@/lib/edt_utils";
 
 import { initialLevels } from "@/lib/niveau_utils";
@@ -25,29 +24,17 @@ import { useEffect, useState } from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import Modal from "./Modal";
 
-export const initialHoraire: Horaire = {
-	id: "",
-	id_grp: groupes.L1[0],
-	jour: 0,
-	heure_debut: "07:00",
-	heure_fin: "08:00",
-	id_ue: "",
-	id_salle: "",
-	id_prof: "",
-	semaine: 1,
-};
-
 export default function HorairesPage() {
-	const [Originalhoraires, setOriginalHoraires] = useState<Horaire[]>([]);
-	const [horaires, setHoraires] = useState<Horaire[]>([]);
+	const [Originalhoraires, setOriginalHoraires] = useState<hourly[]>([]);
+	const [horaires, setHoraires] = useState<hourly[]>([]);
 	const [selectedWeek, setSelectedWeek] = useState<string>(
 		getCurrentWeekNumber().toString()
 	);
 	const [selectedNiveau, setSelectedNiveau] = useState<string>("L1");
-	const [editingHoraire, setEditingHoraire] = useState<Horaire | null>(null);
+	const [editingHoraire, setEditingHoraire] = useState<hourly | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const handleEdit = (horaire: Horaire) => {
+	const handleEdit = (horaire: hourly) => {
 		setEditingHoraire(horaire);
 		console.log(horaire);
 		setIsModalOpen(true);
@@ -93,9 +80,9 @@ export default function HorairesPage() {
 		}
 	}, [selectedNiveau]);
 
-	const filterHorairesByLvl = (data: Horaire[], lvl: string) => {
+	const filterHorairesByLvl = (data: hourly[], lvl: string) => {
 		return data.filter((item) => {
-			return lvl === item.id_grp.split(" ")[0];
+			return lvl === item.level.split(" ")[0];
 		});
 	};
 
@@ -104,52 +91,54 @@ export default function HorairesPage() {
 		setIsModalOpen(true);
 	};
 
-	const handleSubmit = (newHoraire: Horaire) => {
+	const handleSubmit = (newHoraire: hourly) => {
 		if (editingHoraire) {
 			setHoraires(
-				horaires.map((h) => (h.id === editingHoraire.id ? newHoraire : h))
+				horaires.map((h) =>
+					h.edt_id === editingHoraire.edt_id ? newHoraire : h
+				)
 			);
 		} else {
-			setHoraires([...horaires, { ...newHoraire, id: Date.now().toString() }]);
+			setHoraires([
+				...horaires,
+				{ ...newHoraire, edt_id: Date.now().toString() },
+			]);
 		}
 		setIsModalOpen(false);
 	};
 
 	const handleDelete = () => {
 		if (editingHoraire) {
-			setHoraires(horaires.filter((h) => h.id !== editingHoraire.id));
+			setHoraires(horaires.filter((h) => h.edt_id !== editingHoraire.edt_id));
 			setIsModalOpen(false);
 		}
 	};
 
 	const generatePDF = () => {
 		const doc = new jsPDF({
-			orientation: "landscape", // Mode paysage
+			orientation: "landscape",
 			unit: "mm",
 			format: "a4",
 		});
 
-		// Calcul des dates de début et de fin de la semaine
-		const currentYear = new Date().getFullYear(); // Année en cours
+		const currentYear = new Date().getFullYear();
 		const { start, end } = getWeekDateRange(
 			parseInt(selectedWeek),
 			currentYear
 		);
 
-		// Titre et date de la semaine
 		doc.setFontSize(16);
-		doc.text(selectedNiveau, 148.5, 10, { align: "center" }); // Titre centré
+		doc.text(selectedNiveau, 148.5, 10, { align: "center" });
 		doc.setFontSize(10);
-		doc.text(`Semaine : ${start} - ${end}`, 10, 10); // Début et fin de semaine en haut à gauche
+		doc.text(`Semaine : ${start} - ${end}`, 10, 10);
 
-		// Contenu du composant EdtEncapsuler
 		const componentContent = document.getElementById("edt-content");
 		if (componentContent) {
 			doc.html(componentContent, {
 				x: 10,
 				y: 20,
-				width: 270, // Ajuste la largeur pour tenir dans une page paysage
-				windowWidth: 1024, // Largeur de référence pour le rendu
+				width: 270,
+				windowWidth: 1024,
 				callback: (doc) => {
 					doc.save(`${selectedNiveau}_${start}_to_${end}.pdf`);
 				},
@@ -158,7 +147,7 @@ export default function HorairesPage() {
 	};
 
 	return (
-		<div className="p-4">
+		<div className="p-4  min-w-[1250px]">
 			<div className="mb-4 flex justify-between items-center">
 				<Select value={selectedWeek} onValueChange={setSelectedWeek}>
 					<SelectTrigger className="w-[300px]">
@@ -203,6 +192,7 @@ export default function HorairesPage() {
 				onDelete={handleDelete}
 				editingHoraire={editingHoraire}
 				selectedNiveau={selectedNiveau}
+				selectedWeek={parseInt(selectedWeek)}
 			/>
 		</div>
 	);

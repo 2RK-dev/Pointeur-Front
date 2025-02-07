@@ -18,7 +18,13 @@ import {
 } from "@/components/ui/select";
 import { initialRooms } from "@/lib/Room_utils";
 
-import { Horaire, days, initialHoraire } from "@/lib/edt_utils";
+import {
+	days,
+	getDateByWeekAndDay,
+	getDayNumber,
+	hourly,
+	initialHoraire,
+} from "@/lib/edt_utils";
 import { initialLevels } from "@/lib/niveau_utils";
 import { getMatterForLevel } from "@/server/Matter";
 import { getTeacher } from "@/server/Teacher";
@@ -27,10 +33,11 @@ import { useEffect, useState } from "react";
 interface ModalProps {
 	isOpen: boolean;
 	onOpenChange: (open: boolean) => void;
-	onSubmit: (horaire: Horaire) => void;
+	onSubmit: (horaire: hourly) => void;
 	onDelete?: () => void;
-	editingHoraire: Horaire | null;
+	editingHoraire: hourly | null;
 	selectedNiveau: string;
+	selectedWeek: number;
 }
 
 export default function Modal({
@@ -40,8 +47,9 @@ export default function Modal({
 	onDelete,
 	editingHoraire,
 	selectedNiveau,
+	selectedWeek,
 }: ModalProps) {
-	const [horaire, setHoraire] = useState<Horaire>(
+	const [horaire, setHoraire] = useState<hourly>(
 		editingHoraire || initialHoraire
 	);
 	const [MatterOption, setMatterOption] = useState<Matter[]>([]);
@@ -84,15 +92,6 @@ export default function Modal({
 		}
 	};
 
-	useEffect(() => {
-		console.log(horaire);
-		// Split the string by spaces
-		const parts = horaire.id_grp.split(" ");
-		// Combine the parts after the first split
-		const id_grp = parts.slice(1).join(" ");
-		console.log(id_grp);
-	}, [horaire]);
-
 	return (
 		<Dialog open={isOpen} onOpenChange={onOpenChange}>
 			<DialogContent>
@@ -110,19 +109,23 @@ export default function Modal({
 				<form onSubmit={handleSubmit} className="space-y-4">
 					{/* Jour Select */}
 					<Select
-						value={days[horaire.jour]}
+						value={getDayNumber(horaire.date).toString()}
 						onValueChange={(value) => {
-							setHoraire({ ...horaire, jour: days.indexOf(value) });
+							setHoraire({
+								...horaire,
+								date: getDateByWeekAndDay(
+									new Date().getFullYear(),
+									selectedWeek,
+									parseInt(value)
+								),
+							});
 						}}>
 						<SelectTrigger>
 							<SelectValue placeholder="Jour" />
 						</SelectTrigger>
 						<SelectContent>
 							{days.map((day, index) => (
-								<SelectItem
-									key={index}
-									value={day}
-									onSelect={() => setHoraire({ ...horaire, jour: index })}>
+								<SelectItem key={index} value={index.toString()}>
 									{day}
 								</SelectItem>
 							))}
@@ -131,9 +134,9 @@ export default function Modal({
 
 					{/* Groupe Select */}
 					<Select
-						value={horaire.id_grp.split(" ").slice(1).join(" ")}
+						value={horaire.level.split(" ").slice(1).join(" ")}
 						onValueChange={(value) => {
-							setHoraire({ ...horaire, id_grp: selectedNiveau + " " + value });
+							setHoraire({ ...horaire, level: selectedNiveau + " " + value });
 						}}>
 						<SelectTrigger>
 							<SelectValue placeholder="Groupe" />
@@ -143,12 +146,7 @@ export default function Modal({
 								(level) =>
 									level.title === selectedNiveau &&
 									level.groups.map((group, index) => (
-										<SelectItem
-											key={index}
-											value={group}
-											onSelect={() =>
-												setHoraire({ ...horaire, id_grp: group })
-											}>
+										<SelectItem key={index} value={group}>
 											{group}
 										</SelectItem>
 									))
@@ -162,9 +160,9 @@ export default function Modal({
 								Heure de début
 							</label>
 							<TimePicker
-								value={horaire.heure_debut}
+								value={horaire.start_hours}
 								onChange={(time) =>
-									setHoraire({ ...horaire, heure_debut: time })
+									setHoraire({ ...horaire, start_hours: time })
 								}
 								minTime="07:00"
 								maxTime="18:00"
@@ -177,8 +175,8 @@ export default function Modal({
 								Heure de fin
 							</label>
 							<TimePicker
-								value={horaire.heure_fin}
-								onChange={(time) => setHoraire({ ...horaire, heure_fin: time })}
+								value={horaire.end_hours}
+								onChange={(time) => setHoraire({ ...horaire, end_hours: time })}
 								minTime="07:00"
 								maxTime="18:00"
 							/>
@@ -187,9 +185,9 @@ export default function Modal({
 
 					{/* UE Select */}
 					<Select
-						value={horaire.id_ue}
+						value={horaire.ue}
 						onValueChange={(value) => {
-							setHoraire({ ...horaire, id_ue: value });
+							setHoraire({ ...horaire, ue: value });
 						}}>
 						<SelectTrigger>
 							<SelectValue placeholder="UE" />
@@ -205,9 +203,9 @@ export default function Modal({
 
 					{/* Salle Select */}
 					<Select
-						value={horaire.id_salle}
+						value={horaire.room_abr}
 						onValueChange={(value) =>
-							setHoraire({ ...horaire, id_salle: value })
+							setHoraire({ ...horaire, room_abr: value })
 						}>
 						<SelectTrigger>
 							<SelectValue placeholder="Salle" />
@@ -223,9 +221,9 @@ export default function Modal({
 
 					{/* Prof Select */}
 					<Select
-						value={horaire.id_prof}
+						value={horaire.teacher}
 						onValueChange={(value) => {
-							setHoraire({ ...horaire, id_prof: value });
+							setHoraire({ ...horaire, teacher: value });
 						}}>
 						<SelectTrigger>
 							<SelectValue placeholder="Prof" />

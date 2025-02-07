@@ -1,13 +1,12 @@
-export interface Horaire {
-	id: string;
-	id_grp: string;
-	jour: number;
-	heure_debut: string;
-	heure_fin: string;
-	id_ue: string;
-	id_salle: string;
-	id_prof: string;
-	semaine: number;
+export interface hourly {
+	edt_id: string;
+	level: string;
+	start_hours: string;
+	end_hours: string;
+	ue: string;
+	room_abr: string;
+	teacher: string;
+	date: string;
 }
 
 export const BASE_SLOT_HEIGHT = 90;
@@ -35,46 +34,15 @@ export const groupes: { [key: string]: string[] } = {
 	L3: ["grp5", "grp6"],
 };
 
-export const ue: string[] = [
-	"IA",
-	"Java",
-	"RO",
-	"ASDA",
-	"ANG",
-	"Archi",
-	"Archi log",
-	"GLog",
-	"PatronC",
-	"C#",
-	"Base Info",
-	"BDA",
-	"Algo",
-];
-
-export const prof = [
-	"VOL",
-	"RAL",
-	"THM",
-	"BRC",
-	"HJS",
-	"HAJ",
-	"LEA",
-	"BEN",
-	"MAD",
-	"SIK",
-	"CYP",
-];
-
-export const initialHoraire: Horaire = {
-	id: "",
-	id_grp: "",
-	jour: 0,
-	heure_debut: "07:00",
-	heure_fin: "08:00",
-	id_ue: "",
-	id_salle: "",
-	id_prof: "",
-	semaine: 1,
+export const initialHoraire: hourly = {
+	edt_id: "",
+	level: "",
+	start_hours: "07:00",
+	end_hours: "08:00",
+	ue: "",
+	room_abr: "",
+	teacher: "",
+	date: "",
 };
 
 export const getStyleHours = (
@@ -210,6 +178,29 @@ export function getWeekOptions(): { value: string; label: string }[] {
 export function getDayNumber(dateString: string): number {
 	const date = new Date(dateString);
 	return date.getDay();
+}
+
+//get date by week and day number exemple : get date by week 1 and day 1 result : 2024-12-30
+export function getDateByWeekAndDay(
+	year: number,
+	week: number,
+	day: number
+): string {
+	const firstDayOfYear = new Date(year, 0, 1);
+	const daysOffset = (week - 1) * 7;
+	const weekStart = new Date(
+		firstDayOfYear.getTime() + daysOffset * 24 * 60 * 60 * 1000
+	);
+
+	const dayOfWeek = weekStart.getDay(); // 0 (dimanche) à 6 (samedi)
+	const startDate = new Date(weekStart);
+	startDate.setDate(
+		weekStart.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+	);
+
+	const date = new Date(startDate);
+	date.setDate(startDate.getDate() + day);
+	return date.toISOString().split("T")[0];
 }
 
 /**

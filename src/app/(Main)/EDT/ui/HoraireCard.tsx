@@ -1,15 +1,15 @@
 import {
 	BASE_SLOT_HEIGHT,
-	Horaire,
 	calculatePosition,
 	calculateWidth,
 	formatDuration,
 	generateColorByGroup,
+	hourly,
 } from "@/lib/edt_utils";
 
 interface HoraireCardProps {
-	horaire: Horaire;
-	onEdit: (horaire: Horaire) => void;
+	horaire: hourly;
+	onEdit: (horaire: hourly) => void;
 	top: number; // Nouvelle prop pour la position verticale
 }
 
@@ -19,37 +19,37 @@ export default function HoraireCard({
 	top,
 }: HoraireCardProps) {
 	try {
-		const left = calculatePosition(horaire.heure_debut);
-		const width = calculateWidth(horaire.heure_debut, horaire.heure_fin);
+		const left = calculatePosition(horaire.start_hours);
+		const width = calculateWidth(horaire.start_hours, horaire.end_hours);
 	} catch (error) {
 		console.log(horaire);
 	}
 
-	const left = calculatePosition(horaire.heure_debut);
-	const width = calculateWidth(horaire.heure_debut, horaire.heure_fin);
+	const left = calculatePosition(horaire.start_hours);
+	const width = calculateWidth(horaire.start_hours, horaire.end_hours);
 
 	return (
 		<div
 			key={horaire.id}
 			className={`absolute border rounded p-1 text-xs cursor-pointer  ${generateColorByGroup(
-				horaire.id_grp.split(" ").slice(1).join(" ")
+				horaire.level.split(" ").slice(1).join(" ")
 			)}`}
 			style={{
 				left: `${left}%`,
 				width: `${width}%`,
 				height: `${BASE_SLOT_HEIGHT}px`,
-				top: `${top}px`, // Utilisation du `top` passé par le parent
+				top: `${top}px`,
 			}}
 			onClick={() => onEdit(horaire)}>
-			<div className="font-semibold">{horaire.id_ue}</div>
+			<div className="font-semibold">{horaire.ue}</div>
 			<div className="text-[10px]">
-				{horaire.id_grp}
+				{horaire.level}
 				<br />
-				{horaire.id_prof} - {horaire.id_salle}
+				{horaire.teacher} - {horaire.room_abr}
 				<br />
-				{horaire.heure_debut} - {horaire.heure_fin}
+				{horaire.start_hours} - {horaire.end_hours}
 				<br />
-				{formatDuration(horaire.heure_debut, horaire.heure_fin)}
+				{formatDuration(horaire.start_hours, horaire.end_hours)}
 			</div>
 		</div>
 	);

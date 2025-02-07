@@ -1,40 +1,45 @@
-import { BASE_SLOT_HEIGHT, Horaire, timeToMinutes } from "@/lib/edt_utils";
+import {
+	BASE_SLOT_HEIGHT,
+	getDayNumber,
+	hourly,
+	timeToMinutes,
+} from "@/lib/edt_utils";
 
 import HoraireCard from "./HoraireCard";
 
 interface RenderHorairesProps {
-	horaires: Horaire[];
-	onEdit: (horaire: Horaire) => void; // Fonction de gestion des clics pour l'édition
+	horaires: hourly[];
+	onEdit: (horaire: hourly) => void; // Fonction de gestion des clics pour l'édition
 	jourIndex: number;
 }
 
-function isOverlapping(horaire1: Horaire, horaire2: Horaire): boolean {
+function isOverlapping(horaire1: hourly, horaire2: hourly): boolean {
 	const [start1, end1] = [
-		timeToMinutes(horaire1.heure_debut),
-		timeToMinutes(horaire1.heure_fin),
+		timeToMinutes(horaire1.start_hours),
+		timeToMinutes(horaire1.end_hours),
 	];
 	const [start2, end2] = [
-		timeToMinutes(horaire2.heure_debut),
-		timeToMinutes(horaire2.heure_fin),
+		timeToMinutes(horaire2.start_hours),
+		timeToMinutes(horaire2.end_hours),
 	];
 	return !(end1 <= start2 || start1 >= end2);
 }
 
 function calculateRowIndex(
-	rowAssignments: Record<number, Horaire[]>,
-	horaire: Horaire
+	rowAssignments: Record<number, hourly[]>,
+	horaire: hourly
 ): number {
 	return Object.keys(rowAssignments).findIndex((key) =>
 		rowAssignments[parseInt(key)].includes(horaire)
 	);
 }
 
-export function calculateRowAssignments(horaires: Horaire[]) {
-	const rows: Record<number, Horaire[]> = {};
+export function calculateRowAssignments(horaires: hourly[]) {
+	const rows: Record<number, hourly[]> = {};
 
 	// Tri des horaires
 	horaires.sort(
-		(a, b) => timeToMinutes(a.heure_debut) - timeToMinutes(b.heure_debut)
+		(a, b) => timeToMinutes(a.start_hours) - timeToMinutes(b.end_hours)
 	);
 
 	// Affectation des rangées
@@ -58,7 +63,7 @@ export function calculateRowAssignments(horaires: Horaire[]) {
 
 function RenderHoraires({ horaires, onEdit, jourIndex }: RenderHorairesProps) {
 	const joursHoraires = horaires.filter(
-		(horaire) => horaire.jour === jourIndex
+		(hourly) => getDayNumber(hourly.date) === jourIndex
 	);
 
 	const rowAssignments = calculateRowAssignments(joursHoraires);

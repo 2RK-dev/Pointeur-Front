@@ -27,6 +27,8 @@ import {
 	SidebarRail,
 } from "@/components/ui/sidebar";
 
+const Port: string = "3000";
+
 // This is sample data.
 const data = {
 	user: {
@@ -54,14 +56,14 @@ const data = {
 	navMain: [
 		{
 			title: "Tableau de bord",
-			url: "http://localhost:3000/Dashboard",
+			url: "http://localhost:" + Port + "/Dashboard",
 			icon: Layers,
 			access: "Dashboard",
 		},
 		{
 			title: "Absence",
 			icon: Frown,
-			url: "http://localhost:3000/Abs",
+			url: "http://localhost:" + Port + "/Abs",
 			access: "Abs",
 		},
 		{
@@ -71,18 +73,18 @@ const data = {
 			items: [
 				{
 					title: "Emploi du temp",
-					url: "http://localhost:3000/EDT",
+					url: "http://localhost:" + Port + "/EDT",
 				},
 				{
 					title: "UE",
 					icon: Book,
-					url: "http://localhost:3000/UE",
+					url: "http://localhost:" + Port + "/UE",
 					access: "UE",
 				},
 				{
 					title: "Salle",
 					icon: DoorClosed,
-					url: "http://localhost:3000/Room",
+					url: "http://localhost:" + Port + "/Room",
 					access: "UE",
 				},
 			],
@@ -95,33 +97,33 @@ const data = {
 				{
 					title: "Etudiant",
 					icon: UserRound,
-					url: "http://localhost:3000/Etudiant",
+					url: "http://localhost:" + Port + "/Etudiant",
 					access: "UE",
 				},
 				{
 					title: "Professeur",
 					icon: GraduationCap,
-					url: "http://localhost:3000/Prof",
+					url: "http://localhost:" + Port + "/Prof",
 					access: "UE",
 				},
 				{
 					title: "Niveau",
 					icon: School,
-					url: "http://localhost:3000/Level",
+					url: "http://localhost:" + Port + "/Level",
 					access: "UE",
 				},
 			],
 		},
 		{
 			title: "Transfére de données",
-			url: "http://localhost:3000/DataTransfere",
+			url: "http://localhost:" + Port + "/DataTransfere",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
 		},
 
 		{
 			title: "Paramétre",
-			url: "http://localhost:3000/Setting",
+			url: "http://localhost:" + Port + "/Setting",
 			icon: Settings2,
 			access: "Setting",
 		},
