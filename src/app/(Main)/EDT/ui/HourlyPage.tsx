@@ -24,9 +24,9 @@ import { useEffect, useState } from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import Modal from "./Modal";
 
-export default function HorairesPage() {
-	const [Originalhoraires, setOriginalHoraires] = useState<hourly[]>([]);
-	const [horaires, setHoraires] = useState<hourly[]>([]);
+export default function HourlyPage() {
+	const [OriginalHourlys, setOriginalHourlys] = useState<hourly[]>([]);
+	const [hourlys, setHourlys] = useState<hourly[]>([]);
 	const [selectedWeek, setSelectedWeek] = useState<string>(
 		getCurrentWeekNumber().toString()
 	);
@@ -46,9 +46,9 @@ export default function HorairesPage() {
 				getCurrentWeekNumber(),
 				new Date().getFullYear()
 			);
-			setOriginalHoraires(data);
+			setOriginalHourlys(data);
 			const filteredData = filterHorairesByLvl(data, "L1");
-			setHoraires(filteredData);
+			setHourlys(filteredData);
 		};
 		fetch();
 	}, []);
@@ -62,9 +62,9 @@ export default function HorairesPage() {
 					parseInt(selectedWeek),
 					new Date().getFullYear()
 				);
-				setOriginalHoraires(data);
+				setOriginalHourlys(data);
 				const filteredData = filterHorairesByLvl(data, selectedNiveau);
-				setHoraires(filteredData);
+				setHourlys(filteredData);
 			}
 		};
 		fetch();
@@ -72,11 +72,8 @@ export default function HorairesPage() {
 
 	useEffect(() => {
 		if (selectedNiveau) {
-			const filteredData = filterHorairesByLvl(
-				Originalhoraires,
-				selectedNiveau
-			);
-			setHoraires(filteredData);
+			const filteredData = filterHorairesByLvl(OriginalHourlys, selectedNiveau);
+			setHourlys(filteredData);
 		}
 	}, [selectedNiveau]);
 
@@ -93,14 +90,14 @@ export default function HorairesPage() {
 
 	const handleSubmit = (newHoraire: hourly) => {
 		if (editingHoraire) {
-			setHoraires(
-				horaires.map((h) =>
+			setHourlys(
+				hourlys.map((h) =>
 					h.edt_id === editingHoraire.edt_id ? newHoraire : h
 				)
 			);
 		} else {
-			setHoraires([
-				...horaires,
+			setHourlys([
+				...hourlys,
 				{ ...newHoraire, edt_id: Date.now().toString() },
 			]);
 		}
@@ -109,7 +106,7 @@ export default function HorairesPage() {
 
 	const handleDelete = () => {
 		if (editingHoraire) {
-			setHoraires(horaires.filter((h) => h.edt_id !== editingHoraire.edt_id));
+			setHourlys(hourlys.filter((h) => h.edt_id !== editingHoraire.edt_id));
 			setIsModalOpen(false);
 		}
 	};
@@ -183,7 +180,7 @@ export default function HorairesPage() {
 				</div>
 			</div>
 			<div className="flex flex-col space-y-4" id="edt-content">
-				<EdtEncapsuler horaires={horaires} onEdit={handleEdit} />
+				<EdtEncapsuler hourly={hourlys} onEdit={handleEdit} />
 			</div>
 			<Modal
 				isOpen={isModalOpen}

@@ -2,11 +2,11 @@ import { days, getStyleHours, hourly, hours } from "@/lib/edt_utils";
 import RenderHoraires from "./LineEdtRender";
 
 interface props {
-	horaires: hourly[];
+	hourly: hourly[];
 	onEdit: (horaire: hourly) => void;
 }
 
-export default function EdtEncapsuler({ horaires, onEdit }: props) {
+export default function EdtEncapsuler({ hourly, onEdit }: props) {
 	return (
 		<div className="border rounded-lg overflow-x-auto">
 			<div className="relative min-w-[800px]">
@@ -25,7 +25,7 @@ export default function EdtEncapsuler({ horaires, onEdit }: props) {
 						</div>
 						<div className="flex-1 relative">
 							<RenderHoraires
-								horaires={horaires}
+								hourly={hourly}
 								onEdit={onEdit}
 								jourIndex={index}
 							/>

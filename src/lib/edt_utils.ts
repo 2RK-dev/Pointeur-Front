@@ -230,13 +230,59 @@ export function generateColorByGroup(groupName: string): string {
 		"bg-indigo-100 hover:bg-indigo-200",
 	];
 
-	// Crée un hash simple du nom du groupe
 	let hash = 0;
 	for (let i = 0; i < groupName.length; i++) {
 		hash = groupName.charCodeAt(i) + ((hash << 5) - hash);
 	}
 
-	// Assure que l'index est positif et dans les limites du tableau
 	const index = Math.abs(hash) % colors.length;
 	return colors[index];
+}
+
+export function isOverlapping(horaire1: hourly, horaire2: hourly): boolean {
+	const [start1, end1] = [
+		timeToMinutes(horaire1.start_hours),
+		timeToMinutes(horaire1.end_hours),
+	];
+	const [start2, end2] = [
+		timeToMinutes(horaire2.start_hours),
+		timeToMinutes(horaire2.end_hours),
+	];
+	return !(end1 <= start2 || start1 >= end2);
+}
+
+export function calculateRowIndex(
+	rowAssignments: Record<number, hourly[]>,
+	horaire: hourly
+): number {
+	return Object.keys(rowAssignments).findIndex((key) =>
+		rowAssignments[parseInt(key)].includes(horaire)
+	);
+}
+
+export function calculateRowAssignments(horaires: hourly[]) {
+	const rows: Record<number, hourly[]> = {};
+
+	// Tri des horaires
+	horaires.sort(
+		(a, b) => timeToMinutes(a.start_hours) - timeToMinutes(b.end_hours)
+	);
+
+	// Affectation des rangées
+	horaires.forEach((horaire) => {
+		const assignedRow = Object.keys(rows).find((row) =>
+			rows[parseInt(row)].every(
+				(existingHoraire) => !isOverlapping(existingHoraire, horaire)
+			)
+		);
+
+		// Ajouter à une rangée existante ou créer une nouvelle rangée
+		const rowIndex = assignedRow
+			? parseInt(assignedRow)
+			: Object.keys(rows).length;
+		rows[rowIndex] = rows[rowIndex] || [];
+		rows[rowIndex].push(horaire);
+	});
+
+	return { normalRows: rows };
 }
