@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { initialLevels } from "@/lib/niveau_utils";
 import { Edit, Info, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -20,19 +21,6 @@ interface Level {
 	title: string;
 	groups: string[];
 }
-
-const initialLevels: Level[] = [
-	{
-		id: "L1",
-		title: "L1",
-		groups: ["GB grp1", "GB grp2", "ASR grp1", "ASR grp2"],
-	},
-	{
-		id: "L2",
-		title: "L2",
-		groups: ["GB grp1", "GB grp2", "ASR grp1", "ASR grp2"],
-	},
-];
 
 export default function Home() {
 	const [levels, setLevels] = useState<Level[]>(initialLevels);

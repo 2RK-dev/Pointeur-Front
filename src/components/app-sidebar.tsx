@@ -56,14 +56,14 @@ const data = {
 	navMain: [
 		{
 			title: "Tableau de bord",
-			url: "http://localhost:" + Port + "/Dashboard",
+			url: "/Dashboard",
 			icon: Layers,
 			access: "Dashboard",
 		},
 		{
 			title: "Absence",
 			icon: Frown,
-			url: "http://localhost:" + Port + "/Abs",
+			url: "/Abs",
 			access: "Abs",
 		},
 		{
@@ -73,18 +73,18 @@ const data = {
 			items: [
 				{
 					title: "Emploi du temp",
-					url: "http://localhost:" + Port + "/EDT",
+					url: "/EDT",
 				},
 				{
 					title: "UE",
 					icon: Book,
-					url: "http://localhost:" + Port + "/UE",
+					url: "/UE",
 					access: "UE",
 				},
 				{
 					title: "Salle",
 					icon: DoorClosed,
-					url: "http://localhost:" + Port + "/Room",
+					url: "/Room",
 					access: "UE",
 				},
 			],
@@ -97,33 +97,33 @@ const data = {
 				{
 					title: "Etudiant",
 					icon: UserRound,
-					url: "http://localhost:" + Port + "/Etudiant",
+					url: "/Etudiant",
 					access: "UE",
 				},
 				{
 					title: "Professeur",
 					icon: GraduationCap,
-					url: "http://localhost:" + Port + "/Prof",
+					url: "/Prof",
 					access: "UE",
 				},
 				{
 					title: "Niveau",
 					icon: School,
-					url: "http://localhost:" + Port + "/Level",
+					url: "/Level",
 					access: "UE",
 				},
 			],
 		},
 		{
 			title: "Transfére de données",
-			url: "http://localhost:" + Port + "/DataTransfere",
+			url: "/DataTransfere",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
 		},
 
 		{
 			title: "Paramétre",
-			url: "http://localhost:" + Port + "/Setting",
+			url: "/Setting",
 			icon: Settings2,
 			access: "Setting",
 		},
