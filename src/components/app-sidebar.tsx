@@ -76,10 +76,10 @@ const data = {
 					url: "/EDT",
 				},
 				{
-					title: "UE",
+					title: "Matiére",
 					icon: Book,
-					url: "/UE",
-					access: "UE",
+					url: "/Matter",
+					access: "Matter",
 				},
 				{
 					title: "Salle",
@@ -110,7 +110,7 @@ const data = {
 					title: "Niveau",
 					icon: School,
 					url: "/Level",
-					access: "UE",
+					access: "Matter",
 				},
 			],
 		},
