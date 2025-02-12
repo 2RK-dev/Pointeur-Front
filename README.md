@@ -17,16 +17,16 @@ Before running the application, make sure you have the following installed:
 git clone <repository_url>
 ```
 
-2. Navigate to the project directory:
-
-```bash
-cd my-app
-```
-
-3. Install the dependencies:
+2. Install the dependencies:
 
 ```bash
 npm install
+```
+
+3. Build the application:
+
+```bash
+ npm run build
 ```
 
 ## Usage
@@ -34,6 +34,5 @@ npm install
 To start the application, run the following command:
 
 ```bash
- npm run build
  npm start --- -p YourPort
 ```
