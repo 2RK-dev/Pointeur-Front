@@ -35,5 +35,5 @@ To start the application, run the following command:
 
 ```bash
  npm run build
- npm start -p YourPort
+ npm start --- -p YourPort
 ```
