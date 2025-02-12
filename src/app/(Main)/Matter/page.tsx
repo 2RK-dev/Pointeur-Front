@@ -12,10 +12,11 @@ import {
 import { initialLevels } from "@/lib/niveau_utils";
 import { getMatterForLevel } from "@/server/Matter";
 import { FileText } from "lucide-react";
+
 import { useEffect, useState } from "react";
 import MatterTable from "./MatterTable";
 
-export default function page() {
+export default function Page() {
 	const [MatterList, setMatterList] = useState<Matter[]>([]);
 	const [SelectedLevel, setSelectedLevel] = useState<string>("L1");
 
