@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 
 import {
+	CURRENT_YEAR,
 	getCurrentWeekNumber,
 	getWeekDateRange,
 	getWeekOptions,
@@ -30,7 +31,7 @@ export default function HourlyPage() {
 	const [OriginalHourlys, setOriginalHourlys] = useState<hourly[]>([]);
 	const [hourlys, setHourlys] = useState<hourly[]>([]);
 	const [selectedWeek, setSelectedWeek] = useState<string>(
-		getCurrentWeekNumber().toString()
+		getCurrentWeekNumber(CURRENT_YEAR).toString()
 	);
 	const [selectedNiveau, setSelectedNiveau] = useState<string>("L1");
 	const [editingHoraire, setEditingHoraire] = useState<hourly | null>(null);
@@ -44,7 +45,7 @@ export default function HourlyPage() {
 	useEffect(() => {
 		const fetch = async () => {
 			const data = await getedt(
-				getCurrentWeekNumber(),
+				getCurrentWeekNumber(CURRENT_YEAR),
 				new Date().getFullYear()
 			);
 			setOriginalHourlys(data);
