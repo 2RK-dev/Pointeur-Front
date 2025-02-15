@@ -10,32 +10,51 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
+import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { initialRooms } from "@/lib/Room_utils";
-
+import { Room, initialRooms } from "@/lib/Room_utils";
 import {
-	days,
-	getDateByWeekAndDay,
-	getDayNumber,
-	hourly,
+	CURRENT_YEAR,
+	DayOption,
+	getDayOptions,
 	initialHoraire,
 } from "@/lib/edt_utils";
-import { initialLevels } from "@/lib/niveau_utils";
 import { getMatterForLevel } from "@/server/Matter";
 import { getTeacher } from "@/server/Teacher";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+const formSchema = z.object({
+	edt_id: z.string().min(1, "L'identifiant de l'horaire est requis"),
+	date: z.string().min(1, "La date est requise"),
+	ue: z.string().min(1, "Une matière est requis"),
+	start_hours: z.string().min(1, "L'heure de début est requise"),
+	end_hours: z.string().min(1, "L'heure de fin est requise"),
+	teacher: z.string().min(1, "Le professeur est requis"),
+	room_abr: z.string().min(1, "La salle est requise"),
+	level: z.string().min(1, "Le niveau est requis"),
+});
 
 interface ModalProps {
 	isOpen: boolean;
 	onOpenChange: (open: boolean) => void;
-	onSubmit: (horaire: hourly) => void;
+	onSubmit: (horaire: z.infer<typeof formSchema>) => void;
 	onDelete?: () => void;
-	editingHoraire: hourly | null;
+	editingHoraire: z.infer<typeof formSchema> | null;
 	selectedNiveau: string;
 	selectedWeek: number;
 }
@@ -49,74 +68,51 @@ export default function Modal({
 	selectedNiveau,
 	selectedWeek,
 }: ModalProps) {
-	const [horaire, setHoraire] = useState<hourly>(
-		editingHoraire || initialHoraire
-	);
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: editingHoraire || {
+			...initialHoraire,
+			level: selectedNiveau,
+		},
+	});
+
 	const [MatterOption, setMatterOption] = useState<Matter[]>([]);
 	const [TeacherOption, setTeacherOption] = useState<Teacher[]>([]);
-	const [isActiveSubmit, setIsActiveSubmit] = useState(false);
+	const [RoomOption, setRoomOption] = useState<Room[]>(initialRooms);
+	const [DayOption, setDayOption] = useState<DayOption[]>([]);
 
 	useEffect(() => {
-		async function fetchMatter() {
-			const matter = await getMatterForLevel(selectedNiveau);
+		async function fetchOptions() {
+			const [matter, teacher] = await Promise.all([
+				getMatterForLevel(selectedNiveau),
+				getTeacher(),
+			]);
 			setMatterOption(matter);
+			setTeacherOption(teacher);
 		}
-		fetchMatter();
+		fetchOptions();
 	}, [selectedNiveau]);
 
 	useEffect(() => {
-		async function fetchTeacher() {
-			const teacher = await getTeacher();
-			setTeacherOption(teacher);
-		}
-		fetchTeacher();
-	}, []);
+		if (editingHoraire) form.reset(editingHoraire);
+	}, [editingHoraire, form]);
 
 	useEffect(() => {
-		if (editingHoraire) {
-			setHoraire(editingHoraire);
-		}
-	}, [editingHoraire]);
+		setDayOption(getDayOptions(selectedWeek, CURRENT_YEAR));
+	}, [selectedWeek]);
 
-	useEffect(() => {
-		if (
-			horaire.date != "" &&
-			horaire.level != "" &&
-			horaire.start_hours != "" &&
-			horaire.end_hours != "" &&
-			horaire.ue != "" &&
-			horaire.room_abr != "" &&
-			horaire.teacher != ""
-		) {
-			setIsActiveSubmit(true);
-		} else {
-			setIsActiveSubmit(false);
-		}
-	}, [horaire]);
-
-	// Handle submit logic
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		onSubmit(horaire);
-		//clear form
-		setHoraire(initialHoraire);
+	function onFormSubmit(values: z.infer<typeof formSchema>) {
+		onSubmit(values);
+		form.reset(initialHoraire);
 		onOpenChange(false);
-	};
-
-	// Handle delete logic
-	const handleDelete = () => {
-		if (onDelete) {
-			onDelete();
-			onOpenChange(false);
-		}
-	};
+	}
 
 	return (
 		<Dialog
 			open={isOpen}
 			onOpenChange={(value) => {
+				form.reset(initialHoraire);
 				onOpenChange(value);
-				setHoraire(initialHoraire);
 			}}>
 			<DialogContent>
 				<DialogHeader>
@@ -130,155 +126,174 @@ export default function Modal({
 					</DialogDescription>
 				</DialogHeader>
 
-				<form onSubmit={handleSubmit} className="space-y-4">
-					{/* Jour Select */}
-					<Select
-						value={
-							(horaire.date = " " ? "0" : getDayNumber(horaire.date).toString())
-						}
-						onValueChange={(value) => {
-							setHoraire({
-								...horaire,
-								date: getDateByWeekAndDay(
-									new Date().getFullYear(),
-									selectedWeek,
-									parseInt(value)
-								),
-							});
-						}}>
-						<SelectTrigger>
-							<SelectValue placeholder="Jour" />
-						</SelectTrigger>
-						<SelectContent>
-							{days.map((day, index) => (
-								<SelectItem key={index} value={index.toString()}>
-									{day}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+				<Form {...form}>
+					<form
+						onSubmit={form.handleSubmit(onFormSubmit)}
+						className="space-y-4">
+						<FormField
+							control={form.control}
+							name="edt_id"
+							render={({ field }) => <input type="hidden" {...field} />}
+						/>
 
-					{/* Groupe Select */}
-					<Select
-						value={horaire.level.split(" ").slice(1).join(" ")}
-						onValueChange={(value) => {
-							setHoraire({ ...horaire, level: selectedNiveau + " " + value });
-						}}>
-						<SelectTrigger>
-							<SelectValue placeholder="Groupe" />
-						</SelectTrigger>
-						<SelectContent>
-							{initialLevels.map(
-								(level) =>
-									level.title === selectedNiveau &&
-									level.groups.map((group, index) => (
-										<SelectItem key={index} value={group}>
-											{group}
-										</SelectItem>
-									))
+						<FormField
+							control={form.control}
+							name="date"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Jour</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Jour" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{DayOption.map((dayOption, index) => (
+												<SelectItem key={index} value={dayOption.date}>
+													{dayOption.label}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+									<FormMessage />
+								</FormItem>
 							)}
-						</SelectContent>
-					</Select>
-					<div className="flex gap-4">
-						{/* Heure de début */}
-						<div className="flex-1">
-							<label className="block text-sm font-medium mb-2">
-								Heure de début
-							</label>
-							<TimePicker
-								value={horaire.start_hours}
-								onChange={(time) =>
-									setHoraire({ ...horaire, start_hours: time })
-								}
-								minTime="07:00"
-								maxTime="18:00"
-							/>
-						</div>
+						/>
 
-						{/* Heure de fin */}
-						<div className="flex-1">
-							<label className="block text-sm font-medium mb-2">
-								Heure de fin
-							</label>
-							<TimePicker
-								value={horaire.end_hours}
-								onChange={(time) => setHoraire({ ...horaire, end_hours: time })}
-								minTime="07:00"
-								maxTime="18:00"
-							/>
-						</div>
-					</div>
+						<FormField
+							control={form.control}
+							name="ue"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>EC</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="EC" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{MatterOption.map((Matter, index) => (
+												<SelectItem key={index} value={Matter.Abr_Matter}>
+													{Matter.name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 
-					{/* EC Select */}
-					<Select
-						value={horaire.ue}
-						onValueChange={(value) => {
-							setHoraire({ ...horaire, ue: value });
-						}}>
-						<SelectTrigger>
-							<SelectValue placeholder="EC" />
-						</SelectTrigger>
-						<SelectContent>
-							{MatterOption.map((Matter, index) => (
-								<SelectItem key={index} value={Matter.Abr_Matter}>
-									{Matter.name}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+						<FormField
+							control={form.control}
+							name="start_hours"
+							render={({ field: startField }) => (
+								<FormField
+									control={form.control}
+									name="end_hours"
+									render={({ field: endField }) => (
+										<FormItem>
+											<FormLabel>Heures</FormLabel>
+											<div className="flex items-center space-x-2">
+												<FormControl>
+													<TimePicker
+														value={startField.value || "08:00"}
+														onChange={startField.onChange}
+													/>
+												</FormControl>
+												<span>à</span>
+												<FormControl>
+													<TimePicker
+														value={endField.value || "10:00"}
+														onChange={endField.onChange}
+													/>
+												</FormControl>
+											</div>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							)}
+						/>
 
-					{/* Salle Select */}
-					<Select
-						value={horaire.room_abr}
-						onValueChange={(value) =>
-							setHoraire({ ...horaire, room_abr: value })
-						}>
-						<SelectTrigger>
-							<SelectValue placeholder="Salle" />
-						</SelectTrigger>
-						<SelectContent>
-							{initialRooms.map((room, index) => (
-								<SelectItem key={index} value={room.room_abr}>
-									{room.room_name}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+						<FormField
+							control={form.control}
+							name="teacher"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Prof</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Prof" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{TeacherOption.map((teacher, index) => (
+												<SelectItem key={index} value={teacher.Abr_Teacher}>
+													{teacher.name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 
-					{/* Prof Select */}
-					<Select
-						value={horaire.teacher}
-						onValueChange={(value) => {
-							setHoraire({ ...horaire, teacher: value });
-						}}>
-						<SelectTrigger>
-							<SelectValue placeholder="Prof" />
-						</SelectTrigger>
-						<SelectContent>
-							{TeacherOption.map((teacher, index) => (
-								<SelectItem key={index} value={teacher.Abr_Teacher}>
-									{teacher.name}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+						<FormField
+							control={form.control}
+							name="room_abr"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Salle</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Salle" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{RoomOption.map((room, index) => (
+												<SelectItem key={index} value={room.room_abr}>
+													{room.room_name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 
-					<div className="flex justify-between">
-						<Button type="submit" disabled={!isActiveSubmit}>
-							{editingHoraire ? "Modifier" : "Enregistrer"}
-						</Button>
+						<FormField
+							control={form.control}
+							name="level"
+							render={({ field }) => <input type="hidden" {...field} />}
+						/>
 
-						{editingHoraire && onDelete && (
-							<Button
-								disabled={!isActiveSubmit}
-								type="button"
-								variant="destructive"
-								onClick={handleDelete}>
-								Supprimer
+						<div className="flex justify-between">
+							<Button type="submit">
+								{editingHoraire ? "Modifier" : "Enregistrer"}
 							</Button>
-						)}
-					</div>
-				</form>
+							{editingHoraire && onDelete && (
+								<Button type="button" variant="destructive" onClick={onDelete}>
+									Supprimer
+								</Button>
+							)}
+						</div>
+					</form>
+				</Form>
 			</DialogContent>
 		</Dialog>
 	);

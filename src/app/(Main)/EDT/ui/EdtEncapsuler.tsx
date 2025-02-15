@@ -18,20 +18,23 @@ export default function EdtEncapsuler({ hourly, onEdit }: props) {
 				</div>
 
 				{/* for days and hourly */}
-				{days.map((day, index: number) => (
-					<div key={day} className="flex border-b-2 relative">
-						<div className="w-20 flex items-center justify-center font-semibold">
-							{day}
-						</div>
-						<div className="flex-1 relative">
-							<RenderHoraires
-								hourly={hourly}
-								onEdit={onEdit}
-								jourIndex={index}
-							/>
-						</div>
-					</div>
-				))}
+				{days.map(
+					(day, index: number) =>
+						index > 0 && (
+							<div key={day} className="flex border-b-2 relative">
+								<div className="w-20 flex items-center justify-center font-semibold">
+									{day}
+								</div>
+								<div className="flex-1 relative">
+									<RenderHoraires
+										hourly={hourly}
+										onEdit={onEdit}
+										jourIndex={index}
+									/>
+								</div>
+							</div>
+						)
+				)}
 			</div>
 		</div>
 	);

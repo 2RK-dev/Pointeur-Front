@@ -14,13 +14,6 @@ interface Props {
 }
 
 export default function HourlyCard({ hourly, onEdit, top }: Props) {
-	try {
-		const left = calculatePosition(hourly.start_hours);
-		const width = calculateWidth(hourly.start_hours, hourly.end_hours);
-	} catch (error) {
-		console.log(hourly);
-	}
-
 	const left = calculatePosition(hourly.start_hours);
 	const width = calculateWidth(hourly.start_hours, hourly.end_hours);
 
@@ -36,10 +29,12 @@ export default function HourlyCard({ hourly, onEdit, top }: Props) {
 				height: `${BASE_SLOT_HEIGHT}px`,
 				top: `${top}px`,
 			}}
-			onClick={() => onEdit(hourly)}>
+			onClick={() => {
+				onEdit(hourly);
+			}}>
 			<div className="font-semibold">{hourly.ue}</div>
 			<div className="text-[10px]">
-				{hourly.level}
+				{hourly.room_abr}
 				<br />
 				{hourly.teacher} - {hourly.room_abr}
 				<br />

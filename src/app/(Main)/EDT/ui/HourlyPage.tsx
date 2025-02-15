@@ -36,7 +36,6 @@ export default function HourlyPage() {
 
 	const handleEdit = (horaire: hourly) => {
 		setEditingHoraire(horaire);
-		console.log(horaire);
 		setIsModalOpen(true);
 	};
 
@@ -56,8 +55,6 @@ export default function HourlyPage() {
 	useEffect(() => {
 		const fetch = async () => {
 			if (selectedWeek) {
-				console.log(selectedWeek);
-				console.log(getedt(parseInt(selectedWeek), new Date().getFullYear()));
 				const data = await getedt(
 					parseInt(selectedWeek),
 					new Date().getFullYear()
@@ -89,6 +86,7 @@ export default function HourlyPage() {
 	};
 
 	const handleSubmit = (newHoraire: hourly) => {
+		console.log(newHoraire);
 		if (editingHoraire) {
 			setHourlys(
 				hourlys.map((h) =>
@@ -101,7 +99,7 @@ export default function HourlyPage() {
 				{ ...newHoraire, edt_id: Date.now().toString() },
 			]);
 		}
-		setIsModalOpen(false);
+		console.log(newHoraire);
 	};
 
 	const handleDelete = () => {
@@ -151,7 +149,7 @@ export default function HourlyPage() {
 						<SelectValue placeholder="Sélectionner la semaine" />
 					</SelectTrigger>
 					<SelectContent>
-						{getWeekOptions().map((option) => (
+						{getWeekOptions(new Date().getFullYear()).map((option) => (
 							<SelectItem key={option.value} value={option.value}>
 								{option.label}
 							</SelectItem>
