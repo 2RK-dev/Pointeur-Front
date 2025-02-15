@@ -16,6 +16,8 @@ import {
 	hourly,
 } from "@/lib/edt_utils";
 
+import html2canvas from "html2canvas";
+
 import { initialLevels } from "@/lib/niveau_utils";
 import { getedt } from "@/server/edt";
 import { jsPDF } from "jspdf";
@@ -122,6 +124,7 @@ export default function HourlyPage() {
 			currentYear
 		);
 
+		// Set up header
 		doc.setFontSize(16);
 		doc.text(selectedNiveau, 148.5, 10, { align: "center" });
 		doc.setFontSize(10);
@@ -129,14 +132,65 @@ export default function HourlyPage() {
 
 		const componentContent = document.getElementById("edt-content");
 		if (componentContent) {
-			doc.html(componentContent, {
-				x: 10,
-				y: 20,
-				width: 270,
-				windowWidth: 1024,
-				callback: (doc) => {
-					doc.save(`${selectedNiveau}_${start}_to_${end}.pdf`);
-				},
+			// First, get the height of the content
+			const contentHeight = componentContent.offsetHeight;
+			const pageHeight = doc.internal.pageSize.getHeight();
+			const contentWidth = 270; // keeping original width
+
+			// Calculate scaling factor based on content size
+			const scaleFactor = contentWidth / componentContent.offsetWidth;
+			const scaledContentHeight = contentHeight * scaleFactor;
+
+			// Determine if we need multiple pages
+			const totalPages = Math.ceil(
+				(scaledContentHeight + 20) / (pageHeight - 20)
+			); // 20mm margin
+
+			// Use html2canvas to capture the content
+			html2canvas(componentContent).then((canvas) => {
+				// Split content across pages if necessary
+				for (let i = 0; i < totalPages; i++) {
+					if (i > 0) {
+						doc.addPage();
+					}
+
+					// Calculate the portion of the canvas to use for this page
+					const sourceY = i * (canvas.height / totalPages);
+					const sourceHeight = canvas.height / totalPages;
+
+					// Create a temporary canvas for this portion
+					const tempCanvas = document.createElement("canvas");
+					tempCanvas.width = canvas.width;
+					tempCanvas.height = sourceHeight;
+					const ctx = tempCanvas.getContext("2d");
+
+					// Draw the portion of the original canvas
+					ctx?.drawImage(
+						canvas,
+						0,
+						sourceY,
+						canvas.width,
+						sourceHeight,
+						0,
+						0,
+						canvas.width,
+						sourceHeight
+					);
+
+					// Add to PDF
+					const imgData = tempCanvas.toDataURL("image/png");
+					doc.addImage(
+						imgData,
+						"PNG",
+						10,
+						20,
+						contentWidth,
+						sourceHeight * scaleFactor
+					);
+				}
+
+				// Save the PDF
+				doc.save(`${selectedNiveau}_${start}_to_${end}.pdf`);
 			});
 		}
 	};
