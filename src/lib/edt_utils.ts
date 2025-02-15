@@ -79,6 +79,9 @@ export const getStyleHours = (
 
 /**
  * Converts a time string (HH:mm) into total minutes since midnight.
+ * @param time
+ * @returns {number}
+ * @example timeToMinutes("07:30") => 450
  */
 export function timeToMinutes(time: string): number {
 	const [hours, minutes] = time.split(":").map(Number);
@@ -91,6 +94,9 @@ export function timeToMinutes(time: string): number {
 /**
  * Calculates the horizontal position (%) of a time block based on start time.
  * Assumes the schedule starts at 07:00 and spans 11 hours (07:00 - 18:00).
+ * @param startTime
+ * @returns {number}
+ * @example calculatePosition("07:30") => 25
  */
 export function calculatePosition(startTime: string): number {
 	const startMinutes = timeToMinutes(startTime);
@@ -100,6 +106,11 @@ export function calculatePosition(startTime: string): number {
 
 /**
  * Calculates the width (%) of a time block based on start and end times.
+ * Assumes the schedule starts at 07:00 and spans 11 hours (07:00 - 18:00).
+ * @param startTime
+ * @param endTime
+ * @returns {number}
+ * @example calculateWidth("07:30", "09:00") => 25
  */
 export function calculateWidth(startTime: string, endTime: string): number {
 	const start = timeToMinutes(startTime);
@@ -112,13 +123,17 @@ export function calculateWidth(startTime: string, endTime: string): number {
 
 /**
  * Returns the current week number of the year.
+ * @param year
+ * @returns {number}
+ * @example getCurrentWeekNumber() => 6
+ * @see https://weeknumber.net/how-to/determine-week-numbers
  */
-export function getCurrentWeekNumber(): number {
-	const now = new Date();
-	const start = new Date(now.getFullYear(), 0, 1);
-	const diff = now.getTime() - start.getTime();
-	const oneWeek = 1000 * 60 * 60 * 24 * 7;
-	return Math.ceil(diff / oneWeek);
+export function getCurrentWeekNumber(year: number): number {
+	const today = new Date();
+	const firstDayOfYear = new Date(year, 0, 1);
+	const pastDaysOfYear =
+		(today.getTime() - firstDayOfYear.getTime()) / 86400000;
+	return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
 
 /**
@@ -153,7 +168,13 @@ export function getWeekDateRange(
 	};
 }
 
-//Get Week number by date string
+/**
+ * Returns the week number of a given date.
+ * @param dateString
+ * @returns {number}
+ * @example getWeekNumber("2025-02-03") => 6
+ * @see https://weeknumber.net/how-to/determine-week-numbers
+ * */
 export function getWeekNumber(dateString: string): number {
 	const date = new Date(dateString);
 	const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
@@ -183,7 +204,12 @@ export function getWeekOptions(
 	return weekOptions;
 }
 
-//get the day number by date string (between 0 and 6)
+/**
+ * Returns the day number of a given date.
+ * @param dateString
+ * @returns {number}
+ * @example getDayNumber("2025-02-03") => 1
+ * */
 export function getDayNumber(dateString: string): number {
 	const date = new Date(dateString);
 	return date.getDay();
@@ -239,6 +265,10 @@ export function getDayOptions(weekNumber: number, year: number): DayOption[] {
 
 /**
  * Formats the duration between two times (HH:mm) as "XhYY".
+ * @param startTime
+ * @param endTime
+ * @returns {string}
+ * @example formatDuration("07:30", "09:00") => "1h30"
  */
 export function formatDuration(startTime: string, endTime: string): string {
 	const start = timeToMinutes(startTime);
@@ -251,6 +281,9 @@ export function formatDuration(startTime: string, endTime: string): string {
 
 /**
  * Generates a color class based on the group name.
+ * @param groupName
+ * @returns {string}
+ * @example generateColorByGroup("L1 grp1") => "bg-blue-100 hover:bg-blue-200"
  */
 export function generateColorByGroup(groupName: string): string {
 	const colors = [
@@ -273,18 +306,36 @@ export function generateColorByGroup(groupName: string): string {
 	return colors[index];
 }
 
-export function isOverlapping(horaire1: hourly, horaire2: hourly): boolean {
+/**
+ * Checks if two time blocks are overlapping.
+ * @param hourly1
+ * @param hourly2
+ * @returns {boolean}
+ * @example isOverlapping({start_hours: "07:00", end_hours: "08:00"}, {start_hours: "08:00", end_hours: "09:00"}) => false
+ * @example isOverlapping({start_hours: "07:00", end_hours: "08:00"}, {start_hours: "07:30", end_hours: "08:30"}) => true
+ * @example isOverlapping({start_hours: "07:00", end_hours: "08:00"}, {start_hours: "07:30", end_hours: "07:45"}) => true
+ * */
+export function isOverlapping(hourly1: hourly, hourly2: hourly): boolean {
 	const [start1, end1] = [
-		timeToMinutes(horaire1.start_hours),
-		timeToMinutes(horaire1.end_hours),
+		timeToMinutes(hourly1.start_hours),
+		timeToMinutes(hourly1.end_hours),
 	];
 	const [start2, end2] = [
-		timeToMinutes(horaire2.start_hours),
-		timeToMinutes(horaire2.end_hours),
+		timeToMinutes(hourly2.start_hours),
+		timeToMinutes(hourly2.end_hours),
 	];
 	return !(end1 <= start2 || start1 >= end2);
 }
 
+/**
+ * Calculates the row index of a time block based on its position in the schedule.
+ * @param rowAssignments
+ * @param horaire
+ * @returns {number}
+ * @example calculateRowIndex({0: [{start_hours: "07:00", end_hours: "08:00"}]}, {start_hours: "07:00", end_hours: "08:00"}) => 0
+ * @example calculateRowIndex({0: [{start_hours: "07:00", end_hours: "08:00"}]}, {start_hours: "08:00", end_hours: "09:00"}) => 1
+ * @example calculateRowIndex({0: [{start_hours: "07:00", end_hours: "08:00"}, {start_hours: "08:00", end_hours: "09:00"}]}, {start_hours: "07:00", end_hours: "08:00"}) => 0
+ */
 export function calculateRowIndex(
 	rowAssignments: Record<number, hourly[]>,
 	horaire: hourly
@@ -294,6 +345,12 @@ export function calculateRowIndex(
 	);
 }
 
+/**
+ * Calculates the row assignments for a list of time blocks.
+ * @param horaires
+ * @returns {normalRows: Record<number, hourly[]>}
+ * @example calculateRowAssignments([{start_hours: "07:00", end_hours: "08:00"}, {start_hours: "08:00", end_hours: "09:00"}]) => {normalRows: {0: [{start_hours: "07:00", end_hours: "08:00"}], 1: [{start_hours: "08:00", end_hours: "09:00"}]}}
+ */
 export function calculateRowAssignments(horaires: hourly[]) {
 	const rows: Record<number, hourly[]> = {};
 
