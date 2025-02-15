@@ -1,4 +1,4 @@
-import { getDateByWeekAndDay, getDayNumber } from "./edt_utils";
+import { getDateByWeekAndDay, getDayNumber, getDayOptions } from "./edt_utils";
 
 describe("getDateByWeekAndDay", () => {
 	it("should return the correct date for a given week and day", () => {
@@ -27,5 +27,39 @@ describe("getDayNumber", () => {
 		expect(getDayNumber("2025-02-05")).toBe(3);
 
 		// Add more test cases as needed
+	});
+});
+
+describe("getDayOptions", () => {
+	it("should return the correct day options for a given week number", () => {
+		// Test case 1
+		expect(getDayOptions(1, 2025)).toEqual([
+			{ date: "2024-12-30", label: "Lundi" },
+			{ date: "2024-12-31", label: "Mardi" },
+			{ date: "2025-01-01", label: "Mercredi" },
+			{ date: "2025-01-02", label: "Jeudi" },
+			{ date: "2025-01-03", label: "Vendredi" },
+			{ date: "2025-01-04", label: "Samedi" },
+		]);
+
+		// Test case 2
+		expect(getDayOptions(6, 2025)).toEqual([
+			{ date: "2025-02-03", label: "Lundi" },
+			{ date: "2025-02-04", label: "Mardi" },
+			{ date: "2025-02-05", label: "Mercredi" },
+			{ date: "2025-02-06", label: "Jeudi" },
+			{ date: "2025-02-07", label: "Vendredi" },
+			{ date: "2025-02-08", label: "Samedi" },
+		]);
+
+		// Test case 3
+		expect(getDayOptions(10, 2025)).toEqual([
+			{ date: "2025-03-03", label: "Lundi" },
+			{ date: "2025-03-04", label: "Mardi" },
+			{ date: "2025-03-05", label: "Mercredi" },
+			{ date: "2025-03-06", label: "Jeudi" },
+			{ date: "2025-03-07", label: "Vendredi" },
+			{ date: "2025-03-08", label: "Samedi" },
+		]);
 	});
 });
