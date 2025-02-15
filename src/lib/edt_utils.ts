@@ -9,8 +9,16 @@ export interface hourly {
 	date: string;
 }
 
+export interface DayOption {
+	date: string;
+	label: string;
+}
+
+export const CURRENT_YEAR = new Date().getFullYear();
+
 export const BASE_SLOT_HEIGHT = 90;
 export const days: string[] = [
+	"Dimanche",
 	"Lundi",
 	"Mardi",
 	"Mercredi",
@@ -18,6 +26,7 @@ export const days: string[] = [
 	"Vendredi",
 	"Samedi",
 ];
+
 export const hours = [
 	"7:00",
 	"8:00",
@@ -114,6 +123,10 @@ export function getCurrentWeekNumber(): number {
 
 /**
  * Returns the start and end dates of a week based on its number and year.
+ * @param weekNumber
+ * @param year
+ * @returns {start: string, end: string}
+ * @example getWeekDateRange(1, 2025) => {start: "2024-12-30", end: "2025-01-05"}
  */
 export function getWeekDateRange(
 	weekNumber: number,
@@ -149,29 +162,25 @@ export function getWeekNumber(dateString: string): number {
 }
 
 /**
- * Generates an array of week options with formatted labels (Week X + Date Range).
+ * Returns an array of week options for the current year.
+ * @param year
+ * @returns {value: string, label: string}[]
+ * @example getWeekOptions(2025) => [{value: "1", label: "Semaine 1 (30/12 - 04/5)"}, ...]
  */
-export function getWeekOptions(): { value: string; label: string }[] {
-	const currentWeek = getCurrentWeekNumber();
-	return Array.from({ length: 52 }, (_, i) => {
-		const weekNumber = (currentWeek + i) % 52 || 52;
-		const startDate = new Date(
-			new Date().getFullYear(),
-			0,
-			1 + (weekNumber - 1) * 7
-		);
-		const endDate = new Date(startDate.getTime() + 6 * 24 * 60 * 60 * 1000);
-		const formatDate = (date: Date) =>
-			`${date.getDate().toString().padStart(2, "0")}/${(date.getMonth() + 1)
-				.toString()
-				.padStart(2, "0")}`;
-		return {
-			value: weekNumber.toString(),
-			label: `Semaine ${weekNumber} (${formatDate(startDate)} - ${formatDate(
-				endDate
-			)})`,
-		};
-	});
+export function getWeekOptions(
+	year: number
+): { value: string; label: string }[] {
+	const weekOptions = [];
+	for (let i = 1; i <= 52; i++) {
+		const { start, end } = getWeekDateRange(i, year);
+		const startDate = new Date(start);
+		const endDate = new Date(end);
+		const label = `Semaine ${i} (${startDate.getDate()}/${
+			startDate.getMonth() + 1
+		} - ${endDate.getDate()}/${endDate.getMonth() + 1})`;
+		weekOptions.push({ value: i.toString(), label });
+	}
+	return weekOptions;
 }
 
 //get the day number by date string (between 0 and 6)
@@ -180,7 +189,14 @@ export function getDayNumber(dateString: string): number {
 	return date.getDay();
 }
 
-//get date by week and day number exemple : get date by week 1 and day 1 result : 2024-12-30
+/**
+ * get date by week and day number
+ * @param year
+ * @param week
+ * @param day
+ * @returns {string}
+ * @example getDateByWeekAndDay(2025, 6, 1) => "2025-02-03"
+ * */
 export function getDateByWeekAndDay(
 	year: number,
 	week: number,
@@ -201,6 +217,24 @@ export function getDateByWeekAndDay(
 	const date = new Date(startDate);
 	date.setDate(startDate.getDate() + day);
 	return date.toISOString().split("T")[0];
+}
+
+/**
+ * get day options by week number
+ * @param {number}weekNumber
+ * @param {number}year
+ * @returns {date: string, label: string}[]
+ * @example getDayOptions(1,2025) => [{date: "2024-12-30", label: "Lundi"}, ...]
+ */
+export function getDayOptions(weekNumber: number, year: number): DayOption[] {
+	const dayOptions = [];
+	for (let i = 1; i < 7; i++) {
+		const date = getDateByWeekAndDay(year, weekNumber, i);
+		const label = days[i];
+		dayOptions.push({ date, label });
+	}
+
+	return dayOptions;
 }
 
 /**
