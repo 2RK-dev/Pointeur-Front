@@ -18,7 +18,7 @@ import { useState } from "react";
 
 const initialTables: string[] = [
 	"Emploi du temp",
-	"UE",
+	"matter_abr",
 	"Salle",
 	"Etudiant",
 	"Enseignant",

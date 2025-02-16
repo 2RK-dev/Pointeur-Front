@@ -19,7 +19,7 @@ export default function HourlyCard({ hourly, onEdit, top }: Props) {
 
 	return (
 		<div
-			key={hourly.edt_id}
+			key={hourly.hourly_id}
 			className={`absolute border rounded p-1 text-xs cursor-pointer  ${generateColorByGroup(
 				hourly.level.split(" ").slice(1).join(" ")
 			)}`}
@@ -32,7 +32,7 @@ export default function HourlyCard({ hourly, onEdit, top }: Props) {
 			onClick={() => {
 				onEdit(hourly);
 			}}>
-			<div className="font-semibold">{hourly.ue}</div>
+			<div className="font-semibold">{hourly.matter_abr}</div>
 			<div className="text-[10px]">
 				{hourly.room_abr}
 				<br />

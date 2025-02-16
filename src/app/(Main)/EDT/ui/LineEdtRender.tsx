@@ -36,7 +36,7 @@ function RenderHoraires({ hourly, onEdit, jourIndex }: RenderHorairesProps) {
 
 				return (
 					<HourlyCard
-						key={horaire.edt_id}
+						key={horaire.hourly_id}
 						hourly={horaire}
 						onEdit={onEdit}
 						top={top}

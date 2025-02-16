@@ -103,18 +103,23 @@ export default function HourlyPage() {
 		if (editingHoraire) {
 			setHourlys(
 				hourlys.map((h) =>
-					h.edt_id === editingHoraire.edt_id ? newHoraire : h
+					h.hourly_id === editingHoraire.hourly_id ? newHoraire : h
 				)
 			);
 		} else {
-			setHourlys([...hourlys, { ...newHoraire, edt_id: hourlys.length + 1 }]);
+			setHourlys([
+				...hourlys,
+				{ ...newHoraire, hourly_id: hourlys.length + 1 },
+			]);
 		}
 		console.log(newHoraire);
 	};
 
 	const handleDelete = () => {
 		if (editingHoraire) {
-			setHourlys(hourlys.filter((h) => h.edt_id !== editingHoraire.edt_id));
+			setHourlys(
+				hourlys.filter((h) => h.hourly_id !== editingHoraire.hourly_id)
+			);
 			setIsModalOpen(false);
 		}
 	};
@@ -129,7 +134,7 @@ export default function HourlyPage() {
 		});
 
 		// Step 2: take the last id of the data
-		const lastIdNumber = OriginalHourlys[OriginalHourlys.length - 1].edt_id;
+		const lastIdNumber = OriginalHourlys[OriginalHourlys.length - 1].hourly_id;
 
 		const transposedData = transposeHourlies(
 			dataForSelectedWeek,

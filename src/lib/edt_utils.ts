@@ -1,11 +1,11 @@
 import { getWeekDateRange } from "./common/dateUtils";
 
 export interface hourly {
-	edt_id: number;
+	hourly_id: number;
 	level: string;
 	start_hours: string;
 	end_hours: string;
-	ue: string;
+	matter_abr: string;
 	room_abr: string;
 	teacher: string;
 	date: string;
@@ -32,11 +32,11 @@ export const groupes: { [key: string]: string[] } = {
 };
 
 export const initialHoraire: hourly = {
-	edt_id: 0,
+	hourly_id: 0,
 	level: "",
 	start_hours: "07:00",
 	end_hours: "08:00",
-	ue: "",
+	matter_abr: "",
 	room_abr: "",
 	teacher: "",
 	date: "",
@@ -252,7 +252,7 @@ export function calculateRowAssignments(horaires: hourly[]) {
  * @param numberOfWeeks
  * @param lastIdNumber
  * @returns {hourly[]}
- * @example transposeHourlies([{edt_id: 1, date: "2025-02-03"}, {edt_id: 2, date: "2025-02-04"}], 1, 2) => [{edt_id: 3, date: "2025-02-10"}, {edt_id: 4, date: "2025-02-11"}]
+ * @example transposeHourlies([{hourly_id: 1, date: "2025-02-03"}, {hourly_id: 2, date: "2025-02-04"}], 1, 2) => [{hourly_id: 3, date: "2025-02-10"}, {hourly_id: 4, date: "2025-02-11"}]
  */
 export function transposeHourlies(
 	hourlies: hourly[],
@@ -264,7 +264,7 @@ export function transposeHourlies(
 		date.setDate(date.getDate() + numberOfWeeks * 7);
 		return {
 			...horaire,
-			edt_id: lastIdNumber + index + 1,
+			hourly_id: lastIdNumber + index + 1,
 			date: date.toISOString().split("T")[0],
 		};
 	});

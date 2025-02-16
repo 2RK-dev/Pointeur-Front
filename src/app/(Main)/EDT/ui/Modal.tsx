@@ -36,9 +36,9 @@ import * as z from "zod";
 
 const formSchema = z
 	.object({
-		edt_id: z.number().min(1, "L'identifiant de l'horaire est requis"),
+		hourly_id: z.number().min(1, "L'identifiant de l'horaire est requis"),
 		date: z.string().min(1, "La date est requise"),
-		ue: z.string().min(1, "Une matière est requis"),
+		matter_abr: z.string().min(1, "Une matière est requis"),
 		start_hours: z.string().min(1, "L'heure de début est requise"),
 		end_hours: z.string().min(1, "L'heure de fin est requise"),
 		teacher: z.string().min(1, "Le professeur est requis"),
@@ -153,7 +153,7 @@ export default function Modal({
 						className="space-y-4">
 						<FormField
 							control={form.control}
-							name="edt_id"
+							name="hourly_id"
 							render={({ field }) => <input type="hidden" {...field} />}
 						/>
 
@@ -186,7 +186,7 @@ export default function Modal({
 
 						<FormField
 							control={form.control}
-							name="ue"
+							name="matter_abr"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>EC</FormLabel>

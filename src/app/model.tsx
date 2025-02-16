@@ -1,13 +1,13 @@
 export interface edt {
 	date: Date;
 	tranche_horaire: string;
-	ue: string;
+	matter_abr: string;
 	salle: string;
 	prof: string;
 	niveau: string;
 }
 export interface caseInterface {
-	ue: string | null;
+	matter_abr: string | null;
 	salle: string | null;
 	prof: string | null;
 	niveau: string | null;
@@ -28,7 +28,7 @@ export interface Salle {
 	Abr_Salle: string;
 	Designation_Salle: string;
 }
-export interface UE {
+export interface matter_abr {
 	Designation_UE: string;
 	Abr_UE: string;
 	Niveau_Assigner: string;
