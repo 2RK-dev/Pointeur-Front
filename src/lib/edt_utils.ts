@@ -1,5 +1,5 @@
 export interface hourly {
-	edt_id: string;
+	edt_id: number;
 	level: string;
 	start_hours: string;
 	end_hours: string;
@@ -44,7 +44,7 @@ export const groupes: { [key: string]: string[] } = {
 };
 
 export const initialHoraire: hourly = {
-	edt_id: "",
+	edt_id: 0,
 	level: "",
 	start_hours: "07:00",
 	end_hours: "08:00",
