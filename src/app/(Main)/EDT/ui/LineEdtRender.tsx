@@ -2,10 +2,10 @@ import {
 	BASE_SLOT_HEIGHT,
 	calculateRowAssignments,
 	calculateRowIndex,
-	getDayNumber,
 	hourly,
 } from "@/lib/edt_utils";
 
+import { getDayNumber } from "@/lib/common/dateUtils";
 import HourlyCard from "./HourlyCard";
 
 interface RenderHorairesProps {

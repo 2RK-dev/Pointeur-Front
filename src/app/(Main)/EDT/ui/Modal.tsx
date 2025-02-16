@@ -25,12 +25,8 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Room, initialRooms } from "@/lib/Room_utils";
-import {
-	CURRENT_YEAR,
-	DayOption,
-	getDayOptions,
-	initialHoraire,
-} from "@/lib/edt_utils";
+import { DayOption, getDayOptions } from "@/lib/common/dateUtils";
+import { CURRENT_YEAR, initialHoraire } from "@/lib/edt_utils";
 import { getMatterForLevel } from "@/server/Matter";
 import { getTeacher } from "@/server/Teacher";
 import { zodResolver } from "@hookform/resolvers/zod";

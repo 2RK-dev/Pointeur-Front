@@ -9,16 +9,11 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import {
-	CURRENT_YEAR,
-	getCurrentWeekNumber,
-	getWeekDateRange,
-	getWeekOptions,
-	hourly,
-} from "@/lib/edt_utils";
+import { CURRENT_YEAR, getWeekOptions, hourly } from "@/lib/edt_utils";
 
 import html2canvas from "html2canvas";
 
+import { getCurrentWeekNumber, getWeekDateRange } from "@/lib/common/dateUtils";
 import { initialLevels } from "@/lib/niveau_utils";
 import { getedt } from "@/server/edt";
 import { jsPDF } from "jspdf";
