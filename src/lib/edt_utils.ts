@@ -247,7 +247,7 @@ export function calculateRowAssignments(horaires: hourly[]) {
 }
 
 /**
- * Transpose the hourlies for a week to a another week, duplicating the data.
+ * Duplicates the hourly data for a given week and shifts it to another week, returning the new entries to be added.
  * @param hourlies
  * @param numberOfWeeks
  * @param lastIdNumber
