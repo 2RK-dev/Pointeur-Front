@@ -97,10 +97,7 @@ export default function HourlyPage() {
 				)
 			);
 		} else {
-			setHourlys([
-				...hourlys,
-				{ ...newHoraire, edt_id: Date.now().toString() },
-			]);
+			setHourlys([...hourlys, { ...newHoraire, edt_id: hourlys.length + 1 }]);
 		}
 		console.log(newHoraire);
 	};
