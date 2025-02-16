@@ -17,7 +17,7 @@ import { getCurrentWeekNumber, getWeekDateRange } from "@/lib/common/dateUtils";
 import { initialLevels } from "@/lib/niveau_utils";
 import { getedt } from "@/server/edt";
 import { jsPDF } from "jspdf";
-import { CirclePlus, FileText } from "lucide-react";
+import { CirclePlus, Copy, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import Modal from "./Modal";
@@ -25,8 +25,8 @@ import Modal from "./Modal";
 export default function HourlyPage() {
 	const [OriginalHourlys, setOriginalHourlys] = useState<hourly[]>([]);
 	const [hourlys, setHourlys] = useState<hourly[]>([]);
-	const [selectedWeek, setSelectedWeek] = useState<string>(
-		getCurrentWeekNumber(CURRENT_YEAR).toString()
+	const [selectedWeek, setSelectedWeek] = useState<number>(
+		getCurrentWeekNumber(CURRENT_YEAR)
 	);
 	const [selectedNiveau, setSelectedNiveau] = useState<string>("L1");
 	const [editingHoraire, setEditingHoraire] = useState<hourly | null>(null);
@@ -53,10 +53,7 @@ export default function HourlyPage() {
 	useEffect(() => {
 		const fetch = async () => {
 			if (selectedWeek) {
-				const data = await getedt(
-					parseInt(selectedWeek),
-					new Date().getFullYear()
-				);
+				const data = await getedt(selectedWeek, new Date().getFullYear());
 				setOriginalHourlys(data);
 				const filteredData = filterHorairesByLvl(data, selectedNiveau);
 				setHourlys(filteredData);
@@ -104,6 +101,8 @@ export default function HourlyPage() {
 		}
 	};
 
+	const TransposeData = (WeekTarget: string) => {};
+
 	const generatePDF = () => {
 		const doc = new jsPDF({
 			orientation: "landscape",
@@ -112,10 +111,7 @@ export default function HourlyPage() {
 		});
 
 		const currentYear = new Date().getFullYear();
-		const { start, end } = getWeekDateRange(
-			parseInt(selectedWeek),
-			currentYear
-		);
+		const { start, end } = getWeekDateRange(selectedWeek, currentYear);
 
 		// Set up header
 		doc.setFontSize(16);
@@ -191,13 +187,17 @@ export default function HourlyPage() {
 	return (
 		<div className="p-4  min-w-[1250px]">
 			<div className="mb-4 flex justify-between items-center">
-				<Select value={selectedWeek} onValueChange={setSelectedWeek}>
+				<Select
+					value={selectedWeek.toString()}
+					onValueChange={(value) => {
+						setSelectedWeek(parseInt(value));
+					}}>
 					<SelectTrigger className="w-[300px]">
 						<SelectValue placeholder="Sélectionner la semaine" />
 					</SelectTrigger>
 					<SelectContent>
 						{getWeekOptions(new Date().getFullYear()).map((option) => (
-							<SelectItem key={option.value} value={option.value}>
+							<SelectItem key={option.value} value={option.value.toString()}>
 								{option.label}
 							</SelectItem>
 						))}
@@ -216,6 +216,9 @@ export default function HourlyPage() {
 					</SelectContent>
 				</Select>
 				<div className=" space-x-4">
+					<Button onClick={() => {}}>
+						<Copy />
+					</Button>
 					<Button onClick={generatePDF}>
 						<FileText />
 					</Button>
@@ -234,7 +237,7 @@ export default function HourlyPage() {
 				onDelete={handleDelete}
 				editingHoraire={editingHoraire}
 				selectedNiveau={selectedNiveau}
-				selectedWeek={parseInt(selectedWeek)}
+				selectedWeek={selectedWeek}
 			/>
 		</div>
 	);
