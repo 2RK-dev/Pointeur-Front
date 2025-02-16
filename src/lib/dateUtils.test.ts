@@ -1,4 +1,8 @@
-import { getDateByWeekAndDay, getDayNumber, getDayOptions } from "./edt_utils";
+import {
+	getDateByWeekAndDay,
+	getDayNumber,
+	getDayOptions,
+} from "./common/dateUtils";
 
 describe("getDateByWeekAndDay", () => {
 	it("should return the correct date for a given week and day", () => {
