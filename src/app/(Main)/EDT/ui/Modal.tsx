@@ -38,16 +38,41 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-const formSchema = z.object({
-	edt_id: z.string().min(1, "L'identifiant de l'horaire est requis"),
-	date: z.string().min(1, "La date est requise"),
-	ue: z.string().min(1, "Une matière est requis"),
-	start_hours: z.string().min(1, "L'heure de début est requise"),
-	end_hours: z.string().min(1, "L'heure de fin est requise"),
-	teacher: z.string().min(1, "Le professeur est requis"),
-	room_abr: z.string().min(1, "La salle est requise"),
-	level: z.string().min(1, "Le niveau est requis"),
-});
+const formSchema = z
+	.object({
+		edt_id: z.number().min(1, "L'identifiant de l'horaire est requis"),
+		date: z.string().min(1, "La date est requise"),
+		ue: z.string().min(1, "Une matière est requis"),
+		start_hours: z.string().min(1, "L'heure de début est requise"),
+		end_hours: z.string().min(1, "L'heure de fin est requise"),
+		teacher: z.string().min(1, "Le professeur est requis"),
+		room_abr: z.string().min(1, "La salle est requise"),
+		level: z.string().min(1, "Le niveau est requis"),
+	})
+	.refine(
+		(data) => {
+			const start = new Date(`1970-01-01T${data.start_hours}:00`);
+			const end = new Date(`1970-01-01T${data.end_hours}:00`);
+			return end > start;
+		},
+		{
+			message: "L'heure de fin doit être après l'heure de début",
+			path: ["end_hours"],
+		}
+	)
+	.refine(
+		(data) => {
+			const start = new Date(`1970-01-01T${data.start_hours}:00`);
+			const end = new Date(`1970-01-01T${data.end_hours}:00`);
+			const differenceInHours = (end.getTime() - start.getTime()) / 3600000;
+			return differenceInHours >= 1;
+		},
+		{
+			message:
+				"La différence entre l'heure de début et l'heure de fin doit être supérieure à 1 heure",
+			path: ["end_hours"],
+		}
+	);
 
 interface ModalProps {
 	isOpen: boolean;
