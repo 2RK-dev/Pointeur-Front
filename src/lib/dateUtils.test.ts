@@ -2,6 +2,7 @@ import {
 	getDateByWeekAndDay,
 	getDayNumber,
 	getDayOptions,
+	getWeekDateRange,
 } from "./common/dateUtils";
 
 describe("getDateByWeekAndDay", () => {
@@ -65,5 +66,28 @@ describe("getDayOptions", () => {
 			{ date: "2025-03-07", label: "Vendredi" },
 			{ date: "2025-03-08", label: "Samedi" },
 		]);
+	});
+});
+describe("getWeekDateRange", () => {
+	it("should return the correct start and end dates for a given week number and year", () => {
+		// Test case 1
+		expect(getWeekDateRange(1, 2025)).toEqual({
+			start: "2024-12-29",
+			end: "2025-01-04",
+		});
+
+		// Test case 2
+		expect(getWeekDateRange(6, 2025)).toEqual({
+			start: "2025-02-02",
+			end: "2025-02-08",
+		});
+
+		// Test case 3
+		expect(getWeekDateRange(10, 2025)).toEqual({
+			start: "2025-03-02",
+			end: "2025-03-08",
+		});
+
+		// Add more test cases as needed
 	});
 });

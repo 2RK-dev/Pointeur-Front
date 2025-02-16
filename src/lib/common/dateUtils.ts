@@ -43,11 +43,11 @@ export function getWeekNumber(dateString: string): number {
 }
 
 /**
- * Returns the start and end dates of a week based on its number and year.
+ * Returns the start and end dates of a week based on its number and year. from Sunday to Saturday.
  * @param weekNumber
  * @param year
  * @returns {start: string, end: string}
- * @example getWeekDateRange(1, 2025) => {start: "2024-12-30", end: "2025-01-05"}
+ * @example getWeekDateRange(1, 2025) => {start: "2024-12-29", end: "2025-01-04"}
  */
 export function getWeekDateRange(
 	weekNumber: number,
