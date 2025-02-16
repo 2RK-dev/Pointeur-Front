@@ -117,7 +117,7 @@ export function calculateWidth(startTime: string, endTime: string): number {
  */
 export function getWeekOptions(
 	year: number
-): { value: string; label: string }[] {
+): { value: number; label: string }[] {
 	const weekOptions = [];
 	for (let i = 1; i <= 52; i++) {
 		const { start, end } = getWeekDateRange(i, year);
@@ -126,7 +126,7 @@ export function getWeekOptions(
 		const label = `Semaine ${i} (${startDate.getDate()}/${
 			startDate.getMonth() + 1
 		} - ${endDate.getDate()}/${endDate.getMonth() + 1})`;
-		weekOptions.push({ value: i.toString(), label });
+		weekOptions.push({ value: i, label });
 	}
 	return weekOptions;
 }
