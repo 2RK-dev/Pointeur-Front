@@ -9,10 +9,22 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import { CURRENT_YEAR, getWeekOptions, hourly } from "@/lib/edt_utils";
+import {
+	CURRENT_YEAR,
+	getWeekOptions,
+	hourly,
+	transposeHourlies,
+} from "@/lib/edt_utils";
 
 import html2canvas from "html2canvas";
 
+import {
+	Dialog,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import { getCurrentWeekNumber, getWeekDateRange } from "@/lib/common/dateUtils";
 import { initialLevels } from "@/lib/niveau_utils";
 import { getedt } from "@/server/edt";
@@ -25,12 +37,17 @@ import Modal from "./Modal";
 export default function HourlyPage() {
 	const [OriginalHourlys, setOriginalHourlys] = useState<hourly[]>([]);
 	const [hourlys, setHourlys] = useState<hourly[]>([]);
+	const [WeekOptions, setWeekOptions] = useState<
+		{ value: number; label: string }[]
+	>([]);
 	const [selectedWeek, setSelectedWeek] = useState<number>(
 		getCurrentWeekNumber(CURRENT_YEAR)
 	);
+	const [TargetWeek, setTargetWeek] = useState<number>(0);
 	const [selectedNiveau, setSelectedNiveau] = useState<string>("L1");
 	const [editingHoraire, setEditingHoraire] = useState<hourly | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
 
 	const handleEdit = (horaire: hourly) => {
 		setEditingHoraire(horaire);
@@ -39,6 +56,7 @@ export default function HourlyPage() {
 
 	useEffect(() => {
 		const fetch = async () => {
+			setWeekOptions(getWeekOptions(CURRENT_YEAR));
 			const data = await getedt(
 				getCurrentWeekNumber(CURRENT_YEAR),
 				new Date().getFullYear()
@@ -101,7 +119,26 @@ export default function HourlyPage() {
 		}
 	};
 
-	const TransposeData = (WeekTarget: string) => {};
+	const TransposeData = (TargetWeek: number) => {
+		if (TargetWeek <= selectedWeek) return;
+
+		// Step 1: Select the data for this selected week first
+		const { start, end } = getWeekDateRange(selectedWeek, CURRENT_YEAR);
+		const dataForSelectedWeek = hourlys.filter((item) => {
+			return item.date >= start && item.date <= end;
+		});
+
+		// Step 2: take the last id of the data
+		const lastIdNumber = OriginalHourlys[OriginalHourlys.length - 1].edt_id;
+
+		const transposedData = transposeHourlies(
+			dataForSelectedWeek,
+			TargetWeek - selectedWeek,
+			lastIdNumber
+		);
+
+		alert("Données transposées avec succès");
+	};
 
 	const generatePDF = () => {
 		const doc = new jsPDF({
@@ -196,7 +233,7 @@ export default function HourlyPage() {
 						<SelectValue placeholder="Sélectionner la semaine" />
 					</SelectTrigger>
 					<SelectContent>
-						{getWeekOptions(new Date().getFullYear()).map((option) => (
+						{WeekOptions.map((option) => (
 							<SelectItem key={option.value} value={option.value.toString()}>
 								{option.label}
 							</SelectItem>
@@ -216,7 +253,10 @@ export default function HourlyPage() {
 					</SelectContent>
 				</Select>
 				<div className=" space-x-4">
-					<Button onClick={() => {}}>
+					<Button
+						onClick={() => {
+							setIsTransposeModalOpen(true);
+						}}>
 						<Copy />
 					</Button>
 					<Button onClick={generatePDF}>
@@ -239,6 +279,44 @@ export default function HourlyPage() {
 				selectedNiveau={selectedNiveau}
 				selectedWeek={selectedWeek}
 			/>
+			<Dialog
+				open={isTransposeModalOpen}
+				onOpenChange={setIsTransposeModalOpen}>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Transposer les données</DialogTitle>
+					</DialogHeader>
+					<Select
+						onValueChange={(value) => {
+							setTargetWeek(parseInt(value));
+						}}>
+						<SelectTrigger>
+							<SelectValue placeholder="Sélectionner la semaine cible" />
+						</SelectTrigger>
+						<SelectContent>
+							{WeekOptions.map(
+								(option) =>
+									selectedWeek < option.value && (
+										<SelectItem
+											key={option.value}
+											value={option.value.toString()}>
+											{option.label}
+										</SelectItem>
+									)
+							)}
+						</SelectContent>
+					</Select>
+					<DialogFooter>
+						<Button
+							onClick={() => {
+								TransposeData(TargetWeek);
+								setIsTransposeModalOpen(false);
+							}}>
+							Transposer
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 }
