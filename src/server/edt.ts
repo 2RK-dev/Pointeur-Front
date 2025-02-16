@@ -1,6 +1,7 @@
 "use server";
 
-import { getWeekDateRange, hourly } from "@/lib/edt_utils";
+import { getWeekDateRange } from "@/lib/common/dateUtils";
+import { hourly } from "@/lib/edt_utils";
 
 export async function getedt(
 	weekNumber: number,
