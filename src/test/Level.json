@@ -1,0 +1,61 @@
+[
+  {
+    "id": 1,
+    "name": "L1",
+    "groups": [
+      { "id": 1, "name": "GB", "abr": "GB", "size": 25 },
+      { "id": 2, "name": "ASR", "abr": "ASR", "size": 28 },
+      { "id": 3, "name": "IG", "abr": "IG", "size": 30 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "L2",
+    "groups": [
+      { "id": 4, "name": "GB", "abr": "GB", "size": 22 },
+      { "id": 5, "name": "ASR", "abr": "ASR", "size": 24 },
+      { "id": 6, "name": "IG", "abr": "IG", "size": 27 }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "L3",
+    "groups": [
+      { "id": 7, "name": "GB", "abr": "GB", "size": 26 },
+      { "id": 8, "name": "ASR", "abr": "ASR", "size": 29 },
+      { "id": 9, "name": "IG", "abr": "IG", "size": 28 }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "M1",
+    "groups": [
+      { "id": 10, "name": "GB", "abr": "GB", "size": 21 },
+      { "id": 11, "name": "ASR", "abr": "ASR", "size": 23 },
+      { "id": 12, "name": "IG", "abr": "IG", "size": 20 }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "M2",
+    "groups": [
+      { "id": 13, "name": "GB", "abr": "GB", "size": 19 },
+      { "id": 14, "name": "ASR", "abr": "ASR", "size": 20 },
+      { "id": 15, "name": "IG", "abr": "IG", "size": 18 }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "M1 IA",
+    "groups": [
+      { "id": 16, "name": "IA", "abr": "IA", "size": 20 }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "M2 IA",
+    "groups": [
+      { "id": 17, "name": "IA", "abr": "IA", "size": 18 }
+    ]
+  }
+]
