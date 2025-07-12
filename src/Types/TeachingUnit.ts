@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const TeachingUnitSchema = z.object({
-    id: z.string(),
+    id: z.number(),
     name: z.string(),
     abr: z.string()
 });
