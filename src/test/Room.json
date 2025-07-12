@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Salle A101", "abr": "A101", "capacity": 30 },
+  { "id": 2, "name": "Salle A102", "abr": "A102", "capacity": 25 },
+  { "id": 3, "name": "Salle B201", "abr": "B201", "capacity": 40 },
+  { "id": 4, "name": "Salle B202", "abr": "B202", "capacity": 35 },
+  { "id": 5, "name": "Salle C301", "abr": "C301", "capacity": 50 },
+  { "id": 6, "name": "Salle C302", "abr": "C302", "capacity": 45 },
+  { "id": 7, "name": "Salle D401", "abr": "D401", "capacity": 20 },
+  { "id": 8, "name": "Salle D402", "abr": "D402", "capacity": 25 },
+  { "id": 9, "name": "Salle E501", "abr": "E501", "capacity": 60 },
+  { "id": 10, "name": "Salle E502", "abr": "E502", "capacity": 55 }
+]
