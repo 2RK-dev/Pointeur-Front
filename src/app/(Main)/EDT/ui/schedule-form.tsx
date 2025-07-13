@@ -24,7 +24,7 @@ import {getRooms} from "@/services/Room";
 import {Group} from "@/Types/Group";
 import {getGroupInLevel} from "@/services/Level";
 import {getScheduleItemsByLevel} from "@/services/ScheduleItem";
-import {getAvalaibleGroups} from "@/Tools/Group";
+import {getAvailableGroups} from "@/Tools/Group";
 import {ScheduleItem} from "@/Types/ScheduleItem";
 import {generateHours} from "@/Tools/ScheduleItem";
 
@@ -139,7 +139,7 @@ export default function ScheduleForm() {
             endDateTime.setHours(endHour, endMinute, 0, 0);
         }
 
-        const newAvailableGroups = getAvalaibleGroups(schedulesItems, groups, startDateTime, endDateTime)
+        const newAvailableGroups = getAvailableGroups(schedulesItems, groups, startDateTime, endDateTime)
         setAvailableGroups(newAvailableGroups)
 
         const availableGroupIds = newAvailableGroups.map((g) => g.id)
