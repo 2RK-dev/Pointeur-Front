@@ -20,20 +20,30 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Room, initialRooms } from "@/lib/Room_utils";
+import { withErrorHandler } from "@/hooks/withErrorHandler";
+import { Room } from "@/lib/Room_utils";
+import { getRoom } from "@/server_old/Room";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Edit, FileDown, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [rooms, setRooms] = useState<Room[]>(initialRooms);
+	const [rooms, setRooms] = useState<Room[]>([]);
 	const [isAddingRoom, setIsAddingRoom] = useState(false);
 	const [editingRoom, setEditingRoom] = useState<Room | null>(null);
 	const [newRoom, setNewRoom] = useState<Omit<Room, "room_id">>({
 		room_name: "",
 		room_abr: "",
 		room_capacity: 0,
+	});
+
+	useEffect(() => {
+		fetchRooms();
+	}, []);
+
+	const fetchRooms = withErrorHandler(async () => {
+		setRooms(await getRoom());
 	});
 
 	const handleAddRoom = () => {

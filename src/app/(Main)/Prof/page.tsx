@@ -10,7 +10,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { getTeacher } from "@/server/Teacher";
+import { getTeacher } from "@/server_old/Teacher";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { FileDown } from "lucide-react";

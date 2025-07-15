@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "Alix",
+    "abr": "ALX"
+  },
+  {
+    "id": 2,
+    "name": "Andry",
+    "abr": "ANDR"
+  },
+  {
+    "id": 3,
+    "name": "Angelo",
+    "abr": "ANG"
+  },
+  {
+    "id": 4,
+    "name": "Antsa",
+    "abr": "ANT"
+  },
+  {
+    "id": 5,
+    "name": "Benjamin",
+    "abr": "BENJ"
+  },
+  {
+    "id": 6,
+    "name": "Bertin",
+    "abr": "BERT"
+  },
+  {
+    "id": 7,
+    "name": "Brice",
+    "abr": "BRI"
+  },
+  {
+    "id": 8,
+    "name": "Bénédicte",
+    "abr": "BEN"
+  },
+  {
+    "id": 9,
+    "name": "Clément",
+    "abr": "CLEM"
+  },
+  {
+    "id": 10,
+    "name": "Cyprien",
+    "abr": "CYP"
+  },
+  {
+    "id": 11,
+    "name": "Ferdinand",
+    "abr": "FER"
+  },
+  {
+    "id": 12,
+    "name": "Fontaine",
+    "abr": "FON"
+  },
+  {
+    "id": 13,
+    "name": "Germain",
+    "abr": "GER"
+  },
+  {
+    "id": 14,
+    "name": "Gilante",
+    "abr": "GIL"
+  },
+  {
+    "id": 15,
+    "name": "Haja",
+    "abr": "HAJ"
+  },
+  {
+    "id": 16,
+    "name": "Hajarisena",
+    "abr": "HAJS"
+  },
+  {
+    "id": 18,
+    "name": "Herijaona",
+    "abr": "HER"
+  },
+  {
+    "id": 19,
+    "name": "Josué",
+    "abr": "JOS"
+  },
+  {
+    "id": 20,
+    "name": "Lira",
+    "abr": "LIR"
+  },
+  {
+    "id": 21,
+    "name": "Madison",
+    "abr": "MAD"
+  },
+  {
+    "id": 22,
+    "name": "MAHATODY Thomas",
+    "abr": "THO"
+  },
+  {
+    "id": 23,
+    "name": "Marius",
+    "abr": "MAR"
+  },
+  {
+    "id": 24,
+    "name": "Michel",
+    "abr": "MIC"
+  },
+  {
+    "id": 25,
+    "name": "Patrice",
+    "abr": "PAT"
+  },
+  {
+    "id": 26,
+    "name": "RALAIVAO Jean-Christian",
+    "abr": "RAL"
+  },
+  {
+    "id": 27,
+    "name": "Roger",
+    "abr": "ROG"
+  },
+  {
+    "id": 28,
+    "name": "Venot",
+    "abr": "VEN"
+  },
+  {
+    "id": 29,
+    "name": "Victor",
+    "abr": "VIC"
+  },
+  {
+    "id": 30,
+    "name": "Volatiana",
+    "abr": "VOL"
+  },
+  {
+    "id": 31,
+    "name": "William",
+    "abr": "WIL"
+  }
+]

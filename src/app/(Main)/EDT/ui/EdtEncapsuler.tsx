@@ -18,7 +18,6 @@ export default function EdtEncapsuler({ hourly, onEdit }: props) {
 					})}
 				</div>
 
-				{/* for days and hourly */}
 				{days.map(
 					(day, index: number) =>
 						index > 0 && (
@@ -41,8 +40,7 @@ export default function EdtEncapsuler({ hourly, onEdit }: props) {
 	);
 }
 
-//sample componant
-//#region Componant
+//#region Component
 const RenderHours = (hours: string[], heure: string, index: number) => {
 	const style = getStyleHours(hours, heure, index);
 	if (index === hours.length - 2) {
