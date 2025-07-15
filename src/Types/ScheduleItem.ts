@@ -6,8 +6,8 @@ import {GroupSchema} from "@/Types/Group";
 
 export const ScheduleItemSchema = z.object({
   id: z.number(),
-  startTime: z.date().transform((val) => new Date(val)),
-  endTime: z.date().transform((val) => new Date(val)),
+  startTime: z.date(),
+  endTime: z.date(),
   Teacher: TeacherSchema,
   TeachingUnit: TeachingUnitSchema,
   Room: RoomSchema,
