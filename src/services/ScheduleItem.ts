@@ -12,7 +12,7 @@ export async function getScheduleItemsByLevel(LevelId: number): Promise<Schedule
             item.Groups.some((group) =>
                 groups.some((g) => g.id === group.id)));
     } catch (error) {
-        console.error("Error fetching groups for level:", error);
+        console.error("Error loading schedule items for the given level:", error);
         return [];
     }
 }
