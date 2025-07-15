@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState} from "react"
+import {useEffect, useMemo, useState} from "react"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -126,27 +126,28 @@ export default function ScheduleForm() {
 
     }, [])
 
+    const startDateTime = new Date(watchedDate);
+    if (watchedStartTime) {
+        const [startHour, startMinute] = watchedStartTime.split(":").map(Number);
+        startDateTime.setHours(startHour, startMinute, 0, 0);
+    }
+
+    const endDateTime = new Date(watchedDate);
+    if (watchedEndTime) {
+        const [endHour, endMinute] = watchedEndTime.split(":").map(Number);
+        endDateTime.setHours(endHour, endMinute, 0, 0);
+    }
+
+    const memoizedAvailableGroups = useMemo(() => {
+        return getAvailableGroups(schedulesItems, groups, startDateTime, endDateTime);
+    }, [schedulesItems, groups, startDateTime, endDateTime]);
+
     useEffect(() => {
-        const startDateTime = new Date(watchedDate);
-        if (watchedStartTime) {
-            const [startHour, startMinute] = watchedStartTime.split(":").map(Number);
-            startDateTime.setHours(startHour, startMinute, 0, 0);
-        }
-
-        const endDateTime = new Date(watchedDate);
-        if (watchedEndTime) {
-            const [endHour, endMinute] = watchedEndTime.split(":").map(Number);
-            endDateTime.setHours(endHour, endMinute, 0, 0);
-        }
-
-        const newAvailableGroups = getAvailableGroups(schedulesItems, groups, startDateTime, endDateTime)
-        setAvailableGroups(newAvailableGroups)
-
-        const availableGroupIds = newAvailableGroups.map((g) => g.id)
-        const currentlySelectedGroups = watchedGroupIds || []
-        const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)))
-        form.setValue("groupIds", newSelectedGroups)
-
+        setAvailableGroups(memoizedAvailableGroups);
+        const availableGroupIds = memoizedAvailableGroups.map((g) => g.id);
+        const currentlySelectedGroups = watchedGroupIds || [];
+        const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)));
+        form.setValue("groupIds", newSelectedGroups);
     }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
 
     const selectedRoom = rooms.find((room) => room.id === form.watch("roomId"))
