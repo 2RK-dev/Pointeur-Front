@@ -31,10 +31,10 @@ interface ScheduleItemByLevelStore {
     setScheduleItemsByLevel: (groups: Group[], items: ScheduleItem[]) => void;
 }
 
-export const useScheduleItemByLevelStore = create<ScheduleItemByLevelStore>((set => ({
+export const useScheduleItemByLevelStore = create<ScheduleItemByLevelStore>((set) => ({
     scheduleItemsByLevel: [],
     setScheduleItemsByLevel: (groups: Group[], items: ScheduleItem[]) => {
         const filteredItems = items.filter(item => item.Groups.some(group => groups.some(g => g.id === group.id)));
         set({ scheduleItemsByLevel: filteredItems });
     }
-})));
+}));
