@@ -1,13 +1,49 @@
-import { days } from "@/lib/common/dateUtils";
-import { getStyleHours, hourly, hours } from "@/lib/edt_utils";
-import RenderHoraires from "./LineEdtRender";
+import {days} from "@/lib/common/dateUtils";
+import ScheduleDisplay from "@/app/(Main)/EDT/ui/ScheduleDisplay";
 
-interface props {
-	hourly: hourly[];
-	onEdit: (horaire: hourly) => void;
+export function timeToMinutes(time: string): number {
+	const [hours, minutes] = time.split(":").map(Number);
+	if (isNaN(hours) || isNaN(minutes)) {
+		throw new Error(`Invalid time format: ${time}`);
+	}
+	return hours * 60 + minutes;
 }
 
-export default function EdtEncapsuler({ hourly, onEdit }: props) {
+const getStyleHours = (
+	hours: string[],
+	heure: string,
+	index: number
+) => {
+	const minutesActuelles = timeToMinutes(heure);
+	const minutesSuivantes =
+		index < hours.length - 1 ? timeToMinutes(hours[index + 1]) : null;
+
+	const differenceEnMinutes =
+		minutesSuivantes !== null ? minutesSuivantes - minutesActuelles : null;
+
+	const largeurPourcentage =
+		differenceEnMinutes !== null
+			? Math.min((differenceEnMinutes / 120) * 100, 100)
+			: 100;
+
+	const style: React.CSSProperties = {
+		flexBasis: `${largeurPourcentage}%`,
+	};
+	return style;
+};
+
+export const hours = [
+	"7:00",
+	"8:00",
+	"10:00",
+	"12:00",
+	"14:00",
+	"16:00",
+	"18:00",
+];
+
+export default function EdtEncapsuler() {
+
 	return (
 		<div className="border rounded-lg overflow-x-auto">
 			<div className="relative min-w-[800px]">
@@ -26,9 +62,7 @@ export default function EdtEncapsuler({ hourly, onEdit }: props) {
 									{day}
 								</div>
 								<div className="flex-1 relative">
-									<RenderHoraires
-										hourly={hourly}
-										onEdit={onEdit}
+									<ScheduleDisplay
 										jourIndex={index}
 									/>
 								</div>
