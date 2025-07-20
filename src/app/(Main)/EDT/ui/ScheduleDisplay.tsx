@@ -1,4 +1,4 @@
-import {useScheduleItemByLevelStore} from "@/app/Stores/ScheduleItem";
+import {useScheduleItemByLevelStore} from "@/Stores/ScheduleItem";
 import {calculateRowAssignments, getWidthPercentageFor} from "@/Tools/ScheduleItem";
 import ScheduleItemCard from "@/app/(Main)/EDT/ui/ScheduleItemCard";
 

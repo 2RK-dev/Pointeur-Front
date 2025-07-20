@@ -8,11 +8,11 @@ import {CirclePlus, Copy, FileText} from "lucide-react";
 import {useEffect, useState} from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import ScheduleForm from "@/app/(Main)/EDT/ui/schedule-form";
-import {useCurrentScheduleItemsStore, useScheduleItemByLevelStore} from "@/app/Stores/ScheduleItem";
+import {useCurrentScheduleItemsStore, useScheduleItemByLevelStore} from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
 import {getNextFourWeeks, getWeekRange} from "@/Tools/ScheduleItem";
-import {useCurrentLevelStore} from "@/app/Stores/Level";
+import {useCurrentLevelStore} from "@/Stores/Level";
 import {Level} from "@/Types/Level";
 import {getLevels} from "@/services/Level";
 
