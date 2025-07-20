@@ -21,7 +21,7 @@ export default function Schedule() {
     const {setScheduleItemsByLevel} = useScheduleItemByLevelStore();
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
-    const [levels, setSelectedNiveau] = useState<Level[]>([]);
+    const [levels, setLevels] = useState<Level[]>([]);
     const {currentLevel, setCurrentLevel} = useCurrentLevelStore();
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
@@ -36,7 +36,7 @@ export default function Schedule() {
         });
 
         getLevels().then((levels) => {
-            setSelectedNiveau(levels);
+            setLevels(levels);
             if (levels.length > 0) {
                 setCurrentLevel(levels[0]);
             }
@@ -74,7 +74,16 @@ export default function Schedule() {
                     <SelectContent>
                         {getNextFourWeeks().map((week, index) => (
                             <SelectItem key={index} value={index.toString()}>
-                                {`(${week.start.toLocaleDateString()} - ${week.end.toLocaleDateString()})`}
+                                {
+                                    `${week.start.toLocaleDateString('fr-FR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })} - ${week.end.toLocaleDateString('fr-FR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })}`}
                             </SelectItem>
                         ))}
                     </SelectContent>
