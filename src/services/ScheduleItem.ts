@@ -3,10 +3,10 @@
 import data from "@/test/ScheduleItem.json";
 import {ScheduleItem, ScheduleItemPost, ScheduleItemSchema} from "@/Types/ScheduleItem";
 
-export async function getScheduleItems(starTime:Date, endTime:Date): Promise<ScheduleItem[]> {
+export async function getScheduleItems(startTime:Date, endTime:Date): Promise<ScheduleItem[]> {
     const items = ScheduleItemSchema.array().parse(data);
     return items.filter(item => {
-        return item.startTime >= starTime && item.endTime <= endTime;
+        return item.startTime >= startTime && item.endTime <= endTime;
     });
 }
 
