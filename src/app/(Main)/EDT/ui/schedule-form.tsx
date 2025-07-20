@@ -147,7 +147,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
         const availableGroupIds = memoizedAvailableGroups.map((g) => g.id);
         const currentlySelectedGroups = watchedGroupIds || [];
         const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)));
-        if (unorderedEqual(newSelectedGroups, currentlySelectedGroups)) {
+        if (!unorderedEqual(newSelectedGroups, currentlySelectedGroups)) {
             form.setValue("groupIds", newSelectedGroups);
         }
     }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
