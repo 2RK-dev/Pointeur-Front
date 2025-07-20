@@ -209,7 +209,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
         <Dialog open={isFormOpen} onOpenChange={setIsFormOpenAction}>
             <DialogContent className={"max-w-2xl w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>Planification</DialogTitle>
+                    <DialogTitle>Planification pour le niveau {currentLevel?.name}</DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <div className="p-4">
