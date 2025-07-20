@@ -152,7 +152,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
         }
     }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
 
-    function unorderedEqual(a: any[], b: any[]) {
+    function unorderedEqual(a: number[], b: number[]) {
         return a.length === b.length &&
             a.every(val => b.includes(val)) &&
             b.every(val => a.includes(val));
