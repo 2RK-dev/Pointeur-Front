@@ -74,14 +74,14 @@ const ScheduleItemFormSchema = z
         },
     )
 
-export default function ScheduleForm({ isFormOpen, setIsFormOpenAction }: ScheduleFormProps) {
+export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
     const [calendarOpen, setCalendarOpen] = useState(false)
     const [availableGroups, setAvailableGroups] = useState<Group[]>([])
     const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
     const [teachers, setTeachers] = useState<Teacher[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
-    const addScheduleItem = useCurrentScheduleItemsStore((s)=> s.addScheduleItem);
+    const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
     const {currentLevel} = useCurrentLevelStore();
 
     const form = useForm<z.infer<typeof ScheduleItemFormSchema>>({
@@ -147,10 +147,16 @@ export default function ScheduleForm({ isFormOpen, setIsFormOpenAction }: Schedu
         const availableGroupIds = memoizedAvailableGroups.map((g) => g.id);
         const currentlySelectedGroups = watchedGroupIds || [];
         const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)));
-        if (JSON.stringify(newSelectedGroups) !== JSON.stringify(currentlySelectedGroups)) {
+        if (unorderedEqual(newSelectedGroups, currentlySelectedGroups)) {
             form.setValue("groupIds", newSelectedGroups);
         }
     }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
+
+    function unorderedEqual(a: any[], b: any[]) {
+        return a.length === b.length &&
+            a.every(val => b.includes(val)) &&
+            b.every(val => a.includes(val));
+    }
 
     const selectedRoom = rooms.find((room) => room.id === form.watch("roomId"))
     const selectedGroups = availableGroups.filter((group) => form.watch("groupIds").includes(group.id.toString()))
@@ -394,7 +400,7 @@ export default function ScheduleForm({ isFormOpen, setIsFormOpenAction }: Schedu
                                                                                         >
                                                                                             <FormControl>
                                                                                                 <Checkbox
-                                                                                                    checked={field.value.includes(group.id.toString())}
+                                                                                                    checked={Array.isArray(field.value) && field.value.includes(group.id.toString())}
                                                                                                     onCheckedChange={(checked) => {
                                                                                                         const newValue = checked
                                                                                                             ? [...field.value, group.id.toString()]
