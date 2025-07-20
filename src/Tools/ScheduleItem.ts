@@ -48,7 +48,7 @@ function getTimeInMinutes(date: Date): number {
     return date.getHours() * 60 + date.getMinutes();
 }
 
-export function getWidthPercentageFor(duration:number){
+export function getWidthPercentageFor(duration: number){
     return (duration / DAY_DURATION) * 100;
 }
 
