@@ -27,7 +27,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 				<br/>
 				{scheduleItem.Room.abr} — {scheduleItem.Teacher.abr}
 				<br />
-				{scheduleItem.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} -
+				{scheduleItem.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} -&nbsp;
 				{scheduleItem.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
 				<br />
 				<span>Groupes :</span>{" "}
