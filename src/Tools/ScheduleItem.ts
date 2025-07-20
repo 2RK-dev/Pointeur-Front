@@ -48,6 +48,12 @@ function getTimeInMinutes(date: Date): number {
     return date.getHours() * 60 + date.getMinutes();
 }
 
+/**
+ * Calculates the width percentage for a given duration in minutes.
+ * 
+ * @param {number} duration - The duration in minutes.
+ * @returns {number} The width percentage as a proportion of the total day duration.
+ */
 export function getWidthPercentageFor(duration: number){
     return (duration / DAY_DURATION) * 100;
 }
