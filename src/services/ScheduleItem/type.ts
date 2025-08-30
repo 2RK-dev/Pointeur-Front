@@ -1,4 +1,4 @@
-import { ScheduleItem } from "@/Types/ScheduleItem";
+import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
 
 /**
  * Schedule Service Type Definition.
@@ -6,5 +6,6 @@ import { ScheduleItem } from "@/Types/ScheduleItem";
  * Services should only export functions.
  */
 export type IScheduleItemService = {
-    getScheduleItemsByLevel(LevelId: number): Promise<ScheduleItem[]>,
+    getScheduleItems(startTime:Date, endTime:Date): Promise<ScheduleItem[]>,
+    addScheduleItemService (scheduleItem: ScheduleItemPost): Promise<ScheduleItem>;
 }

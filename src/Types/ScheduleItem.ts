@@ -15,8 +15,8 @@ export const ScheduleItemSchema = z.object({
 });
 
 export const ScheduleItemPostSchema = z.object({
-    startTime: z.preprocess((arg) => (arg as Date).toISOString(), z.string()),
-    endTime: z.preprocess((arg) => (arg as Date).toISOString(), z.string()),
+    startTime: z.preprocess((arg) => (arg as Date).toISOString().slice(0, 19), z.string()),
+    endTime: z.preprocess((arg) => (arg as Date).toISOString().slice(0, 19), z.string()),
     TeacherId: z.number(),
     TeachingUnitID: z.number(),
     RoomId: z.number(),

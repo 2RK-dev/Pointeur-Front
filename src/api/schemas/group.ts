@@ -7,3 +7,8 @@ export const GroupSchema = z.object({
     size: z.number(),
     level: LevelSchema
 });
+
+export const LevelDetailsSchema = z.object({
+    level: LevelSchema,
+    groups: GroupSchema.array(),
+})

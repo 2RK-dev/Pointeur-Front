@@ -1,13 +1,15 @@
 import { LevelSchema } from "./level";
-import { GroupSchema } from "./group";
+import { GroupSchema, LevelDetailsSchema } from "./group";
 import { RoomSchema } from "./room";
-import { ScheduleItemSchema } from "@/api/schemas/shedule-item";
-import { TeacherSchema } from "@/api/schemas/teacher";
-import { TeachingUnitSchema } from "@/api/schemas/teaching-unit";
+import { CreateScheduleItemSchema, ScheduleItemSchema } from "./schedule-item";
+import { TeacherSchema } from "./teacher";
+import { TeachingUnitSchema } from "./teaching-unit";
 
 export const DTO = {
-    LevelSchema,
+    CreateScheduleItemSchema,
     GroupSchema,
+    LevelDetailsSchema,
+    LevelSchema,
     RoomSchema,
     ScheduleItemSchema,
     TeacherSchema,

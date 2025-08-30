@@ -10,6 +10,15 @@ export const ScheduleItemSchema = z.object({
     teacher: TeacherSchema,
     teachingUnit: TeachingUnitSchema,
     room: RoomSchema,
-    startTime: z.date(),
-    endTime: z.date(),
-})
+    startTime: z.string().datetime({local: true}),
+    endTime: z.string().datetime({local: true}),
+});
+
+export const CreateScheduleItemSchema = z.object({
+    groupIds: z.number().array(),
+    teacherId: z.number(),
+    teachingUnitId: z.number(),
+    roomId: z.number(),
+    startTime: z.string().datetime(),
+    endTime: z.string().datetime(),
+});
