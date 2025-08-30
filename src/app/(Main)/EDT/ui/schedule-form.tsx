@@ -22,15 +22,23 @@ import {getTeachers} from "@/services/Teacher";
 import {Room} from "@/Types/Room";
 import {getRooms} from "@/services/Room";
 import {Group} from "@/Types/Group";
-import {getGroupInLevel} from "@/services/Level";
-import {getScheduleItemsByLevel} from "@/services/ScheduleItem";
 import {getAvailableGroups} from "@/Tools/Group";
-import {ScheduleItem} from "@/Types/ScheduleItem";
 import {generateHours} from "@/Tools/ScheduleItem";
+import {useCurrentScheduleItemsStore} from "@/Stores/ScheduleItem";
+import {useCurrentLevelStore} from "@/Stores/Level";
+import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {ScrollArea} from "@/components/ui/scroll-area";
+import {addScheduleItemService} from "@/services/ScheduleItem";
+import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
+
+interface ScheduleFormProps {
+    isFormOpen: boolean;
+    setIsFormOpenAction: (open: boolean) => void;
+}
 
 const hours = generateHours();
 
-const formSchema = z
+const ScheduleItemFormSchema = z
     .object({
         date: z.date({
             required_error: "Veuillez sélectionner une date",
@@ -66,17 +74,18 @@ const formSchema = z
         },
     )
 
-export default function ScheduleForm() {
+export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
     const [calendarOpen, setCalendarOpen] = useState(false)
-    const [groups, setGroups] = useState<Group[]>([])
     const [availableGroups, setAvailableGroups] = useState<Group[]>([])
     const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
     const [teachers, setTeachers] = useState<Teacher[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
-    const [schedulesItems, setSchedulesItems] = useState<ScheduleItem[]>([])
+    const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
+    const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
+    const {currentLevel} = useCurrentLevelStore();
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof ScheduleItemFormSchema>>({
+        resolver: zodResolver(ScheduleItemFormSchema),
         defaultValues: {
             date: undefined,
             startTime: "",
@@ -111,20 +120,8 @@ export default function ScheduleForm() {
         }).catch((error) => {
             console.error("Erreur lors de la récupération des salles :", error);
         })
-
-        getGroupInLevel(1).then((groupsData) => {
-            setGroups(groupsData);
-        }).catch((error) => {
-            console.error("Erreur lors de la récupération des groupes :", error);
-        })
-
-        getScheduleItemsByLevel(1).then((items) => {
-            setSchedulesItems(items);
-        }).catch((error) => {
-            console.error("Erreur lors de la récupération des horaires :", error);
-        })
-
     }, [])
+
 
     const startDateTime = new Date(watchedDate);
     if (watchedStartTime) {
@@ -139,16 +136,27 @@ export default function ScheduleForm() {
     }
 
     const memoizedAvailableGroups = useMemo(() => {
-        return getAvailableGroups(schedulesItems, groups, startDateTime, endDateTime);
-    }, [schedulesItems, groups, startDateTime, endDateTime]);
+        if (!currentLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+            return [];
+        }
+        return getAvailableGroups(currentScheduleItems, currentLevel.groups, startDateTime, endDateTime);
+    }, [currentScheduleItems, currentLevel?.groups, startDateTime, endDateTime]);
 
     useEffect(() => {
         setAvailableGroups(memoizedAvailableGroups);
         const availableGroupIds = memoizedAvailableGroups.map((g) => g.id);
         const currentlySelectedGroups = watchedGroupIds || [];
         const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)));
-        form.setValue("groupIds", newSelectedGroups);
+        if (!unorderedEqual(newSelectedGroups, currentlySelectedGroups)) {
+            form.setValue("groupIds", newSelectedGroups);
+        }
     }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
+
+    function unorderedEqual(a: number[], b: number[]) {
+        return a.length === b.length &&
+            a.every(val => b.includes(val)) &&
+            b.every(val => a.includes(val));
+    }
 
     const selectedRoom = rooms.find((room) => room.id === form.watch("roomId"))
     const selectedGroups = availableGroups.filter((group) => form.watch("groupIds").includes(group.id.toString()))
@@ -162,406 +170,448 @@ export default function ScheduleForm() {
 
     const isPeriodComplete = watchedDate && watchedStartTime && watchedEndTime
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
         if (capacityError) {
             return
         }
 
-        const [startHour, startMinute] = values.startTime.split(":").map(Number)
-        const [endHour, endMinute] = values.endTime.split(":").map(Number)
+        try {
+            const [startHour, startMinute] = values.startTime.split(":").map(Number)
+            const [endHour, endMinute] = values.endTime.split(":").map(Number)
 
-        const startDateTime = new Date(values.date)
-        startDateTime.setHours(startHour, startMinute, 0, 0)
+            const startDateTime = new Date(values.date)
+            startDateTime.setHours(startHour, startMinute, 0, 0)
 
-        const endDateTime = new Date(values.date)
-        endDateTime.setHours(endHour, endMinute, 0, 0)
+            const endDateTime = new Date(values.date)
+            endDateTime.setHours(endHour, endMinute, 0, 0)
 
-        const scheduleItem = {
-            teachingUnitID: values.teachingUnitID,
-            teacherId: values.teacherId,
-            roomId: values.roomId,
-            groupIds: values.groupIds,
-            start: startDateTime.toISOString(),
-            end: endDateTime.toISOString(),
+            const scheduleItem = ScheduleItemPostSchema.parse({
+                TeachingUnitID: values.teachingUnitID,
+                TeacherId: values.teacherId,
+                RoomId: values.roomId,
+                GroupIds: values.groupIds,
+                startTime: startDateTime,
+                endTime: endDateTime,
+            })
+            addScheduleItemService(scheduleItem).then((scheduleItem) => {
+                addScheduleItem(scheduleItem);
+                setIsFormOpenAction(false);
+            }).catch((error) => {
+                console.error(" Error : ", error);
+            })
+
+        } catch (e) {
+            console.error(" Error : ", e);
         }
-
-        console.log("Schedule Item créé:", scheduleItem)
     }
 
     return (
-        <div className="p-4">
-            <div className="max-w-2xl mx-auto">
-                <Card className="shadow-xl border-0">
-                    <CardContent className="p-6">
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                                <Card className="border-2 border-blue-200 bg-blue-50/50">
-                                    <CardHeader className="pb-3">
-                                        <CardTitle className="text-lg flex items-center gap-2">
-                                            <div
-                                                className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                                                1
-                                            </div>
-                                            Définir la période
-                                        </CardTitle>
-                                        <CardDescription>
-                                            Sélectionnez d'abord la date et les heures pour voir les groupes disponibles
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
-                                        <FormField
-                                            control={form.control}
-                                            name="date"
-                                            render={({field}) => (
-                                                <FormItem className="flex flex-col">
-                                                    <FormLabel className="flex items-center gap-2">
-                                                        <CalendarIcon className="h-4 w-4 text-red-600"/>
-                                                        Date du cours
-                                                    </FormLabel>
-                                                    <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
-                                                        <PopoverTrigger asChild>
-                                                            <FormControl>
-                                                                <Button
-                                                                    variant="outline"
-                                                                    className={`w-full pl-3 text-left font-normal ${
-                                                                        !field.value && "text-muted-foreground"
-                                                                    }`}
-                                                                >
-                                                                    {field.value ? (
-                                                                        field.value.toLocaleDateString("fr-FR", {
-                                                                            weekday: "long",
-                                                                            year: "numeric",
-                                                                            month: "long",
-                                                                            day: "numeric",
-                                                                        })
-                                                                    ) : (
-                                                                        <span>Sélectionner une date</span>
-                                                                    )}
-                                                                    <CalendarIcon
-                                                                        className="ml-auto h-4 w-4 opacity-50"/>
-                                                                </Button>
-                                                            </FormControl>
-                                                        </PopoverTrigger>
-                                                        <PopoverContent className="w-auto p-0" align="start">
-                                                            <Calendar
-                                                                mode="single"
-                                                                selected={field.value}
-                                                                onSelect={(date: Date) => {
-                                                                    field.onChange(date)
-                                                                    setCalendarOpen(false)
-                                                                }}
-                                                                disabled={(date: Date) => date < new Date() || !isValidDay(date)}
-                                                                required
-                                                            />
-                                                        </PopoverContent>
-                                                    </Popover>
-                                                    <FormDescription>Seuls les jours de lundi à samedi sont
-                                                        disponibles</FormDescription>
-                                                    <FormMessage/>
-                                                </FormItem>
-                                            )}
-                                        />
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <FormField
-                                                control={form.control}
-                                                name="startTime"
-                                                render={({field}) => (
-                                                    <FormItem>
-                                                        <FormLabel className="flex items-center gap-2">
-                                                            <Clock className="h-4 w-4 text-blue-600"/>
-                                                            Heure de début
-                                                        </FormLabel>
-                                                        <Select onValueChange={field.onChange}
-                                                                defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger>
-                                                                    <SelectValue placeholder="Heure de début"/>
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {hours.slice(0, -1).map((hour) => (
-                                                                    <SelectItem key={hour} value={hour}>
-                                                                        {hour}
-                                                                    </SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage/>
-                                                    </FormItem>
-                                                )}
-                                            />
-
-                                            <FormField
-                                                control={form.control}
-                                                name="endTime"
-                                                render={({field}) => (
-                                                    <FormItem>
-                                                        <FormLabel className="flex items-center gap-2">
-                                                            <Clock className="h-4 w-4 text-red-600"/>
-                                                            Heure de fin
-                                                        </FormLabel>
-                                                        <Select onValueChange={field.onChange}
-                                                                defaultValue={field.value}>
-                                                            <FormControl>
-                                                                <SelectTrigger>
-                                                                    <SelectValue placeholder="Heure de fin"/>
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {hours.map((hour) => (
-                                                                    <SelectItem key={hour} value={hour}>
-                                                                        {hour}
-                                                                    </SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage/>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
-                                    </CardContent>
-                                </Card>
-
-                                <Card
-                                    className={`border-2 ${isPeriodComplete ? "border-green-200 bg-green-50/50" : "border-gray-200 bg-gray-50/50"}`}
-                                >
-                                    <CardHeader className="pb-3">
-                                        <CardTitle className="text-lg flex items-center gap-2">
-                                            <div
-                                                className={`w-6 h-6 ${isPeriodComplete ? "bg-green-600" : "bg-gray-400"} text-white rounded-full flex items-center justify-center text-sm font-bold`}
-                                            >
-                                                2
-                                            </div>
-                                            Sélectionner les groupes
-                                            {!isPeriodComplete &&
-                                                <Badge variant="secondary">Définissez d'abord la période</Badge>}
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <FormField
-                                            control={form.control}
-                                            name="groupIds"
-                                            render={() => (
-                                                <FormItem>
-                                                    <FormLabel className="flex items-center gap-2">
-                                                        <Users className="h-4 w-4 text-orange-600"/>
-                                                        Groupes d'étudiants disponibles
-                                                    </FormLabel>
-                                                    <FormDescription>
-                                                        {isPeriodComplete
-                                                            ? `${availableGroups.length} groupe(s) disponible(s) pour cette période`
-                                                            : "Sélectionnez une période pour voir les groupes disponibles"}
-                                                    </FormDescription>
-
-                                                    {isPeriodComplete ? (
-                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                            {availableGroups.map((group) => (
-                                                                <FormField
-                                                                    key={group.id}
-                                                                    control={form.control}
-                                                                    name="groupIds"
-                                                                    render={({field}) => {
-                                                                        return (
-                                                                            <FormItem
-                                                                                key={group.id}
-                                                                                className="flex flex-row items-start space-x-3 space-y-0"
+        <Dialog open={isFormOpen} onOpenChange={setIsFormOpenAction}>
+            <DialogContent className={"max-w-2xl w-full max-h-[90vh] min-h-[300px]"}>
+                <DialogHeader>
+                    <DialogTitle>Planification pour le niveau {currentLevel?.name}</DialogTitle>
+                </DialogHeader>
+                <ScrollArea className={"max-h-[80vh] w-full"}>
+                    <div className="p-4">
+                        <div className="max-w-2xl mx-auto">
+                            <Card className="shadow-xl border-0">
+                                <CardContent className="p-6">
+                                    <Form {...form}>
+                                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                                            <Card className="border-2 border-blue-200 bg-blue-50/50">
+                                                <CardHeader className="pb-3">
+                                                    <CardTitle className="text-lg flex items-center gap-2">
+                                                        <div
+                                                            className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                                            1
+                                                        </div>
+                                                        Définir la période
+                                                    </CardTitle>
+                                                    <CardDescription>
+                                                        Sélectionnez d'abord la date et les heures pour voir les groupes
+                                                        disponibles
+                                                    </CardDescription>
+                                                </CardHeader>
+                                                <CardContent className="space-y-4">
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="date"
+                                                        render={({field}) => (
+                                                            <FormItem className="flex flex-col">
+                                                                <FormLabel className="flex items-center gap-2">
+                                                                    <CalendarIcon className="h-4 w-4 text-red-600"/>
+                                                                    Date du cours
+                                                                </FormLabel>
+                                                                <Popover open={calendarOpen}
+                                                                         onOpenChange={setCalendarOpen}>
+                                                                    <PopoverTrigger asChild>
+                                                                        <FormControl>
+                                                                            <Button
+                                                                                variant="outline"
+                                                                                className={`w-full pl-3 text-left font-normal ${
+                                                                                    !field.value && "text-muted-foreground"
+                                                                                }`}
                                                                             >
-                                                                                <FormControl>
-                                                                                    <Checkbox
-                                                                                        checked={field.value?.includes(group.id.toString())}
-                                                                                        onCheckedChange={(checked) => {
-                                                                                            return checked
-                                                                                                ? field.onChange([...field.value, group.id])
-                                                                                                : field.onChange(field.value?.filter((value) => value !== group.id.toString()))
-                                                                                        }}
-                                                                                    />
-                                                                                </FormControl>
-                                                                                <div className="space-y-1 leading-none">
+                                                                                {field.value ? (
+                                                                                    field.value.toLocaleDateString("fr-FR", {
+                                                                                        weekday: "long",
+                                                                                        year: "numeric",
+                                                                                        month: "long",
+                                                                                        day: "numeric",
+                                                                                    })
+                                                                                ) : (
+                                                                                    <span>Sélectionner une date</span>
+                                                                                )}
+                                                                                <CalendarIcon
+                                                                                    className="ml-auto h-4 w-4 opacity-50"/>
+                                                                            </Button>
+                                                                        </FormControl>
+                                                                    </PopoverTrigger>
+                                                                    <PopoverContent className="w-auto p-0"
+                                                                                    align="start">
+                                                                        <Calendar
+                                                                            mode="single"
+                                                                            selected={field.value}
+                                                                            onSelect={(date: Date) => {
+                                                                                field.onChange(date)
+                                                                                setCalendarOpen(false)
+                                                                            }}
+                                                                            disabled={(date: Date) => date < new Date() || !isValidDay(date)}
+                                                                            required
+                                                                        />
+                                                                    </PopoverContent>
+                                                                </Popover>
+                                                                <FormDescription>Seuls les jours de lundi à samedi sont
+                                                                    disponibles</FormDescription>
+                                                                <FormMessage/>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="startTime"
+                                                            render={({field}) => (
+                                                                <FormItem>
+                                                                    <FormLabel className="flex items-center gap-2">
+                                                                        <Clock className="h-4 w-4 text-blue-600"/>
+                                                                        Heure de début
+                                                                    </FormLabel>
+                                                                    <Select onValueChange={field.onChange}
+                                                                            defaultValue={field.value}>
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue
+                                                                                    placeholder="Heure de début"/>
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {hours.slice(0, -1).map((hour) => (
+                                                                                <SelectItem key={hour} value={hour}>
+                                                                                    {hour}
+                                                                                </SelectItem>
+                                                                            ))}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage/>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="endTime"
+                                                            render={({field}) => (
+                                                                <FormItem>
+                                                                    <FormLabel className="flex items-center gap-2">
+                                                                        <Clock className="h-4 w-4 text-red-600"/>
+                                                                        Heure de fin
+                                                                    </FormLabel>
+                                                                    <Select onValueChange={field.onChange}
+                                                                            defaultValue={field.value}>
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue
+                                                                                    placeholder="Heure de fin"/>
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {hours.map((hour) => (
+                                                                                <SelectItem key={hour} value={hour}>
+                                                                                    {hour}
+                                                                                </SelectItem>
+                                                                            ))}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage/>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+
+                                            <Card
+                                                className={`border-2 ${isPeriodComplete ? "border-green-200 bg-green-50/50" : "border-gray-200 bg-gray-50/50"}`}
+                                            >
+                                                <CardHeader className="pb-3">
+                                                    <CardTitle className="text-lg flex items-center gap-2">
+                                                        <div
+                                                            className={`w-6 h-6 ${isPeriodComplete ? "bg-green-600" : "bg-gray-400"} text-white rounded-full flex items-center justify-center text-sm font-bold`}
+                                                        >
+                                                            2
+                                                        </div>
+                                                        Sélectionner les groupes
+                                                        {!isPeriodComplete &&
+                                                            <Badge variant="secondary">Définissez d'abord la
+                                                                période</Badge>}
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent>
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="groupIds"
+                                                        render={() => (
+                                                            <FormItem>
+                                                                <FormLabel className="flex items-center gap-2">
+                                                                    <Users className="h-4 w-4 text-orange-600"/>
+                                                                    Groupes d'étudiants disponibles
+                                                                </FormLabel>
+                                                                <FormDescription>
+                                                                    {isPeriodComplete
+                                                                        ? `${availableGroups.length} groupe(s) disponible(s) pour cette période`
+                                                                        : "Sélectionnez une période pour voir les groupes disponibles"}
+                                                                </FormDescription>
+
+                                                                {isPeriodComplete ? (
+                                                                    <div
+                                                                        className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                                        {availableGroups.map((group) => (
+                                                                            <FormField
+                                                                                key={group.id}
+                                                                                control={form.control}
+                                                                                name="groupIds"
+                                                                                render={({field}) => {
+                                                                                    return (
+                                                                                        <FormItem
+                                                                                            key={group.id}
+                                                                                            className="flex flex-row items-start space-x-3 space-y-0"
+                                                                                        >
+                                                                                            <FormControl>
+                                                                                                <Checkbox
+                                                                                                    checked={Array.isArray(field.value) && field.value.includes(group.id.toString())}
+                                                                                                    onCheckedChange={(checked) => {
+                                                                                                        const newValue = checked
+                                                                                                            ? [...field.value, group.id.toString()]
+                                                                                                            : field.value.filter((id) => id !== group.id.toString())
+                                                                                                        field.onChange(newValue)
+                                                                                                    }}
+                                                                                                />
+                                                                                            </FormControl>
+                                                                                            <div
+                                                                                                className="space-y-1 leading-none">
+                                                                                                <div
+                                                                                                    className="flex items-center gap-2">
+                                                                                                    <Badge
+                                                                                                        variant="outline">{group.abr}</Badge>
+                                                                                                    <span
+                                                                                                        className="text-sm font-medium">{group.name}</span>
+                                                                                                </div>
+                                                                                                <p className="text-xs text-muted-foreground">{group.size} étudiants</p>
+                                                                                            </div>
+                                                                                        </FormItem>
+                                                                                    )
+                                                                                }}
+                                                                            />
+                                                                        ))}
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="text-center py-8 text-gray-500">
+                                                                        <Users
+                                                                            className="h-12 w-12 mx-auto mb-2 opacity-50"/>
+                                                                        <p>Définissez la période pour voir les groupes
+                                                                            disponibles</p>
+                                                                    </div>
+                                                                )}
+                                                                <FormMessage/>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                </CardContent>
+                                            </Card>
+
+                                            <Card
+                                                className={`border-2 ${isPeriodComplete ? "border-purple-200 bg-purple-50/50" : "border-gray-200 bg-gray-50/50"}`}
+                                            >
+                                                <CardHeader className="pb-3">
+                                                    <CardTitle className="text-lg flex items-center gap-2">
+                                                        <div
+                                                            className={`w-6 h-6 ${isPeriodComplete ? "bg-purple-600" : "bg-gray-400"} text-white rounded-full flex items-center justify-center text-sm font-bold`}
+                                                        >
+                                                            3
+                                                        </div>
+                                                        Informations du cours
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent className="space-y-4">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="teachingUnitID"
+                                                            render={({field}) => (
+                                                                <FormItem>
+                                                                    <FormLabel className="flex items-center gap-2">
+                                                                        <BookOpen className="h-4 w-4 text-blue-600"/>
+                                                                        Unité de Cours
+                                                                    </FormLabel>
+                                                                    <Select
+                                                                        onValueChange={(val) => field.onChange(Number(val))}
+                                                                        defaultValue={field.value?.toString()}>
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue
+                                                                                    placeholder="Sélectionner une UC"/>
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {teachingUnits.map((uc) => (
+                                                                                <SelectItem key={uc.id}
+                                                                                            value={uc.id.toString()}>
                                                                                     <div
                                                                                         className="flex items-center gap-2">
                                                                                         <Badge
-                                                                                            variant="outline">{group.abr}</Badge>
-                                                                                        <span
-                                                                                            className="text-sm font-medium">{group.name}</span>
+                                                                                            variant="secondary">{uc.abr}</Badge>
+                                                                                        <span>{uc.name}</span>
                                                                                     </div>
-                                                                                    <p className="text-xs text-muted-foreground">{group.size} étudiants</p>
+                                                                                </SelectItem>
+                                                                            ))}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage/>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="teacherId"
+                                                            render={({field}) => (
+                                                                <FormItem>
+                                                                    <FormLabel className="flex items-center gap-2">
+                                                                        <User className="h-4 w-4 text-green-600"/>
+                                                                        Enseignant
+                                                                    </FormLabel>
+                                                                    <Select
+                                                                        onValueChange={(val) => field.onChange(Number(val))}
+                                                                        defaultValue={field.value?.toString()}>
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue
+                                                                                    placeholder="Sélectionner un enseignant"/>
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {teachers.map((teacher) => (
+                                                                                <SelectItem key={teacher.id}
+                                                                                            value={teacher.id.toString()}>
+                                                                                    <div
+                                                                                        className="flex items-center gap-2">
+                                                                                        <Badge
+                                                                                            variant="outline">{teacher.abr}</Badge>
+                                                                                        <span>{teacher.name}</span>
+                                                                                    </div>
+                                                                                </SelectItem>
+                                                                            ))}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage/>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    </div>
+
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="roomId"
+                                                        render={({field}) => (
+                                                            <FormItem>
+                                                                <FormLabel className="flex items-center gap-2">
+                                                                    <MapPin className="h-4 w-4 text-purple-600"/>
+                                                                    Salle
+                                                                </FormLabel>
+                                                                <Select
+                                                                    onValueChange={(val) => field.onChange(Number(val))}
+                                                                    defaultValue={field.value?.toString()}>
+                                                                    <FormControl>
+                                                                        <SelectTrigger>
+                                                                            <SelectValue
+                                                                                placeholder="Sélectionner une salle"/>
+                                                                        </SelectTrigger>
+                                                                    </FormControl>
+                                                                    <SelectContent>
+                                                                        {rooms.map((room) => (
+                                                                            <SelectItem key={room.id}
+                                                                                        value={room.id.toString()}>
+                                                                                <div
+                                                                                    className="flex items-center justify-between w-full">
+                                                                                    <div
+                                                                                        className="flex items-center gap-2">
+                                                                                        <Badge
+                                                                                            variant="outline">{room.abr}</Badge>
+                                                                                        <span>{room.name}</span>
+                                                                                    </div>
+                                                                                    <Badge variant="secondary"
+                                                                                           className="ml-2">
+                                                                                        {room.capacity} places
+                                                                                    </Badge>
                                                                                 </div>
-                                                                            </FormItem>
-                                                                        )
-                                                                    }}
-                                                                />
-                                                            ))}
-                                                        </div>
-                                                    ) : (
-                                                        <div className="text-center py-8 text-gray-500">
-                                                            <Users className="h-12 w-12 mx-auto mb-2 opacity-50"/>
-                                                            <p>Définissez la période pour voir les groupes
-                                                                disponibles</p>
-                                                        </div>
-                                                    )}
-                                                    <FormMessage/>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </CardContent>
-                                </Card>
+                                                                            </SelectItem>
+                                                                        ))}
+                                                                    </SelectContent>
+                                                                </Select>
+                                                                <FormMessage/>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                </CardContent>
+                                            </Card>
 
-                                <Card
-                                    className={`border-2 ${isPeriodComplete ? "border-purple-200 bg-purple-50/50" : "border-gray-200 bg-gray-50/50"}`}
-                                >
-                                    <CardHeader className="pb-3">
-                                        <CardTitle className="text-lg flex items-center gap-2">
-                                            <div
-                                                className={`w-6 h-6 ${isPeriodComplete ? "bg-purple-600" : "bg-gray-400"} text-white rounded-full flex items-center justify-center text-sm font-bold`}
+                                            {capacityError && (
+                                                <Alert variant="destructive">
+                                                    <AlertDescription>
+                                                        ⚠️ La capacité de la salle ({selectedRoom?.capacity} places) est
+                                                        insuffisante pour accueillir tous
+                                                        les étudiants sélectionnés ({totalGroupSize} étudiants).
+                                                    </AlertDescription>
+                                                </Alert>
+                                            )}
+
+                                            {selectedGroups.length > 0 && !capacityError && (
+                                                <Alert>
+                                                    <AlertDescription>
+                                                        ✅ Total: {totalGroupSize} étudiants - Capacité
+                                                        salle: {selectedRoom?.capacity || 0} places
+                                                    </AlertDescription>
+                                                </Alert>
+                                            )}
+
+                                            <Button
+                                                type="submit"
+                                                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                                                disabled={capacityError || !isPeriodComplete}
                                             >
-                                                3
-                                            </div>
-                                            Informations du cours
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <FormField
-                                                control={form.control}
-                                                name="teachingUnitID"
-                                                render={({field}) => (
-                                                    <FormItem>
-                                                        <FormLabel className="flex items-center gap-2">
-                                                            <BookOpen className="h-4 w-4 text-blue-600"/>
-                                                            Unité de Cours
-                                                        </FormLabel>
-                                                        <Select onValueChange={(val) => field.onChange(Number(val))}
-                                                                defaultValue={field.value?.toString()}>
-                                                            <FormControl>
-                                                                <SelectTrigger>
-                                                                    <SelectValue placeholder="Sélectionner une UC"/>
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {teachingUnits.map((uc) => (
-                                                                    <SelectItem key={uc.id} value={uc.id.toString()}>
-                                                                        <div className="flex items-center gap-2">
-                                                                            <Badge variant="secondary">{uc.abr}</Badge>
-                                                                            <span>{uc.name}</span>
-                                                                        </div>
-                                                                    </SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage/>
-                                                    </FormItem>
-                                                )}
-                                            />
+                                                Créer le Planning
+                                            </Button>
+                                        </form>
+                                    </Form>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </div>
+                </ScrollArea>
+            </DialogContent>
+        </Dialog>
 
-                                            <FormField
-                                                control={form.control}
-                                                name="teacherId"
-                                                render={({field}) => (
-                                                    <FormItem>
-                                                        <FormLabel className="flex items-center gap-2">
-                                                            <User className="h-4 w-4 text-green-600"/>
-                                                            Enseignant
-                                                        </FormLabel>
-                                                        <Select onValueChange={(val) => field.onChange(Number(val))}
-                                                                defaultValue={field.value?.toString()}>
-                                                            <FormControl>
-                                                                <SelectTrigger>
-                                                                    <SelectValue
-                                                                        placeholder="Sélectionner un enseignant"/>
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                {teachers.map((teacher) => (
-                                                                    <SelectItem key={teacher.id}
-                                                                                value={teacher.id.toString()}>
-                                                                        <div className="flex items-center gap-2">
-                                                                            <Badge
-                                                                                variant="outline">{teacher.abr}</Badge>
-                                                                            <span>{teacher.name}</span>
-                                                                        </div>
-                                                                    </SelectItem>
-                                                                ))}
-                                                            </SelectContent>
-                                                        </Select>
-                                                        <FormMessage/>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
-
-                                        <FormField
-                                            control={form.control}
-                                            name="roomId"
-                                            render={({field}) => (
-                                                <FormItem>
-                                                    <FormLabel className="flex items-center gap-2">
-                                                        <MapPin className="h-4 w-4 text-purple-600"/>
-                                                        Salle
-                                                    </FormLabel>
-                                                    <Select onValueChange={(val) => field.onChange(Number(val))}
-                                                            defaultValue={field.value?.toString()}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue placeholder="Sélectionner une salle"/>
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            {rooms.map((room) => (
-                                                                <SelectItem key={room.id} value={room.id.toString()}>
-                                                                    <div
-                                                                        className="flex items-center justify-between w-full">
-                                                                        <div className="flex items-center gap-2">
-                                                                            <Badge variant="outline">{room.abr}</Badge>
-                                                                            <span>{room.name}</span>
-                                                                        </div>
-                                                                        <Badge variant="secondary" className="ml-2">
-                                                                            {room.capacity} places
-                                                                        </Badge>
-                                                                    </div>
-                                                                </SelectItem>
-                                                            ))}
-                                                        </SelectContent>
-                                                    </Select>
-                                                    <FormMessage/>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </CardContent>
-                                </Card>
-
-                                {capacityError && (
-                                    <Alert variant="destructive">
-                                        <AlertDescription>
-                                            ⚠️ La capacité de la salle ({selectedRoom?.capacity} places) est
-                                            insuffisante pour accueillir tous
-                                            les étudiants sélectionnés ({totalGroupSize} étudiants).
-                                        </AlertDescription>
-                                    </Alert>
-                                )}
-
-                                {selectedGroups.length > 0 && !capacityError && (
-                                    <Alert>
-                                        <AlertDescription>
-                                            ✅ Total: {totalGroupSize} étudiants - Capacité
-                                            salle: {selectedRoom?.capacity || 0} places
-                                        </AlertDescription>
-                                    </Alert>
-                                )}
-
-                                <Button
-                                    type="submit"
-                                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-                                    disabled={capacityError || !isPeriodComplete}
-                                >
-                                    Créer le Planning
-                                </Button>
-                            </form>
-                        </Form>
-                    </CardContent>
-                </Card>
-            </div>
-        </div>
     )
 }
