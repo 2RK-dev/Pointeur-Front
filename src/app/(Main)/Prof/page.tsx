@@ -52,7 +52,7 @@ export default function Home() {
                         </TableHeader>
                         <TableBody>
                             {teachers.map((teacher, index) => (
-                                <TableRow key={index}>
+                                <TableRow key={teacher.id}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{teacher.name}</TableCell>
                                     <TableCell>{teacher.abr}</TableCell>
