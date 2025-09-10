@@ -16,9 +16,9 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import { Logo } from "@/components/logo";
-import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
+import { Logo } from "@/components/SideBar comp/logo";
+import { NavMain } from "@/components/SideBar comp/nav-main";
+import { NavUser } from "@/components/SideBar comp/nav-user";
 import {
 	Sidebar,
 	SidebarContent,
@@ -76,10 +76,10 @@ const data = {
 					url: "/EDT",
 				},
 				{
-					title: "Matiére",
+					title: "Matière",
 					icon: Book,
-					url: "/Matter",
-					access: "Matter",
+					url: "/TeachingUnit",
+					access: "TeachingUnit",
 				},
 				{
 					title: "Salle",

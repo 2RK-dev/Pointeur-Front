@@ -1,5 +1,5 @@
-import {days} from "@/lib/common/dateUtils";
 import ScheduleDisplay from "@/app/(Main)/EDT/ui/ScheduleDisplay";
+import {DAYS} from "@/Tools/ScheduleItem";
 
 export function timeToMinutes(time: string): number {
 	const [hours, minutes] = time.split(":").map(Number);
@@ -54,7 +54,7 @@ export default function EdtEncapsuler() {
 					})}
 				</div>
 
-				{days.map(
+				{DAYS.map(
 					(day, index: number) =>
 						index > 0 && (
 							<div key={day} className="flex border-b-2 relative">

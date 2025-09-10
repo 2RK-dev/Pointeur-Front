@@ -4,6 +4,16 @@ const DAY_START_MINUTES = 7 * 60;
 const DAY_END_MINUTES = 18 * 60;
 const DAY_DURATION = DAY_END_MINUTES - DAY_START_MINUTES;
 
+export const DAYS: string[] = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+];
+
 export const generateHours = () => {
     const hours = []
     for (let i = 7; i <= 18; i++) {
@@ -97,3 +107,4 @@ export function getWeekRange(weekIndex: number): { start: Date, end: Date } {
     }
     return weeks[weekIndex];
 }
+
