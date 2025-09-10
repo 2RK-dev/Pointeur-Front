@@ -64,7 +64,7 @@ function getTimeInMinutes(date: Date): number {
  * @param {number} duration - The duration in minutes.
  * @returns {number} The width percentage as a proportion of the total day duration.
  */
-export function getWidthPercentageFor(duration: number){
+export function getWidthPercentageFor(duration: number): number{
     return (duration / DAY_DURATION) * 100;
 }
 
