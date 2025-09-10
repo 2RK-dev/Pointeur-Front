@@ -23,7 +23,15 @@ git clone <repository_url>
 npm install
 ```
 
-3. Build the application:
+3. Set up environment variables:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` with your specific configuration values.
+
+4. Build the application:
 
 ```bash
  npm run build
@@ -36,3 +44,35 @@ To start the application, run the following command:
 ```bash
  npm start --- -p YourPort
 ```
+
+## Environment Variables
+
+This application uses environment variables for configuration. Copy `.env.example` to `.env.local` and configure the following variables:
+
+### Required Variables
+
+- **`NEXT_PUBLIC_USE_MOCKS`**: Controls whether to use mock services (`true`) or real services (`false`)
+  - Example: `NEXT_PUBLIC_USE_MOCKS=false`
+  - Used by the service layer to switch between mock and real implementations
+
+- **`API_BASE_URL`**: Base URL for client-side API requests
+  - Example: `API_BASE_URL=http://localhost:3001/api`
+  - Used by the axios HTTP client for API calls
+
+- **`BACK_URL`**: Backend URL for server-side API calls
+  - Example: `BACK_URL=http://localhost:3000`
+  - Used for server-side Room service requests
+
+### Setup
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Edit `.env.local` with your specific configuration values
+
+3. Restart the development server if running:
+   ```bash
+   npm run dev
+   ```
