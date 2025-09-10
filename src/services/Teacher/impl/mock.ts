@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 "use server";
 
 import data from "@/test/Teacher.json";
