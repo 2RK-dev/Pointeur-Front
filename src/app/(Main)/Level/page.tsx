@@ -95,7 +95,7 @@ export default function Home() {
 									<div className="space-y-4">
 										{level.groups.map((group, index) => (
 											<div
-												key={index}
+												key={group.id}
 												className="flex justify-between items-center">
 												<span>{group.name}</span>
 												<Button
