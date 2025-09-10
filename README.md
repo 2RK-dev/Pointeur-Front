@@ -59,10 +59,6 @@ This application uses environment variables for configuration. Copy `.env.exampl
   - Example: `API_BASE_URL=http://localhost:3001/api`
   - Used by the axios HTTP client for API calls
 
-- **`BACK_URL`**: Backend URL for server-side API calls
-  - Example: `BACK_URL=http://localhost:3000`
-  - Used for server-side Room service requests
-
 ### Setup
 
 1. Copy the example environment file:
