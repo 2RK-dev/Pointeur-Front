@@ -2,8 +2,11 @@ import { ICreateScheduleItem, IScheduleItem } from "@/api/types";
 import { http } from "@/api/http/axios";
 import { DTO } from "@/api/schemas";
 
+// Earliest supported schedule date. Used as a default to fetch all items if no start date is provided.
+const DEFAULT_SCHEDULE_START_DATE = new Date(1997, 1, 1, 0, 0, 0, 0);
+
 export async function fetchScheduleItemsForLevel (
-    start: Date = new Date(1997, 1, 1, 0, 0, 0, 0),
+    start: Date = DEFAULT_SCHEDULE_START_DATE,
     end: Date = new Date(),
     levelId?: number,
 ): Promise<IScheduleItem[]> {
