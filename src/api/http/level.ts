@@ -6,11 +6,7 @@ import { IGroup, ILevelDetails } from "@/api/types";
 
 export async function fetchLevels (): Promise<ILevelDetails[]> {
     const {data: responseData} = await http.pub.get("/levels");
-    try {
-        return DTO.LevelDetailsSchema.array().parse(responseData);
-    } catch (e) {
-        throw e;
-    }
+    return DTO.LevelDetailsSchema.array().parse(responseData);
 }
 
 export async function fetchGroupList (levelId: number): Promise<IGroup[]> {
