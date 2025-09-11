@@ -175,7 +175,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
 
     const isPeriodComplete = watchedDate && watchedStartTime && watchedEndTime
 
-    const btnIsDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0;
+    const isSubmitDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0;
 
 
     const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
@@ -615,7 +615,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                 </Button>
                                                 <Button
                                                     type="submit"
-                                                    disabled={btnIsDisabled}
+                                                    disabled={isSubmitDisabled}
                                                 >
                                                     <Check />
                                                 </Button>
