@@ -1,77 +1,37 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-	Dialog,
-	DialogContent,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
-import { withErrorHandler } from "@/hooks/withErrorHandler";
-import { Room } from "@/lib/Room_utils";
-import { getRoom } from "@/server_old/Room";
+import {Button} from "@/components/ui/button";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog";
+import {Input} from "@/components/ui/input";
+import {Label} from "@/components/ui/label";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import { Edit, FileDown, Plus, Trash2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import {Edit, FileDown, Plus, Trash2} from "lucide-react";
+import {useEffect, useState} from "react";
+import {Room} from "@/Types/Room";
+import {getRooms} from "@/services/Room";
 
 export default function Home() {
 	const [rooms, setRooms] = useState<Room[]>([]);
 	const [isAddingRoom, setIsAddingRoom] = useState(false);
 	const [editingRoom, setEditingRoom] = useState<Room | null>(null);
-	const [newRoom, setNewRoom] = useState<Omit<Room, "room_id">>({
-		room_name: "",
-		room_abr: "",
-		room_capacity: 0,
-	});
 
 	useEffect(() => {
-		fetchRooms();
+		getRooms().then((data)=> setRooms(data))
 	}, []);
 
-	const fetchRooms = withErrorHandler(async () => {
-		setRooms(await getRoom());
-	});
-
 	const handleAddRoom = () => {
-		if (newRoom.room_name && newRoom.room_abr) {
-			const roomToAdd: Room = {
-				...newRoom,
-				room_id:
-					rooms.length > 0 ? Math.max(...rooms.map((r) => r.room_id)) + 1 : 1,
-			};
-			setRooms([...rooms, roomToAdd]);
-			setNewRoom({ room_name: "", room_abr: "", room_capacity: 0 });
-			setIsAddingRoom(false);
-		}
+		// TODO: Implement add room logic
 	};
 
 	const handleUpdateRoom = () => {
-		if (editingRoom) {
-			setRooms(
-				rooms.map((room) =>
-					room.room_id === editingRoom.room_id ? editingRoom : room
-				)
-			);
-			setEditingRoom(null);
-		}
+		// TODO: Implement update room logic
 	};
 
 	const handleDeleteRoom = (id: number) => {
-		setRooms(rooms.filter((room) => room.room_id !== id));
+		// TODO: Implement delete room logic
 	};
 
 	const handleExportPDF = () => {
@@ -79,10 +39,10 @@ export default function Home() {
 		autoTable(doc, {
 			head: [["ID", "Nom", "Abréviation", "Capacité"]],
 			body: rooms.map((room) => [
-				room.room_id,
-				room.room_name,
-				room.room_abr,
-				room.room_capacity,
+				room.id,
+				room.name,
+				room.abr,
+				room.capacity,
 			]),
 		});
 		doc.save("liste_des_salles.pdf");
@@ -103,57 +63,7 @@ export default function Home() {
 								</Button>
 							</DialogTrigger>
 							<DialogContent className="sm:max-w-[425px]">
-								<DialogHeader>
-									<DialogTitle>Ajouter une nouvelle salle</DialogTitle>
-								</DialogHeader>
-								<div className="grid gap-4 py-4">
-									<div className="grid grid-cols-4 items-center gap-4">
-										<Label htmlFor="room_name" className="text-right">
-											Nom
-										</Label>
-										<Input
-											id="room_name"
-											value={newRoom.room_name}
-											onChange={(e) =>
-												setNewRoom({ ...newRoom, room_name: e.target.value })
-											}
-											className="col-span-3"
-										/>
-									</div>
-									<div className="grid grid-cols-4 items-center gap-4">
-										<Label htmlFor="room_abr" className="text-right">
-											Abréviation
-										</Label>
-										<Input
-											id="room_abr"
-											value={newRoom.room_abr}
-											onChange={(e) =>
-												setNewRoom({ ...newRoom, room_abr: e.target.value })
-											}
-											className="col-span-3"
-										/>
-									</div>
-									<div className="grid grid-cols-4 items-center gap-4">
-										<Label htmlFor="room_capacity" className="text-right">
-											Capacité
-										</Label>
-										<Input
-											id="room_capacity"
-											type="number"
-											value={newRoom.room_capacity}
-											onChange={(e) =>
-												setNewRoom({
-													...newRoom,
-													room_capacity: Number.parseInt(e.target.value),
-												})
-											}
-											className="col-span-3"
-										/>
-									</div>
-								</div>
-								<DialogFooter>
-									<Button onClick={handleAddRoom}>Ajouter</Button>
-								</DialogFooter>
+								{/* TODO: create a component for */}
 							</DialogContent>
 						</Dialog>
 						<Button variant="outline" onClick={handleExportPDF}>
@@ -174,11 +84,11 @@ export default function Home() {
 						</TableHeader>
 						<TableBody>
 							{rooms.map((room) => (
-								<TableRow key={room.room_id}>
-									<TableCell>{room.room_id}</TableCell>
-									<TableCell>{room.room_name}</TableCell>
-									<TableCell>{room.room_abr}</TableCell>
-									<TableCell>{room.room_capacity}</TableCell>
+								<TableRow key={room.id}>
+									<TableCell>{room.id}</TableCell>
+									<TableCell>{room.name}</TableCell>
+									<TableCell>{room.abr}</TableCell>
+									<TableCell>{room.capacity}</TableCell>
 									<TableCell>
 										<div className="flex space-x-2">
 											<Button
@@ -190,7 +100,7 @@ export default function Home() {
 											<Button
 												variant="outline"
 												size="icon"
-												onClick={() => handleDeleteRoom(room.room_id)}>
+												onClick={() => handleDeleteRoom(room.id)}>
 												<Trash2 className="h-4 w-4" />
 											</Button>
 										</div>
@@ -215,11 +125,11 @@ export default function Home() {
 								</Label>
 								<Input
 									id="edit_room_name"
-									value={editingRoom.room_name}
+									value={editingRoom.name}
 									onChange={(e) =>
 										setEditingRoom({
 											...editingRoom,
-											room_name: e.target.value,
+											name: e.target.value,
 										})
 									}
 									className="col-span-3"
@@ -231,9 +141,9 @@ export default function Home() {
 								</Label>
 								<Input
 									id="edit_room_abr"
-									value={editingRoom.room_abr}
+									value={editingRoom.abr}
 									onChange={(e) =>
-										setEditingRoom({ ...editingRoom, room_abr: e.target.value })
+										setEditingRoom({ ...editingRoom, abr: e.target.value })
 									}
 									className="col-span-3"
 								/>
@@ -245,11 +155,11 @@ export default function Home() {
 								<Input
 									id="edit_room_capacity"
 									type="number"
-									value={editingRoom.room_capacity}
+									value={editingRoom.capacity}
 									onChange={(e) =>
 										setEditingRoom({
 											...editingRoom,
-											room_capacity: Number.parseInt(e.target.value),
+											capacity: Number.parseInt(e.target.value),
 										})
 									}
 									className="col-span-3"

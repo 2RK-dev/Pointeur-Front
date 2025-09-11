@@ -12,81 +12,35 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { initialLevels } from "@/lib/niveau_utils";
+import { Level } from "@/Types/Level";
 import { Edit, Info, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
-
-interface Level {
-	id: string;
-	title: string;
-	groups: string[];
-}
+import {useEffect, useState} from "react";
+import {getLevels} from "@/services/Level";
 
 export default function Home() {
-	const [levels, setLevels] = useState<Level[]>(initialLevels);
+	const [levels, setLevels] = useState<Level[]>([]);
 	const [editingLevel, setEditingLevel] = useState<Level | null>(null);
-	const [newLevel, setNewLevel] = useState<Omit<Level, "id">>({
-		title: "",
-		groups: [],
-	});
 	const [newGroup, setNewGroup] = useState("");
 	const [isAddingLevel, setIsAddingLevel] = useState(false);
 
-	const handleAddLevel = () => {
-		if (newLevel.title) {
-			const newLevelComplete: Level = {
-				id: `L${levels.length + 1}`,
-				title: newLevel.title,
-				groups: newLevel.groups,
-			};
-			setLevels([...levels, newLevelComplete]);
-			setNewLevel({ title: "", groups: [] });
-			setIsAddingLevel(false);
-		}
-	};
+	useEffect(() => {
+		getLevels().then((data) => setLevels(data));
+	}, []);
 
 	const handleUpdateLevel = (updatedLevel: Level) => {
-		setLevels(
-			levels.map((level) =>
-				level.id === updatedLevel.id ? updatedLevel : level
-			)
-		);
-		setEditingLevel(null);
+		// TODO: Implement update logic using updatedLevel parameter
 	};
 
-	const handleDeleteLevel = (id: string) => {
-		setLevels(levels.filter((level) => level.id !== id));
+	const handleDeleteLevel = (id: number) => {
+		// TODO: implement level deletion using the id parameter
 	};
 
-	const handleAddGroup = (levelId: string) => {
-		if (newGroup) {
-			setLevels(
-				levels.map((level) => {
-					if (level.id === levelId) {
-						return {
-							...level,
-							groups: [...level.groups, newGroup],
-						};
-					}
-					return level;
-				})
-			);
-			setNewGroup("");
-		}
+	const handleAddGroup = (levelId: number) => {
+		// TODO: implement group addition logic using levelId. Parameter is currently unused.
 	};
 
-	const handleDeleteGroup = (levelId: string, groupToDelete: string) => {
-		setLevels(
-			levels.map((level) => {
-				if (level.id === levelId) {
-					return {
-						...level,
-						groups: level.groups.filter((group) => group !== groupToDelete),
-					};
-				}
-				return level;
-			})
-		);
+	const handleDeleteGroup = (groupToDelete: number) => {
+		// TODO: implement group deletion logic using groupToDelete
 	};
 
 	return (
@@ -100,21 +54,7 @@ export default function Home() {
 					</Button>
 				</DialogTrigger>
 				<DialogContent className="sm:max-w-[425px]">
-					<DialogHeader>
-						<DialogTitle>Ajouter un nouveau niveau</DialogTitle>
-					</DialogHeader>
-					<Label htmlFor="newLevelTitle">Titre</Label>
-					<Input
-						id="newLevelTitle"
-						value={newLevel.title}
-						onChange={(e) =>
-							setNewLevel({ ...newLevel, title: e.target.value })
-						}
-						className="mb-4"
-					/>
-					<DialogFooter>
-						<Button onClick={handleAddLevel}>Ajouter</Button>
-					</DialogFooter>
+					{/* To move in a new component */}
 				</DialogContent>
 			</Dialog>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -124,7 +64,7 @@ export default function Home() {
 						className="shadow-lg hover:shadow-xl transition-shadow duration-300">
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 							<CardTitle className="text-2xl font-bold">
-								{level.title}
+								{level.name}
 							</CardTitle>
 							<div className="flex space-x-2">
 								<Button
@@ -150,18 +90,18 @@ export default function Home() {
 								</DialogTrigger>
 								<DialogContent className="sm:max-w-[425px]">
 									<DialogHeader>
-										<DialogTitle>{level.title} - Groupes</DialogTitle>
+										<DialogTitle>{level.name} - Groupes</DialogTitle>
 									</DialogHeader>
 									<div className="space-y-4">
 										{level.groups.map((group, index) => (
 											<div
-												key={index}
+												key={group.id}
 												className="flex justify-between items-center">
-												<span>{group}</span>
+												<span>{group.name}</span>
 												<Button
 													variant="outline"
 													size="sm"
-													onClick={() => handleDeleteGroup(level.id, group)}>
+													onClick={() => handleDeleteGroup(group.id)}>
 													<Trash2 className="h-4 w-4" />
 												</Button>
 											</div>
@@ -193,9 +133,9 @@ export default function Home() {
 							<Label htmlFor="levelTitle">Titre</Label>
 							<Input
 								id="levelTitle"
-								value={editingLevel.title}
+								value={editingLevel.name}
 								onChange={(e) =>
-									setEditingLevel({ ...editingLevel, title: e.target.value })
+									setEditingLevel({ ...editingLevel, name: e.target.value })
 								}
 								className="mb-4"
 							/>

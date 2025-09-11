@@ -15,7 +15,7 @@ import {
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import LoadingModal from "./LoadingModal";
+import LoadingModal from "../LoadingModal";
 
 export function NavUser({
 	user,
