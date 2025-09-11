@@ -21,7 +21,6 @@ import {Teacher} from "@/Types/Teacher";
 import {getTeachers} from "@/services/Teacher";
 import {Room} from "@/Types/Room";
 import {getRooms} from "@/services/Room";
-import {Group} from "@/Types/Group";
 import {getAvailableGroups} from "@/Tools/Group";
 import {generateHours} from "@/Tools/ScheduleItem";
 import {useCurrentScheduleItemsStore} from "@/Stores/ScheduleItem";
@@ -76,7 +75,6 @@ const ScheduleItemFormSchema = z
 
 export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
     const [calendarOpen, setCalendarOpen] = useState(false)
-    const [availableGroups, setAvailableGroups] = useState<Group[]>([])
     const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
     const [teachers, setTeachers] = useState<Teacher[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
@@ -135,22 +133,28 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
         endDateTime.setHours(endHour, endMinute, 0, 0);
     }
 
-    const memoizedAvailableGroups = useMemo(() => {
+    const availableGroups = useMemo(() => {
         if (!currentLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return [];
         }
-        return getAvailableGroups(currentScheduleItems, currentLevel.groups, startDateTime, endDateTime);
+        return getAvailableGroups(
+            currentScheduleItems,
+            currentLevel.groups,
+            startDateTime,
+            endDateTime
+        );
     }, [currentScheduleItems, currentLevel?.groups, startDateTime, endDateTime]);
 
     useEffect(() => {
-        setAvailableGroups(memoizedAvailableGroups);
-        const availableGroupIds = memoizedAvailableGroups.map((g) => g.id);
-        const currentlySelectedGroups = watchedGroupIds || [];
-        const newSelectedGroups = currentlySelectedGroups.filter((id) => availableGroupIds.includes(Number(id)));
-        if (!unorderedEqual(newSelectedGroups, currentlySelectedGroups)) {
-            form.setValue("groupIds", newSelectedGroups);
+        const availableGroupIds = availableGroups.map((g) => g.id);
+        const currentlySelected = watchedGroupIds || [];
+        const validSelected = currentlySelected.filter((id) =>
+            availableGroupIds.includes(Number(id))
+        );
+        if (!unorderedEqual(validSelected, currentlySelected)) {
+            form.setValue("groupIds", validSelected);
         }
-    }, [watchedDate, watchedStartTime, watchedEndTime, form, watchedGroupIds])
+    }, [availableGroups, watchedGroupIds, form]);
 
     function unorderedEqual(a: string[], b: string[]) {
         return a.length === b.length &&
@@ -195,6 +199,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
             })
             addScheduleItemService(scheduleItem).then((scheduleItem) => {
                 addScheduleItem(scheduleItem);
+                form.reset();
                 setIsFormOpenAction(false);
             }).catch((error) => {
                 console.error(" Error : ", error);

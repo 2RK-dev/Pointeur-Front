@@ -53,7 +53,7 @@ export default function Schedule() {
         });
         if (!currentLevel) return;
         setScheduleItemsByLevel(currentLevel?.groups || [], filtered);
-    }, [selectedWeek, currentLevel]);
+    }, [selectedWeek, currentLevel, currentScheduleItems]);
 
     const TransposeData = (TargetWeek: number) => {
         alert(`Transposing data to week ${TargetWeek}`);
