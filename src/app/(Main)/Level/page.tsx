@@ -40,7 +40,7 @@ export default function Home() {
 	};
 
 	const handleDeleteGroup = (groupToDelete: number) => {
-		//to be implemented
+		// TODO: implement group deletion logic using groupToDelete
 	};
 
 	return (
