@@ -104,19 +104,24 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
     }, [])
 
     useEffect(() => {
-        const startHour = Number.parseInt(watchedStartTime?.split(":")[0])
-        const startMinute = Number.parseInt(watchedStartTime?.split(":")[1])
-        const endHour = Number.parseInt(watchedEndTime?.split(":")[0])
-        const endMinute = Number.parseInt(watchedEndTime?.split(":")[1])
+        if (watchedStartTime && watchedEndTime) {
+            const [startHourStr, startMinuteStr] = watchedStartTime.split(":");
+            const [endHourStr, endMinuteStr] = watchedEndTime.split(":");
+            const startHour = Number.parseInt(startHourStr);
+            const startMinute = Number.parseInt(startMinuteStr);
+            const endHour = Number.parseInt(endHourStr);
+            const endMinute = Number.parseInt(endMinuteStr);
 
-        const startTotalMinutes = startHour * 60 + startMinute
-        const endTotalMinutes = endHour * 60 + endMinute
+            const startTotalMinutes = startHour * 60 + startMinute;
+            const endTotalMinutes = endHour * 60 + endMinute;
 
-        if (watchedStartTime && watchedEndTime && startTotalMinutes >= endTotalMinutes) {
-            form.setError("endTime", {message: "L'heure de fin doit être après l'heure de début"})
-
+            if (startTotalMinutes >= endTotalMinutes) {
+                form.setError("endTime", {message: "L'heure de fin doit être après l'heure de début"});
+            } else {
+                form.clearErrors("endTime");
+            }
         } else {
-            form.clearErrors("endTime")
+            form.clearErrors("endTime");
         }
     }, [watchedStartTime, watchedEndTime, form])
 
