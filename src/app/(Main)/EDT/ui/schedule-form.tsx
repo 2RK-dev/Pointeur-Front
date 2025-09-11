@@ -608,9 +608,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                 <Button
                                                     type="button"
                                                     variant={"outline"}
-                                                    onClick={()=>{
-                                                        form.reset();
-                                                    }}
+                                                    onClick={()  => { form.reset() }}
                                                 >
                                                     <RotateCcw />
                                                 </Button>
