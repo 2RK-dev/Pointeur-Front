@@ -32,7 +32,7 @@ export default function Home() {
 	};
 
 	const handleDeleteLevel = (id: number) => {
-		//to be implemented
+		// TODO: implement level deletion using the id parameter
 	};
 
 	const handleAddGroup = (levelId: number) => {
