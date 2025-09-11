@@ -28,7 +28,7 @@ export default function Home() {
 	}, []);
 
 	const handleUpdateLevel = (updatedLevel: Level) => {
-		//to be implemented
+		// TODO: Implement update logic using updatedLevel parameter
 	};
 
 	const handleDeleteLevel = (id: number) => {
