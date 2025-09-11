@@ -1,12 +1,15 @@
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/sidebar-comp/app-sidebar";
 import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "ENI",
@@ -23,7 +26,7 @@ export default function RootLayout({
 			<Head>
 				<title>ENI</title>
 			</Head>
-			<body className="font-sans">
+			<body className={inter.className}>
 				<SidebarProvider>
 					<AppSidebar userAccess={[]} />
 					<SidebarInset>
