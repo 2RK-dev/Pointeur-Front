@@ -16,9 +16,9 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import { Logo } from "@/components/SideBar comp/logo";
-import { NavMain } from "@/components/SideBar comp/nav-main";
-import { NavUser } from "@/components/SideBar comp/nav-user";
+import { Logo } from "@/components/sidebar-comp/logo";
+import { NavMain } from "@/components/sidebar-comp/nav-main";
+import { NavUser } from "@/components/sidebar-comp/nav-user";
 import {
 	Sidebar,
 	SidebarContent,
@@ -26,8 +26,6 @@ import {
 	SidebarHeader,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-
-const Port: string = "3000";
 
 // This is sample data.
 const data = {
