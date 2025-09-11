@@ -36,7 +36,7 @@ export default function Home() {
 	};
 
 	const handleAddGroup = (levelId: number) => {
-		//to be implemented
+		// TODO: implement group addition logic using levelId. Parameter is currently unused.
 	};
 
 	const handleDeleteGroup = (groupToDelete: number) => {
