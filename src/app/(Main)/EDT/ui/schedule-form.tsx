@@ -4,7 +4,7 @@ import {useEffect, useMemo, useState} from "react"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import * as z from "zod"
-import {BookOpen, CalendarIcon, Clock, MapPin, User, Users} from "lucide-react"
+import {BookOpen, CalendarIcon, Check, Clock, MapPin, RotateCcw, User, Users} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {Calendar} from "@/components/ui/calendar"
@@ -55,23 +55,6 @@ const ScheduleItemFormSchema = z
         }),
         groupIds: z.array(z.string()).min(1, "Veuillez sélectionner au moins un groupe"),
     })
-    .refine(
-        (data) => {
-            const startHour = Number.parseInt(data.startTime.split(":")[0])
-            const startMinute = Number.parseInt(data.startTime.split(":")[1])
-            const endHour = Number.parseInt(data.endTime.split(":")[0])
-            const endMinute = Number.parseInt(data.endTime.split(":")[1])
-
-            const startTotalMinutes = startHour * 60 + startMinute
-            const endTotalMinutes = endHour * 60 + endMinute
-
-            return endTotalMinutes > startTotalMinutes
-        },
-        {
-            message: "L'heure de fin doit être après l'heure de début",
-            path: ["endTime"],
-        },
-    )
 
 export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
     const [calendarOpen, setCalendarOpen] = useState(false)
@@ -86,8 +69,8 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
         resolver: zodResolver(ScheduleItemFormSchema),
         defaultValues: {
             date: undefined,
-            startTime: "",
-            endTime: "",
+            startTime: undefined,
+            endTime: undefined,
             teachingUnitID: undefined,
             teacherId: undefined,
             roomId: undefined,
@@ -119,6 +102,23 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
             console.error("Erreur lors de la récupération des salles :", error);
         })
     }, [])
+
+    useEffect(() => {
+        const startHour = Number.parseInt(watchedStartTime?.split(":")[0])
+        const startMinute = Number.parseInt(watchedStartTime?.split(":")[1])
+        const endHour = Number.parseInt(watchedEndTime?.split(":")[0])
+        const endMinute = Number.parseInt(watchedEndTime?.split(":")[1])
+
+        const startTotalMinutes = startHour * 60 + startMinute
+        const endTotalMinutes = endHour * 60 + endMinute
+
+        if (watchedStartTime && watchedEndTime && startTotalMinutes >= endTotalMinutes) {
+            form.setError("endTime", {message: "L'heure de fin doit être après l'heure de début"})
+
+        } else {
+            form.clearErrors("endTime")
+        }
+    }, [watchedStartTime, watchedEndTime, form])
 
 
     const startDateTime = new Date(watchedDate);
@@ -173,6 +173,9 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
     }
 
     const isPeriodComplete = watchedDate && watchedStartTime && watchedEndTime
+
+    const btnIsDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0;
+
 
     const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
         if (capacityError) {
@@ -304,7 +307,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                                         Heure de début
                                                                     </FormLabel>
                                                                     <Select onValueChange={field.onChange}
-                                                                            defaultValue={field.value}>
+                                                                            value={field.value || ""}>
                                                                         <FormControl>
                                                                             <SelectTrigger>
                                                                                 <SelectValue
@@ -334,7 +337,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                                         Heure de fin
                                                                     </FormLabel>
                                                                     <Select onValueChange={field.onChange}
-                                                                            defaultValue={field.value}>
+                                                                            value={field.value || ""}>
                                                                         <FormControl>
                                                                             <SelectTrigger>
                                                                                 <SelectValue
@@ -472,7 +475,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                                     </FormLabel>
                                                                     <Select
                                                                         onValueChange={(val) => field.onChange(Number(val))}
-                                                                        defaultValue={field.value?.toString()}>
+                                                                        value={field.value?.toString() || ""}>
                                                                         <FormControl>
                                                                             <SelectTrigger>
                                                                                 <SelectValue
@@ -509,7 +512,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                                     </FormLabel>
                                                                     <Select
                                                                         onValueChange={(val) => field.onChange(Number(val))}
-                                                                        defaultValue={field.value?.toString()}>
+                                                                        value={field.value?.toString() || ""}>
                                                                         <FormControl>
                                                                             <SelectTrigger>
                                                                                 <SelectValue
@@ -547,7 +550,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                                 </FormLabel>
                                                                 <Select
                                                                     onValueChange={(val) => field.onChange(Number(val))}
-                                                                    defaultValue={field.value?.toString()}>
+                                                                    value={field.value?.toString() || ""}>
                                                                     <FormControl>
                                                                         <SelectTrigger>
                                                                             <SelectValue
@@ -601,13 +604,23 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                 </Alert>
                                             )}
 
-                                            <Button
-                                                type="submit"
-                                                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-                                                disabled={capacityError || !isPeriodComplete}
-                                            >
-                                                Créer le Planning
-                                            </Button>
+                                            <div className={"flex flex-row justify-end gap-2 mt-2"}>
+                                                <Button
+                                                    type="button"
+                                                    variant={"outline"}
+                                                    onClick={()=>{
+                                                        form.reset();
+                                                    }}
+                                                >
+                                                    <RotateCcw />
+                                                </Button>
+                                                <Button
+                                                    type="submit"
+                                                    disabled={btnIsDisabled}
+                                                >
+                                                    <Check />
+                                                </Button>
+                                            </div>
                                         </form>
                                     </Form>
                                 </CardContent>
