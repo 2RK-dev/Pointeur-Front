@@ -105,12 +105,8 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
 
     useEffect(() => {
         if (watchedStartTime && watchedEndTime) {
-            const [startHourStr, startMinuteStr] = watchedStartTime.split(":");
-            const [endHourStr, endMinuteStr] = watchedEndTime.split(":");
-            const startHour = Number.parseInt(startHourStr);
-            const startMinute = Number.parseInt(startMinuteStr);
-            const endHour = Number.parseInt(endHourStr);
-            const endMinute = Number.parseInt(endMinuteStr);
+            const [startHour, startMinute] = watchedStartTime.split(":").map(Number);
+            const [endHour, endMinute] = watchedEndTime.split(":").map(Number);
 
             const startTotalMinutes = startHour * 60 + startMinute;
             const endTotalMinutes = endHour * 60 + endMinute;
@@ -609,11 +605,11 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                                                 </Alert>
                                             )}
 
-                                            <div className={"flex flex-row justify-end gap-2 mt-2"}>
+                                            <div className="flex flex-row justify-end gap-2 mt-2">
                                                 <Button
                                                     type="button"
                                                     variant={"outline"}
-                                                    onClick={()  => { form.reset() }}
+                                                    onClick={() => { form.reset() }}
                                                 >
                                                     <RotateCcw />
                                                 </Button>
