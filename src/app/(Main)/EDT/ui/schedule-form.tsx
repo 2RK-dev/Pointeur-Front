@@ -75,7 +75,6 @@ const ScheduleItemFormSchema = z
 
 export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
     const [calendarOpen, setCalendarOpen] = useState(false)
-    // const [availableGroups, setAvailableGroups] = useState<Group[]>([])
     const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
     const [teachers, setTeachers] = useState<Teacher[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
