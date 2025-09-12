@@ -4,7 +4,7 @@ import {useEffect, useMemo, useState} from "react"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import * as z from "zod"
-import {BookOpen, CalendarIcon, Check, Clock, MapPin, RotateCcw, User, Users} from "lucide-react"
+import {BookOpen, CalendarIcon, Check, Clock, MapPin, RotateCcw, Trash2, User, Users} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {Calendar} from "@/components/ui/calendar"
@@ -33,7 +33,7 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {addScheduleItemService} from "@/services/ScheduleItem";
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
-import {updateScheduleItemService} from "@/services/ScheduleItem/impl/real";
+import {deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem/impl/real";
 
 const hours = generateHours();
 
@@ -57,7 +57,6 @@ const ScheduleItemFormSchema = z
     })
 
 
-
 export default function ScheduleForm() {
     const {open, setOpen} = useOpenScheduleItemFormStore();
     const [calendarOpen, setCalendarOpen] = useState(false)
@@ -67,6 +66,7 @@ export default function ScheduleForm() {
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem);
+    const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem);
     const {currentLevel} = useCurrentLevelStore();
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem);
 
@@ -79,7 +79,7 @@ export default function ScheduleForm() {
         endTime: selectedScheduleItem?.endTime.toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit'
-        })  || undefined,
+        }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
         teacherId: selectedScheduleItem?.Teacher.id || undefined,
         roomId: selectedScheduleItem?.Room.id || undefined,
@@ -196,6 +196,16 @@ export default function ScheduleForm() {
 
     const isSubmitDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0;
 
+    const handleDelete = () => {
+        if (!selectedScheduleItem) return;
+        deleteScheduleItemService(selectedScheduleItem.id).then((deletedScheduleItem) => {
+            removeScheduleItem(deletedScheduleItem.id);
+            form.reset();
+            setOpen(false);
+        }).catch((error) => {
+            console.error(" Error : ", error);
+        })
+    }
 
     const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
         if (capacityError) {
@@ -220,15 +230,15 @@ export default function ScheduleForm() {
                 startTime: startDateTime,
                 endTime: endDateTime,
             })
-            if(selectedScheduleItem){
-               updateScheduleItemService(selectedScheduleItem.id, scheduleItem).then((updatedItem) => {
-                    updateScheduleItem(selectedScheduleItem.id,updatedItem);
+            if (selectedScheduleItem) {
+                updateScheduleItemService(selectedScheduleItem.id, scheduleItem).then((updatedItem) => {
+                    updateScheduleItem(selectedScheduleItem.id, updatedItem);
                     form.reset();
                     setOpen(false);
                 }).catch((error) => {
-                      console.error(" Error : ", error);
+                    console.error(" Error : ", error);
                 })
-            }else{
+            } else {
                 addScheduleItemService(scheduleItem).then((scheduleItem) => {
                     addScheduleItem(scheduleItem);
                     form.reset();
@@ -634,20 +644,33 @@ export default function ScheduleForm() {
                                                 </Alert>
                                             )}
 
-                                            <div className="flex flex-row justify-end gap-2 mt-2">
-                                                <Button
-                                                    type="button"
-                                                    variant={"outline"}
-                                                    onClick={() => { form.reset() }}
-                                                >
-                                                    <RotateCcw />
-                                                </Button>
-                                                <Button
-                                                    type="submit"
-                                                    disabled={isSubmitDisabled}
-                                                >
-                                                    <Check />
-                                                </Button>
+                                            <div className="flex flex-row justify-between items-center mt-4">
+                                                {selectedScheduleItem ? (
+                                                    <Button
+                                                        type="button"
+                                                        variant="destructive"
+                                                        onClick={handleDelete}
+                                                    >
+                                                        <Trash2/>
+                                                    </Button>
+                                                ) : <div/>}
+                                                <div className={"flex flex-row gap-2 mt-2"}>
+                                                    <Button
+                                                        type="button"
+                                                        variant={"outline"}
+                                                        onClick={() => {
+                                                            form.reset()
+                                                        }}
+                                                    >
+                                                        <RotateCcw/>
+                                                    </Button>
+                                                    <Button
+                                                        type="submit"
+                                                        disabled={isSubmitDisabled}
+                                                    >
+                                                        <Check/>
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </form>
                                     </Form>

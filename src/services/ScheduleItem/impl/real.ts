@@ -34,3 +34,8 @@ export async function updateScheduleItemService (id:number,scheduleItem: Schedul
     // TODO: Implement update functionality logic
     throw new Error("Not implemented");
 }
+
+export async function deleteScheduleItemService (id:number): Promise<ScheduleItem> {
+    // TODO: Implement delete functionality logic
+    throw new Error("Not implemented");
+}
