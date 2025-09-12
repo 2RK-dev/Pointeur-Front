@@ -41,6 +41,8 @@ export default function RoomForm({isFormOpen, setIsFormOpen, selectedRoom}: Prop
                 updateRoomInStore(selectedRoom.id,updatedRoom);
                 form.reset();
                 setIsFormOpen(false);
+            }).catch((error) => {
+                console.error("Error updating room:", error);
             })
         }else{
             addRoomService(roomData).then((newRoom) => {

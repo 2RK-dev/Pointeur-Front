@@ -12,7 +12,7 @@ export const RoomPostSchema = z.object({
     abr: z.string().min(1, "L'abréviation est requise"),
     capacity: z.number({
         required_error: "La capacité est requise",
-    }).min(0, "La capacité doit être positive").int().positive()
+    }).min(0, "La capacité doit être positive").int()
 })
 
 export type Room = z.infer<typeof RoomSchema>
