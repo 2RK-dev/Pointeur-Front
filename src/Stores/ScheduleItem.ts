@@ -38,3 +38,22 @@ export const useScheduleItemByLevelStore = create<ScheduleItemByLevelStore>((set
         set({ scheduleItemsByLevel: filteredItems });
     }
 }));
+
+interface SelectedScheduleItemStore {
+    selectedScheduleItem: ScheduleItem | null;
+    setSelectedScheduleItem: (item: ScheduleItem | null) => void;
+}
+
+export const useSelectedScheduleItemStore = create<SelectedScheduleItemStore>((set) => ({
+    selectedScheduleItem: null,
+    setSelectedScheduleItem: (item: ScheduleItem | null) => set({ selectedScheduleItem: item }),
+}));
+
+interface OpenScheduleItemForm {
+    open: boolean;
+    setOpen: (open: boolean) => void;
+}
+export const useOpenScheduleItemFormStore = create<OpenScheduleItemForm>((set) => ({
+    open: false,
+    setOpen: (open: boolean) => set({ open }),
+}));
