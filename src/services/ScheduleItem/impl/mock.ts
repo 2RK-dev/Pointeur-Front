@@ -1,6 +1,3 @@
-// noinspection JSUnusedGlobalSymbols
-
-"use server";
 
 import data from "@/test/ScheduleItem.json";
 import {ScheduleItem, ScheduleItemPost, ScheduleItemSchema} from "@/Types/ScheduleItem";
@@ -16,10 +13,5 @@ export async function addScheduleItemService(scheduleItem : ScheduleItemPost): P
     // This function is a placeholder for adding a schedule item.
     // In a real application, you would implement the logic to add an item to your database or state.
     console.log(scheduleItem);
-    throw new Error("Not implemented");
-}
-
-export async function updateScheduleItemService (id:number,scheduleItem: ScheduleItemPost): Promise<ScheduleItem> {
-    // TODO: Implement update functionality logic
     throw new Error("Not implemented");
 }
