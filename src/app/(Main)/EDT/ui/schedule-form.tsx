@@ -74,11 +74,13 @@ export default function ScheduleForm() {
         date: selectedScheduleItem?.startTime || undefined,
         startTime: selectedScheduleItem?.startTime.toLocaleTimeString([], {
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hour12: false
         }) || undefined,
         endTime: selectedScheduleItem?.endTime.toLocaleTimeString([], {
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hour12: false
         }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
         teacherId: selectedScheduleItem?.Teacher.id || undefined,
