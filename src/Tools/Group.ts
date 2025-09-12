@@ -1,7 +1,10 @@
 import {Group} from "@/Types/Group";
 import {ScheduleItem} from "@/Types/ScheduleItem";
 
-export function getAvailableGroups(scheduleItems: ScheduleItem[], currentGroups: Group[], startTime: Date, endTime: Date,): Group[] {
+export function getAvailableGroups(scheduleItems: ScheduleItem[], currentGroups: Group[], startTime: Date, endTime: Date,except:ScheduleItem | null ): Group[] {
+    if(except){
+        scheduleItems = scheduleItems.filter(item => item.id !== except.id);
+    }
     const overlappingItems = scheduleItems.filter(item => {
         return item.startTime < endTime && item.endTime > startTime;
     });

@@ -8,7 +8,11 @@ import {CirclePlus, Copy, FileText} from "lucide-react";
 import {useEffect, useState} from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import ScheduleForm from "@/app/(Main)/EDT/ui/schedule-form";
-import {useCurrentScheduleItemsStore, useScheduleItemByLevelStore} from "@/Stores/ScheduleItem";
+import {
+    useCurrentScheduleItemsStore,
+    useOpenScheduleItemFormStore,
+    useScheduleItemByLevelStore, useSelectedScheduleItemStore
+} from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
 import {getNextFourWeeks, getWeekRange} from "@/Tools/ScheduleItem";
@@ -19,11 +23,12 @@ import {getLevels} from "@/services/Level";
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
     const {setScheduleItemsByLevel} = useScheduleItemByLevelStore();
+    const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
     const [levels, setLevels] = useState<Level[]>([]);
     const {currentLevel, setCurrentLevel} = useCurrentLevelStore();
-    const [isFormOpen, setIsFormOpen] = useState(false);
+    const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
 
     useEffect(() => {
@@ -115,7 +120,10 @@ export default function Schedule() {
                     <Button onClick={generatePDF}>
                         <FileText/>
                     </Button>
-                    <Button onClick={() => setIsFormOpen(true)}>
+                    <Button onClick={() =>{
+                        setSelectedScheduleItem(null);
+                        setOpenForm(true)
+                    }}>
                         <CirclePlus/>
                     </Button>
                 </div>
@@ -124,7 +132,7 @@ export default function Schedule() {
                 <EdtEncapsuler/>
             </div>
 
-            <ScheduleForm isFormOpen={isFormOpen} setIsFormOpenAction={setIsFormOpen}/>
+            <ScheduleForm/>
 
             <Dialog
                 open={isTransposeModalOpen}
