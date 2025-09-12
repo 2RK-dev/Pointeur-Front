@@ -15,3 +15,8 @@ export async function addRoomService(room: RoomPost): Promise<Room> {
     // TODO: implement addRoom logic
     throw new Error("Method not implemented.");
 }
+
+export async function updateRoomService(id: number, room: RoomPost): Promise<Room> {
+    // TODO: implement updateRoom logic
+    throw new Error("Method not implemented.");
+}

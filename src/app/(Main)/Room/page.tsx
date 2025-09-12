@@ -10,10 +10,13 @@ import {useEffect, useState} from "react";
 import {Room} from "@/Types/Room";
 import {getRoomsService} from "@/services/Room";
 import RoomForm from "@/app/(Main)/Room/ui/room-form";
+import {useRoomsStore} from "@/Stores/Room";
 
 export default function Home() {
-    const [rooms, setRooms] = useState<Room[]>([]);
+    const rooms = useRoomsStore((s) => s.rooms);
+    const setRooms = useRoomsStore((s) => s.setRooms);
     const [isOpen, setOpenForm] = useState(false);
+    const [selectedRoom, setSelectedRoom] = useState<Room|null>(null);
 
     useEffect(() => {
         getRoomsService().then((data) => setRooms(data))
@@ -42,6 +45,7 @@ export default function Home() {
                     </CardTitle>
                     <div className="flex space-x-2">
                         <Button onClick={() => {
+                            setSelectedRoom(null);
                             setOpenForm(true);
                         }}>
                             <Plus className="mr-2 h-4 w-4"/> Ajouter une salle
@@ -75,7 +79,8 @@ export default function Home() {
                                                 variant="outline"
                                                 size="icon"
                                                 onClick={() => {
-
+                                                    setSelectedRoom(room);
+                                                    setOpenForm(true);
                                                 }}>
                                                 <Edit className="h-4 w-4"/>
                                             </Button>
@@ -95,7 +100,7 @@ export default function Home() {
                     </Table>
                 </CardContent>
             </Card>
-            <RoomForm isFormOpen={isOpen} setIsFormOpen={setOpenForm}/>
+            <RoomForm isFormOpen={isOpen} setIsFormOpen={setOpenForm} selectedRoom={selectedRoom}/>
         </div>
     );
 }

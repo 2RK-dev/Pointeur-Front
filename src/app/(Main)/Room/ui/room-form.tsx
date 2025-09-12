@@ -7,42 +7,57 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
-import {addRoomService} from "@/services/Room";
-import {RoomPost, RoomPostSchema} from "@/Types/Room";
+import {addRoomService, updateRoomService} from "@/services/Room";
+import {Room, RoomPost, RoomPostSchema} from "@/Types/Room";
 import {useRoomsStore} from "@/Stores/Room";
+import {useEffect} from "react";
 
 interface Props {
     isFormOpen: boolean
     setIsFormOpen: (isOpen: boolean) => void
+    selectedRoom: Room | null
 }
 
-export default function RoomForm({isFormOpen, setIsFormOpen}: Props) {
+export default function RoomForm({isFormOpen, setIsFormOpen, selectedRoom}: Props) {
     const addRoomInStore = useRoomsStore((s) => s.addRoom)
+    const updateRoomInStore = useRoomsStore((s) => s.updateRoom)
     const defaultValues = {
-        name: "",
-        abr: "",
-        capacity: 0,
+        name: selectedRoom?.name || "",
+        abr: selectedRoom?.abr || "",
+        capacity: selectedRoom?.capacity || 0,
     }
     const form = useForm<z.infer<typeof RoomPostSchema>>({
         resolver: zodResolver(RoomPostSchema),
         defaultValues: defaultValues,
     })
 
+    useEffect(() => {
+        form.reset(defaultValues);
+    }, [selectedRoom]);
+
     const onSubmit = (roomData: RoomPost) => {
-        addRoomService(roomData).then((newRoom) => {
-            addRoomInStore(newRoom);
-            form.reset();
-            setIsFormOpen(false);
-        }).catch((error) => {
-            console.error("Error adding room:", error);
-        })
+        if(selectedRoom){
+            updateRoomService(selectedRoom.id, roomData).then((updatedRoom) => {
+                updateRoomInStore(selectedRoom.id,updatedRoom);
+                form.reset();
+                setIsFormOpen(false);
+            })
+        }else{
+            addRoomService(roomData).then((newRoom) => {
+                addRoomInStore(newRoom);
+                form.reset();
+                setIsFormOpen(false);
+            }).catch((error) => {
+                console.error("Error adding room:", error);
+            })
+        }
     }
 
     return (
         <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
             <DialogContent className={"w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>Nouvelle Salle</DialogTitle>
+                    <DialogTitle>{selectedRoom ? "Modifier" : "Nouvelle"} Salle</DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <Form {...form}>
