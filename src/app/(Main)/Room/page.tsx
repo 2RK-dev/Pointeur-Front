@@ -8,26 +8,37 @@ import autoTable from "jspdf-autotable";
 import {Edit, FileDown, Plus, Trash2} from "lucide-react";
 import {useEffect, useState} from "react";
 import {Room} from "@/Types/Room";
-import {getRoomsService} from "@/services/Room";
+import {removeRoomService, getRoomsService} from "@/services/Room";
 import RoomForm from "@/app/(Main)/Room/ui/room-form";
 import {useRoomsStore} from "@/Stores/Room";
+import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 export default function Home() {
     const rooms = useRoomsStore((s) => s.rooms);
     const setRooms = useRoomsStore((s) => s.setRooms);
+    const removeRoomInStore = useRoomsStore((s) => s.removeRoom);
     const [isOpen, setOpenForm] = useState(false);
-    const [selectedRoom, setSelectedRoom] = useState<Room|null>(null);
+    const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
         getRoomsService().then((data) => setRooms(data))
     }, []);
 
+    const handleRemoveRoom = (id: number) => {
+        removeRoomService(id).then((removedRoom) => {
+            removeRoomInStore(removedRoom.id);
+        }).catch((err) => {
+            console.error("Error deleting room:", err);
+        })
+    }
+
     const handleExportPDF = () => {
         const doc = new jsPDF();
         autoTable(doc, {
-            head: [["ID", "Nom", "Abréviation", "Capacité"]],
+            head: [["Nom", "Abréviation", "Capacité"]],
             body: rooms.map((room) => [
-                room.id,
                 room.name,
                 room.abr,
                 room.capacity,
@@ -59,7 +70,6 @@ export default function Home() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>ID</TableHead>
                                 <TableHead>Nom</TableHead>
                                 <TableHead>Abréviation</TableHead>
                                 <TableHead>Capacité</TableHead>
@@ -69,7 +79,6 @@ export default function Home() {
                         <TableBody>
                             {rooms.map((room) => (
                                 <TableRow key={room.id}>
-                                    <TableCell>{room.id}</TableCell>
                                     <TableCell>{room.name}</TableCell>
                                     <TableCell>{room.abr}</TableCell>
                                     <TableCell>{room.capacity}</TableCell>
@@ -85,10 +94,11 @@ export default function Home() {
                                                 <Edit className="h-4 w-4"/>
                                             </Button>
                                             <Button
-                                                variant="outline"
+                                                variant="destructive"
                                                 size="icon"
                                                 onClick={() => {
-
+                                                    setSelectedRoom(room);
+                                                    setIsConfirmationModalOpen(true);
                                                 }}>
                                                 <Trash2 className="h-4 w-4"/>
                                             </Button>
@@ -101,6 +111,25 @@ export default function Home() {
                 </CardContent>
             </Card>
             <RoomForm isFormOpen={isOpen} setIsFormOpen={setOpenForm} selectedRoom={selectedRoom}/>
+            <Dialog open={isConfirmationModalOpen} onOpenChange={setIsConfirmationModalOpen}>
+                <DialogContent className={"w-full max-h-[90vh] min-h-[100px]"}>
+                    <DialogHeader>
+                        <DialogTitle>Supprimer la salle ?</DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className={"max-h-[80vh] w-full"}>
+                        Cette action est irréversible. La salle et toutes les données associées seront définitivement supprimées.
+                        Voulez-vous vraiment continuer ?
+                        <div className="mt-4 flex justify-end space-x-2">
+                            <Button variant="outline" onClick={() => setIsConfirmationModalOpen(false)}>Annuler</Button>
+                            <Button variant="destructive" onClick={() => {
+                                if(!selectedRoom) return;
+                                handleRemoveRoom(selectedRoom.id);
+                                setIsConfirmationModalOpen(false);
+                            }}>Confirmer</Button>
+                        </div>
+                    </ScrollArea>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
