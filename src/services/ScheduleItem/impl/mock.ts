@@ -18,3 +18,8 @@ export async function addScheduleItemService(scheduleItem : ScheduleItemPost): P
     console.log(scheduleItem);
     throw new Error("Not implemented");
 }
+
+export async function updateScheduleItemService (id:number,scheduleItem: ScheduleItemPost): Promise<ScheduleItem> {
+    // TODO: Implement update functionality logic
+    throw new Error("Not implemented");
+}

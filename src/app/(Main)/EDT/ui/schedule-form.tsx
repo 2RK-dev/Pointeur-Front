@@ -33,6 +33,7 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {addScheduleItemService} from "@/services/ScheduleItem";
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
+import {updateScheduleItemService} from "@/services/ScheduleItem/impl/real";
 
 const hours = generateHours();
 
@@ -65,6 +66,7 @@ export default function ScheduleForm() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
+    const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem);
     const {currentLevel} = useCurrentLevelStore();
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem);
 
@@ -219,7 +221,13 @@ export default function ScheduleForm() {
                 endTime: endDateTime,
             })
             if(selectedScheduleItem){
-               // TODO: Add update functionality
+               updateScheduleItemService(selectedScheduleItem.id, scheduleItem).then((updatedItem) => {
+                    updateScheduleItem(selectedScheduleItem.id,updatedItem);
+                    form.reset();
+                    setOpen(false);
+                }).catch((error) => {
+                      console.error(" Error : ", error);
+                })
             }else{
                 addScheduleItemService(scheduleItem).then((scheduleItem) => {
                     addScheduleItem(scheduleItem);
