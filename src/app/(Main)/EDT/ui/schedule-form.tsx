@@ -20,7 +20,7 @@ import {getTeachingUnits} from "@/services/TeachingUnit";
 import {Teacher} from "@/Types/Teacher";
 import {getTeachers} from "@/services/Teacher";
 import {Room} from "@/Types/Room";
-import {getRooms} from "@/services/Room";
+import {getRoomsService} from "@/services/Room";
 import {getAvailableGroups} from "@/Tools/Group";
 import {generateHours} from "@/Tools/ScheduleItem";
 import {
@@ -113,7 +113,7 @@ export default function ScheduleForm() {
             console.error("Erreur lors de la récupération des enseignants :", error);
         })
 
-        getRooms().then((roomsData) => {
+        getRoomsService().then((roomsData) => {
             setRooms(roomsData);
         }).catch((error) => {
             console.error("Erreur lors de la récupération des salles :", error);

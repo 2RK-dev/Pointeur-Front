@@ -2,11 +2,16 @@
 
 "use server";
 
-import { Room } from "@/Types/Room";
+import {Room, RoomPost} from "@/Types/Room";
 import { fetchRooms } from "@/api/http/room";
 import { RoomMapper } from "@/services/mapper";
 
-export async function getRooms (): Promise<Room[]> {
+export async function getRoomsService (): Promise<Room[]> {
     const roomList = await fetchRooms();
     return roomList.map(room => RoomMapper.fromDto(room));
+}
+
+export async function addRoomService(room: RoomPost): Promise<Room> {
+    // TODO: implement addRoom logic
+    throw new Error("Method not implemented.");
 }
