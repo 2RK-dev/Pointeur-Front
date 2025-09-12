@@ -31,9 +31,8 @@ import {
 import {useCurrentLevelStore} from "@/Stores/Level";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {addScheduleItemService} from "@/services/ScheduleItem";
+import {addScheduleItemService, deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem";
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
-import {deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem/impl/real";
 
 const hours = generateHours();
 
