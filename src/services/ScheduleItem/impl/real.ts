@@ -21,7 +21,7 @@ export async function addScheduleItemService (scheduleItem: ScheduleItemPost): P
     const requestBody: ICreateScheduleItem = {
         startTime: scheduleItem.startTime,
         endTime: scheduleItem.endTime,
-        groupIds: scheduleItem.GroupIds.map(s => parseInt(s)),
+        groupIds: scheduleItem.GroupIds.map(s => parseInt(s,10)),
         teacherId: scheduleItem.TeacherId,
         teachingUnitId: scheduleItem.TeachingUnitID,
         roomId: scheduleItem.RoomId
