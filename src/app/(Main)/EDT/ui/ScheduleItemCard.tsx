@@ -20,7 +20,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 
 	return (
 		<div
-			className={`border p-1 rounded shadow-sm text-xs overflow-hidden ${getColorGroups(scheduleItem.Groups)}`}
+			className={`border p-1 rounded shadow-sm text-xs overflow-hidden cursor-pointer ${getColorGroups(scheduleItem.Groups)}`}
 
 			style={{
 				flexBasis: `${width}%`,
