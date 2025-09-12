@@ -1,6 +1,7 @@
 import {ScheduleItem} from "@/Types/ScheduleItem";
 import {getWidthPercentage} from "@/Tools/ScheduleItem";
 import {getColorGroups} from "@/Tools/Color";
+import {useOpenScheduleItemFormStore, useSelectedScheduleItemStore} from "@/Stores/ScheduleItem";
 
 
 interface Props {
@@ -9,7 +10,13 @@ interface Props {
 }
 
 export default function ScheduleItemCard({ scheduleItem,left }: Props) {
+	const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+	const setOpen = useOpenScheduleItemFormStore((s) => s.setOpen);
 	const width = getWidthPercentage(scheduleItem.startTime, scheduleItem.endTime);
+	const UpdateScheduleItem = () => {
+		setSelectedScheduleItem(scheduleItem);
+		setOpen(true);
+	}
 
 	return (
 		<div
@@ -22,7 +29,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 				flexShrink: 0,
 			}}
 		>
-			<div className="text-[10px] whitespace-normal leading-tight">
+			<div onClick={UpdateScheduleItem} className="text-[10px] whitespace-normal leading-tight">
 				<span>{scheduleItem.TeachingUnit.abr}</span>
 				<br/>
 				{scheduleItem.Room.abr} — {scheduleItem.Teacher.abr}

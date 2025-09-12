@@ -23,17 +23,16 @@ import {Room} from "@/Types/Room";
 import {getRooms} from "@/services/Room";
 import {getAvailableGroups} from "@/Tools/Group";
 import {generateHours} from "@/Tools/ScheduleItem";
-import {useCurrentScheduleItemsStore} from "@/Stores/ScheduleItem";
+import {
+    useCurrentScheduleItemsStore,
+    useOpenScheduleItemFormStore,
+    useSelectedScheduleItemStore
+} from "@/Stores/ScheduleItem";
 import {useCurrentLevelStore} from "@/Stores/Level";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {addScheduleItemService} from "@/services/ScheduleItem";
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
-
-interface ScheduleFormProps {
-    isFormOpen: boolean;
-    setIsFormOpenAction: (open: boolean) => void;
-}
 
 const hours = generateHours();
 
@@ -56,7 +55,10 @@ const ScheduleItemFormSchema = z
         groupIds: z.array(z.string()).min(1, "Veuillez sélectionner au moins un groupe"),
     })
 
-export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: ScheduleFormProps) {
+
+
+export default function ScheduleForm() {
+    const {open, setOpen} = useOpenScheduleItemFormStore();
     const [calendarOpen, setCalendarOpen] = useState(false)
     const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
     const [teachers, setTeachers] = useState<Teacher[]>([])
@@ -64,19 +66,31 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
     const {currentLevel} = useCurrentLevelStore();
+    const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem);
 
+    const defaultValues = {
+        date: selectedScheduleItem?.startTime || undefined,
+        startTime: selectedScheduleItem?.startTime.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+        }) || undefined,
+        endTime: selectedScheduleItem?.endTime.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+        })  || undefined,
+        teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
+        teacherId: selectedScheduleItem?.Teacher.id || undefined,
+        roomId: selectedScheduleItem?.Room.id || undefined,
+        groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
+    }
     const form = useForm<z.infer<typeof ScheduleItemFormSchema>>({
         resolver: zodResolver(ScheduleItemFormSchema),
-        defaultValues: {
-            date: undefined,
-            startTime: undefined,
-            endTime: undefined,
-            teachingUnitID: undefined,
-            teacherId: undefined,
-            roomId: undefined,
-            groupIds: [],
-        },
+        defaultValues: defaultValues,
     })
+
+    useEffect(() => {
+        form.reset(defaultValues);
+    }, [selectedScheduleItem]);
 
     const watchedDate = form.watch("date")
     const watchedStartTime = form.watch("startTime")
@@ -142,8 +156,11 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
             currentScheduleItems,
             currentLevel.groups,
             startDateTime,
-            endDateTime
+            endDateTime,
+            selectedScheduleItem
         );
+
+
     }, [currentScheduleItems, currentLevel?.groups, startDateTime, endDateTime]);
 
     useEffect(() => {
@@ -201,13 +218,17 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
                 startTime: startDateTime,
                 endTime: endDateTime,
             })
-            addScheduleItemService(scheduleItem).then((scheduleItem) => {
-                addScheduleItem(scheduleItem);
-                form.reset();
-                setIsFormOpenAction(false);
-            }).catch((error) => {
-                console.error(" Error : ", error);
-            })
+            if(selectedScheduleItem){
+               // TODO: Add update functionality
+            }else{
+                addScheduleItemService(scheduleItem).then((scheduleItem) => {
+                    addScheduleItem(scheduleItem);
+                    form.reset();
+                    setOpen(false);
+                }).catch((error) => {
+                    console.error(" Error : ", error);
+                })
+            }
 
         } catch (e) {
             console.error(" Error : ", e);
@@ -215,7 +236,7 @@ export default function ScheduleForm({isFormOpen, setIsFormOpenAction}: Schedule
     }
 
     return (
-        <Dialog open={isFormOpen} onOpenChange={setIsFormOpenAction}>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className={"max-w-2xl w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
                     <DialogTitle>Planification pour le niveau {currentLevel?.name}</DialogTitle>
