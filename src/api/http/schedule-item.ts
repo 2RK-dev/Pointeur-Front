@@ -8,9 +8,7 @@ export async function fetchScheduleItemsForLevel (
     levelId?: number,
 ): Promise<IScheduleItem[]> {
 
-    const startString = start.toISOString().slice(0, 19);
-    const endString = end.toISOString().slice(0, 19);
-    let url = `/schedule?startDate=${startString}&endDate=${endString}`;
+    let url = `/schedule?startDate=${(start.toISOString())}&endDate=${(end.toISOString())}`;
     if (levelId) url += `&levelId=${levelId}`;
     const {data: responseData} = await http.pub.get(url);
     return DTO.ScheduleItemSchema.array().parse(responseData);
