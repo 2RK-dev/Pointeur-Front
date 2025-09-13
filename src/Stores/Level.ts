@@ -1,12 +1,14 @@
 import {create} from "zustand";
 import {Level} from "@/Types/Level";
 
-interface CurrentLevelStoreInterface {
-    currentLevel: Level | null;
-    setCurrentLevel: (level: Level) => void;
+
+
+interface SelectedLevelStoreInterface {
+    selectedLevel: Level | null;
+    setSelectedLevel: (level: Level) => void;
 }
 
-export const useCurrentLevelStore = create<CurrentLevelStoreInterface>((set) => ({
-    currentLevel: null,
-    setCurrentLevel: (level: Level) => set({currentLevel: level}),
+export const useSelectedLevelStore = create<SelectedLevelStoreInterface>((set) => ({
+    selectedLevel: null,
+    setSelectedLevel: (level: Level) => set({selectedLevel: level}),
 }));
