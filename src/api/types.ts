@@ -1,7 +1,7 @@
 import z from "zod";
 import { GroupSchema, LevelDetailsSchema } from "./schemas/group";
 import { CreateRoomSchema, RoomSchema, UpdateRoomSchema } from "./schemas/room";
-import { CreateScheduleItemSchema, ScheduleItemSchema } from "./schemas/schedule-item";
+import { CreateScheduleItemSchema, ScheduleItemSchema, UpdateScheduleItemSchema } from "./schemas/schedule-item";
 import { TeacherSchema } from "./schemas/teacher";
 import { TeachingUnitSchema } from "./schemas/teaching-unit";
 
