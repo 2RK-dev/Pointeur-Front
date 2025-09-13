@@ -14,3 +14,4 @@ export type ICreateScheduleItem = z.infer<typeof CreateScheduleItemSchema>;
 export type ILevelDetails = z.infer<typeof LevelDetailsSchema>;
 export type ICreateRoom = z.infer<typeof CreateRoomSchema>;
 export type IUpdateRoom = z.infer<typeof UpdateRoomSchema>;
+export type IUpdateScheduleItem = z.infer<typeof UpdateScheduleItemSchema>;

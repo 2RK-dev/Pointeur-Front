@@ -3,8 +3,13 @@
 "use server";
 
 import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
-import { createScheduleItem, fetchScheduleItemsForLevel } from "@/api/http/schedule-item";
-import { ICreateScheduleItem } from "@/api/types";
+import {
+    createScheduleItem,
+    deleteScheduleItem,
+    fetchScheduleItemsForLevel,
+    updateScheduleItem
+} from "@/api/http/schedule-item";
+import { ICreateScheduleItem, IUpdateScheduleItem } from "@/api/types";
 import { ScheduleItemMapper } from "@/services/mapper";
 
 export async function getScheduleItems (startTime: Date, endTime: Date): Promise<ScheduleItem[]> {
@@ -21,7 +26,7 @@ export async function addScheduleItemService (scheduleItem: ScheduleItemPost): P
     const requestBody: ICreateScheduleItem = {
         startTime: scheduleItem.startTime,
         endTime: scheduleItem.endTime,
-        groupIds: scheduleItem.GroupIds.map(s => parseInt(s,10)),
+        groupIds: scheduleItem.GroupIds.map(s => parseInt(s, 10)),
         teacherId: scheduleItem.TeacherId,
         teachingUnitId: scheduleItem.TeachingUnitID,
         roomId: scheduleItem.RoomId
@@ -30,12 +35,20 @@ export async function addScheduleItemService (scheduleItem: ScheduleItemPost): P
     return ScheduleItemMapper.fromDto(item);
 }
 
-export async function updateScheduleItemService (id:number,scheduleItem: ScheduleItemPost): Promise<ScheduleItem> {
-    // TODO: Implement update functionality logic
-    throw new Error("Not implemented");
+export async function updateScheduleItemService (id: number, scheduleItem: ScheduleItemPost): Promise<ScheduleItem> {
+    const requestBody: IUpdateScheduleItem = {
+        endTime: scheduleItem.endTime,
+        startTime: scheduleItem.startTime,
+        groupIds: scheduleItem.GroupIds.map(s => parseInt(s, 10)),
+        roomId: scheduleItem.RoomId,
+        teacherId: scheduleItem.TeacherId,
+        teachingUnitId: scheduleItem.TeachingUnitID
+    }
+    const item = await updateScheduleItem(id, requestBody);
+    return ScheduleItemMapper.fromDto(item);
 }
 
-export async function deleteScheduleItemService (id:number): Promise<ScheduleItem> {
-    // TODO: Implement delete functionality logic
-    throw new Error("Not implemented");
+export async function deleteScheduleItemService (id: number): Promise<number> {
+    await deleteScheduleItem(id);
+    return id;
 }
