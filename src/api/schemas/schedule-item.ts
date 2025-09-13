@@ -14,7 +14,7 @@ export const ScheduleItemSchema = z.object({
     endTime: z.string().datetime({local: true}),
 });
 
-export const CreateScheduleItemSchema = z.object({
+const BaseScheduleItemSchema = z.object({
     groupIds: z.number().array(),
     teacherId: z.number(),
     teachingUnitId: z.number(),
@@ -22,12 +22,5 @@ export const CreateScheduleItemSchema = z.object({
     startTime: z.string().datetime(),
     endTime: z.string().datetime(),
 });
-
-export const UpdateScheduleItemSchema = z.object({
-    groupIds: z.number().array(),
-    teacherId: z.number(),
-    teachingUnitId: z.number(),
-    roomId: z.number(),
-    startTime: z.string().datetime(),
-    endTime: z.string().datetime(),
-});
+export const CreateScheduleItemSchema = BaseScheduleItemSchema;
+export const UpdateScheduleItemSchema = BaseScheduleItemSchema;
