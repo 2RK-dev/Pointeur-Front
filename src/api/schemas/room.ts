@@ -5,4 +5,16 @@ export const RoomSchema = z.object({
     name: z.string(),
     abbreviation: z.string(),
     size: z.number(),
-})
+});
+
+export const CreateRoomSchema = z.object({
+    name: z.string(),
+    abbreviation: z.string(),
+    size: z.number(),
+});
+
+export const UpdateRoomSchema = z.object({
+    name: z.string(),
+    abbreviation: z.string(),
+    size: z.number()
+});
