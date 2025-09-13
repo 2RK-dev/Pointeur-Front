@@ -1,6 +1,6 @@
 import z from "zod";
 import { GroupSchema, LevelDetailsSchema } from "./schemas/group";
-import { RoomSchema } from "./schemas/room";
+import { CreateRoomSchema, RoomSchema, UpdateRoomSchema } from "./schemas/room";
 import { CreateScheduleItemSchema, ScheduleItemSchema, UpdateScheduleItemSchema } from "./schemas/schedule-item";
 import { TeacherSchema } from "./schemas/teacher";
 import { TeachingUnitSchema } from "./schemas/teaching-unit";
@@ -12,4 +12,6 @@ export type ITeacher = z.infer<typeof TeacherSchema>;
 export type ITeachingUnit = z.infer<typeof TeachingUnitSchema>;
 export type ICreateScheduleItem = z.infer<typeof CreateScheduleItemSchema>;
 export type ILevelDetails = z.infer<typeof LevelDetailsSchema>;
+export type ICreateRoom = z.infer<typeof CreateRoomSchema>;
+export type IUpdateRoom = z.infer<typeof UpdateRoomSchema>;
 export type IUpdateScheduleItem = z.infer<typeof UpdateScheduleItemSchema>;
