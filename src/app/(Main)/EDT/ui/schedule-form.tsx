@@ -199,8 +199,8 @@ export default function ScheduleForm() {
 
     const handleDelete = () => {
         if (!selectedScheduleItem) return;
-        deleteScheduleItemService(selectedScheduleItem.id).then((deletedScheduleItem) => {
-            removeScheduleItem(deletedScheduleItem.id);
+        deleteScheduleItemService(selectedScheduleItem.id).then((deletedScheduleItemId) => {
+            removeScheduleItem(deletedScheduleItemId);
             form.reset();
             setOpen(false);
         }).catch((error) => {
