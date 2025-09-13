@@ -32,7 +32,8 @@ export const TeachingUnitMapper = {
         return {
             id: dto.id,
             abr: dto.abbreviation,
-            name: dto.name
+            name: dto.name,
+            associatedLevels: dto.level.id
         };
     },
 }

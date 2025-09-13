@@ -16,7 +16,7 @@ import {
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
 import {getNextFourWeeks, getWeekRange} from "@/Tools/ScheduleItem";
-import {useCurrentLevelStore} from "@/Stores/Level";
+import {useSelectedLevelStore} from "@/Stores/Level";
 import {Level} from "@/Types/Level";
 import {getLevels} from "@/services/Level";
 
@@ -27,7 +27,7 @@ export default function Schedule() {
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
     const [levels, setLevels] = useState<Level[]>([]);
-    const {currentLevel, setCurrentLevel} = useCurrentLevelStore();
+    const {selectedLevel, setSelectedLevel} = useSelectedLevelStore();
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Schedule() {
         getLevels().then((levels) => {
             setLevels(levels);
             if (levels.length > 0) {
-                setCurrentLevel(levels[0]);
+                setSelectedLevel(levels[0]);
             }
         }).catch((error) => {
             console.error("Error fetching levels:", error);
@@ -56,9 +56,9 @@ export default function Schedule() {
         const filtered = currentScheduleItems.filter(item => {
             return item.startTime >= start && item.endTime <= end;
         });
-        if (!currentLevel) return;
-        setScheduleItemsByLevel(currentLevel?.groups || [], filtered);
-    }, [selectedWeek, currentLevel, currentScheduleItems]);
+        if (!selectedLevel) return;
+        setScheduleItemsByLevel(selectedLevel?.groups || [], filtered);
+    }, [selectedWeek, selectedLevel, currentScheduleItems]);
 
     const TransposeData = (TargetWeek: number) => {
         alert(`Transposing data to week ${TargetWeek}`);
@@ -93,10 +93,10 @@ export default function Schedule() {
                         ))}
                     </SelectContent>
                 </Select>
-                <Select value={currentLevel?.id.toString() || "0"} onValueChange={(val) => {
+                <Select value={selectedLevel?.id.toString() || "0"} onValueChange={(val) => {
                     const level = levels.find((l) => l.id.toString() === val);
                     if (level) {
-                        setCurrentLevel(level);
+                        setSelectedLevel(level);
                     }
                 }}>
                     <SelectTrigger className="w-[180px]">

@@ -16,15 +16,19 @@ import { Level } from "@/Types/Level";
 import { Edit, Info, Plus, Trash2 } from "lucide-react";
 import {useEffect, useState} from "react";
 import {getLevels} from "@/services/Level";
+import {useLevelStore} from "@/Stores/Level";
 
 export default function Home() {
-	const [levels, setLevels] = useState<Level[]>([]);
+	const levels = useLevelStore((s) => s.levels);
+	const setLevels = useLevelStore((s) => s.setLevels);
 	const [editingLevel, setEditingLevel] = useState<Level | null>(null);
 	const [newGroup, setNewGroup] = useState("");
 	const [isAddingLevel, setIsAddingLevel] = useState(false);
 
 	useEffect(() => {
-		getLevels().then((data) => setLevels(data));
+		getLevels()
+			.then((data) => setLevels(data))
+			.catch((error) => console.log(error));
 	}, []);
 
 	const handleUpdateLevel = (updatedLevel: Level) => {
@@ -58,7 +62,7 @@ export default function Home() {
 				</DialogContent>
 			</Dialog>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{levels.map((level) => (
+				{levels?.map((level) => (
 					<Card
 						key={level.id}
 						className="shadow-lg hover:shadow-xl transition-shadow duration-300">
