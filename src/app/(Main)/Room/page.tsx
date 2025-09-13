@@ -28,7 +28,7 @@ export default function Home() {
 
     const handleRemoveRoom = (id: number) => {
         removeRoomService(id).then((removedRoom) => {
-            removeRoomInStore(removedRoom.id);
+            removeRoomInStore(removedRoom);
         }).catch((err) => {
             console.error("Error deleting room:", err);
         })

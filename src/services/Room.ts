@@ -21,7 +21,7 @@ export async function updateRoomService(id: number, room: RoomPost): Promise<Roo
     throw new Error("Method not implemented.");
 }
 
-export async function removeRoomService(id: number): Promise<Room> {
+export async function removeRoomService(id: number): Promise<number> {
     // TODO: implement deleteRoom logic
     throw new Error("Method not implemented.");
 }
