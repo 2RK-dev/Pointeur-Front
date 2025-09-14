@@ -86,11 +86,11 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                             Nom
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder={"Nom de la salle"} value={field.value}
+                                            <Input placeholder={"Nom de la matière"} value={field.value}
                                                    onChange={field.onChange}/>
                                         </FormControl>
                                         <FormDescription>
-                                            Le nom complet de la salle.
+                                            Le nom complet de la matière.
                                         </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
