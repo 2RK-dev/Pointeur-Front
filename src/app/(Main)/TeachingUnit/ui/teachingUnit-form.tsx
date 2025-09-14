@@ -128,7 +128,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                     <FormControl>
                                                         <SelectTrigger>
                                                             <SelectValue
-                                                                placeholder="Heure de début"/>
+                                                                placeholder="Sélectionner un niveau"/>
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
