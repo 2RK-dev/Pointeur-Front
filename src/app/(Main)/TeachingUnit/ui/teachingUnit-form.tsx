@@ -142,7 +142,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                 </Select>
                                             </FormControl>
                                             <FormDescription>
-                                                L'abréviation de la matière.
+                                                Le niveau auquel cette unité d'enseignement est associée.
                                             </FormDescription>
                                             <FormMessage/>
                                         </FormItem>
