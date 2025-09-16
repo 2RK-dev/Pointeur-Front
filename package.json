@@ -42,7 +42,7 @@
 		"jspdf-autotable": "^3.8.4",
 		"lucide-react": "^0.412.0",
 		"my-app": "file:",
-		"next": "15.1.6",
+		"next": "15.4.7",
 		"react": "^18",
 		"react-day-picker": "^9.8.0",
 		"react-dom": "^18",
