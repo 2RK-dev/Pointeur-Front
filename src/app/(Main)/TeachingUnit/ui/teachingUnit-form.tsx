@@ -24,7 +24,7 @@ interface IProps {
 
 export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, selectedTeachingUnit}: IProps) {
     const AddTeachingUnitInStore = useTeachingUnitStore(s => s.addTeachingUnit);
-    const UpadateTeachingUnitInStore = useTeachingUnitStore(s => s.updateTeachingUnit);
+    const UpdateTeachingUnitInStore = useTeachingUnitStore(s => s.updateTeachingUnit);
     const Levels = useLevelStore(s => s.levels);
 
     const defaultValues = {
@@ -48,7 +48,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         if(selectedTeachingUnit){
             UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
-                    UpadateTeachingUnitInStore(updatedTeachingUnit.id,updatedTeachingUnit);
+                    UpdateTeachingUnitInStore(updatedTeachingUnit.id,updatedTeachingUnit);
                     setIsOpen(false);
                     form.reset();
                 })
