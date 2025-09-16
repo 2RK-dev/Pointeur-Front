@@ -15,7 +15,6 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Checkbox} from "@/components/ui/checkbox"
 import {Badge} from "@/components/ui/badge"
 import {Alert, AlertDescription} from "@/components/ui/alert"
-import {TeachingUnit} from "@/Types/TeachingUnit";
 import {getTeachingUnits} from "@/services/TeachingUnit";
 import {Teacher} from "@/Types/Teacher";
 import {getTeachers} from "@/services/Teacher";
@@ -28,11 +27,12 @@ import {
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore
 } from "@/Stores/ScheduleItem";
-import {useCurrentLevelStore} from "@/Stores/Level";
+import {useSelectedLevelStore} from "@/Stores/Level";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {addScheduleItemService, deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem";
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem";
+import {useTeachingUnitStore} from "@/Stores/TeachingUnit";
 
 const hours = generateHours();
 
@@ -59,14 +59,16 @@ const ScheduleItemFormSchema = z
 export default function ScheduleForm() {
     const {open, setOpen} = useOpenScheduleItemFormStore();
     const [calendarOpen, setCalendarOpen] = useState(false)
-    const [teachingUnits, setTeachingUnits] = useState<TeachingUnit[]>([])
+    const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
+    const setTeachingUnits = useTeachingUnitStore((s) => s.setTeachingUnits)
+    const getTeachingUnitByLevel = useTeachingUnitStore((s) => s.getTeachingUnitByLevel)
     const [teachers, setTeachers] = useState<Teacher[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems);
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem);
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem);
     const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem);
-    const {currentLevel} = useCurrentLevelStore();
+    const {selectedLevel} = useSelectedLevelStore();
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem);
 
     const defaultValues = {
@@ -101,11 +103,13 @@ export default function ScheduleForm() {
     const watchedGroupIds = form.watch("groupIds")
 
     useEffect(() => {
-        getTeachingUnits().then((units) => {
-            setTeachingUnits(units);
-        }).catch((error) => {
-            console.error("Erreur lors de la récupération des unités de cours :", error);
-        })
+       if(!teachingUnits) {
+           getTeachingUnits().then((unitsData) => {
+               setTeachingUnits(unitsData);
+           }).catch((error) => {
+               console.error("Erreur lors de la récupération des unités de cours :", error);
+           })
+       }
 
         getTeachers().then((teachersData) => {
             setTeachers(teachersData);
@@ -152,19 +156,19 @@ export default function ScheduleForm() {
     }
 
     const availableGroups = useMemo(() => {
-        if (!currentLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return [];
         }
         return getAvailableGroups(
             currentScheduleItems,
-            currentLevel.groups,
+            selectedLevel.groups,
             startDateTime,
             endDateTime,
             selectedScheduleItem
         );
 
 
-    }, [currentScheduleItems, currentLevel?.groups, startDateTime, endDateTime]);
+    }, [currentScheduleItems, selectedLevel?.groups, startDateTime, endDateTime]);
 
     useEffect(() => {
         const availableGroupIds = availableGroups.map((g) => g.id);
@@ -258,7 +262,7 @@ export default function ScheduleForm() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className={"max-w-2xl w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>Planification pour le niveau {currentLevel?.name}</DialogTitle>
+                    <DialogTitle>Planification pour le niveau {selectedLevel?.name}</DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <div className="p-4">
@@ -524,7 +528,7 @@ export default function ScheduleForm() {
                                                                             </SelectTrigger>
                                                                         </FormControl>
                                                                         <SelectContent>
-                                                                            {teachingUnits.map((uc) => (
+                                                                            {getTeachingUnitByLevel(selectedLevel?.id || null).map((uc) => (
                                                                                 <SelectItem key={uc.id}
                                                                                             value={uc.id.toString()}>
                                                                                     <div
