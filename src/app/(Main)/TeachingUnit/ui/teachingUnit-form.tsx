@@ -86,11 +86,11 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                             Nom
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder={"Nom de la salle"} value={field.value}
+                                            <Input placeholder={"Nom de la matière"} value={field.value}
                                                    onChange={field.onChange}/>
                                         </FormControl>
                                         <FormDescription>
-                                            Le nom complet de la salle.
+                                            Le nom complet de la matière.
                                         </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
@@ -104,7 +104,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                             Abréviation
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder={"Nom de la salle"} value={field.value}
+                                            <Input placeholder={"Abréviation de la matière"} value={field.value}
                                                    onChange={field.onChange}/>
                                         </FormControl>
                                         <FormDescription>
@@ -128,7 +128,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                     <FormControl>
                                                         <SelectTrigger>
                                                             <SelectValue
-                                                                placeholder="Heure de début"/>
+                                                                placeholder="Sélectionner un niveau"/>
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
@@ -142,7 +142,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                 </Select>
                                             </FormControl>
                                             <FormDescription>
-                                                L'abréviation de la matière.
+                                                Le niveau auquel cette unité d'enseignement est associée.
                                             </FormDescription>
                                             <FormMessage/>
                                         </FormItem>

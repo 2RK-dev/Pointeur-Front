@@ -77,7 +77,7 @@ export default function Page() {
                             setSelectedTeachingUnit(null);
                             setIsTeachingUnitFormOpen(true);
                         }}>
-                            <Plus className="mr-2 h-4 w-4"/> Ajouter une salle
+                            <Plus className="mr-2 h-4 w-4"/> Ajouter une matière
                         </Button>
                         <Button variant="outline">
                             <FileDown className="mr-2 h-4 w-4"/> Exporter en PDF
