@@ -48,7 +48,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         if(selectedTeachingUnit){
             UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
-                    UpadateTeachingUnitInStore(updatedTeachingUnit);
+                    UpadateTeachingUnitInStore(updatedTeachingUnit.id,updatedTeachingUnit);
                     setIsOpen(false);
                     form.reset();
                 })
@@ -124,7 +124,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={field.onChange}
-                                                        value={field.value.toString() || ""}>
+                                                        value={field.value?.toString() || ""}>
                                                     <FormControl>
                                                         <SelectTrigger>
                                                             <SelectValue
