@@ -8,11 +8,13 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {TeachingUnit, TeachingUnitPost, TeachingUnitPostSchema} from "@/Types/TeachingUnit";
 import z from "zod";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {AddTeachingUnitService, UpdateTeachingUnitService} from "@/services/TeachingUnit";
 import {useTeachingUnitStore} from "@/Stores/TeachingUnit";
 import {useLevelStore} from "@/Stores/Level";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {Checkbox} from "@/components/ui/checkbox";
+import {Label} from "@/components/ui/label";
 
 interface IProps {
     isOpen: boolean;
@@ -26,6 +28,9 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
     const AddTeachingUnitInStore = useTeachingUnitStore(s => s.addTeachingUnit);
     const UpdateTeachingUnitInStore = useTeachingUnitStore(s => s.updateTeachingUnit);
     const Levels = useLevelStore(s => s.levels);
+    const defaultChecked = selectedTeachingUnit ? selectedTeachingUnit.associatedLevels !== null : true;
+    const [isAssociated, setIsAssociated] = useState<boolean>(defaultChecked);
+
 
     const defaultValues = {
         name: selectedTeachingUnit?.name || "",
@@ -45,17 +50,21 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
     const selectedLevelsObj = Levels?.find(level => level.id === selectedLevelID);
 
     const onSubmit = (data: TeachingUnitPost) => {
-        if(selectedTeachingUnit){
+        if(!isAssociated){
+            data.associatedLevels = null;
+        }
+        console.log("Form data submitted:", data);
+        if (selectedTeachingUnit) {
             UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
-                    UpdateTeachingUnitInStore(updatedTeachingUnit.id,updatedTeachingUnit);
+                    UpdateTeachingUnitInStore(updatedTeachingUnit.id, updatedTeachingUnit);
                     setIsOpen(false);
                     form.reset();
                 })
                 .catch((error) => {
                     console.error("Failed to update teaching unit:", error);
-            })
-        }else{
+                })
+        } else {
             AddTeachingUnitService(data)
                 .then((newTeachingUnit) => {
                     AddTeachingUnitInStore(newTeachingUnit);
@@ -113,47 +122,74 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                         <FormMessage/>
                                     </FormItem>
                                 )}/>
-                            { selectedTeachingUnit !== null && (
-                                <FormField
-                                    control={form.control}
-                                    name="associatedLevels"
-                                    render={({field}) => (
-                                        <FormItem className="flex flex-col">
-                                            <FormLabel className="flex items-center gap-2">
-                                                Associé au niveau
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Select onValueChange={field.onChange}
-                                                        value={field.value?.toString() || ""}>
-                                                    <FormControl>
-                                                        <SelectTrigger>
-                                                            <SelectValue
-                                                                placeholder="Sélectionner un niveau"/>
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        {Levels?.map((level) => (
-                                                            <SelectItem key={level.id}
-                                                                        value={level.id.toString()}>
-                                                                {level.name}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
-                                            </FormControl>
-                                            <FormDescription>
-                                                Le niveau auquel cette unité d'enseignement est associée.
-                                            </FormDescription>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}/>
+                            {selectedTeachingUnit !== null && (
+                                <div>
+                                    <FormField
+                                        control={form.control}
+                                        name="associatedLevels"
+                                        render={({field}) => (
+                                            <FormItem className="flex flex-col">
+                                                <FormLabel className="flex items-center gap-2">
+                                                    Associé au niveau
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <div className={"flex flex-col gap-2"}>
+                                                        <Select disabled={!isAssociated}
+                                                            onValueChange={(value) => {
+                                                            field.onChange(value ? parseInt(value) : null)
+                                                        }}
+                                                                value={field.value?.toString() || ""}>
+                                                            <FormControl>
+                                                                <SelectTrigger>
+                                                                    <SelectValue
+                                                                        placeholder="Sélectionner un niveau"/>
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {Levels?.map((level) => (
+                                                                    <SelectItem key={level.id}
+                                                                                value={level.id.toString()}>
+                                                                        {level.name}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <Label
+                                                            className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
+                                                            <Checkbox
+                                                                id="toggle-2"
+                                                                checked={!isAssociated}
+                                                                onCheckedChange={(checked)=>{
+                                                                    setIsAssociated(!checked);
+                                                                }}
+                                                                className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+                                                            />
+                                                            <div className="grid gap-1.5 font-normal">
+                                                                <p className="text-sm leading-none font-medium">
+                                                                    Ne pas associer à un niveau
+                                                                </p>
+                                                                <p className="text-muted-foreground text-sm">
+                                                                    La matière sera associée à tous les niveaux.
+                                                                </p>
+                                                            </div>
+                                                        </Label>
+                                                    </div>
+                                                </FormControl>
+                                                <FormDescription>
+                                                    Le niveau auquel cette unité d'enseignement est associée.
+                                                </FormDescription>
+                                                <FormMessage/>
+                                            </FormItem>
+                                        )}/>
+                                </div>
                             )}
                             <div className="flex flex-row justify-end gap-2 mt-2 ">
                                 <Button
                                     type="button"
                                     variant={"outline"}
                                     onClick={() => {
-                                        form.reset()
+                                        form.reset();
+                                        setIsAssociated(defaultChecked);
                                     }}>
                                     <RotateCcw/>
                                 </Button>
