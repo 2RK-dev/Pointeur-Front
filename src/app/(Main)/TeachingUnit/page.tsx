@@ -46,8 +46,8 @@ export default function Page() {
 
     const handleRemove = (id: number) => {
         RemoveTeachingUnitService(id)
-            .then((removedTeachingUnit) => {
-                removeTeachingUnitInStore(removedTeachingUnit.id);
+            .then((removedTeachingUnitId) => {
+                removeTeachingUnitInStore(removedTeachingUnitId);
                 setIsConfirmationModalOpen(false);
             }).catch((error) => {
             console.error("Failed to remove teaching unit:", error);
