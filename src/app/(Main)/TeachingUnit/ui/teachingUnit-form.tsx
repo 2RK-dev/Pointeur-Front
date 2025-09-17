@@ -133,7 +133,6 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                     Associé au niveau
                                                 </FormLabel>
                                                 <FormControl>
-                                                    <div className={"flex flex-col gap-2"}>
                                                         <Select disabled={!isAssociated}
                                                             onValueChange={(value) => {
                                                             field.onChange(value ? parseInt(value) : null)
@@ -154,26 +153,6 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                                 ))}
                                                             </SelectContent>
                                                         </Select>
-                                                        <Label
-                                                            className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
-                                                            <Checkbox
-                                                                id="toggle-2"
-                                                                checked={!isAssociated}
-                                                                onCheckedChange={(checked)=>{
-                                                                    setIsAssociated(!checked);
-                                                                }}
-                                                                className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
-                                                            />
-                                                            <div className="grid gap-1.5 font-normal">
-                                                                <p className="text-sm leading-none font-medium">
-                                                                    Ne pas associer à un niveau
-                                                                </p>
-                                                                <p className="text-muted-foreground text-sm">
-                                                                    La matière sera associée à tous les niveaux.
-                                                                </p>
-                                                            </div>
-                                                        </Label>
-                                                    </div>
                                                 </FormControl>
                                                 <FormDescription>
                                                     Le niveau auquel cette unité d'enseignement est associée.
@@ -183,6 +162,25 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                         )}/>
                                 </div>
                             )}
+                            <Label
+                                className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
+                                <Checkbox
+                                    id="toggle-2"
+                                    checked={!isAssociated}
+                                    onCheckedChange={(checked)=>{
+                                        setIsAssociated(!checked);
+                                    }}
+                                    className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+                                />
+                                <div className="grid gap-1.5 font-normal">
+                                    <p className="text-sm leading-none font-medium">
+                                        Ne pas associer à un niveau
+                                    </p>
+                                    <p className="text-muted-foreground text-sm">
+                                        La matière sera associée à tous les niveaux.
+                                    </p>
+                                </div>
+                            </Label>
                             <div className="flex flex-row justify-end gap-2 mt-2 ">
                                 <Button
                                     type="button"
