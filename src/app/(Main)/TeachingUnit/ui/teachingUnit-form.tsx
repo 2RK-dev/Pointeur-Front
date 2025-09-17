@@ -54,7 +54,6 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         if(!isAssociated){
             data.associatedLevels = null;
         }
-        console.log("Form data submitted:", data);
         if (selectedTeachingUnit) {
             UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
