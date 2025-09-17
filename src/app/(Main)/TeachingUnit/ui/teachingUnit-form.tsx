@@ -45,6 +45,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
 
     useEffect(() => {
         form.reset(defaultValues);
+        setIsAssociated(defaultChecked);
     }, [selectedLevelID, selectedTeachingUnit]);
 
     const selectedLevelsObj = Levels?.find(level => level.id === selectedLevelID);
