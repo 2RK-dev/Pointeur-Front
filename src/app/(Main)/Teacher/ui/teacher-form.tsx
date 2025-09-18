@@ -1,6 +1,5 @@
-import {Teacher, TeacherPost} from "@/Types/Teacher";
+import {Teacher, TeacherPost, TeacherPostSchema} from "@/Types/Teacher";
 import {useForm} from "react-hook-form";
-import {RoomPostSchema} from "@/Types/Room";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useEffect} from "react";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
@@ -26,7 +25,7 @@ export default function TeacherForm({isOpen, setIsOpen, selectedTeacher}: Props)
         abr: selectedTeacher?.abr || "",
     }
     const form = useForm<TeacherPost>({
-        resolver: zodResolver(RoomPostSchema),
+        resolver: zodResolver(TeacherPostSchema),
         defaultValues: defaultValues,
     })
 
@@ -59,7 +58,7 @@ export default function TeacherForm({isOpen, setIsOpen, selectedTeacher}: Props)
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className={"w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>{selectedTeacher ? "Modifier" : "Nouvelle"} enseignant </DialogTitle>
+                    <DialogTitle>{selectedTeacher ? "Modifier" : "Nouvel"} enseignant </DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <Form {...form}>
