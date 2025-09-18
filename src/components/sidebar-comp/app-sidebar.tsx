@@ -53,18 +53,6 @@ const data = {
 	],
 	navMain: [
 		{
-			title: "Tableau de bord",
-			url: "/Dashboard",
-			icon: Layers,
-			access: "Dashboard",
-		},
-		{
-			title: "Absence",
-			icon: Frown,
-			url: "/Abs",
-			access: "Abs",
-		},
-		{
 			title: "Planification",
 			isActive: true,
 			icon: School,
@@ -93,15 +81,9 @@ const data = {
 			icon: School,
 			items: [
 				{
-					title: "Etudiant",
-					icon: UserRound,
-					url: "/Etudiant",
-					access: "matter_abr",
-				},
-				{
 					title: "Professeur",
 					icon: GraduationCap,
-					url: "/Prof",
+					url: "/Teacher",
 					access: "matter_abr",
 				},
 				{
