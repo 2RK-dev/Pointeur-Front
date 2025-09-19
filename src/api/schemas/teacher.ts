@@ -1,7 +1,9 @@
 import z from "zod";
 
-export const TeacherSchema = z.object({
-    id: z.number(),
+const BaseTeacherSchema = z.object({
     name: z.string(),
     abbreviation: z.string(),
-})
+});
+export const TeacherSchema = BaseTeacherSchema.extend({id: z.number()});
+export const CreateTeacherSchema = BaseTeacherSchema;
+export const UpdateTeacherSchema = BaseTeacherSchema;

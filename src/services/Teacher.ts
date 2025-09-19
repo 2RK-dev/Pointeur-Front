@@ -2,9 +2,10 @@
 
 "use server";
 
-import {Teacher, TeacherPost} from "@/Types/Teacher";
-import { fetchTeachers } from "@/api/http/teacher";
+import { Teacher, TeacherPost } from "@/Types/Teacher";
+import { createTeacher, deleteTeacher, fetchTeachers, updateTeacher as updateTeacherApi } from "@/api/http/teacher";
 import { TeacherMapper } from "@/services/mapper";
+import { ICreateTeacher, IUpdateTeacher } from "@/api/types";
 
 export async function getTeachers (): Promise<Teacher[]> {
     const teachersList = await fetchTeachers();
@@ -12,17 +13,24 @@ export async function getTeachers (): Promise<Teacher[]> {
 }
 
 export async function addTeacher (teacher: TeacherPost): Promise<Teacher> {
-    // TODO: implement addTeacher function
-    throw new Error("Function not implemented.");
+    const requestBody: ICreateTeacher = {
+        name: teacher.name,
+        abbreviation: teacher.abr,
+    };
+    const createdTeacher = await createTeacher(requestBody);
+    return TeacherMapper.fromDto(createdTeacher);
 }
 
 export async function updateTeacher (id: number, teacher: TeacherPost): Promise<Teacher> {
-    // TODO: implement updateTeacher function
-    throw new Error("Function not implemented.");
+    const requestBody: IUpdateTeacher = {
+        abbreviation: teacher.abr, name: teacher.name
+    };
+    const updatedTeacher = await updateTeacherApi(id, requestBody);
+    return TeacherMapper.fromDto(updatedTeacher);
 }
 
 export async function removeTeacher (id: number): Promise<number> {
-    // TODO: implement removeTeacher function
-    throw new Error("Function not implemented.");
+    await deleteTeacher(id);
+    return id;
 }
 
