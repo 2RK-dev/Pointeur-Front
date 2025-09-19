@@ -1,10 +1,8 @@
-version: "3.8"
-
 services:
-  nextjs:
-    image: hhh # Si vous avez déjà une image construite
+  app:
+    build: .
+    container_name: nextJS_app
     ports:
-      - "3000:3000" # Utilisation du port défini dans .env
-    environment:
-      - PORT=3000
-      - API_URL=http://192.168.201.215:8000
+      - "${EXTERNAL_PORT}:3000"
+    env_file:
+      - .env
