@@ -97,6 +97,10 @@ export default function ScheduleForm() {
         form.reset(defaultValues)
     }, [selectedScheduleItem])
 
+    useEffect(()=>{
+        form.resetField("teachingUnitID")
+    },[selectedLevel])
+
     const watchedDate = form.watch("date")
     const watchedStartTime = form.watch("startTime")
     const watchedEndTime = form.watch("endTime")
