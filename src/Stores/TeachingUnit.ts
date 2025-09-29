@@ -28,6 +28,6 @@ export const useTeachingUnitStore = create<useTeachingUnitStore>((set, get) => (
         const units = get().teachingUnits;
         if (!units) return [];
         if (levelId === null) return [];
-        return units.filter(unit => unit.associatedLevels === levelId);
+        return units.filter(unit => unit.associatedLevels === levelId || unit.associatedLevels === null);
     }
 }));
