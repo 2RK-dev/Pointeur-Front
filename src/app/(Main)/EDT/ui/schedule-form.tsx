@@ -44,9 +44,7 @@ const ScheduleItemFormSchema = z.object({
     teacherId: z.number({
         required_error: "Veuillez sélectionner un enseignant",
     }),
-    roomId: z.number({
-        required_error: "Veuillez sélectionner une salle",
-    }),
+    roomId: z.number().nullable(),
     groupIds: z.array(z.string()).min(1, "Veuillez sélectionner au moins un groupe"),
 })
 
@@ -84,7 +82,7 @@ export default function ScheduleForm() {
             }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
         teacherId: selectedScheduleItem?.Teacher.id || undefined,
-        roomId: selectedScheduleItem?.Room.id || undefined,
+        roomId: selectedScheduleItem?.Room?.id || -1,
         groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
     }
 
@@ -219,7 +217,7 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         const availableRoomIds = availableRooms.map((r) => r.id)
-        if (form.getValues("roomId") && !availableRoomIds.includes(form.getValues("roomId"))) {
+        if (form.getValues("roomId") && !availableRoomIds.includes(form.getValues("roomId") || -1)) {
             form.resetField("roomId")
         }
     }, [availableRooms, form]);
@@ -272,7 +270,7 @@ export default function ScheduleForm() {
             const scheduleItem = ScheduleItemPostSchema.parse({
                 TeachingUnitID: values.teachingUnitID,
                 TeacherId: values.teacherId,
-                RoomId: values.roomId,
+                RoomId: values.roomId === -1 ? null : values.roomId,
                 GroupIds: values.groupIds,
                 startTime: startDateTime,
                 endTime: endDateTime,
@@ -576,6 +574,11 @@ export default function ScheduleForm() {
                                                             </SelectTrigger>
                                                         </FormControl>
                                                         <SelectContent>
+                                                            <SelectItem value={"-1"}>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span>Aucune</span>
+                                                                </div>
+                                                            </SelectItem>
                                                             {availableRooms.map((room) => (
                                                                 <SelectItem key={room.id} value={room.id.toString()}>
                                                                     <div
