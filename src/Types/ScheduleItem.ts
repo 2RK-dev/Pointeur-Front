@@ -10,7 +10,7 @@ export const ScheduleItemSchema = z.object({
   endTime: z.preprocess((arg) => new Date(arg as string), z.date()),
   Teacher: TeacherSchema,
   TeachingUnit: TeachingUnitSchema,
-  Room: RoomSchema,
+  Room: RoomSchema.nullable(),
   Groups: z.array(GroupSchema)
 });
 
@@ -19,7 +19,7 @@ export const ScheduleItemPostSchema = z.object({
     endTime: z.preprocess((arg) => (arg as Date).toISOString(), z.string()),
     TeacherId: z.number(),
     TeachingUnitID: z.number(),
-    RoomId: z.number(),
+    RoomId: z.number().nullable(),
     GroupIds: z.array(z.string())
 })
 

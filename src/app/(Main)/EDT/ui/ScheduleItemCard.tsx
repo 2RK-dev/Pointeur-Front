@@ -32,12 +32,12 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 			<div onClick={UpdateScheduleItem} className="text-[10px] whitespace-normal leading-tight">
 				<span>{scheduleItem.TeachingUnit.abr}</span>
 				<br/>
-				{scheduleItem.Room.abr} — {scheduleItem.Teacher.abr}
+				{ scheduleItem.Room && scheduleItem.Room.abr + " - "}{scheduleItem.Teacher.abr}
 				<br />
 				{scheduleItem.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })} -&nbsp;
 				{scheduleItem.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}
 				<br />
-				<span>Groupes :</span>{" "}
+				<span>Groupes :</span>&nbsp;
 				{scheduleItem.Groups.map((g) => g.abr).join(", ")}
 			</div>
 		</div>
