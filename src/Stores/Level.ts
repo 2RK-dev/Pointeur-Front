@@ -22,13 +22,3 @@ export const useLevelStore = create<LevelStoreInterface>((set) => ({
         levels: state.levels ? state.levels.filter(level => level.id !== id) : null
     })),
 }));
-interface SelectedLevelStoreInterface {
-    selectedLevel: Level | null;
-    setSelectedLevel: (level: Level) => void;
-}
-
-export const useSelectedLevelStore = create<SelectedLevelStoreInterface>((set) => ({
-    selectedLevel: null,
-    setSelectedLevel: (level: Level) => set({selectedLevel: level}),
-}));
-

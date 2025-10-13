@@ -1,4 +1,4 @@
-import {useScheduleItemByLevelStore} from "@/Stores/ScheduleItem";
+import {useDisplayScheduleItem} from "@/Stores/ScheduleItem";
 import {calculateRowAssignments, getWidthPercentageFor} from "@/Tools/ScheduleItem";
 import ScheduleItemCard from "@/app/(Main)/EDT/ui/ScheduleItemCard";
 
@@ -7,8 +7,8 @@ interface ScheduleDisplayProps {
 }
 
 export default function ScheduleDisplay({jourIndex}: ScheduleDisplayProps) {
-    const {scheduleItemsByLevel} = useScheduleItemByLevelStore();
-    const joursHoraires = scheduleItemsByLevel.filter(
+    const {displayScheduleItems} = useDisplayScheduleItem();
+    const joursHoraires = displayScheduleItems.filter(
         (item) => item.startTime.getDay() === jourIndex
     );
 

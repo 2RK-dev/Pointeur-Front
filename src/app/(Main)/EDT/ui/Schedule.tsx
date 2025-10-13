@@ -10,24 +10,34 @@ import EdtEncapsuler from "./EdtEncapsuler";
 import ScheduleForm from "@/app/(Main)/EDT/ui/schedule-form";
 import {
     useCurrentScheduleItemsStore,
+    useDisplayScheduleItem,
     useOpenScheduleItemFormStore,
-    useScheduleItemByLevelStore, useSelectedScheduleItemStore
+    useSelectedScheduleItemStore
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
 import {getNextFourWeeks, getWeekRange} from "@/Tools/ScheduleItem";
-import {useSelectedLevelStore} from "@/Stores/Level";
 import {Level} from "@/Types/Level";
 import {getLevels} from "@/services/Level";
+import {useLevelStore} from "@/Stores/Level";
+import {useTeacherStore} from "@/Stores/Teacher";
+import {getTeachers} from "@/services/Teacher";
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
-    const {setScheduleItemsByLevel} = useScheduleItemByLevelStore();
+    const setScheduleItemsByLevel = useDisplayScheduleItem((s) => s.setScheduleItemsByLevel);
+    const setScheduleItemsByTeacher = useDisplayScheduleItem((s) => s.setScheduleItemsByTeacher);
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+    const displayMode = useDisplayScheduleItem((s) => s.displayMode);
+    const setDisplayMode = useDisplayScheduleItem((s) => s.setDisplayMode);
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
-    const [levels, setLevels] = useState<Level[]>([]);
-    const {selectedLevel, setSelectedLevel} = useSelectedLevelStore();
+    const teachers = useTeacherStore((s) => s.teachers);
+    const setTeachers = useTeacherStore((s) => s.setTeachers);
+    const levels = useLevelStore((s) => s.levels);
+    const setLevels = useLevelStore((s) => s.setLevels);
+    const [selectedTeacher, setSelectedTeacher] = useState<number | null>(null);
+    const [selectedLevel, setSelectedLevel] = useState<Level | null>(null)
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
 
@@ -40,14 +50,32 @@ export default function Schedule() {
             console.error("Error fetching schedule items:", error);
         });
 
-        getLevels().then((levels) => {
-            setLevels(levels);
-            if (levels.length > 0) {
-                setSelectedLevel(levels[0]);
-            }
-        }).catch((error) => {
-            console.error("Error fetching levels:", error);
-        })
+        if (!levels) {
+            getLevels().then((levels) => {
+                setLevels(levels);
+                if (levels.length > 0) {
+                    setSelectedLevel(levels[0]);
+                }
+            }).catch((error) => {
+                console.error("Error fetching levels:", error);
+            })
+        } else if (levels.length > 0) {
+            setSelectedLevel(levels[0]);
+        }
+
+        if (!teachers) {
+            getTeachers().then((teachers) => {
+                setTeachers(teachers);
+                if (teachers.length > 0) {
+                    setSelectedTeacher(teachers[0].id);
+                }
+            }).catch((error) => {
+                console.error("Error fetching teachers:", error);
+            });
+        } else if (teachers.length > 0) {
+            setSelectedTeacher(teachers[0].id);
+        }
+
     }, []);
 
 
@@ -56,9 +84,12 @@ export default function Schedule() {
         const filtered = currentScheduleItems.filter(item => {
             return item.startTime >= start && item.endTime <= end;
         });
-        if (!selectedLevel) return;
-        setScheduleItemsByLevel(selectedLevel?.groups || [], filtered);
-    }, [selectedWeek, selectedLevel, currentScheduleItems]);
+        if (displayMode === "Student" && selectedLevel) {
+            setScheduleItemsByLevel(selectedLevel?.groups || [], filtered);
+        } else if (displayMode === "Teacher" && selectedTeacher) {
+            setScheduleItemsByTeacher(selectedTeacher, filtered);
+        }
+    }, [selectedWeek, selectedLevel, currentScheduleItems, displayMode, selectedTeacher]);
 
     const TransposeData = (TargetWeek: number) => {
         alert(`Transposing data to week ${TargetWeek}`);
@@ -67,6 +98,20 @@ export default function Schedule() {
 
     return (
         <div className="p-4  min-w-[1250px]">
+            <div>
+                <Select value={displayMode} onValueChange={(val) => {
+                    setDisplayMode(val as "Student" | "Teacher" | "Room");
+                }}>
+                    <SelectTrigger className="w-[180px] mb-4">
+                        <SelectValue placeholder="Sélectionner la vue"/>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="Student">Vue Étudiant</SelectItem>
+                        <SelectItem value="Teacher">Vue Enseignant</SelectItem>
+                        <SelectItem value="Room">Vue Salle</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
             <div className="mb-4 flex justify-between items-center">
                 <Select
                     value={selectedWeek.toString()}
@@ -93,23 +138,7 @@ export default function Schedule() {
                         ))}
                     </SelectContent>
                 </Select>
-                <Select value={selectedLevel?.id.toString() || "0"} onValueChange={(val) => {
-                    const level = levels.find((l) => l.id.toString() === val);
-                    if (level) {
-                        setSelectedLevel(level);
-                    }
-                }}>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Sélectionner le niveau"/>
-                    </SelectTrigger>
-                    <SelectContent>
-                        {levels.map((level) => (
-                            <SelectItem key={level.id} value={level.id.toString()}>
-                                {level.name}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                <SelectComponent setSelectedTeacher={setSelectedTeacher} setSelectedLevel={setSelectedLevel}/>
                 <div className=" space-x-4">
                     <Button
                         onClick={() => {
@@ -120,7 +149,7 @@ export default function Schedule() {
                     <Button onClick={generatePDF}>
                         <FileText/>
                     </Button>
-                    <Button onClick={() =>{
+                    <Button onClick={() => {
                         setSelectedScheduleItem(null);
                         setOpenForm(true)
                     }}>
@@ -132,7 +161,7 @@ export default function Schedule() {
                 <EdtEncapsuler/>
             </div>
 
-            <ScheduleForm/>
+            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacher} levelList={levels || [] }/>
 
             <Dialog
                 open={isTransposeModalOpen}
@@ -169,4 +198,78 @@ export default function Schedule() {
             </Dialog>
         </div>
     );
+}
+
+interface selectComponentProps {
+    setSelectedLevel: (level: Level | null) => void;
+    setSelectedTeacher: (teacherId: number | null) => void;
+}
+
+function SelectComponent({setSelectedLevel, setSelectedTeacher}: selectComponentProps) {
+    const displayMode = useDisplayScheduleItem((s) => s.displayMode);
+    const levels = useLevelStore((s) => s.levels);
+    const teachers = useTeacherStore((s) => s.teachers);
+    const [selectedValue, setSelectedValue] = useState<string>("");
+    const getDisplayLabel = (mode: string) => {
+        switch (mode) {
+            case "Student":
+                return "niveau";
+            case "Teacher":
+                return "enseignant";
+            case "Room":
+                return "salle";
+            default:
+                return "";
+        }
+    }
+
+    useEffect(() => {
+        if(displayMode === "Student" && levels && levels.length > 0){
+            setSelectedValue(levels[0].id.toString());
+            setSelectedLevel(levels[0]);
+            setSelectedTeacher(null);
+        } else if(displayMode === "Teacher" && teachers && teachers.length > 0){
+            setSelectedValue(teachers[0].id.toString());
+            setSelectedTeacher(teachers[0].id);
+            setSelectedLevel(null);
+        } else {
+            setSelectedValue("");
+            setSelectedLevel(null);
+            setSelectedTeacher(null);
+        }
+    }, [displayMode, levels, teachers]);
+
+    return (
+        <Select value={selectedValue} onValueChange={(value) => {
+            setSelectedTeacher(null);
+            setSelectedLevel(null);
+            if (displayMode === "Student") {
+                const level = levels?.find(l => l.id.toString() === value);
+                if (level) {
+                    setSelectedLevel(level);
+                }
+            } else if (displayMode === "Teacher") {
+                const teacherId = parseInt(value);
+                setSelectedTeacher(teacherId);
+            }
+            setSelectedValue(value);
+        }}
+        >
+            <SelectTrigger className="w-[250px] mb-4">
+                <SelectValue placeholder={"Sélectionner un " + getDisplayLabel(displayMode)}/>
+            </SelectTrigger>
+            <SelectContent>
+                {displayMode === "Student" && levels ? levels.map((level) => (
+                    <SelectItem key={level.id} value={level.id.toString()}>
+                        {level.name}
+                    </SelectItem>
+                )) : displayMode === "Teacher" && teachers ? teachers.map((teacher) => (
+                    <SelectItem key={teacher.id} value={teacher.id.toString()}>
+                        {teacher.name}
+                    </SelectItem>
+                )) :<div className=" p-2 text-sm text-muted-foreground">Aucun élément disponible</div>}
+            </SelectContent>
+        </Select>
+
+    )
 }

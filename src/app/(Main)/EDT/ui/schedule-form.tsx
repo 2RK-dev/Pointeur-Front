@@ -23,12 +23,12 @@ import {
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore,
 } from "@/Stores/ScheduleItem"
-import {useSelectedLevelStore} from "@/Stores/Level"
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog"
 import {addScheduleItemService, deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem"
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem"
 import {useTeachingUnitStore} from "@/Stores/TeachingUnit"
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {Level} from "@/Types/Level";
 
 const hours = generateHours()
 
@@ -40,17 +40,23 @@ const ScheduleItemFormSchema = z.object({
     endTime: z.string().min(1, "Veuillez sélectionner l'heure de fin"),
     teachingUnitID: z.number({
         required_error: "Veuillez sélectionner une unité de cours",
-    }),
+    }).nullable(),
     teacherId: z.number({
         required_error: "Veuillez sélectionner un enseignant",
-    }),
+    }).nullable(),
     roomId: z.number({
         required_error: "Veuillez sélectionner une salle",
     }),
     groupIds: z.array(z.string()).min(1, "Veuillez sélectionner au moins un groupe"),
 })
 
-export default function ScheduleForm() {
+interface props {
+    selectedLevel: Level | null,
+    selectedTeacherId: number | null,
+    levelList: Level[]
+}
+
+export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList}: props) {
     const {open, setOpen} = useOpenScheduleItemFormStore()
     const [calendarOpen, setCalendarOpen] = useState(false)
     const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
@@ -65,8 +71,8 @@ export default function ScheduleForm() {
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem)
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem)
     const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem)
-    const {selectedLevel} = useSelectedLevelStore()
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem)
+    const [selectedLevelState, setSelectedLevelState] = useState<Level | null>(selectedLevel)
 
     const defaultValues = {
         date: selectedScheduleItem?.startTime || undefined,
@@ -83,7 +89,7 @@ export default function ScheduleForm() {
                 hour12: false,
             }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
-        teacherId: selectedScheduleItem?.Teacher.id || undefined,
+        teacherId: selectedScheduleItem?.Teacher.id || selectedTeacherId || undefined,
         roomId: selectedScheduleItem?.Room.id || undefined,
         groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
     }
@@ -95,11 +101,14 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         form.reset(defaultValues)
-    }, [selectedScheduleItem])
+        if (selectedScheduleItem) {
+            const level = levelList.find(l => l.id === selectedScheduleItem.Groups[0]?.levelId) || null
+            setSelectedLevelState(level)
+        } else {
+            setSelectedLevelState(selectedLevel)
+        }
+    }, [selectedLevel, selectedTeacherId, selectedScheduleItem])
 
-    useEffect(()=>{
-        form.resetField("teachingUnitID")
-    },[selectedLevel])
 
     const watchedDate = form.watch("date")
     const watchedStartTime = form.watch("startTime")
@@ -164,20 +173,24 @@ export default function ScheduleForm() {
         endDateTime.setHours(endHour, endMinute, 0, 0)
     }
 
+    const teachingUnitByLevel = useMemo(() => {
+        return getTeachingUnitByLevel(selectedLevelState?.id || null)
+    }, [selectedLevelState])
+
     const availableGroups = useMemo(() => {
-        if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableGroups(
             startDateTime,
             endDateTime,
-            selectedLevel.groups,
+            selectedLevelState.groups,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime])
+    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime])
 
     const availableTeachers = useMemo(() => {
-            if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+            if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
                 return []
             }
             return getAvailableTeachers(
@@ -187,10 +200,10 @@ export default function ScheduleForm() {
                 selectedScheduleItem,
             )
         }
-        , [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime, teachers])
+        , [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, teachers])
 
     const availableRooms = useMemo(() => {
-        if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableRooms(
@@ -199,7 +212,17 @@ export default function ScheduleForm() {
             rooms,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime, rooms])
+    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, rooms])
+
+    useEffect(() => {
+        const currentTeachingUnitID = form.getValues("teachingUnitID")
+        if (
+            currentTeachingUnitID &&
+            !teachingUnitByLevel.find(uc => uc.id === currentTeachingUnitID)
+        ) {
+            form.setValue("teachingUnitID", null)
+        }
+    }, [teachingUnitByLevel, form])
 
     useEffect(() => {
         const availableGroupIds = availableGroups.map((g) => g.id)
@@ -212,8 +235,9 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         const availableTeacherIds = availableTeachers.map((t) => t.id)
-        if (form.getValues("teacherId") && !availableTeacherIds.includes(form.getValues("teacherId"))) {
-            form.resetField("teacherId")
+        const currentTeacherId = form.getValues("teacherId")
+        if (currentTeacherId && !availableTeacherIds.includes(currentTeacherId)) {
+            form.setValue("teacherId", null)
         }
     }, [availableTeachers, form])
 
@@ -238,8 +262,8 @@ export default function ScheduleForm() {
         return day >= 1 && day <= 6
     }
 
-    const isPeriodComplete = watchedDate && watchedStartTime && watchedEndTime
-    const isSubmitDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0
+    const canShowGroup = watchedDate && watchedStartTime && watchedEndTime && selectedLevelState
+    const isSubmitDisabled = capacityError || !canShowGroup || Object.keys(form.formState.errors).length > 0
 
     const handleDelete = () => {
         if (!selectedScheduleItem) return
@@ -311,9 +335,11 @@ export default function ScheduleForm() {
                     <DialogTitle className="text-xl font-medium">
                         {selectedScheduleItem ? "Modifier le cours" : "Nouveau cours"}
                     </DialogTitle>
-                    <p className="text-sm text-muted-foreground mt-1">Niveau {selectedLevel?.name}</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                        {selectedLevel && `Niveau ${selectedLevel.name}`}
+                    </p>
                 </DialogHeader>
-                <ScrollArea className="max-h-[80vh] w-full">
+                <ScrollArea className="max-h-[80vh] w-full px-2 pb-8">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mx-2">
                             <div className="space-y-4">
@@ -421,13 +447,31 @@ export default function ScheduleForm() {
 
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Groupes</h3>
-
+                                <Select value={selectedLevelState?.id.toString() } onValueChange={(val) =>{
+                                    const level = levelList.find(l => l.id.toString() === val) || null
+                                    setSelectedLevelState(level)
+                                }}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Sélectionner un niveau"/>
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {levelList.length > 0 ? levelList.map((level) => (
+                                            <SelectItem key={level.id} value={level.id.toString()}>
+                                                <div className="flex items-center gap-2">
+                                                    <span
+                                                        className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">{level.name}</span>
+                                                    <span>{level.name}</span>
+                                                </div>
+                                            </SelectItem>
+                                        )) : <div className="p-2 text-sm text-muted-foreground">Aucun niveau disponible</div>}
+                                    </SelectContent>
+                                </Select>
                                 <FormField
                                     control={form.control}
                                     name="groupIds"
                                     render={() => (
                                         <FormItem>
-                                            {isPeriodComplete ? (
+                                            {canShowGroup ? (
                                                 <div className="space-y-3">
                                                     <p className="text-sm text-muted-foreground">
                                                         {availableGroups.length} groupe(s) disponible(s)
@@ -478,7 +522,7 @@ export default function ScheduleForm() {
                                             ) : (
                                                 <div className="text-center py-12 text-muted-foreground">
                                                     <Users className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                                    <p className="text-sm">Définissez la période pour voir les groupes
+                                                    <p className="text-sm">Définissez la période et le niveau pour voir les groupes
                                                         disponibles</p>
                                                 </div>
                                             )}
@@ -490,7 +534,7 @@ export default function ScheduleForm() {
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Détails
                                     du cours</h3>
-                                {isPeriodComplete ? (
+                                {canShowGroup ? (
                                     <>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <FormField
@@ -509,7 +553,7 @@ export default function ScheduleForm() {
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
-                                                                {getTeachingUnitByLevel(selectedLevel?.id || null).map((uc) => (
+                                                                {teachingUnitByLevel.map((uc) => (
                                                                     <SelectItem key={uc.id} value={uc.id.toString()}>
                                                                         <div className="flex items-center gap-2">
                                                                             <span
@@ -600,7 +644,7 @@ export default function ScheduleForm() {
                                 ) : (
                                     <div className="text-center py-12 text-muted-foreground">
                                         <BookOpen className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                        <p className="text-sm">Définissez la période pour configurer les détails du
+                                        <p className="text-sm">Définissez la période et le niveau pour configurer les détails du
                                             cours</p>
                                     </div>
                                 )}
@@ -635,7 +679,10 @@ export default function ScheduleForm() {
                                 )}
 
                                 <div className="flex gap-3 ml-auto">
-                                    <Button type="button" variant="outline" onClick={() => form.reset()}>
+                                    <Button type="button" variant="outline" onClick={() => {
+                                        setSelectedLevelState(selectedLevel)
+                                        form.reset()
+                                    }}>
                                         Réinitialiser
                                     </Button>
                                     <Button type="submit" disabled={isSubmitDisabled}>
@@ -648,5 +695,5 @@ export default function ScheduleForm() {
                 </ScrollArea>
             </DialogContent>
         </Dialog>
-    )
+)
 }
