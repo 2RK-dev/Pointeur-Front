@@ -29,14 +29,16 @@ import {Room} from "@/Types/Room";
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
-    const setScheduleItemsByLevel = useDisplayScheduleItem((s) => s.setScheduleItemsByLevel);
-    const setScheduleItemsByTeacher = useDisplayScheduleItem((s) => s.setScheduleItemsByTeacher);
-    const setScheduleItemsByRoom = useDisplayScheduleItem((s) => s.setScheduleItemsByRoom);
+    const {
+        displayMode,
+        setDisplayMode,
+        setScheduleItemsByLevel,
+        setScheduleItemsByTeacher,
+        setScheduleItemsByRoom
+    } = useDisplayScheduleItem();
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
     const roomList = useRoomsStore((s) => s.rooms);
     const setRoomList = useRoomsStore((s) => s.setRooms);
-    const displayMode = useDisplayScheduleItem((s) => s.displayMode);
-    const setDisplayMode = useDisplayScheduleItem((s) => s.setDisplayMode);
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
     const teacherList = useTeacherStore((s) => s.teachers);
@@ -84,16 +86,16 @@ export default function Schedule() {
             setSelectedTeacherId(teacherList[0].id);
         }
 
-        if(!roomList) {
+        if (!roomList) {
             getRoomsService().then((rooms) => {
                 setRoomList(rooms);
-                if(rooms.length > 0) {
+                if (rooms.length > 0) {
                     setSelectedRoomId(rooms[0].id);
                 }
             }).catch((error) => {
                 console.error("Error fetching rooms:", error);
             })
-        } else if(roomList.length > 0) {
+        } else if (roomList.length > 0) {
             setSelectedRoomId(roomList[0].id);
         }
 
@@ -157,7 +159,8 @@ export default function Schedule() {
                         ))}
                     </SelectContent>
                 </Select>
-                <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel} setSelectedRoom={setSelectedRoomId}
+                <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel}
+                                 setSelectedRoom={setSelectedRoomId}
                                  levelList={levelList} teacherList={teacherList} roomList={roomList}
                 />
                 <div className=" space-x-4">
@@ -182,8 +185,9 @@ export default function Schedule() {
                 <EdtEncapsuler/>
             </div>
 
-            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId} selectedRoomId={selectedRoomId}
-                          levelList={levelList || [] } teacherList={teacherList || []} roomList={roomList || []} />
+            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId}
+                          selectedRoomId={selectedRoomId}
+                          levelList={levelList || []} teacherList={teacherList || []} roomList={roomList || []}/>
 
             <Dialog
                 open={isTransposeModalOpen}
@@ -231,7 +235,14 @@ interface selectComponentProps {
     roomList: Room[] | null;
 }
 
-function SelectComponent({setSelectedLevel, setSelectedTeacher,setSelectedRoom, levelList, teacherList, roomList}: selectComponentProps) {
+function SelectComponent({
+                             setSelectedLevel,
+                             setSelectedTeacher,
+                             setSelectedRoom,
+                             levelList,
+                             teacherList,
+                             roomList
+                         }: selectComponentProps) {
     const displayMode = useDisplayScheduleItem((s) => s.displayMode);
     const [selectedValue, setSelectedValue] = useState<string>("");
     const getDisplayLabel = (mode: string) => {
@@ -248,17 +259,17 @@ function SelectComponent({setSelectedLevel, setSelectedTeacher,setSelectedRoom, 
     }
 
     useEffect(() => {
-        if(displayMode === "Student" && levelList && levelList.length > 0){
+        if (displayMode === "Student" && levelList && levelList.length > 0) {
             setSelectedValue(levelList[0].id.toString());
             setSelectedLevel(levelList[0]);
             setSelectedTeacher(null);
             setSelectedRoom(null);
-        } else if(displayMode === "Teacher" && teacherList && teacherList.length > 0){
+        } else if (displayMode === "Teacher" && teacherList && teacherList.length > 0) {
             setSelectedValue(teacherList[0].id.toString());
             setSelectedTeacher(teacherList[0].id);
             setSelectedLevel(null);
             setSelectedRoom(null);
-        } else if(displayMode === "Room" && roomList && roomList.length > 0){
+        } else if (displayMode === "Room" && roomList && roomList.length > 0) {
             setSelectedValue(roomList[0].id.toString());
             setSelectedRoom(roomList[0].id);
             setSelectedLevel(null);
@@ -295,11 +306,11 @@ function SelectComponent({setSelectedLevel, setSelectedTeacher,setSelectedRoom, 
                     <SelectItem key={teacher.id} value={teacher.id.toString()}>
                         {teacher.name}
                     </SelectItem>
-                )) :displayMode === "Room" && roomList ? roomList.map((room) => (
+                )) : displayMode === "Room" && roomList ? roomList.map((room) => (
                     <SelectItem key={room.id} value={room.id.toString()}>
                         {room.name}
                     </SelectItem>
-                )) :<div className=" p-2 text-sm text-muted-foreground">Aucun élément disponible</div>}
+                )) : <div className=" p-2 text-sm text-muted-foreground">Aucun élément disponible</div>}
             </SelectContent>
         </Select>
 
