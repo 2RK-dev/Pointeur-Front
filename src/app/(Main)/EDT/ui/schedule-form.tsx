@@ -219,7 +219,17 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
     useEffect(() => {
         const availableTeacherIds = availableTeachers.map((t) => t.id)
         const currentTeacherId = form.getValues("teacherId")
-        if (currentTeacherId && !availableTeacherIds.includes(currentTeacherId)) {
+        console.log(currentTeacherId, availableTeacherIds)
+        if (
+            currentTeacherId === null &&
+            selectedTeacherId &&
+            availableTeacherIds.includes(selectedTeacherId)
+        ) {
+            form.setValue("teacherId", selectedTeacherId)
+        } else if (
+            currentTeacherId &&
+            !availableTeacherIds.includes(currentTeacherId)
+        ) {
             form.setValue("teacherId", null)
         }
     }, [availableTeachers, form])

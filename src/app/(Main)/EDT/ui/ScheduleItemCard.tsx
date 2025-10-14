@@ -38,7 +38,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 
 	return (
 		<div
-			className={`border p-1 rounded shadow-sm text-xs overflow-hidden cursor-pointer ${getColorGroups(scheduleItem.Groups)}`}
+			className={`border p-1 pb-2 rounded shadow-sm overflow-hidden cursor-pointer ${getColorGroups(scheduleItem.Groups)}`}
 
 			style={{
 				flexBasis: `${width}%`,
@@ -47,7 +47,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 				flexShrink: 0,
 			}}
 		>
-			<div onClick={UpdateScheduleItem} className="text-[10px] whitespace-normal leading-tight">
+			<div onClick={UpdateScheduleItem} className="text-[11px] whitespace-normal leading-tight">
 				<span>{scheduleItem.TeachingUnit.abr}</span>
 				<br/>
 				{getDisplayModeLabel()}
