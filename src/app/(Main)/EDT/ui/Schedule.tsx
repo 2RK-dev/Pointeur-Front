@@ -22,22 +22,30 @@ import {getLevels} from "@/services/Level";
 import {useLevelStore} from "@/Stores/Level";
 import {useTeacherStore} from "@/Stores/Teacher";
 import {getTeachers} from "@/services/Teacher";
+import {useRoomsStore} from "@/Stores/Room";
+import {getRoomsService} from "@/services/Room";
+import {Teacher} from "@/Types/Teacher";
+import {Room} from "@/Types/Room";
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
     const setScheduleItemsByLevel = useDisplayScheduleItem((s) => s.setScheduleItemsByLevel);
     const setScheduleItemsByTeacher = useDisplayScheduleItem((s) => s.setScheduleItemsByTeacher);
+    const setScheduleItemsByRoom = useDisplayScheduleItem((s) => s.setScheduleItemsByRoom);
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+    const roomList = useRoomsStore((s) => s.rooms);
+    const setRoomList = useRoomsStore((s) => s.setRooms);
     const displayMode = useDisplayScheduleItem((s) => s.displayMode);
     const setDisplayMode = useDisplayScheduleItem((s) => s.setDisplayMode);
     const [selectedWeek, setSelectedWeek] = useState<number>(0);
     const [TargetWeek, setTargetWeek] = useState<number>(0);
-    const teachers = useTeacherStore((s) => s.teachers);
-    const setTeachers = useTeacherStore((s) => s.setTeachers);
-    const levels = useLevelStore((s) => s.levels);
-    const setLevels = useLevelStore((s) => s.setLevels);
-    const [selectedTeacher, setSelectedTeacher] = useState<number | null>(null);
+    const teacherList = useTeacherStore((s) => s.teachers);
+    const setTeacherList = useTeacherStore((s) => s.setTeachers);
+    const levelList = useLevelStore((s) => s.levels);
+    const setLevelList = useLevelStore((s) => s.setLevels);
+    const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
     const [selectedLevel, setSelectedLevel] = useState<Level | null>(null)
+    const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
 
@@ -50,30 +58,43 @@ export default function Schedule() {
             console.error("Error fetching schedule items:", error);
         });
 
-        if (!levels) {
+        if (!levelList) {
             getLevels().then((levels) => {
-                setLevels(levels);
+                setLevelList(levels);
                 if (levels.length > 0) {
                     setSelectedLevel(levels[0]);
                 }
             }).catch((error) => {
                 console.error("Error fetching levels:", error);
             })
-        } else if (levels.length > 0) {
-            setSelectedLevel(levels[0]);
+        } else if (levelList.length > 0) {
+            setSelectedLevel(levelList[0]);
         }
 
-        if (!teachers) {
+        if (!teacherList) {
             getTeachers().then((teachers) => {
-                setTeachers(teachers);
+                setTeacherList(teachers);
                 if (teachers.length > 0) {
-                    setSelectedTeacher(teachers[0].id);
+                    setSelectedTeacherId(teachers[0].id);
                 }
             }).catch((error) => {
                 console.error("Error fetching teachers:", error);
             });
-        } else if (teachers.length > 0) {
-            setSelectedTeacher(teachers[0].id);
+        } else if (teacherList.length > 0) {
+            setSelectedTeacherId(teacherList[0].id);
+        }
+
+        if(!roomList) {
+            getRoomsService().then((rooms) => {
+                setRoomList(rooms);
+                if(rooms.length > 0) {
+                    setSelectedRoomId(rooms[0].id);
+                }
+            }).catch((error) => {
+                console.error("Error fetching rooms:", error);
+            })
+        } else if(roomList.length > 0) {
+            setSelectedRoomId(roomList[0].id);
         }
 
     }, []);
@@ -84,12 +105,10 @@ export default function Schedule() {
         const filtered = currentScheduleItems.filter(item => {
             return item.startTime >= start && item.endTime <= end;
         });
-        if (displayMode === "Student" && selectedLevel) {
-            setScheduleItemsByLevel(selectedLevel?.groups || [], filtered);
-        } else if (displayMode === "Teacher" && selectedTeacher) {
-            setScheduleItemsByTeacher(selectedTeacher, filtered);
-        }
-    }, [selectedWeek, selectedLevel, currentScheduleItems, displayMode, selectedTeacher]);
+        if (displayMode === "Student" && selectedLevel) setScheduleItemsByLevel(selectedLevel.groups || [], filtered);
+        else if (displayMode === "Teacher" && selectedTeacherId) setScheduleItemsByTeacher(selectedTeacherId, filtered);
+        else if (displayMode === "Room" && selectedRoomId) setScheduleItemsByRoom(selectedRoomId, filtered);
+    }, [selectedWeek, currentScheduleItems, displayMode, selectedLevel, selectedTeacherId, selectedRoomId]);
 
     const TransposeData = (TargetWeek: number) => {
         alert(`Transposing data to week ${TargetWeek}`);
@@ -138,7 +157,9 @@ export default function Schedule() {
                         ))}
                     </SelectContent>
                 </Select>
-                <SelectComponent setSelectedTeacher={setSelectedTeacher} setSelectedLevel={setSelectedLevel}/>
+                <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel} setSelectedRoom={setSelectedRoomId}
+                                 levelList={levelList} teacherList={teacherList} roomList={roomList}
+                />
                 <div className=" space-x-4">
                     <Button
                         onClick={() => {
@@ -161,7 +182,8 @@ export default function Schedule() {
                 <EdtEncapsuler/>
             </div>
 
-            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacher} levelList={levels || [] }/>
+            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId} selectedRoomId={selectedRoomId}
+                          levelList={levelList || [] } teacherList={teacherList || []} roomList={roomList || []} />
 
             <Dialog
                 open={isTransposeModalOpen}
@@ -203,12 +225,14 @@ export default function Schedule() {
 interface selectComponentProps {
     setSelectedLevel: (level: Level | null) => void;
     setSelectedTeacher: (teacherId: number | null) => void;
+    setSelectedRoom: (roomId: number | null) => void;
+    levelList: Level[] | null;
+    teacherList: Teacher[] | null;
+    roomList: Room[] | null;
 }
 
-function SelectComponent({setSelectedLevel, setSelectedTeacher}: selectComponentProps) {
+function SelectComponent({setSelectedLevel, setSelectedTeacher,setSelectedRoom, levelList, teacherList, roomList}: selectComponentProps) {
     const displayMode = useDisplayScheduleItem((s) => s.displayMode);
-    const levels = useLevelStore((s) => s.levels);
-    const teachers = useTeacherStore((s) => s.teachers);
     const [selectedValue, setSelectedValue] = useState<string>("");
     const getDisplayLabel = (mode: string) => {
         switch (mode) {
@@ -224,48 +248,56 @@ function SelectComponent({setSelectedLevel, setSelectedTeacher}: selectComponent
     }
 
     useEffect(() => {
-        if(displayMode === "Student" && levels && levels.length > 0){
-            setSelectedValue(levels[0].id.toString());
-            setSelectedLevel(levels[0]);
+        if(displayMode === "Student" && levelList && levelList.length > 0){
+            setSelectedValue(levelList[0].id.toString());
+            setSelectedLevel(levelList[0]);
             setSelectedTeacher(null);
-        } else if(displayMode === "Teacher" && teachers && teachers.length > 0){
-            setSelectedValue(teachers[0].id.toString());
-            setSelectedTeacher(teachers[0].id);
+            setSelectedRoom(null);
+        } else if(displayMode === "Teacher" && teacherList && teacherList.length > 0){
+            setSelectedValue(teacherList[0].id.toString());
+            setSelectedTeacher(teacherList[0].id);
             setSelectedLevel(null);
+            setSelectedRoom(null);
+        } else if(displayMode === "Room" && roomList && roomList.length > 0){
+            setSelectedValue(roomList[0].id.toString());
+            setSelectedRoom(roomList[0].id);
+            setSelectedLevel(null);
+            setSelectedTeacher(null);
         } else {
             setSelectedValue("");
             setSelectedLevel(null);
             setSelectedTeacher(null);
+            setSelectedRoom(null);
         }
-    }, [displayMode, levels, teachers]);
+    }, [displayMode, levelList, teacherList, roomList]);
 
     return (
         <Select value={selectedValue} onValueChange={(value) => {
             setSelectedTeacher(null);
             setSelectedLevel(null);
+            setSelectedRoom(null);
             if (displayMode === "Student") {
-                const level = levels?.find(l => l.id.toString() === value);
-                if (level) {
-                    setSelectedLevel(level);
-                }
-            } else if (displayMode === "Teacher") {
-                const teacherId = parseInt(value);
-                setSelectedTeacher(teacherId);
-            }
+                const level = levelList?.find(l => l.id.toString() === value);
+                if (level) setSelectedLevel(level);
+            } else if (displayMode === "Teacher") setSelectedTeacher(parseInt(value));
+            else if (displayMode === "Room") setSelectedRoom(parseInt(value));
             setSelectedValue(value);
-        }}
-        >
+        }}>
             <SelectTrigger className="w-[250px] mb-4">
                 <SelectValue placeholder={"Sélectionner un " + getDisplayLabel(displayMode)}/>
             </SelectTrigger>
             <SelectContent>
-                {displayMode === "Student" && levels ? levels.map((level) => (
+                {displayMode === "Student" && levelList ? levelList.map((level) => (
                     <SelectItem key={level.id} value={level.id.toString()}>
                         {level.name}
                     </SelectItem>
-                )) : displayMode === "Teacher" && teachers ? teachers.map((teacher) => (
+                )) : displayMode === "Teacher" && teacherList ? teacherList.map((teacher) => (
                     <SelectItem key={teacher.id} value={teacher.id.toString()}>
                         {teacher.name}
+                    </SelectItem>
+                )) :displayMode === "Room" && roomList ? roomList.map((room) => (
+                    <SelectItem key={room.id} value={room.id.toString()}>
+                        {room.name}
                     </SelectItem>
                 )) :<div className=" p-2 text-sm text-muted-foreground">Aucun élément disponible</div>}
             </SelectContent>

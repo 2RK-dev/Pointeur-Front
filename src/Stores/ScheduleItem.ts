@@ -90,6 +90,7 @@ interface DisplayScheduleItem {
     displayMode: "Student" | "Teacher" | "Room";
     setScheduleItemsByLevel: (groups: Group[], items: ScheduleItem[]) => void;
     setScheduleItemsByTeacher: (teacherId: number, items: ScheduleItem[]) => void;
+    setScheduleItemsByRoom: (roomId: number, items: ScheduleItem[]) => void;
     setDisplayMode: (mode: "Student" | "Teacher" | "Room") => void;
 }
 
@@ -101,6 +102,10 @@ export const useDisplayScheduleItem = create<DisplayScheduleItem>((set) => ({
     },
     setScheduleItemsByTeacher: (teacherId: number, items: ScheduleItem[]) => {
         const filteredItems = items.filter(item => item.Teacher?.id === teacherId);
+        set({displayScheduleItems: filteredItems});
+    },
+    setScheduleItemsByRoom: (roomId: number, items: ScheduleItem[]) => {
+        const filteredItems = items.filter(item => item.Room?.id === roomId);
         set({displayScheduleItems: filteredItems});
     },
     displayMode: "Student",

@@ -14,9 +14,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Checkbox} from "@/components/ui/checkbox"
 import {getTeachingUnits} from "@/services/TeachingUnit"
 import type {Teacher} from "@/Types/Teacher"
-import {getTeachers} from "@/services/Teacher"
 import type {Room} from "@/Types/Room"
-import {getRoomsService} from "@/services/Room"
 import {generateHours} from "@/Tools/ScheduleItem"
 import {
     useCurrentScheduleItemsStore,
@@ -53,10 +51,13 @@ const ScheduleItemFormSchema = z.object({
 interface props {
     selectedLevel: Level | null,
     selectedTeacherId: number | null,
-    levelList: Level[]
+    selectedRoomId: number | null,
+    levelList: Level[],
+    teacherList: Teacher[],
+    roomList: Room[],
 }
 
-export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList}: props) {
+export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRoomId, levelList,teacherList,roomList}: props) {
     const {open, setOpen} = useOpenScheduleItemFormStore()
     const [calendarOpen, setCalendarOpen] = useState(false)
     const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
@@ -65,8 +66,6 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
     const getAvailableGroups = useCurrentScheduleItemsStore((s) => s.getAvailableGroups)
     const getAvailableTeachers = useCurrentScheduleItemsStore((s) => s.getAvailableTeachers)
     const getAvailableRooms = useCurrentScheduleItemsStore((s) => s.getAvailableRooms)
-    const [teachers, setTeachers] = useState<Teacher[]>([])
-    const [rooms, setRooms] = useState<Room[]>([])
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems)
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem)
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem)
@@ -90,7 +89,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
             }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
         teacherId: selectedScheduleItem?.Teacher.id || selectedTeacherId || undefined,
-        roomId: selectedScheduleItem?.Room.id || undefined,
+        roomId: selectedScheduleItem?.Room.id || selectedRoomId || undefined,
         groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
     }
 
@@ -107,7 +106,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
         } else {
             setSelectedLevelState(selectedLevel)
         }
-    }, [selectedLevel, selectedTeacherId, selectedScheduleItem])
+    }, [selectedLevel, selectedTeacherId,selectedRoomId, selectedScheduleItem])
 
 
     const watchedDate = form.watch("date")
@@ -125,22 +124,6 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
                     console.error("Erreur lors de la récupération des unités de cours :", error)
                 })
         }
-
-        getTeachers()
-            .then((teachersData) => {
-                setTeachers(teachersData)
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des enseignants :", error)
-            })
-
-        getRoomsService()
-            .then((roomsData) => {
-                setRooms(roomsData)
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des salles :", error)
-            })
     }, [])
 
     useEffect(() => {
@@ -196,11 +179,11 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
             return getAvailableTeachers(
                 startDateTime,
                 endDateTime,
-                teachers,
+                teacherList,
                 selectedScheduleItem,
             )
         }
-        , [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, teachers])
+        , [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, teacherList])
 
     const availableRooms = useMemo(() => {
         if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
@@ -209,10 +192,10 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
         return getAvailableRooms(
             startDateTime,
             endDateTime,
-            rooms,
+            roomList,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, rooms])
+    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, roomList])
 
     useEffect(() => {
         const currentTeachingUnitID = form.getValues("teachingUnitID")
@@ -252,7 +235,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId, levelList
         return a.length === b.length && a.every((val) => b.includes(val)) && b.every((val) => a.includes(val))
     }
 
-    const selectedRoom = rooms.find((room) => room.id === form.watch("roomId"))
+    const selectedRoom = roomList.find((room) => room.id === form.watch("roomId"))
     const selectedGroups = availableGroups.filter((group) => form.watch("groupIds").includes(group.id.toString()))
     const totalGroupSize = selectedGroups.reduce((sum, group) => sum + group.size, 0)
     const capacityError = selectedRoom && totalGroupSize > selectedRoom.capacity
