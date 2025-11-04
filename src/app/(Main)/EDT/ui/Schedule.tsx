@@ -17,7 +17,7 @@ import {generatePDF} from "@/Tools/PDF";
 import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {Level} from "@/Types/Level";
 import {getLevels} from "@/services/Level";
-import {Week, WeekSchema} from "@/Types/ScheduleItem";
+import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
 import Transpose from "@/app/(Main)/EDT/ui/Transpose";
 import {useLevelStore} from "@/Stores/Level";
 import {useTeacherStore} from "@/Stores/Teacher";
@@ -26,6 +26,7 @@ import {useRoomsStore} from "@/Stores/Room";
 import {getRoomsService} from "@/services/Room";
 import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
+import {TranspositionResultBadges} from "@/app/(Main)/EDT/ui/transposition-result-badges";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 5;
 const TODAY = new Date();
@@ -52,6 +53,8 @@ export default function Schedule() {
     const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
+    const [transpositionResponse, setTranspositionResponse] = useState<TranspositionResponse | null>();
+    const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
     useEffect(() => {
         if (!selectedWeek) return
@@ -114,6 +117,21 @@ export default function Schedule() {
         else if (displayMode === "Teacher" && selectedTeacherId) setScheduleItemsByTeacher(selectedTeacherId, filtered);
         else if (displayMode === "Room" && selectedRoomId) setScheduleItemsByRoom(selectedRoomId, filtered);
     }, [selectedWeek, currentScheduleItems, displayMode, selectedLevel, selectedTeacherId, selectedRoomId]);
+
+    useEffect(() => {
+        if (transpositionResponse) {
+            setIsClosingTranspositionBadges(false);
+        } else {
+            setIsClosingTranspositionBadges(true);
+        }
+    }, [transpositionResponse]);
+
+    const onCloseTranspositionBadges = () => {
+        setIsClosingTranspositionBadges(true);
+        setTimeout(() => {
+            setTranspositionResponse(null);
+        }, 300);
+    }
 
     return (
         <div className="p-4  min-w-[1250px]">
@@ -193,6 +211,12 @@ export default function Schedule() {
                                setIsTransposeModalOpen={setIsTransposeModalOpen}
                                selectedWeek={selectedWeek}/>
                 </>)}
+            <TranspositionResultBadges
+                successItems={transpositionResponse?.successItems || []}
+                failedItems={transpositionResponse?.failedItems || []}
+                isClosing={isClosingTranspositionBadges}
+                onClose={onCloseTranspositionBadges}
+            />
         </div>
     );
 }
