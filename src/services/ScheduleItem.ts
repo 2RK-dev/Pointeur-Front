@@ -2,7 +2,7 @@
 
 "use server";
 
-import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
+import {ScheduleItem, ScheduleItemPost, TranspositionResponse} from "@/Types/ScheduleItem";
 import {
     createScheduleItem,
     deleteScheduleItem,
@@ -53,7 +53,7 @@ export async function deleteScheduleItemService (id: number): Promise<number> {
     return id;
 }
 
-export async function AddScheduleItemListService (): Promise<ScheduleItem[]> {
+export async function AddScheduleItemListService (scheduleItemList: ScheduleItemPost[]): Promise<TranspositionResponse[]> {
     //TODO: Implement transpose logic here
     throw new Error("Not implemented");
 }

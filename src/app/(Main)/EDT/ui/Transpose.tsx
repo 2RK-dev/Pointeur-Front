@@ -3,8 +3,14 @@ import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import {Week, WeekSchema} from "@/Types/ScheduleItem";
 import {useState} from "react";
-import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
+import {
+    AddWeeksToScheduleItems,
+    getAllNextWeeksFromDate,
+    getWeekDifference,
+    ScheduleItemToPost
+} from "@/Tools/ScheduleItem";
 import {AddScheduleItemListService} from "@/services/ScheduleItem";
+import {useCurrentScheduleItemsStore, useDisplayScheduleItem} from "@/Stores/ScheduleItem";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 5;
 
@@ -14,15 +20,28 @@ interface Props {
     selectedWeek: Week;
 }
 
-export default function Transpose({ isTransposeModalOpen, setIsTransposeModalOpen,selectedWeek }: Props) {
-
+export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen, selectedWeek}: Props) {
+    const {displayScheduleItems} = useDisplayScheduleItem();
+    const {addScheduleItem} = useCurrentScheduleItemsStore();
     const [targetWeek, setTargetWeek] = useState<Week>();
 
     const initialDate = new Date(selectedWeek.end);
     initialDate.setDate(initialDate.getDate() + 1);
 
     const TransposeData = () => {
-        //TODO: Implement the transpose logic here
+        if (!targetWeek) return;
+
+        const weekDiff = getWeekDifference(selectedWeek.start, targetWeek.start);
+        const scheduleItemListToAdd = AddWeeksToScheduleItems(displayScheduleItems, weekDiff);
+        AddScheduleItemListService(scheduleItemListToAdd.map(item => ScheduleItemToPost(item))).then((value) => {
+            value.forEach(response => {
+                response.successItems.forEach(successItem => {
+                    addScheduleItem(successItem);
+                })
+            })
+        }).catch((error) => {
+            console.error("Error transposing schedule items:", error);
+        })
     }
 
     return (

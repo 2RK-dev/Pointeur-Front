@@ -1,4 +1,4 @@
-import {ScheduleItem, Week} from "@/Types/ScheduleItem";
+import {ScheduleItem, ScheduleItemPost, ScheduleItemPostSchema, Week} from "@/Types/ScheduleItem";
 
 const DAY_START_MINUTES = 7 * 60;
 const DAY_END_MINUTES = 18 * 60;
@@ -99,6 +99,18 @@ export function getAllNextWeeksFromDate(numberOfWeeks: number, startFrom: Date =
 }
 
 /**
+ * Calculates the diference in weeks between two dates.
+ * @param {Date} date1 - The first date.
+ * @param {Date} date2 - The second date.
+ * @returns {number} The number of weeks between the two dates.
+ */
+export function getWeekDifference(date1: Date, date2: Date): number {
+    const millisecondsPerWeek = 7 * 24 * 60 * 60 * 1000;
+    const diffInMilliseconds = date2.getTime() - date1.getTime();
+    return Math.floor(diffInMilliseconds / millisecondsPerWeek);
+}
+
+/**
  Adds the specified number of weeks to the date fields of each selected ScheduleItem.
 
  For example, if an item has a startTime of "2024-06-01" and weeksToAdd is 2,
@@ -122,6 +134,29 @@ export function AddWeeksToScheduleItems(items: ScheduleItem[], weeksToAdd: numbe
             endTime: newEndTime
         };
     });
+}
+
+
+/**
+ * Converts a `ScheduleItem` to a `ScheduleItemPost`-compliant object.
+ *
+ * - Maps date fields and relations (teacher, teaching unit, room, groups).
+ * - Formats `GroupIds` as an array of strings.
+ * - Validates and normalizes the result via `ScheduleItemPostSchema.parse` to ensure
+ *   the payload matches the API schema.
+ *
+ * @param {ScheduleItem} item - The schedule item to convert.
+ * @returns {ScheduleItemPost} Validated object ready to be sent to the backend.
+ */
+export function ScheduleItemToPost(item: ScheduleItem): ScheduleItemPost {
+    return ScheduleItemPostSchema.parse({
+        startTime: item.startTime,
+        endTime: item.endTime,
+        TeacherId: item.Teacher.id,
+        TeachingUnitID: item.TeachingUnit.id,
+        RoomId: item.Room ? item.Room.id : null,
+        GroupIds: item.Groups.map(g => g.id.toString())
+    })
 }
 
 
