@@ -23,7 +23,10 @@ export default function Home() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getRoomsService().then((data) => setRooms(data))
+        getRoomsService().then((data) => {
+            console.log(data);
+            setRooms(data)
+        })
     }, []);
 
     const handleRemoveRoom = (id: number) => {
@@ -38,7 +41,7 @@ export default function Home() {
         const doc = new jsPDF();
         autoTable(doc, {
             head: [["Nom", "Abréviation", "Capacité"]],
-            body: rooms.map((room) => [
+            body: rooms?.map((room) => [
                 room.name,
                 room.abr,
                 room.capacity,
@@ -77,7 +80,7 @@ export default function Home() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {rooms.map((room) => (
+                            {rooms?.map((room) => (
                                 <TableRow key={room.id}>
                                     <TableCell>{room.name}</TableCell>
                                     <TableCell>{room.abr}</TableCell>

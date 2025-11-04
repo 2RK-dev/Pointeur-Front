@@ -1,7 +1,7 @@
 import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import {Week, WeekSchema} from "@/Types/ScheduleItem";
+import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
 import {useState} from "react";
 import {
     AddWeeksToScheduleItems,
@@ -18,9 +18,10 @@ interface Props {
     isTransposeModalOpen: boolean;
     setIsTransposeModalOpen: (open: boolean) => void;
     selectedWeek: Week;
+    setTransposeResponse: (response: TranspositionResponse) => void;
 }
 
-export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen, selectedWeek}: Props) {
+export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen, selectedWeek, setTransposeResponse}: Props) {
     const {displayScheduleItems} = useDisplayScheduleItem();
     const {addScheduleItem} = useCurrentScheduleItemsStore();
     const [targetWeek, setTargetWeek] = useState<Week>();
@@ -34,10 +35,9 @@ export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen
         const weekDiff = getWeekDifference(selectedWeek.start, targetWeek.start);
         const scheduleItemListToAdd = AddWeeksToScheduleItems(displayScheduleItems, weekDiff);
         AddScheduleItemListService(scheduleItemListToAdd.map(item => ScheduleItemToPost(item))).then((value) => {
-            value.forEach(response => {
-                response.successItems.forEach(successItem => {
-                    addScheduleItem(successItem);
-                })
+            setTransposeResponse(value);
+            value.successItems.forEach(successItem => {
+                addScheduleItem(successItem);
             })
         }).catch((error) => {
             console.error("Error transposing schedule items:", error);

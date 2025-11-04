@@ -57,13 +57,15 @@ export default function Schedule() {
     const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!selectedWeek) return
-        const {start, end} = selectedWeek;
-        getScheduleItems(start, end).then((items) => {
-            setCurrentScheduleItems(items);
-        }).catch((error) => {
-            console.error("Error fetching schedule items:", error);
-        });
+        if (selectedWeek){
+            const {start, end} = selectedWeek;
+            getScheduleItems(start, end).then((items) => {
+                setCurrentScheduleItems(items);
+            }).catch((error) => {
+                console.error("Error fetching schedule items:", error);
+            });
+        }
+
 
         if (!levelList) {
             getLevels().then((levels) => {
@@ -182,18 +184,18 @@ export default function Schedule() {
                 <div className=" space-x-4">
                     <Button disabled={!selectedWeek}
                             onClick={() => {
-                            setIsTransposeModalOpen(true);
-                        }}>
+                                setIsTransposeModalOpen(true);
+                            }}>
                         <Copy/>
                     </Button>
-                    <Button disabled={!selectedWeek}  onClick={generatePDF}>
+                    <Button disabled={!selectedWeek} onClick={generatePDF}>
                         <FileText/>
                     </Button>
                     <Button disabled={!selectedWeek}
-                        onClick={() => {
-                        setSelectedScheduleItem(null);
-                        setOpenForm(true)
-                    }}>
+                            onClick={() => {
+                                setSelectedScheduleItem(null);
+                                setOpenForm(true)
+                            }}>
                         <CirclePlus/>
                     </Button>
                 </div>
@@ -205,11 +207,14 @@ export default function Schedule() {
                 <>
                     <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId}
                                   selectedRoomId={selectedRoomId}
-                                  levelList={levelList || []} teacherList={teacherList || []} roomList={roomList || []}/>
+                                  levelList={levelList || []} teacherList={teacherList || []}
+                                  roomList={roomList || []}/>
 
                     <Transpose isTransposeModalOpen={isTransposeModalOpen}
                                setIsTransposeModalOpen={setIsTransposeModalOpen}
-                               selectedWeek={selectedWeek}/>
+                               selectedWeek={selectedWeek}
+                               setTransposeResponse={setTranspositionResponse}
+                    />
                 </>)}
             <TranspositionResultBadges
                 successItems={transpositionResponse?.successItems || []}
