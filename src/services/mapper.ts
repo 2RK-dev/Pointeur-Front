@@ -58,7 +58,7 @@ export const ScheduleItemMapper = {
             endTime: new Date(dto.endTime),
             Teacher: TeacherMapper.fromDto(dto.teacher),
             TeachingUnit: TeachingUnitMapper.fromDto(dto.teachingUnit),
-            Room: RoomMapper.fromDto(dto.room),
+            Room: dto.room ? RoomMapper.fromDto(dto.room) : null,
             Groups: dto.groups.map(g => GroupMapper.fromDto(g))
         };
     },

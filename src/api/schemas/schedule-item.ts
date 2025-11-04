@@ -9,7 +9,7 @@ export const ScheduleItemSchema = z.object({
     groups: GroupSchema.array(),
     teacher: TeacherSchema,
     teachingUnit: TeachingUnitSchema,
-    room: RoomSchema,
+    room: RoomSchema.nullable(),
     startTime: z.string().datetime({local: true}),
     endTime: z.string().datetime({local: true}),
 });
@@ -18,7 +18,7 @@ const BaseScheduleItemSchema = z.object({
     groupIds: z.number().array(),
     teacherId: z.number(),
     teachingUnitId: z.number(),
-    roomId: z.number(),
+    roomId: z.number().nullable(),
     startTime: z.string().datetime(),
     endTime: z.string().datetime(),
 });

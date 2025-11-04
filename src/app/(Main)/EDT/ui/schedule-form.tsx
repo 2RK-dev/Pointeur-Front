@@ -236,7 +236,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
 
     useEffect(() => {
         const availableRoomIds = availableRooms.map((r) => r.id)
-        if (form.getValues("roomId") && !availableRoomIds.includes(form.getValues("roomId"))) {
+        if (form.getValues("roomId") && !availableRoomIds.includes(form.getValues("roomId") || -1)) {
             form.resetField("roomId")
         }
     }, [availableRooms, form]);
@@ -289,7 +289,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
             const scheduleItem = ScheduleItemPostSchema.parse({
                 TeachingUnitID: values.teachingUnitID,
                 TeacherId: values.teacherId,
-                RoomId: values.roomId,
+                RoomId: values.roomId === -1 ? null : values.roomId,
                 GroupIds: values.groupIds,
                 startTime: startDateTime,
                 endTime: endDateTime,
@@ -613,6 +613,11 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
                                                             </SelectTrigger>
                                                         </FormControl>
                                                         <SelectContent>
+                                                            <SelectItem value={"-1"}>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span>Aucune</span>
+                                                                </div>
+                                                            </SelectItem>
                                                             {availableRooms.map((room) => (
                                                                 <SelectItem key={room.id} value={room.id.toString()}>
                                                                     <div
