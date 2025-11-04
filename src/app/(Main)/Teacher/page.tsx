@@ -32,7 +32,7 @@ export default function Home() {
         const doc = new jsPDF();
         autoTable(doc, {
             head: [["Nom", "Abréviation"]],
-            body: teachers.map((teacher) => [teacher.name, teacher.abr]),
+            body: teachers?.map((teacher) => [teacher.name, teacher.abr]),
         });
         doc.save("liste_des_salles.pdf");
     };
@@ -74,7 +74,7 @@ export default function Home() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {teachers.map((teacher) => (
+                            {teachers?.map((teacher) => (
                                 <TableRow key={teacher.id}>
                                     <TableCell>{teacher.name}</TableCell>
                                     <TableCell>{teacher.abr}</TableCell>

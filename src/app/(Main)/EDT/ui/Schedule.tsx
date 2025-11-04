@@ -2,8 +2,6 @@
 
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
 import {CirclePlus, Copy, FileText} from "lucide-react";
 import {useEffect, useState} from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
@@ -16,9 +14,11 @@ import {
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
-import {getNextFourWeeks, getWeekRange} from "@/Tools/ScheduleItem";
+import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {Level} from "@/Types/Level";
 import {getLevels} from "@/services/Level";
+import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
+import Transpose from "@/app/(Main)/EDT/ui/Transpose";
 import {useLevelStore} from "@/Stores/Level";
 import {useTeacherStore} from "@/Stores/Teacher";
 import {getTeachers} from "@/services/Teacher";
@@ -26,6 +26,10 @@ import {useRoomsStore} from "@/Stores/Room";
 import {getRoomsService} from "@/services/Room";
 import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
+import {TranspositionResultBadges} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+
+const NUMBER_OF_WEEK_TO_DISPLAY = 5;
+const TODAY = new Date();
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
@@ -39,8 +43,7 @@ export default function Schedule() {
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
     const roomList = useRoomsStore((s) => s.rooms);
     const setRoomList = useRoomsStore((s) => s.setRooms);
-    const [selectedWeek, setSelectedWeek] = useState<number>(0);
-    const [TargetWeek, setTargetWeek] = useState<number>(0);
+    const [selectedWeek, setSelectedWeek] = useState<Week>();
     const teacherList = useTeacherStore((s) => s.teachers);
     const setTeacherList = useTeacherStore((s) => s.setTeachers);
     const levelList = useLevelStore((s) => s.levels);
@@ -50,15 +53,19 @@ export default function Schedule() {
     const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
+    const [transpositionResponse, setTranspositionResponse] = useState<TranspositionResponse | null>();
+    const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
     useEffect(() => {
-        const {start} = getWeekRange(0);
-        const {end} = getWeekRange(3);
-        getScheduleItems(start, end).then((items) => {
-            setCurrentScheduleItems(items);
-        }).catch((error) => {
-            console.error("Error fetching schedule items:", error);
-        });
+        if (selectedWeek){
+            const {start, end} = selectedWeek;
+            getScheduleItems(start, end).then((items) => {
+                setCurrentScheduleItems(items);
+            }).catch((error) => {
+                console.error("Error fetching schedule items:", error);
+            });
+        }
+
 
         if (!levelList) {
             getLevels().then((levels) => {
@@ -103,7 +110,8 @@ export default function Schedule() {
 
 
     useEffect(() => {
-        const {start, end} = getWeekRange(selectedWeek);
+        if (!selectedWeek) return;
+        const {start, end} = selectedWeek;
         const filtered = currentScheduleItems.filter(item => {
             return item.startTime >= start && item.endTime <= end;
         });
@@ -112,10 +120,20 @@ export default function Schedule() {
         else if (displayMode === "Room" && selectedRoomId) setScheduleItemsByRoom(selectedRoomId, filtered);
     }, [selectedWeek, currentScheduleItems, displayMode, selectedLevel, selectedTeacherId, selectedRoomId]);
 
-    const TransposeData = (TargetWeek: number) => {
-        alert(`Transposing data to week ${TargetWeek}`);
-    };
+    useEffect(() => {
+        if (transpositionResponse) {
+            setIsClosingTranspositionBadges(false);
+        } else {
+            setIsClosingTranspositionBadges(true);
+        }
+    }, [transpositionResponse]);
 
+    const onCloseTranspositionBadges = () => {
+        setIsClosingTranspositionBadges(true);
+        setTimeout(() => {
+            setTranspositionResponse(null);
+        }, 300);
+    }
 
     return (
         <div className="p-4  min-w-[1250px]">
@@ -135,16 +153,16 @@ export default function Schedule() {
             </div>
             <div className="mb-4 flex justify-between items-center">
                 <Select
-                    value={selectedWeek.toString()}
+                    value={JSON.stringify(selectedWeek)}
                     onValueChange={(value) => {
-                        setSelectedWeek(parseInt(value));
+                        setSelectedWeek(WeekSchema.parse(JSON.parse(value)));
                     }}>
                     <SelectTrigger className="w-[300px]">
                         <SelectValue placeholder="Sélectionner la semaine"/>
                     </SelectTrigger>
                     <SelectContent>
-                        {getNextFourWeeks().map((week, index) => (
-                            <SelectItem key={index} value={index.toString()}>
+                        {getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY).map((week, index) => (
+                            <SelectItem key={index} value={JSON.stringify(week)}>
                                 {
                                     `${week.start.toLocaleDateString('fr-FR', {
                                         day: '2-digit',
@@ -164,19 +182,20 @@ export default function Schedule() {
                                  levelList={levelList} teacherList={teacherList} roomList={roomList}
                 />
                 <div className=" space-x-4">
-                    <Button
-                        onClick={() => {
-                            setIsTransposeModalOpen(true);
-                        }}>
+                    <Button disabled={!selectedWeek}
+                            onClick={() => {
+                                setIsTransposeModalOpen(true);
+                            }}>
                         <Copy/>
                     </Button>
-                    <Button onClick={generatePDF}>
+                    <Button disabled={!selectedWeek} onClick={generatePDF}>
                         <FileText/>
                     </Button>
-                    <Button onClick={() => {
-                        setSelectedScheduleItem(null);
-                        setOpenForm(true)
-                    }}>
+                    <Button disabled={!selectedWeek}
+                            onClick={() => {
+                                setSelectedScheduleItem(null);
+                                setOpenForm(true)
+                            }}>
                         <CirclePlus/>
                     </Button>
                 </div>
@@ -184,44 +203,25 @@ export default function Schedule() {
             <div className="flex flex-col space-y-4" id="edt-content">
                 <EdtEncapsuler/>
             </div>
+            {selectedWeek && (
+                <>
+                    <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId}
+                                  selectedRoomId={selectedRoomId}
+                                  levelList={levelList || []} teacherList={teacherList || []}
+                                  roomList={roomList || []}/>
 
-            <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId}
-                          selectedRoomId={selectedRoomId}
-                          levelList={levelList || []} teacherList={teacherList || []} roomList={roomList || []}/>
-
-            <Dialog
-                open={isTransposeModalOpen}
-                onOpenChange={setIsTransposeModalOpen}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Transposer les données</DialogTitle>
-                    </DialogHeader>
-                    <Select
-                        onValueChange={(value) => {
-                            setTargetWeek(parseInt(value));
-                        }}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner la semaine cible"/>
-                        </SelectTrigger>
-                        <SelectContent>
-                            {getNextFourWeeks().map((week, index) => (
-                                <SelectItem key={index} value={index.toString()}>
-                                    {`(${week.start.toLocaleDateString()} - ${week.end.toLocaleDateString()})`}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    <DialogFooter>
-                        <Button
-                            onClick={() => {
-                                TransposeData(TargetWeek);
-                                setIsTransposeModalOpen(false);
-                            }}>
-                            Transposer
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+                    <Transpose isTransposeModalOpen={isTransposeModalOpen}
+                               setIsTransposeModalOpen={setIsTransposeModalOpen}
+                               selectedWeek={selectedWeek}
+                               setTransposeResponse={setTranspositionResponse}
+                    />
+                </>)}
+            <TranspositionResultBadges
+                successItems={transpositionResponse?.successItems || []}
+                failedItems={transpositionResponse?.failedItems || []}
+                isClosing={isClosingTranspositionBadges}
+                onClose={onCloseTranspositionBadges}
+            />
         </div>
     );
 }

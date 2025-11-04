@@ -96,7 +96,7 @@ const data = {
 		},
 		{
 			title: "Transfére de données",
-			url: "/DataTransfere",
+			url: "/import-export",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
 		},

@@ -89,7 +89,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
             }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
         teacherId: selectedScheduleItem?.Teacher.id || selectedTeacherId || undefined,
-        roomId: selectedScheduleItem?.Room.id || selectedRoomId || undefined,
+        roomId: selectedScheduleItem?.Room?.id || selectedRoomId || undefined,
         groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
     }
 

@@ -1,6 +1,0 @@
-[
-  { "id": 1, "name": "Mathématiques Appliquées", "abr": "MATH" },
-  { "id": 2, "name": "Programmation Web", "abr": "PROG" },
-  { "id": 3, "name": "Base de Données", "abr": "BDD" },
-  { "id": 4, "name": "Réseaux Informatiques", "abr": "RES" }
-]

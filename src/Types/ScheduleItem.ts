@@ -23,6 +23,21 @@ export const ScheduleItemPostSchema = z.object({
     GroupIds: z.array(z.string())
 })
 
+export const WeekSchema = z.object({
+    start: z.preprocess((arg) => new Date(arg as string), z.date()),
+    end: z.preprocess((arg) => new Date(arg as string), z.date()),
+});
+
+export const TranspositionResponseSchema = z.object({
+    successItems: z.array(ScheduleItemSchema),
+    failedItems: z.array(z.object({
+        item: ScheduleItemPostSchema,
+        reason: z.string()
+    }))
+})
+
 
 export type ScheduleItem = z.infer<typeof ScheduleItemSchema>;
 export type ScheduleItemPost = z.infer<typeof ScheduleItemPostSchema>;
+export type Week = z.infer<typeof WeekSchema>;
+export type TranspositionResponse = z.infer<typeof TranspositionResponseSchema>;
