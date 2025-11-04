@@ -11,9 +11,7 @@ export const GroupMapper = {
             id: dto.id,
             abr: dto.name,
             name: dto.name,
-            size: dto.size,
-            levelName: dto.level.name,
-            levelId: dto.level.id
+            size: dto.size
         };
     },
 }

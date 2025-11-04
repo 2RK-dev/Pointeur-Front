@@ -52,3 +52,8 @@ export async function deleteScheduleItemService (id: number): Promise<number> {
     await deleteScheduleItem(id);
     return id;
 }
+
+export async function AddScheduleItemListService (): Promise<ScheduleItem[]> {
+    //TODO: Implement transpose logic here
+    throw new Error("Not implemented");
+}

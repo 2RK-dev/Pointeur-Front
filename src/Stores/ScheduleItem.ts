@@ -85,31 +85,17 @@ export const useCurrentScheduleItemsStore = create<currentScheduleItemsInterface
     },
 }));
 
-interface DisplayScheduleItem {
-    displayScheduleItems: ScheduleItem[];
-    displayMode: "Student" | "Teacher" | "Room";
+interface ScheduleItemByLevelStore {
+    scheduleItemsByLevel: ScheduleItem[];
     setScheduleItemsByLevel: (groups: Group[], items: ScheduleItem[]) => void;
-    setScheduleItemsByTeacher: (teacherId: number, items: ScheduleItem[]) => void;
-    setScheduleItemsByRoom: (roomId: number, items: ScheduleItem[]) => void;
-    setDisplayMode: (mode: "Student" | "Teacher" | "Room") => void;
 }
 
-export const useDisplayScheduleItem = create<DisplayScheduleItem>((set) => ({
-    displayScheduleItems: [],
+export const useScheduleItemByLevelStore = create<ScheduleItemByLevelStore>((set) => ({
+    scheduleItemsByLevel: [],
     setScheduleItemsByLevel: (groups: Group[], items: ScheduleItem[]) => {
         const filteredItems = items.filter(item => item.Groups.some(group => groups.some(g => g.id === group.id)));
-        set({displayScheduleItems: filteredItems});
-    },
-    setScheduleItemsByTeacher: (teacherId: number, items: ScheduleItem[]) => {
-        const filteredItems = items.filter(item => item.Teacher?.id === teacherId);
-        set({displayScheduleItems: filteredItems});
-    },
-    setScheduleItemsByRoom: (roomId: number, items: ScheduleItem[]) => {
-        const filteredItems = items.filter(item => item.Room?.id === roomId);
-        set({displayScheduleItems: filteredItems});
-    },
-    displayMode: "Student",
-    setDisplayMode: (mode) => set({displayMode: mode}),
+        set({scheduleItemsByLevel: filteredItems});
+    }
 }));
 
 interface SelectedScheduleItemStore {

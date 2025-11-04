@@ -23,6 +23,12 @@ export const ScheduleItemPostSchema = z.object({
     GroupIds: z.array(z.string())
 })
 
+export const WeekSchema = z.object({
+    start: z.preprocess((arg) => new Date(arg as string), z.date()),
+    end: z.preprocess((arg) => new Date(arg as string), z.date()),
+});
+
 
 export type ScheduleItem = z.infer<typeof ScheduleItemSchema>;
 export type ScheduleItemPost = z.infer<typeof ScheduleItemPostSchema>;
+export type Week = z.infer<typeof WeekSchema>;
