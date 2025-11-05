@@ -1,15 +1,16 @@
 import { IGroup, IRoom, IScheduleItem, ITeacher, ITeachingUnit } from "@/api/types";
-import { Group } from "@/Types/Group";
+import { GroupDTO } from "@/Types/GroupDTO";
 import { Room } from "@/Types/Room";
 import { TeachingUnit } from "@/Types/TeachingUnit";
 import { Teacher } from "@/Types/Teacher";
 import { ScheduleItem } from "@/Types/ScheduleItem";
 
 export const GroupMapper = {
-    fromDto (dto: IGroup): Group {
+    fromDto (dto: IGroup): GroupDTO {
         return {
             id: dto.id,
-            abr: dto.name,
+            type: dto.type,
+            classe: dto.classe,
             name: dto.name,
             size: dto.size,
             levelName: dto.level.name,

@@ -3,7 +3,7 @@
 "use server";
 
 import { Level } from "@/Types/Level";
-import { Group } from "@/Types/Group";
+import { GroupDTO } from "@/Types/GroupDTO";
 import { fetchGroupList, fetchLevels } from "@/api/http/level";
 import { GroupMapper } from "@/services/mapper";
 
@@ -16,7 +16,7 @@ export async function getLevels (): Promise<Level[]> {
     }));
 }
 
-export async function getGroupInLevel (levelId: number): Promise<Group[]> {
+export async function getGroupInLevel (levelId: number): Promise<GroupDTO[]> {
     const groupList = await fetchGroupList(levelId);
     return groupList.map(group => GroupMapper.fromDto(group));
 }
