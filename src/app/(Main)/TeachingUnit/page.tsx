@@ -30,11 +30,16 @@ export default function Page() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getTeachingUnits()
+        const promiseTeaching = getTeachingUnits()
             .then((data) => setTeachingUnits(data))
             .catch((error) => console.log(error));
+        notifications.promise(promiseTeaching,{
+            loading: "Chargement des matières...",
+            success: "Matières chargées avec succès !",
+            error: "Erreur lors du chargement des matières."
+        })
         if (!levels) {
-            getLevelListService()
+            const promiseLevel = getLevelListService()
                 .then((data) => {
                     setLevels(data);
                     if (data.length > 0) {
@@ -42,6 +47,11 @@ export default function Page() {
                     }
                 })
                 .catch((error) => console.log(error));
+            notifications.promise(promiseLevel,{
+                loading: "Chargement des niveaux...",
+                success: "Niveaux chargés avec succès !",
+                error: "Erreur lors du chargement des niveaux."
+            });
         }
     }, []);
 

@@ -26,10 +26,15 @@ export default function LevelsPage() {
     const [isDeleteLevelDialogOpen, setIsDeleteLevelDialogOpen] = useState(false)
 
     useEffect(() => {
-        getLevelListService().then((data) => {
+        const promise = getLevelListService().then((data) => {
             setLevels(data);
         }).catch((error) => {
             console.error("Error fetching levels:", error);
+        })
+        notifications.promise(promise,{
+            loading: "Chargement des niveaux...",
+            success: "Niveaux chargés avec succès !",
+            error: "Erreur lors du chargement des niveaux."
         })
     }, [])
 

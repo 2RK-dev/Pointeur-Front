@@ -24,9 +24,13 @@ export default function Home() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getRoomsService().then((data) => {
-            console.log(data);
+        const promise = getRoomsService().then((data) => {
             setRooms(data)
+        })
+        notifications.promise(promise, {
+            loading: "Chargement des salles...",
+            success: "Salles chargées avec succès !",
+            error: "Erreur lors du chargement des salles."
         })
     }, []);
 

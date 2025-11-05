@@ -24,9 +24,14 @@ export default function Home() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getTeachers().then((data) =>
+        const promise = getTeachers().then((data) =>
             setTeachers(data)
         );
+        notifications.promise(promise,{
+            loading: "Chargement des enseignants...",
+            success: "Enseignants chargés avec succès !",
+            error: "Erreur lors du chargement des enseignants."
+        })
     }, []);
 
     const handleExportPDF = () => {
