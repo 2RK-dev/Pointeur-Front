@@ -2,9 +2,9 @@
 
 "use server";
 
-import {LevelDetailsDTO, LevelDTO, LevelPostDTO} from "@/Types/LevelDTO";
-import {fetchLevels} from "@/api/http/level";
-import {GroupMapper, LevelMapper} from "@/services/mapper";
+import { LevelDetailsDTO, LevelDTO, LevelPostDTO } from "@/Types/LevelDTO";
+import { createLevel, deleteLevel, fetchLevels, updateLevel } from "@/api/http/level";
+import { GroupMapper, LevelMapper } from "@/services/mapper";
 
 export async function getLevelListService (): Promise<LevelDetailsDTO[]> {
     const detailsList = await fetchLevels();
@@ -15,16 +15,21 @@ export async function getLevelListService (): Promise<LevelDetailsDTO[]> {
 }
 
 export async function addLevelService (levelPost: LevelPostDTO): Promise<LevelDTO> {
-    //TODO: implement add level API call
-    throw new Error("Not implemented.");
+    const createdLevel = await createLevel({
+        abbreviation: levelPost.abr,
+        name: levelPost.name
+    });
+    return LevelMapper.fromDto(createdLevel);
 }
 
 export async function updateLevelService (levelId: number, levelPost: LevelPostDTO): Promise<LevelDTO> {
-    //TODO: implement update level API call
-    throw new Error("Not implemented.");
+    const updatedLevel = await updateLevel(levelId, {
+        name: levelPost.name,
+        abbreviation: levelPost.abr,
+    });
+    return LevelMapper.fromDto(updatedLevel);
 }
 
 export async function removeLevelService (levelId: number): Promise<void> {
-    //TODO: implement delete level API call
-    throw new Error("Not implemented.");
+    await deleteLevel(levelId);
 }

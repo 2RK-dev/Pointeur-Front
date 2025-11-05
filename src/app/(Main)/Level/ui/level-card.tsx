@@ -49,7 +49,7 @@ export function LevelCard({
 
     const handleDeleteGroup = () => {
         if (!selectedGroup) return;
-        removeGroupService(selectedGroup.id).then(() => {
+        removeGroupService(level.id, selectedGroup.id).then(() => {
             removeGroupInLevel(level.id, selectedGroup.id)
         }).catch((error) => {
             console.error("Failed to delete group:", error);
