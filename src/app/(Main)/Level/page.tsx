@@ -10,6 +10,7 @@ import {LevelDetailsDTO, LevelDTO, LevelPostDTO} from "@/Types/LevelDTO"
 import ConfirmeDeleteComp from "@/components/ConfirmeDeleteComp";
 import {useLevelStore} from "@/Stores/Level";
 import {addLevelService, getLevelListService, removeLevelService, updateLevelService} from "@/services/Level";
+import {notifications} from "@/components/notifications";
 
 export default function LevelsPage() {
     const levels = useLevelStore((s) => s.levelsDetails);
@@ -25,10 +26,15 @@ export default function LevelsPage() {
     const [isDeleteLevelDialogOpen, setIsDeleteLevelDialogOpen] = useState(false)
 
     useEffect(() => {
-        getLevelListService().then((data) => {
+        const promise = getLevelListService().then((data) => {
             setLevels(data);
         }).catch((error) => {
             console.error("Error fetching levels:", error);
+        })
+        notifications.promise(promise,{
+            loading: "Chargement des niveaux...",
+            success: "Niveaux chargés avec succès !",
+            error: "Erreur lors du chargement des niveaux."
         })
     }, [])
 
@@ -57,32 +63,50 @@ export default function LevelsPage() {
 
     const handleAddLevel = (levelPost: LevelPostDTO) => {
         if(!levelPost) return;
-        addLevelService(levelPost).then((newLevel) => {
+        const promise = addLevelService(levelPost).then((newLevel) => {
             addLevel({
                 level: newLevel,
                 groups: []
             });
+            notifications.success('Niveau ajouté avec succès', ' Le niveau N°' + newLevel.id + ' - ' + newLevel.name + ' a été ajouté.');
         }).catch((err) => {
-            console.error("Error adding levelPostDTO:", err);
+            notifications.error("Erreur lors de l'ajout du niveau", err.message);
+        })
+        notifications.promise(promise,{
+            loading: "Ajout du niveau...",
+            success: "Niveau ajouté avec succès !",
+            error: "Erreur lors de l'ajout du niveau."
         })
     }
 
     const handleUpdateLevel = (levelID:number, levelPost: LevelPostDTO) => {
         if(!levelPost) return;
-        updateLevelService(levelID, levelPost).then((updatedLevel) => {
+        const promise = updateLevelService(levelID, levelPost).then((updatedLevel) => {
             updateLevel(levelID,updatedLevel);
+            notifications.success("Niveau mis à jour avec succès", " Le niveau N°" + updatedLevel.id + " - " + updatedLevel.name + " a été mis à jour.");
         }).catch((error) => {
-            console.error("Error updating levelPostDTO:", error);
+            notifications.error("Erreur lors de la mise à jour du niveau", error.message);
+        })
+        notifications.promise(promise,{
+            loading: "Mise à jour du niveau...",
+            success: "Niveau mis à jour avec succès !",
+            error: "Erreur lors de la mise à jour du niveau."
         })
     }
 
     const handleDeleteLevel = () => {
         setIsDeleteLevelDialogOpen(false);
         if(!editingLevel) return;
-        removeLevelService(editingLevel.id).then(() => {
+        const promise = removeLevelService(editingLevel.id).then(() => {
             removeLevel(editingLevel.id);
+            notifications.success("Niveau supprimé avec succès", " Le niveau N°" + editingLevel.id + " - " + editingLevel.name + " a été supprimé.");
         }).catch((error) => {
-            console.error("Error deleting level:", error);
+            notifications.error("Erreur lors de la suppression du niveau", error.message);
+        })
+        notifications.promise(promise,{
+            loading: "Suppression du niveau...",
+            success: "Niveau supprimé avec succès !",
+            error: "Erreur lors de la suppression du niveau."
         })
     }
 

@@ -14,6 +14,7 @@ import TeachingUnitForm from "@/app/(Main)/TeachingUnit/ui/teachingUnit-form";
 import {TeachingUnit} from "@/Types/TeachingUnit";
 import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {notifications} from "@/components/notifications";
 
 export default function Page() {
     const setTeachingUnits = useTeachingUnitStore(s => s.setTeachingUnits);
@@ -29,11 +30,16 @@ export default function Page() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getTeachingUnits()
+        const promiseTeaching = getTeachingUnits()
             .then((data) => setTeachingUnits(data))
             .catch((error) => console.log(error));
+        notifications.promise(promiseTeaching,{
+            loading: "Chargement des matières...",
+            success: "Matières chargées avec succès !",
+            error: "Erreur lors du chargement des matières."
+        })
         if (!levels) {
-            getLevelListService()
+            const promiseLevel = getLevelListService()
                 .then((data) => {
                     setLevels(data);
                     if (data.length > 0) {
@@ -41,16 +47,27 @@ export default function Page() {
                     }
                 })
                 .catch((error) => console.log(error));
+            notifications.promise(promiseLevel,{
+                loading: "Chargement des niveaux...",
+                success: "Niveaux chargés avec succès !",
+                error: "Erreur lors du chargement des niveaux."
+            });
         }
     }, []);
 
     const handleRemove = (id: number) => {
-        RemoveTeachingUnitService(id)
+        const promise = RemoveTeachingUnitService(id)
             .then((removedTeachingUnitId) => {
                 removeTeachingUnitInStore(removedTeachingUnitId);
                 setIsConfirmationModalOpen(false);
+                notifications.success("Matière supprimée avec succès","Matière N°" + removedTeachingUnitId + " a été supprimée.");
             }).catch((error) => {
-            console.error("Failed to remove teaching unit:", error);
+                notifications.error("Échec de la suppression de la matière", error.message);
+        })
+        notifications.promise(promise, {
+            loading: "Suppression de la matière en cours...",
+            success: "Matière supprimée avec succès !",
+            error: "Échec de la suppression de la matière."
         })
     }
 

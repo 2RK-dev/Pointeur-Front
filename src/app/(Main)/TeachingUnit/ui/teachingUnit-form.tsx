@@ -15,6 +15,7 @@ import {useLevelStore} from "@/Stores/Level";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Label} from "@/components/ui/label";
+import {notifications} from "@/components/notifications";
 
 interface IProps {
     isOpen: boolean;
@@ -55,25 +56,37 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
             data.associatedLevels = null;
         }
         if (selectedTeachingUnit) {
-            UpdateTeachingUnitService(selectedTeachingUnit.id, data)
+            const promise = UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
                     UpdateTeachingUnitInStore(updatedTeachingUnit.id, updatedTeachingUnit);
                     setIsOpen(false);
                     form.reset();
+                    notifications.success("Matière mise à jour avec succès","La matière N°" + updatedTeachingUnit.id + " - "+updatedTeachingUnit.name +" a été mise à jour.");
                 })
                 .catch((error) => {
-                    console.error("Failed to update teaching unit:", error);
+                    notifications.error("Échec de la mise à jour de la matière", error.message);
                 })
+            notifications.promise(promise, {
+                loading: "Mise à jour de la matière en cours...",
+                success: "Matière mise à jour avec succès !",
+                error: "Échec de la mise à jour de la matière."
+            })
         } else {
-            AddTeachingUnitService(data)
+            const promise = AddTeachingUnitService(data)
                 .then((newTeachingUnit) => {
                     AddTeachingUnitInStore(newTeachingUnit);
                     setIsOpen(false);
                     form.reset();
+                    notifications.success("Matière ajoutée avec succès","La matière N°" + newTeachingUnit.id + " - "+newTeachingUnit.name +" a été ajoutée.");
                 })
                 .catch((error) => {
-                    console.error("Failed to add teaching unit:", error);
+                    notifications.error("Échec de l'ajout de la matière", error.message);
                 })
+            notifications.promise(promise, {
+                loading: "Ajout de la matière en cours...",
+                success: "Matière ajoutée avec succès !",
+                error: "Échec de l'ajout de la matière."
+            })
         }
     }
 

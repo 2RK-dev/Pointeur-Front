@@ -13,6 +13,7 @@ import RoomForm from "@/app/(Main)/Room/ui/room-form";
 import {useRoomsStore} from "@/Stores/Room";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {notifications} from "@/components/notifications";
 
 export default function Home() {
     const rooms = useRoomsStore((s) => s.rooms);
@@ -23,17 +24,27 @@ export default function Home() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getRoomsService().then((data) => {
-            console.log(data);
+        const promise = getRoomsService().then((data) => {
             setRooms(data)
+        })
+        notifications.promise(promise, {
+            loading: "Chargement des salles...",
+            success: "Salles chargées avec succès !",
+            error: "Erreur lors du chargement des salles."
         })
     }, []);
 
     const handleRemoveRoom = (id: number) => {
-        removeRoomService(id).then((removedRoom) => {
+        const promise = removeRoomService(id).then((removedRoom) => {
             removeRoomInStore(removedRoom);
+            notifications.success("Salle supprimée avec succès", " La salle N°" + removedRoom + " a été supprimée.");
         }).catch((err) => {
-            console.error("Error deleting room:", err);
+            notifications.error("Erreur lors de la suppression de la salle", err.message);
+        })
+        notifications.promise(promise, {
+            loading: "Suppression de la salle...",
+            success: "Salle supprimée avec succès !",
+            error: "Erreur lors de la suppression de la salle."
         })
     }
 
@@ -48,6 +59,7 @@ export default function Home() {
             ]),
         });
         doc.save("liste_des_salles.pdf");
+        notifications.success("Exportation PDF réussie", "Le fichier PDF a été généré avec succès.");
     };
 
     return (

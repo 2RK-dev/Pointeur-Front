@@ -27,6 +27,7 @@ import {getRoomsService} from "@/services/Room";
 import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
 import {TranspositionResultBadges} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {notifications} from "@/components/notifications";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 5;
 const TODAY = new Date();
@@ -59,16 +60,21 @@ export default function Schedule() {
     useEffect(() => {
         if (selectedWeek){
             const {start, end} = selectedWeek;
-            getScheduleItems(start, end).then((items) => {
+            const promiseScheduleItem = getScheduleItems(start, end).then((items) => {
                 setCurrentScheduleItems(items);
             }).catch((error) => {
                 console.error("Error fetching schedule items:", error);
             });
+            notifications.promise(promiseScheduleItem,{
+                loading: "Chargement des éléments du planning...",
+                success: "Éléments du planning chargés avec succès !",
+                error: "Échec du chargement des éléments du planning."
+            })
         }
 
 
         if (!levelList) {
-            getLevelListService().then((levels) => {
+            const promiseLevel = getLevelListService().then((levels) => {
                 setLevelList(levels);
                 if (levels.length > 0) {
                     setSelectedLevel(levels[0]);
@@ -76,12 +82,17 @@ export default function Schedule() {
             }).catch((error) => {
                 console.error("Error fetching levels:", error);
             })
+            notifications.promise(promiseLevel,{
+                loading: "Chargement des niveaux...",
+                success: "Niveaux chargés avec succès !",
+                error: "Échec du chargement des niveaux."
+            })
         } else if (levelList.length > 0) {
             setSelectedLevel(levelList[0]);
         }
 
         if (!teacherList) {
-            getTeachers().then((teachers) => {
+            const promiseTeacher = getTeachers().then((teachers) => {
                 setTeacherList(teachers);
                 if (teachers.length > 0) {
                     setSelectedTeacherId(teachers[0].id);
@@ -89,18 +100,28 @@ export default function Schedule() {
             }).catch((error) => {
                 console.error("Error fetching teachers:", error);
             });
+            notifications.promise(promiseTeacher,{
+                loading: "Chargement des enseignants...",
+                success: "Enseignants chargés avec succès !",
+                error: "Échec du chargement des enseignants."
+            })
         } else if (teacherList.length > 0) {
             setSelectedTeacherId(teacherList[0].id);
         }
 
         if (!roomList) {
-            getRoomsService().then((rooms) => {
+            const promiseRoom = getRoomsService().then((rooms) => {
                 setRoomList(rooms);
                 if (rooms.length > 0) {
                     setSelectedRoomId(rooms[0].id);
                 }
             }).catch((error) => {
                 console.error("Error fetching rooms:", error);
+            })
+            notifications.promise(promiseRoom,{
+                loading: "Chargement des salles...",
+                success: "Salles chargées avec succès !",
+                error: "Échec du chargement des salles."
             })
         } else if (roomList.length > 0) {
             setSelectedRoomId(roomList[0].id);
