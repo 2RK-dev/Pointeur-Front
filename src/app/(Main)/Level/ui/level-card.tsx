@@ -66,7 +66,7 @@ export function LevelCard({
 
     const handleDeleteGroup = () => {
         if (!selectedGroup) return;
-        const promise = removeGroupService(selectedGroup.id).then(() => {
+        const promise = removeGroupService(level.id, selectedGroup.id).then(() => {
             removeGroupInLevel(level.id, selectedGroup.id)
             notifications.success("Groupe supprimé avec succès",
                 "Le groupe N°" + selectedGroup.id + " - " +

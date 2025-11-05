@@ -48,7 +48,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         setIsAssociated(defaultChecked);
     }, [selectedLevelID, selectedTeachingUnit]);
 
-    const selectedLevelsObj = Levels?.find(level => level.id === selectedLevelID);
+    const selectedLevelsObj = Levels?.find(level => level.level.id === selectedLevelID);
 
     const onSubmit = (data: TeachingUnitPost) => {
         if(!isAssociated){
@@ -81,7 +81,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className={"w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>{selectedTeachingUnit ? "Modifier" : "Ajouter"} Matière {selectedLevelsObj?.name}</DialogTitle>
+                    <DialogTitle>{selectedTeachingUnit ? "Modifier" : "Ajouter"} Matière {selectedLevelsObj?.level.name}</DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <Form {...form}>
@@ -146,9 +146,9 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                             </FormControl>
                                                             <SelectContent>
                                                                 {Levels?.map((level) => (
-                                                                    <SelectItem key={level.id}
-                                                                                value={level.id.toString()}>
-                                                                        {level.name}
+                                                                    <SelectItem key={level.level.id}
+                                                                                value={level.level.id.toString()}>
+                                                                        {level.level.name}
                                                                     </SelectItem>
                                                                 ))}
                                                             </SelectContent>

@@ -166,7 +166,7 @@ export default function ScheduleForm({
 
     const teachingUnitByLevel = useMemo(() => {
         return getTeachingUnitByLevel(selectedLevelDetailState?.level.id || null)
-    }, [selectedLevelDetailState])
+    }, [selectedLevelDetailState, teachingUnits])
 
     const availableGroups = useMemo(() => {
         if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
