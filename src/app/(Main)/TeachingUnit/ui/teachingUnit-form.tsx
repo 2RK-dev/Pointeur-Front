@@ -27,7 +27,7 @@ interface IProps {
 export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, selectedTeachingUnit}: IProps) {
     const AddTeachingUnitInStore = useTeachingUnitStore(s => s.addTeachingUnit);
     const UpdateTeachingUnitInStore = useTeachingUnitStore(s => s.updateTeachingUnit);
-    const Levels = useLevelStore(s => s.levels);
+    const Levels = useLevelStore(s => s.levelsDetails);
     const defaultChecked = selectedTeachingUnit ? selectedTeachingUnit.associatedLevels !== null : true;
     const [isAssociated, setIsAssociated] = useState<boolean>(defaultChecked);
 

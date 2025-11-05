@@ -26,7 +26,7 @@ import {addScheduleItemService, deleteScheduleItemService, updateScheduleItemSer
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem"
 import {useTeachingUnitStore} from "@/Stores/TeachingUnit"
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {Level} from "@/Types/Level";
+import {LevelDetailsDTO} from "@/Types/LevelDTO";
 
 const hours = generateHours()
 
@@ -49,15 +49,15 @@ const ScheduleItemFormSchema = z.object({
 })
 
 interface props {
-    selectedLevel: Level | null,
+    selectedLevelDetails: LevelDetailsDTO | null,
     selectedTeacherId: number | null,
     selectedRoomId: number | null,
-    levelList: Level[],
+    levelDetailsList: LevelDetailsDTO[],
     teacherList: Teacher[],
     roomList: Room[],
 }
 
-export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRoomId, levelList,teacherList,roomList}: props) {
+export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,selectedRoomId, levelDetailsList,teacherList,roomList}: props) {
     const {open, setOpen} = useOpenScheduleItemFormStore()
     const [calendarOpen, setCalendarOpen] = useState(false)
     const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
@@ -71,7 +71,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem)
     const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem)
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem)
-    const [selectedLevelState, setSelectedLevelState] = useState<Level | null>(selectedLevel)
+    const [selectedLevelDetailState, setselectedLevelDetailState] = useState<LevelDetailsDTO | null>(selectedLevelDetails)
 
     const defaultValues = {
         date: selectedScheduleItem?.startTime || undefined,
@@ -101,12 +101,12 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
     useEffect(() => {
         form.reset(defaultValues)
         if (selectedScheduleItem) {
-            const level = levelList.find(l => l.id === selectedScheduleItem.Groups[0]?.levelId) || null
-            setSelectedLevelState(level)
+            const level = levelDetailsList.find(l => l.level.id === selectedScheduleItem.Groups[0]?.levelId) || null
+            setselectedLevelDetailState(level)
         } else {
-            setSelectedLevelState(selectedLevel)
+            setselectedLevelDetailState(selectedLevelDetails)
         }
-    }, [selectedLevel, selectedTeacherId,selectedRoomId, selectedScheduleItem])
+    }, [selectedLevelDetails, selectedTeacherId,selectedRoomId, selectedScheduleItem])
 
 
     const watchedDate = form.watch("date")
@@ -157,23 +157,23 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
     }
 
     const teachingUnitByLevel = useMemo(() => {
-        return getTeachingUnitByLevel(selectedLevelState?.id || null)
-    }, [selectedLevelState])
+        return getTeachingUnitByLevel(selectedLevelDetailState?.level.id || null)
+    }, [selectedLevelDetailState])
 
     const availableGroups = useMemo(() => {
-        if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableGroups(
             startDateTime,
             endDateTime,
-            selectedLevelState.groups,
+            selectedLevelDetailState.groups,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime])
+    }, [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime])
 
     const availableTeachers = useMemo(() => {
-            if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
+            if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
                 return []
             }
             return getAvailableTeachers(
@@ -183,10 +183,10 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
                 selectedScheduleItem,
             )
         }
-        , [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, teacherList])
+        , [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime, teacherList])
 
     const availableRooms = useMemo(() => {
-        if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableRooms(
@@ -195,7 +195,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
             roomList,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevelState, watchedDate, watchedStartTime, watchedEndTime, roomList])
+    }, [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime, roomList])
 
     useEffect(() => {
         const currentTeachingUnitID = form.getValues("teachingUnitID")
@@ -255,7 +255,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
         return day >= 1 && day <= 6
     }
 
-    const canShowGroup = watchedDate && watchedStartTime && watchedEndTime && selectedLevelState
+    const canShowGroup = watchedDate && watchedStartTime && watchedEndTime && selectedLevelDetailState
     const isSubmitDisabled = capacityError || !canShowGroup || Object.keys(form.formState.errors).length > 0
 
     const handleDelete = () => {
@@ -329,7 +329,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
                         {selectedScheduleItem ? "Modifier le cours" : "Nouveau cours"}
                     </DialogTitle>
                     <p className="text-sm text-muted-foreground mt-1">
-                        {selectedLevel && `Niveau ${selectedLevel.name}`}
+                        {selectedLevelDetails && `Niveau ${selectedLevelDetails.level.name}`}
                     </p>
                 </DialogHeader>
                 <ScrollArea className="max-h-[80vh] w-full px-2 pb-8">
@@ -440,20 +440,20 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
 
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Groupes</h3>
-                                <Select value={selectedLevelState?.id.toString() } onValueChange={(val) =>{
-                                    const level = levelList.find(l => l.id.toString() === val) || null
-                                    setSelectedLevelState(level)
+                                <Select value={selectedLevelDetailState?.level.id.toString() } onValueChange={(val) =>{
+                                    const level = levelDetailsList.find(l => l.level.id.toString() === val) || null
+                                    setselectedLevelDetailState(level)
                                 }}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Sélectionner un niveau"/>
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {levelList.length > 0 ? levelList.map((level) => (
-                                            <SelectItem key={level.id} value={level.id.toString()}>
+                                        {levelDetailsList.length > 0 ? levelDetailsList.map((levelDetails) => (
+                                            <SelectItem key={levelDetails.level.id} value={levelDetails.level.id.toString()}>
                                                 <div className="flex items-center gap-2">
                                                     <span
-                                                        className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">{level.name}</span>
-                                                    <span>{level.name}</span>
+                                                        className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">{levelDetails.level.name}</span>
+                                                    <span>{levelDetails.level.name}</span>
                                                 </div>
                                             </SelectItem>
                                         )) : <div className="p-2 text-sm text-muted-foreground">Aucun niveau disponible</div>}
@@ -499,7 +499,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
                                                                                         <span
                                                                                             className="font-medium">{group.name}</span>
                                                                                         <span
-                                                                                            className="text-muted-foreground ml-2">({group.abr})</span>
+                                                                                            className="text-muted-foreground ml-2">({group.name})</span>
                                                                                     </div>
                                                                                     <span
                                                                                         className="text-sm text-muted-foreground">{group.size} étudiants</span>
@@ -678,7 +678,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
 
                                 <div className="flex gap-3 ml-auto">
                                     <Button type="button" variant="outline" onClick={() => {
-                                        setSelectedLevelState(selectedLevel)
+                                        setselectedLevelDetailState(selectedLevelDetails)
                                         form.reset()
                                     }}>
                                         Réinitialiser
