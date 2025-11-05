@@ -11,6 +11,7 @@ import {GroupModal} from "./group-modal"
 import ConfirmeDeleteComp from "@/components/ConfirmeDeleteComp";
 import {useLevelStore} from "@/Stores/Level";
 import {addGroupService, removeGroupService, updateGroupService} from "@/services/Group";
+import {notifications} from "@/components/notifications";
 
 interface props {
     currentLevelDetails: LevelDetailsDTO,
@@ -31,28 +32,52 @@ export function LevelCard({
 
     const handleUpdateGroup = (groupId: number, groupPost: GroupPost) => {
         if (!selectedGroup) return;
-        updateGroupService(groupId, groupPost).then((updatedGroup) => {
+        const promise = updateGroupService(groupId, groupPost).then((updatedGroup) => {
             updateGroupInLevel(level.id, updatedGroup)
+            notifications.success("Groupe mis à jour avec succès",
+                "Le groupe N°" + updatedGroup.id + " - " +
+                updatedGroup.type + " " + updatedGroup.classe + " " + updatedGroup.name + " a été mis à jour.")
         }).catch(error => {
-            console.error("Failed to update group:", error);
+            notifications.error("Échec de la mise à jour du groupe", error.message);
+        })
+        notifications.promise(promise, {
+            loading: "Mise à jour du groupe en cours...",
+            success: "Groupe mis à jour avec succès !",
+            error: "Échec de la mise à jour du groupe."
         })
     }
 
     const handleAddGroup = (groupPost: GroupPost) => {
-        addGroupService(groupPost).then((newGroup) => {
+        const promise = addGroupService(groupPost).then((newGroup) => {
             addGroupInLevel(level.id, newGroup)
+            notifications.success("Groupe ajouté avec succès",
+                "Le groupe N°" + newGroup.id + " - " +
+                newGroup.type + " " + newGroup.classe + " " + newGroup.name + " a été ajouté.")
         }).catch(error => {
-            console.error("Failed to add group:", error);
+            notifications.error("Échec de l'ajout du groupe", error.message);
+        })
+        notifications.promise(promise, {
+            loading: "Ajout du groupe en cours...",
+            success: "Groupe ajouté avec succès !",
+            error: "Échec de l'ajout du groupe."
         })
     }
 
 
     const handleDeleteGroup = () => {
         if (!selectedGroup) return;
-        removeGroupService(selectedGroup.id).then(() => {
+        const promise = removeGroupService(selectedGroup.id).then(() => {
             removeGroupInLevel(level.id, selectedGroup.id)
+            notifications.success("Groupe supprimé avec succès",
+                "Le groupe N°" + selectedGroup.id + " - " +
+                selectedGroup.type + " " + selectedGroup.classe + " " + selectedGroup.name + " a été supprimé.")
         }).catch((error) => {
-            console.error("Failed to delete group:", error);
+            notifications.error("Échec de la suppression du groupe", error.message);
+        })
+        notifications.promise(promise, {
+            loading: "Suppression du groupe en cours...",
+            success: "Groupe supprimé avec succès !",
+            error: "Échec de la suppression du groupe."
         })
         setDeleteDialogOpen(false)
     }
