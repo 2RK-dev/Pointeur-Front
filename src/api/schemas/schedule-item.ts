@@ -24,3 +24,11 @@ const BaseScheduleItemSchema = z.object({
 });
 export const CreateScheduleItemSchema = BaseScheduleItemSchema;
 export const UpdateScheduleItemSchema = BaseScheduleItemSchema;
+
+export const BulkScheduleItemCreationResponseSchema = z.object({
+    successItems: ScheduleItemSchema.array(),
+    failedItems: z.array(z.object({
+        item: CreateScheduleItemSchema,
+        reason: z.string(),
+    })),
+});
