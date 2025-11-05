@@ -21,13 +21,19 @@ interface Props {
     setTransposeResponse: (response: TranspositionResponse) => void;
 }
 
-export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen, selectedWeek, setTransposeResponse}: Props) {
+export default function Transpose({
+                                      isTransposeModalOpen,
+                                      setIsTransposeModalOpen,
+                                      selectedWeek,
+                                      setTransposeResponse
+                                  }: Props) {
     const {displayScheduleItems} = useDisplayScheduleItem();
     const {addScheduleItem} = useCurrentScheduleItemsStore();
     const [targetWeek, setTargetWeek] = useState<Week>();
 
     const initialDate = new Date(selectedWeek.end);
     initialDate.setDate(initialDate.getDate() + 1);
+    const dateOption = getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, initialDate);
 
     const TransposeData = () => {
         if (!targetWeek) return;
@@ -53,7 +59,9 @@ export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen
                     <DialogTitle>Transposer les données</DialogTitle>
                 </DialogHeader>
                 <Select
-                    value={JSON.stringify(targetWeek)}
+                    value={targetWeek
+                    && dateOption.some(w => JSON.stringify(w) === JSON.stringify(targetWeek))
+                        ? JSON.stringify(targetWeek) : undefined}
                     onValueChange={(value) => {
                         setTargetWeek(WeekSchema.parse(JSON.parse(value)))
                     }}>
@@ -61,9 +69,18 @@ export default function Transpose({isTransposeModalOpen, setIsTransposeModalOpen
                         <SelectValue placeholder="Sélectionner la semaine cible"/>
                     </SelectTrigger>
                     <SelectContent>
-                        {getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, initialDate).map((week, index) => (
+                        {dateOption.map((week, index) => (
                             <SelectItem key={index} value={JSON.stringify(week)}>
-                                {`(${week.start.toLocaleDateString()} - ${week.end.toLocaleDateString()})`}
+                                {
+                                    `${week.start.toLocaleDateString('fr-FR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })} - ${week.end.toLocaleDateString('fr-FR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })}`}
                             </SelectItem>
                         ))}
                     </SelectContent>
