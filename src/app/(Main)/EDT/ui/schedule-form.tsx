@@ -158,7 +158,7 @@ export default function ScheduleForm({selectedLevel,selectedTeacherId,selectedRo
 
     const teachingUnitByLevel = useMemo(() => {
         return getTeachingUnitByLevel(selectedLevelState?.id || null)
-    }, [selectedLevelState])
+    }, [selectedLevelState, teachingUnits])
 
     const availableGroups = useMemo(() => {
         if (!selectedLevelState || !watchedDate || !watchedStartTime || !watchedEndTime) {
