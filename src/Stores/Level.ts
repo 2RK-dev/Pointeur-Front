@@ -9,7 +9,7 @@ interface LevelStoreInterface {
     updateLevel: (id: number, level: LevelDTO) => void;
     removeLevel: (id: number) => void;
     addGroupInLevel: (levelId: number, group: GroupDTO) => void;
-    updateGroupInLevel: (id: number, group: GroupDTO) => void;
+    updateGroupInLevel: (levelId: number, group: GroupDTO) => void;
     removeGroupInLevel: (levelId: number, groupId: number) => void;
 }
 
@@ -39,11 +39,16 @@ export const useLevelStore = create<LevelStoreInterface>((set) => ({
             return levelDetail;
         }) : null
     })),
-    updateGroupInLevel: (id: number, group: GroupDTO) => set((state) => ({
-        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => ({
-            ...levelDetail,
-            groups: levelDetail.groups.map(g => g.id === id ? {...g, ...group} : g)
-        })) : null
+    updateGroupInLevel: (levelId: number, group: GroupDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => {
+            if (levelDetail.level.id === levelId) {
+                return {
+                    ...levelDetail,
+                    groups: levelDetail.groups.map(g => g.id === group.id ? group : g)
+                };
+            }
+            return levelDetail;
+        }) : null
     })),
     removeGroupInLevel: (levelId: number, groupId: number) => set((state) => ({
         levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => {
