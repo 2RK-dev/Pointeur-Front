@@ -58,7 +58,10 @@ export default function LevelsPage() {
     const handleAddLevel = (levelPost: LevelPostDTO) => {
         if(!levelPost) return;
         addLevelService(levelPost).then((newLevel) => {
-            addLevel(newLevel);
+            addLevel({
+                level: newLevel,
+                groups: []
+            });
         }).catch((err) => {
             console.error("Error adding levelPostDTO:", err);
         })

@@ -1,12 +1,12 @@
 import {create} from "zustand";
-import {LevelDetailsDTO} from "@/Types/LevelDTO";
+import {LevelDetailsDTO, LevelDTO} from "@/Types/LevelDTO";
 import {GroupDTO} from "@/Types/GroupDTO";
 
 interface LevelStoreInterface {
     levelsDetails: LevelDetailsDTO[] | null;
     setLevels: (levels: LevelDetailsDTO[]) => void;
     addLevel: (level: LevelDetailsDTO) => void;
-    updateLevel: (id: number, level: LevelDetailsDTO) => void;
+    updateLevel: (id: number, level: LevelDTO) => void;
     removeLevel: (id: number) => void;
     addGroupInLevel: (levelId: number, group: GroupDTO) => void;
     updateGroupInLevel: (id: number, group: GroupDTO) => void;
@@ -19,8 +19,11 @@ export const useLevelStore = create<LevelStoreInterface>((set) => ({
     addLevel: (level: LevelDetailsDTO) => set((state) => ({
         levelsDetails: state.levelsDetails ? [...state.levelsDetails, level] : [level]
     })),
-    updateLevel: (id: number, level: LevelDetailsDTO) => set((state) => ({
-        levelsDetails: state.levelsDetails ? state.levelsDetails.map(l => l.level.id === id ? {...l, ...level} : l) : [level]
+    updateLevel: (id: number, level: LevelDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => ({
+            ...levelDetail,
+            level: levelDetail.level.id === id ? {...levelDetail.level, ...level} : levelDetail.level
+        })) : null
     })),
     removeLevel: (id: number) => set((state) => ({
         levelsDetails: state.levelsDetails ? state.levelsDetails.filter(levelDetail => levelDetail.level.id !== id) : null

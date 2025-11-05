@@ -2,7 +2,7 @@
 
 "use server";
 
-import {LevelDetailsDTO, LevelPostDTO} from "@/Types/LevelDTO";
+import {LevelDetailsDTO, LevelDTO, LevelPostDTO} from "@/Types/LevelDTO";
 import {fetchLevels} from "@/api/http/level";
 import {GroupMapper, LevelMapper} from "@/services/mapper";
 
@@ -14,12 +14,12 @@ export async function getLevelListService (): Promise<LevelDetailsDTO[]> {
     }));
 }
 
-export async function addLevelService (levelPost: LevelPostDTO): Promise<LevelDetailsDTO> {
+export async function addLevelService (levelPost: LevelPostDTO): Promise<LevelDTO> {
     //TODO: implement add level API call
     throw new Error("Not implemented.");
 }
 
-export async function updateLevelService (levelId: number, levelPost: LevelPostDTO): Promise<LevelDetailsDTO> {
+export async function updateLevelService (levelId: number, levelPost: LevelPostDTO): Promise<LevelDTO> {
     //TODO: implement update level API call
     throw new Error("Not implemented.");
 }
