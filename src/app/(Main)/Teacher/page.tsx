@@ -13,6 +13,7 @@ import {useTeacherStore} from "@/Stores/Teacher";
 import TeacherForm from "@/app/(Main)/Teacher/ui/teacher-form";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {notifications} from "@/components/notifications";
 
 export default function Home() {
     const teachers = useTeacherStore((s) => s.teachers);
@@ -35,13 +36,15 @@ export default function Home() {
             body: teachers?.map((teacher) => [teacher.name, teacher.abr]),
         });
         doc.save("liste_des_salles.pdf");
+        notifications.success("Exportation PDF réussie", "Le fichier PDF a été généré avec succès.");
     };
 
     const handleRemoveTeacher = (id: number) => {
         removeTeacher(id).then((removedTeacherId) => {
             removeTeacherInStore(removedTeacherId);
+            notifications.success("Enseignant supprimé avec succès"," L'enseignant avec l'ID " + removedTeacherId + " a été supprimé.");
         }).catch((err) => {
-            console.error("Error deleting teacher:", err);
+            notifications.error("Erreur lors de la suppression de l'enseignant", err.message);
         })
     }
 

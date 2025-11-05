@@ -10,6 +10,7 @@ import {Button} from "@/components/ui/button";
 import {Check, RotateCcw} from "lucide-react";
 import {addTeacher, updateTeacher} from "@/services/Teacher";
 import {useTeacherStore} from "@/Stores/Teacher";
+import {notifications} from "@/components/notifications";
 
 interface Props {
     isOpen: boolean,
@@ -34,22 +35,23 @@ export default function TeacherForm({isOpen, setIsOpen, selectedTeacher}: Props)
     }, [selectedTeacher]);
 
     const onSubmit = (data: TeacherPost) => {
-        if(selectedTeacher){
+        if (selectedTeacher) {
             updateTeacher(selectedTeacher.id, data).then((updatedTeacher) => {
                 updateTeacherInStore(selectedTeacher.id, updatedTeacher);
                 form.reset();
                 setIsOpen(false);
+                notifications.success("Enseignant mis à jour avec succès", " L'enseignant N°" + updatedTeacher.id + " - " + updatedTeacher.name + " a été mis à jour.");
             }).catch((err) => {
-                console.error("Error updating teacher:", err);
+                notifications.error("Erreur lors de la mise à jour de l'enseignant", err.message);
             })
-        }
-        else {
+        } else {
             addTeacher(data).then((newTeacher) => {
                 addTeacherInStore(newTeacher);
                 form.reset();
                 setIsOpen(false);
+                notifications.success('Enseignant ajouté avec succès', ' L\'enseignant ' + newTeacher.id + ' - ' + newTeacher.name + ' a été ajouté.');
             }).catch((err) => {
-                console.error("Error adding teacher:", err);
+                notifications.error("Erreur lors de l'ajout de l'enseignant", err.message);
             })
         }
     }
