@@ -36,7 +36,7 @@ export default function TeacherForm({isOpen, setIsOpen, selectedTeacher}: Props)
 
     const onSubmit = (data: TeacherPost) => {
         if (selectedTeacher) {
-            updateTeacher(selectedTeacher.id, data).then((updatedTeacher) => {
+            const promise = updateTeacher(selectedTeacher.id, data).then((updatedTeacher) => {
                 updateTeacherInStore(selectedTeacher.id, updatedTeacher);
                 form.reset();
                 setIsOpen(false);
@@ -44,14 +44,24 @@ export default function TeacherForm({isOpen, setIsOpen, selectedTeacher}: Props)
             }).catch((err) => {
                 notifications.error("Erreur lors de la mise à jour de l'enseignant", err.message);
             })
+            notifications.promise(promise,{
+                loading: "Mise à jour de l'enseignant...",
+                success: "Enseignant mis à jour avec succès !",
+                error: "Erreur lors de la mise à jour de l'enseignant."
+            })
         } else {
-            addTeacher(data).then((newTeacher) => {
+            const promise = addTeacher(data).then((newTeacher) => {
                 addTeacherInStore(newTeacher);
                 form.reset();
                 setIsOpen(false);
-                notifications.success('Enseignant ajouté avec succès', ' L\'enseignant ' + newTeacher.id + ' - ' + newTeacher.name + ' a été ajouté.');
+                notifications.success('Enseignant ajouté avec succès', ' L\'enseignant N°' + newTeacher.id + ' - ' + newTeacher.name + ' a été ajouté.');
             }).catch((err) => {
                 notifications.error("Erreur lors de l'ajout de l'enseignant", err.message);
+            })
+            notifications.promise(promise,{
+                loading: "Ajout de l'enseignant...",
+                success: "Enseignant ajouté avec succès !",
+                error: "Erreur lors de l'ajout de l'enseignant."
             })
         }
     }

@@ -40,11 +40,16 @@ export default function Home() {
     };
 
     const handleRemoveTeacher = (id: number) => {
-        removeTeacher(id).then((removedTeacherId) => {
+        const promise = removeTeacher(id).then((removedTeacherId) => {
             removeTeacherInStore(removedTeacherId);
             notifications.success("Enseignant supprimé avec succès"," L'enseignant avec l'ID " + removedTeacherId + " a été supprimé.");
         }).catch((err) => {
             notifications.error("Erreur lors de la suppression de l'enseignant", err.message);
+        })
+        notifications.promise(promise,{
+            loading: "Suppression de l'enseignant...",
+            success: "Enseignant supprimé avec succès !",
+            error: "Erreur lors de la suppression de l'enseignant."
         })
     }
 

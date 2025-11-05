@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
+import {Toaster} from "sonner";
 
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const [open, setOpen] = useState(false);
-	return <div> {children}</div>;
+	return <div>
+		<Toaster />
+		{children}
+	</div>;
 }
