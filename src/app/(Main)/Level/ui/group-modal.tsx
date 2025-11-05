@@ -18,17 +18,19 @@ interface GroupModalProps {
     selectGroup: GroupDTO | null
     handleAddGroup:(groupPost: GroupPost) => void
     handleUpdateGroup:(groupId:number, groupPost: GroupPost) => void
+    currentLevelId: number
 }
 
 const listOfTypes = ["TD", "TP", "CM", "Projet"]
 
-export function GroupModal({open, onOpenChange, selectGroup, handleUpdateGroup, handleAddGroup}: GroupModalProps) {
+export function GroupModal({open, onOpenChange, selectGroup, handleUpdateGroup, handleAddGroup, currentLevelId}: GroupModalProps) {
     const mode = selectGroup ? "edit" : "create";
     const defaultValue = {
         name: selectGroup?.name || "",
         type: selectGroup?.type || "",
         classe: selectGroup?.classe || "",
         size: selectGroup?.size || 0,
+        levelId: currentLevelId,
     }
 
     const form = useForm<GroupPost>({

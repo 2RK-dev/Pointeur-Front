@@ -10,7 +10,7 @@ export const GroupDTOSchema = z.object({
     levelId: z.number(),
 })
 
-export const GroupPostDTOSchema = GroupDTOSchema.omit({ id: true , levelAbr: true, levelId: true})
+export const GroupPostDTOSchema = GroupDTOSchema.omit({ id: true , levelAbr: true})
 
 export type GroupDTO = z.infer<typeof GroupDTOSchema>
 export type GroupPost = z.infer<typeof GroupPostDTOSchema>

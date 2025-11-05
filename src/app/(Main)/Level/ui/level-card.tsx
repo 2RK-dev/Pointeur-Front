@@ -146,6 +146,7 @@ export function LevelCard({
                 selectGroup={selectedGroup}
                 handleAddGroup={handleAddGroup}
                 handleUpdateGroup={handleUpdateGroup}
+                currentLevelId={level.id}
             />
 
             <ConfirmeDeleteComp isConfirmationModalOpen={deleteDialogOpen}
