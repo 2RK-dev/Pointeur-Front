@@ -39,7 +39,6 @@ export function LevelCard({
     }
 
     const handleAddGroup = (groupPost: GroupPost) => {
-        if (!selectedGroup) return;
         addGroupService(groupPost).then((newGroup) => {
             addGroupInLevel(level.id, newGroup)
         }).catch(error => {
