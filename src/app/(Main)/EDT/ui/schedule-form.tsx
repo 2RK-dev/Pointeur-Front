@@ -27,6 +27,7 @@ import {ScheduleItemPostSchema} from "@/Types/ScheduleItem"
 import {useTeachingUnitStore} from "@/Stores/TeachingUnit"
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {LevelDetailsDTO} from "@/Types/LevelDTO";
+import {notifications} from "@/components/notifications";
 
 const hours = generateHours()
 
@@ -57,7 +58,14 @@ interface props {
     roomList: Room[],
 }
 
-export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,selectedRoomId, levelDetailsList,teacherList,roomList}: props) {
+export default function ScheduleForm({
+                                         selectedLevelDetails,
+                                         selectedTeacherId,
+                                         selectedRoomId,
+                                         levelDetailsList,
+                                         teacherList,
+                                         roomList
+                                     }: props) {
     const {open, setOpen} = useOpenScheduleItemFormStore()
     const [calendarOpen, setCalendarOpen] = useState(false)
     const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
@@ -106,7 +114,7 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
         } else {
             setselectedLevelDetailState(selectedLevelDetails)
         }
-    }, [selectedLevelDetails, selectedTeacherId,selectedRoomId, selectedScheduleItem])
+    }, [selectedLevelDetails, selectedTeacherId, selectedRoomId, selectedScheduleItem])
 
 
     const watchedDate = form.watch("date")
@@ -260,22 +268,25 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
 
     const handleDelete = () => {
         if (!selectedScheduleItem) return
-        deleteScheduleItemService(selectedScheduleItem.id)
+        const promise = deleteScheduleItemService(selectedScheduleItem.id)
             .then((deletedScheduleItemID) => {
                 removeScheduleItem(deletedScheduleItemID)
                 form.reset()
                 setOpen(false)
+                notifications.success("Cours supprimé avec succès", "Le cours N°" + deletedScheduleItemID + " a été supprimé")
             })
             .catch((error) => {
-                console.error(" Error : ", error)
+                notifications.error("Erreur lors de la suppression du cours", error.message)
             })
+        notifications.promise(promise, {
+            loading: "Suppression du cours...",
+            success: "Cours supprimé avec succès !",
+            error: "Erreur lors de la suppression du cours."
+        })
     }
 
     const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
-        if (capacityError) {
-            return
-        }
-
+        if (capacityError) return
         try {
             const [startHour, startMinute] = values.startTime.split(":").map(Number)
             const [endHour, endMinute] = values.endTime.split(":").map(Number)
@@ -296,28 +307,44 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
             })
 
             if (selectedScheduleItem) {
-                updateScheduleItemService(selectedScheduleItem.id, scheduleItem)
+                const promise = updateScheduleItemService(selectedScheduleItem.id, scheduleItem)
                     .then((updatedItem) => {
                         updateScheduleItem(selectedScheduleItem.id, updatedItem)
                         form.reset()
                         setOpen(false)
+                        notifications.success("Cours mis à jour avec succès",
+                            " Le cours N°" + updatedItem.id + "de " + updatedItem.TeachingUnit.name +
+                            "avec Mr/Mme " + updatedItem.Teacher.name + " a été mis à jour.")
                     })
                     .catch((error) => {
-                        console.error(" Error : ", error)
+                        notifications.error("Erreur lors de la mise à jour du cours", error.message)
                     })
+                notifications.promise(promise, {
+                    loading: "Mise à jour du cours...",
+                    success: "Cours mis à jour avec succès !",
+                    error: "Erreur lors de la mise à jour du cours."
+                })
             } else {
-                addScheduleItemService(scheduleItem)
+                const promise = addScheduleItemService(scheduleItem)
                     .then((scheduleItem) => {
                         addScheduleItem(scheduleItem)
                         form.reset()
                         setOpen(false)
+                        notifications.success("Cours ajouté avec succès",
+                            " Le cours N°" + scheduleItem.id + "de " + scheduleItem.TeachingUnit.name +
+                            "avec Mr/Mme " + scheduleItem.Teacher.name + " a été ajouté.")
                     })
                     .catch((error) => {
-                        console.error(" Error : ", error)
+                        notifications.error("Erreur lors de l'ajout du cours", error.message)
                     })
+                notifications.promise(promise, {
+                    loading: "Ajout du cours...",
+                    success: "Cours ajouté avec succès !",
+                    error: "Erreur lors de l'ajout du cours."
+                })
             }
         } catch (e) {
-            console.error(" Error : ", e)
+            notifications.error("Erreur de validation", "Les données du cours sont invalides.")
         }
     }
 
@@ -440,7 +467,7 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
 
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Groupes</h3>
-                                <Select value={selectedLevelDetailState?.level.id.toString() } onValueChange={(val) =>{
+                                <Select value={selectedLevelDetailState?.level.id.toString()} onValueChange={(val) => {
                                     const level = levelDetailsList.find(l => l.level.id.toString() === val) || null
                                     setselectedLevelDetailState(level)
                                 }}>
@@ -449,14 +476,16 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
                                     </SelectTrigger>
                                     <SelectContent>
                                         {levelDetailsList.length > 0 ? levelDetailsList.map((levelDetails) => (
-                                            <SelectItem key={levelDetails.level.id} value={levelDetails.level.id.toString()}>
+                                            <SelectItem key={levelDetails.level.id}
+                                                        value={levelDetails.level.id.toString()}>
                                                 <div className="flex items-center gap-2">
                                                     <span
                                                         className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">{levelDetails.level.name}</span>
                                                     <span>{levelDetails.level.name}</span>
                                                 </div>
                                             </SelectItem>
-                                        )) : <div className="p-2 text-sm text-muted-foreground">Aucun niveau disponible</div>}
+                                        )) : <div className="p-2 text-sm text-muted-foreground">Aucun niveau
+                                            disponible</div>}
                                     </SelectContent>
                                 </Select>
                                 <FormField
@@ -515,7 +544,8 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
                                             ) : (
                                                 <div className="text-center py-12 text-muted-foreground">
                                                     <Users className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                                    <p className="text-sm">Définissez la période et le niveau pour voir les groupes
+                                                    <p className="text-sm">Définissez la période et le niveau pour voir
+                                                        les groupes
                                                         disponibles</p>
                                                 </div>
                                             )}
@@ -642,7 +672,8 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
                                 ) : (
                                     <div className="text-center py-12 text-muted-foreground">
                                         <BookOpen className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                        <p className="text-sm">Définissez la période et le niveau pour configurer les détails du
+                                        <p className="text-sm">Définissez la période et le niveau pour configurer les
+                                            détails du
                                             cours</p>
                                     </div>
                                 )}
@@ -693,5 +724,5 @@ export default function ScheduleForm({selectedLevelDetails,selectedTeacherId,sel
                 </ScrollArea>
             </DialogContent>
         </Dialog>
-)
+    )
 }
