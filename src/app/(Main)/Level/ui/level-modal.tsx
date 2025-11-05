@@ -40,6 +40,7 @@ export function LevelModal({open, onOpenChange, selectedLevel, handleUpdateLevel
         } else {
             handleAddLevel(data);
         }
+        onOpenChange(false);
     });
 
     return (

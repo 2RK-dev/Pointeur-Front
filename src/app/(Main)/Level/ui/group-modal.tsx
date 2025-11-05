@@ -48,6 +48,7 @@ export function GroupModal({open, onOpenChange, selectGroup, handleUpdateGroup, 
         } else {
             handleAddGroup(data);
         }
+        onOpenChange(false);
     });
 
     return (
