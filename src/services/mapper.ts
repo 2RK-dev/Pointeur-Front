@@ -1,9 +1,20 @@
-import { IGroup, IRoom, IScheduleItem, ITeacher, ITeachingUnit } from "@/api/types";
+import {IGroup, ILevel, IRoom, IScheduleItem, ITeacher, ITeachingUnit} from "@/api/types";
 import { GroupDTO } from "@/Types/GroupDTO";
 import { Room } from "@/Types/Room";
 import { TeachingUnit } from "@/Types/TeachingUnit";
 import { Teacher } from "@/Types/Teacher";
 import { ScheduleItem } from "@/Types/ScheduleItem";
+import {LevelDTO} from "@/Types/LevelDTO";
+
+export const LevelMapper = {
+    fromDto(dto: ILevel): LevelDTO{
+        return {
+            id: dto.id,
+            name: dto.name,
+            abr: dto.abbreviation
+        }
+    }
+}
 
 export const GroupMapper = {
     fromDto (dto: IGroup): GroupDTO {
@@ -13,7 +24,7 @@ export const GroupMapper = {
             classe: dto.classe,
             name: dto.name,
             size: dto.size,
-            levelName: dto.level.name,
+            levelAbr: dto.level.name,
             levelId: dto.level.id
         };
     },

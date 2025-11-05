@@ -1,24 +1,56 @@
 import {create} from "zustand";
-import {Level} from "@/Types/Level";
+import {LevelDetailsDTO} from "@/Types/LevelDTO";
+import {GroupDTO} from "@/Types/GroupDTO";
 
 interface LevelStoreInterface {
-    levels: Level[] | null;
-    setLevels: (levels: Level[]) => void;
-    addLevel: (level: Level) => void;
-    updateLevel: (id: number, level: Level) => void;
+    levelsDetails: LevelDetailsDTO[] | null;
+    setLevels: (levels: LevelDetailsDTO[]) => void;
+    addLevel: (level: LevelDetailsDTO) => void;
+    updateLevel: (id: number, level: LevelDetailsDTO) => void;
     removeLevel: (id: number) => void;
+    addGroupInLevel: (levelId: number, group: GroupDTO) => void;
+    updateGroupInLevel: (id: number, group: GroupDTO) => void;
+    removeGroupInLevel: (levelId: number, groupId: number) => void;
 }
 
 export const useLevelStore = create<LevelStoreInterface>((set) => ({
-    levels: null,
-    setLevels: (levels: Level[]) => set({levels}),
-    addLevel: (level: Level) => set((state) => ({
-        levels: state.levels ? [...state.levels, level] : [level]
+    levelsDetails: null,
+    setLevels: (levels: LevelDetailsDTO[]) => set({levelsDetails: levels}),
+    addLevel: (level: LevelDetailsDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? [...state.levelsDetails, level] : [level]
     })),
-    updateLevel: (id: number, level: Level) => set((state) => ({
-        levels: state.levels ? state.levels.map(l => l.id === id ? {...l, ...level} : l) : [level]
+    updateLevel: (id: number, level: LevelDetailsDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(l => l.level.id === id ? {...l, ...level} : l) : [level]
     })),
     removeLevel: (id: number) => set((state) => ({
-        levels: state.levels ? state.levels.filter(level => level.id !== id) : null
+        levelsDetails: state.levelsDetails ? state.levelsDetails.filter(levelDetail => levelDetail.level.id !== id) : null
+    })),
+    addGroupInLevel: (levelId: number, group: GroupDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => {
+            if (levelDetail.level.id === levelId) {
+                return {
+                    ...levelDetail,
+                    groups: [...levelDetail.groups, group]
+                };
+            }
+            return levelDetail;
+        }) : null
+    })),
+    updateGroupInLevel: (id: number, group: GroupDTO) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => ({
+            ...levelDetail,
+            groups: levelDetail.groups.map(g => g.id === id ? {...g, ...group} : g)
+        })) : null
+    })),
+    removeGroupInLevel: (levelId: number, groupId: number) => set((state) => ({
+        levelsDetails: state.levelsDetails ? state.levelsDetails.map(levelDetail => {
+            if (levelDetail.level.id === levelId) {
+                return {
+                    ...levelDetail,
+                    groups: levelDetail.groups.filter(g => g.id !== groupId)
+                };
+            }
+            return levelDetail;
+        }) : null
     })),
 }));

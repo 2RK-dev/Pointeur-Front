@@ -4,7 +4,7 @@ import {useTeachingUnitStore} from "@/Stores/TeachingUnit";
 import {useEffect, useState} from "react";
 import {getTeachingUnits, RemoveTeachingUnitService} from "@/services/TeachingUnit";
 import {useLevelStore} from "@/Stores/Level";
-import {getLevels} from "@/services/Level";
+import {getLevelListService} from "@/services/Level";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {Edit, FileDown, Plus, Trash2} from "lucide-react";
@@ -20,7 +20,7 @@ export default function Page() {
     const getTeachingUnitByLevel = useTeachingUnitStore(s => s.getTeachingUnitByLevel);
     const removeTeachingUnitInStore = useTeachingUnitStore(s => s.removeTeachingUnit);
 
-    const levels = useLevelStore(s => s.levels);
+    const levels = useLevelStore(s => s.levelsDetails);
     const setLevels = useLevelStore(s => s.setLevels);
 
     const [selectedLevelID, setSelectedLevelID] = useState<number | null>(null);
@@ -33,11 +33,11 @@ export default function Page() {
             .then((data) => setTeachingUnits(data))
             .catch((error) => console.log(error));
         if (!levels) {
-            getLevels()
+            getLevelListService()
                 .then((data) => {
                     setLevels(data);
                     if (data.length > 0) {
-                        setSelectedLevelID(data[0].id);
+                        setSelectedLevelID(data[0].level.id);
                     }
                 })
                 .catch((error) => console.log(error));
@@ -65,9 +65,9 @@ export default function Page() {
                             <SelectValue placeholder="Filtrer par niveau"/>
                         </SelectTrigger>
                         <SelectContent>
-                            {levels?.map((level) => (
-                                <SelectItem key={level.id} value={level.id.toString() || ""}>
-                                    {level.name}
+                            {levels?.map((levelDetails) => (
+                                <SelectItem key={levelDetails.level.id} value={levelDetails.level.id.toString() || ""}>
+                                    {levelDetails.level.name}
                                 </SelectItem>
                             ))}
                         </SelectContent>
