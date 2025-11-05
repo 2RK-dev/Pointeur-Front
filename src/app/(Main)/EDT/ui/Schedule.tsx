@@ -15,8 +15,8 @@ import {
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
 import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
-import {Level} from "@/Types/Level";
-import {getLevels} from "@/services/Level";
+import {LevelDetailsDTO} from "@/Types/LevelDTO";
+import {getLevelListService} from "@/services/Level";
 import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
 import Transpose from "@/app/(Main)/EDT/ui/Transpose";
 import {useLevelStore} from "@/Stores/Level";
@@ -46,10 +46,10 @@ export default function Schedule() {
     const [selectedWeek, setSelectedWeek] = useState<Week>();
     const teacherList = useTeacherStore((s) => s.teachers);
     const setTeacherList = useTeacherStore((s) => s.setTeachers);
-    const levelList = useLevelStore((s) => s.levels);
+    const levelList = useLevelStore((s) => s.levelsDetails);
     const setLevelList = useLevelStore((s) => s.setLevels);
     const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
-    const [selectedLevel, setSelectedLevel] = useState<Level | null>(null)
+    const [selectedLevel, setSelectedLevel] = useState<LevelDetailsDTO | null>(null)
     const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
     const setOpenForm = useOpenScheduleItemFormStore((s) => s.setOpen);
     const [isTransposeModalOpen, setIsTransposeModalOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function Schedule() {
 
 
         if (!levelList) {
-            getLevels().then((levels) => {
+            getLevelListService().then((levels) => {
                 setLevelList(levels);
                 if (levels.length > 0) {
                     setSelectedLevel(levels[0]);
@@ -179,7 +179,7 @@ export default function Schedule() {
                 </Select>
                 <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel}
                                  setSelectedRoom={setSelectedRoomId}
-                                 levelList={levelList} teacherList={teacherList} roomList={roomList}
+                                 levelDetailList={levelList} teacherList={teacherList} roomList={roomList}
                 />
                 <div className=" space-x-4">
                     <Button disabled={!selectedWeek}
@@ -205,9 +205,9 @@ export default function Schedule() {
             </div>
             {selectedWeek && (
                 <>
-                    <ScheduleForm selectedLevel={selectedLevel} selectedTeacherId={selectedTeacherId}
+                    <ScheduleForm selectedLevelDetails={selectedLevel} selectedTeacherId={selectedTeacherId}
                                   selectedRoomId={selectedRoomId}
-                                  levelList={levelList || []} teacherList={teacherList || []}
+                                  levelDetailsList={levelList || []} teacherList={teacherList || []}
                                   roomList={roomList || []}/>
 
                     <Transpose isTransposeModalOpen={isTransposeModalOpen}
@@ -227,10 +227,10 @@ export default function Schedule() {
 }
 
 interface selectComponentProps {
-    setSelectedLevel: (level: Level | null) => void;
+    setSelectedLevel: (level: LevelDetailsDTO | null) => void;
     setSelectedTeacher: (teacherId: number | null) => void;
     setSelectedRoom: (roomId: number | null) => void;
-    levelList: Level[] | null;
+    levelDetailList: LevelDetailsDTO[] | null;
     teacherList: Teacher[] | null;
     roomList: Room[] | null;
 }
@@ -239,7 +239,7 @@ function SelectComponent({
                              setSelectedLevel,
                              setSelectedTeacher,
                              setSelectedRoom,
-                             levelList,
+                             levelDetailList,
                              teacherList,
                              roomList
                          }: selectComponentProps) {
@@ -259,9 +259,9 @@ function SelectComponent({
     }
 
     useEffect(() => {
-        if (displayMode === "Student" && levelList && levelList.length > 0) {
-            setSelectedValue(levelList[0].id.toString());
-            setSelectedLevel(levelList[0]);
+        if (displayMode === "Student" && levelDetailList && levelDetailList.length > 0) {
+            setSelectedValue(levelDetailList[0].level.id.toString());
+            setSelectedLevel(levelDetailList[0]);
             setSelectedTeacher(null);
             setSelectedRoom(null);
         } else if (displayMode === "Teacher" && teacherList && teacherList.length > 0) {
@@ -280,7 +280,7 @@ function SelectComponent({
             setSelectedTeacher(null);
             setSelectedRoom(null);
         }
-    }, [displayMode, levelList, teacherList, roomList]);
+    }, [displayMode, levelDetailList, teacherList, roomList]);
 
     return (
         <Select value={selectedValue} onValueChange={(value) => {
@@ -288,7 +288,7 @@ function SelectComponent({
             setSelectedLevel(null);
             setSelectedRoom(null);
             if (displayMode === "Student") {
-                const level = levelList?.find(l => l.id.toString() === value);
+                const level = levelDetailList?.find(l => l.level.id.toString() === value);
                 if (level) setSelectedLevel(level);
             } else if (displayMode === "Teacher") setSelectedTeacher(parseInt(value));
             else if (displayMode === "Room") setSelectedRoom(parseInt(value));
@@ -298,9 +298,9 @@ function SelectComponent({
                 <SelectValue placeholder={"Sélectionner un " + getDisplayLabel(displayMode)}/>
             </SelectTrigger>
             <SelectContent>
-                {displayMode === "Student" && levelList ? levelList.map((level) => (
-                    <SelectItem key={level.id} value={level.id.toString()}>
-                        {level.name}
+                {displayMode === "Student" && levelDetailList ? levelDetailList.map((levelDetail) => (
+                    <SelectItem key={levelDetail.level.id} value={levelDetail.level.id.toString()}>
+                        {levelDetail.level.name}
                     </SelectItem>
                 )) : displayMode === "Teacher" && teacherList ? teacherList.map((teacher) => (
                     <SelectItem key={teacher.id} value={teacher.id.toString()}>

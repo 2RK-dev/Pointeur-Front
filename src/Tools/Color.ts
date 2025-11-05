@@ -1,4 +1,4 @@
-import {Group} from "@/Types/Group";
+import {GroupDTO} from "@/Types/GroupDTO";
 
 function generateUniqueColorScheme(words: string[]): string {
     const normalizedWords = words
@@ -45,7 +45,7 @@ function generateUniqueColorScheme(words: string[]): string {
     return colorSchemes[colorIndex]
 }
 
-export function getColorGroups(groups: Group[]): string {
+export function getColorGroups(groups: GroupDTO[]): string {
     if (groups.length === 0) {
         return "bg-gray-100 hover:bg-gray-200 text-gray-800 hover:text-gray-900";
     }

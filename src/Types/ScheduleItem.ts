@@ -2,7 +2,7 @@ import z from 'zod';
 import {TeacherSchema} from "@/Types/Teacher";
 import {TeachingUnitSchema} from "@/Types/TeachingUnit";
 import {RoomSchema} from "@/Types/Room";
-import {GroupSchema} from "@/Types/Group";
+import {GroupDTOSchema} from "@/Types/GroupDTO";
 
 export const ScheduleItemSchema = z.object({
   id: z.number(),
@@ -11,7 +11,7 @@ export const ScheduleItemSchema = z.object({
   Teacher: TeacherSchema,
   TeachingUnit: TeachingUnitSchema,
   Room: RoomSchema.nullable(),
-  Groups: z.array(GroupSchema)
+  Groups: z.array(GroupDTOSchema)
 });
 
 export const ScheduleItemPostSchema = z.object({
