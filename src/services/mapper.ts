@@ -1,9 +1,9 @@
-import {IGroup, ILevel, IRoom, IScheduleItem, ITeacher, ITeachingUnit} from "@/api/types";
+import {IGroup,ICreateScheduleItem, ILevel, IRoom, IScheduleItem, ITeacher, ITeachingUnit} from "@/api/types";
 import { GroupDTO } from "@/Types/GroupDTO";
 import { Room } from "@/Types/Room";
 import { TeachingUnit } from "@/Types/TeachingUnit";
 import { Teacher } from "@/Types/Teacher";
-import { ScheduleItem } from "@/Types/ScheduleItem";
+import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
 import {LevelDTO} from "@/Types/LevelDTO";
 
 export const LevelMapper = {
@@ -74,4 +74,24 @@ export const ScheduleItemMapper = {
             Groups: dto.groups.map(g => GroupMapper.fromDto(g))
         };
     },
+    iCreateItemFromItemPost (dto: ScheduleItemPost): ICreateScheduleItem {
+        return {
+            startTime: dto.startTime,
+            endTime: dto.endTime,
+            groupIds: dto.GroupIds.map(s => parseInt(s, 10)),
+            teacherId: dto.TeacherId,
+            teachingUnitId: dto.TeachingUnitID,
+            roomId: dto.RoomId
+        };
+    },
+    itemPostFromICreateItem (dto: ICreateScheduleItem): ScheduleItemPost {
+        return {
+            GroupIds: dto.groupIds.map(id => "" + id),
+            RoomId: dto.roomId,
+            TeacherId: dto.teacherId,
+            TeachingUnitID: dto.teachingUnitId,
+            endTime: dto.startTime,
+            startTime: dto.endTime
+        };
+    }
 }
