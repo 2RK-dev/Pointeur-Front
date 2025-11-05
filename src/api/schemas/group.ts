@@ -4,6 +4,8 @@ import { LevelSchema } from "./level";
 export const GroupSchema = z.object({
     id: z.number(),
     name: z.string(),
+    type: z.string(),
+    classe: z.string(),
     size: z.number(),
     level: LevelSchema
 });

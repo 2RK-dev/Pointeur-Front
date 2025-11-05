@@ -28,9 +28,9 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 			case 'Student':
 				return scheduleItem.Room ? `${scheduleItem.Room.abr} - ${scheduleItem.Teacher.abr}` : `${scheduleItem.Teacher.abr}`;
 			case 'Teacher':
-				return scheduleItem.Room ? `${scheduleItem.Groups[0].levelName} - ${scheduleItem.Room.abr}` : `${scheduleItem.Groups[0].levelName}`;
+				return scheduleItem.Room ? `${scheduleItem.Groups[0].levelAbr} - ${scheduleItem.Room.abr}` : `${scheduleItem.Groups[0].levelAbr}`;
 			case 'Room':
-				return scheduleItem.Teacher ? `${scheduleItem.Groups[0].levelName} - ${scheduleItem.Teacher.abr}` : `${scheduleItem.Groups[0].levelName}`;
+				return scheduleItem.Teacher ? `${scheduleItem.Groups[0].levelAbr} - ${scheduleItem.Teacher.abr}` : `${scheduleItem.Groups[0].levelAbr}`;
 			default:
 				return '';
 		}
@@ -56,7 +56,7 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 				{scheduleItem.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}
 				<br />
 				<span>Groupes :</span>&nbsp;
-				{scheduleItem.Groups.map((g) => g.abr).join(", ")}
+				{scheduleItem.Groups.map((g) => g.type + g.classe + g.name).join(", ")}
 			</div>
 		</div>
 	);
