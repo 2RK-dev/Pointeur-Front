@@ -27,5 +27,5 @@ export async function updateLevel (levelId: number, data: IUpdateLevel): Promise
 }
 
 export async function deleteLevel (levelId: number) {
-    await http.pub.delete(`/rooms/${levelId}`);
+    await http.pub.delete(`/levels/${levelId}`);
 }

@@ -6,6 +6,7 @@ import {
 } from "@/api/types";
 import { http } from "@/api/http/axios";
 import { DTO } from "@/api/schemas";
+import axios from "axios";
 
 // Earliest supported schedule date. Used as a default to fetch all items if no start date is provided.
 const DEFAULT_SCHEDULE_START_DATE = new Date(1997, 1, 1, 0, 0, 0, 0);
@@ -23,8 +24,13 @@ export async function fetchScheduleItemsForLevel (
 }
 
 export async function createScheduleItem (data: ICreateScheduleItem): Promise<IScheduleItem> {
-    const {data: responseData} = await http.pub.post(`/schedule`, data);
-    return DTO.ScheduleItemSchema.parse(responseData);
+    try {
+        const {data: responseData} = await http.pub.post(`/schedule`, data);
+        return DTO.ScheduleItemSchema.parse(responseData);
+    } catch (e) {
+        if (axios.isAxiosError(e)) throw new Error(e.response?.data.message);
+        else throw new Error();
+    }
 }
 
 export async function updateScheduleItem (scheduleItemId: number, data: IUpdateScheduleItem): Promise<IScheduleItem> {
