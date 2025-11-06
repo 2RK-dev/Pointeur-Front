@@ -87,7 +87,7 @@ export default function Schedule() {
                 success: "Niveaux chargés avec succès !",
                 error: "Échec du chargement des niveaux."
             })
-        } else if (levelList.length > 0) {
+        } else if (levelList.length > 0 && !selectedLevel) {
             setSelectedLevel(levelList[0]);
         }
 
@@ -127,7 +127,7 @@ export default function Schedule() {
             setSelectedRoomId(roomList[0].id);
         }
 
-    }, []);
+    }, [selectedWeek]);
 
 
     useEffect(() => {
