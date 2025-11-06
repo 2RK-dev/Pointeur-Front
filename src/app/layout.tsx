@@ -30,7 +30,7 @@ export default function RootLayout({
 				<SidebarProvider>
 					<AppSidebar userAccess={[]} />
 					<SidebarInset>
-						<SidebarTrigger className="-ml-1" />
+						<SidebarTrigger className="ml-4 mt-4 border border-gray-200 rounded-md " />
 						{children}
 					</SidebarInset>
 				</SidebarProvider>

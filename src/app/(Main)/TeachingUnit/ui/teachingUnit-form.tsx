@@ -15,6 +15,7 @@ import {useLevelStore} from "@/Stores/Level";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Label} from "@/components/ui/label";
+import {notifications} from "@/components/notifications";
 
 interface IProps {
     isOpen: boolean;
@@ -27,7 +28,7 @@ interface IProps {
 export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, selectedTeachingUnit}: IProps) {
     const AddTeachingUnitInStore = useTeachingUnitStore(s => s.addTeachingUnit);
     const UpdateTeachingUnitInStore = useTeachingUnitStore(s => s.updateTeachingUnit);
-    const Levels = useLevelStore(s => s.levels);
+    const Levels = useLevelStore(s => s.levelsDetails);
     const defaultChecked = selectedTeachingUnit ? selectedTeachingUnit.associatedLevels !== null : true;
     const [isAssociated, setIsAssociated] = useState<boolean>(defaultChecked);
 
@@ -48,32 +49,44 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         setIsAssociated(defaultChecked);
     }, [selectedLevelID, selectedTeachingUnit]);
 
-    const selectedLevelsObj = Levels?.find(level => level.id === selectedLevelID);
+    const selectedLevelsObj = Levels?.find(level => level.level.id === selectedLevelID);
 
     const onSubmit = (data: TeachingUnitPost) => {
         if(!isAssociated){
             data.associatedLevels = null;
         }
         if (selectedTeachingUnit) {
-            UpdateTeachingUnitService(selectedTeachingUnit.id, data)
+            const promise = UpdateTeachingUnitService(selectedTeachingUnit.id, data)
                 .then((updatedTeachingUnit) => {
                     UpdateTeachingUnitInStore(updatedTeachingUnit.id, updatedTeachingUnit);
                     setIsOpen(false);
                     form.reset();
+                    notifications.success("Matière mise à jour avec succès","La matière N°" + updatedTeachingUnit.id + " - "+updatedTeachingUnit.name +" a été mise à jour.");
                 })
                 .catch((error) => {
-                    console.error("Failed to update teaching unit:", error);
+                    notifications.error("Échec de la mise à jour de la matière", error.message);
                 })
+            notifications.promise(promise, {
+                loading: "Mise à jour de la matière en cours...",
+                success: "Matière mise à jour avec succès !",
+                error: "Échec de la mise à jour de la matière."
+            })
         } else {
-            AddTeachingUnitService(data)
+            const promise = AddTeachingUnitService(data)
                 .then((newTeachingUnit) => {
                     AddTeachingUnitInStore(newTeachingUnit);
                     setIsOpen(false);
                     form.reset();
+                    notifications.success("Matière ajoutée avec succès","La matière N°" + newTeachingUnit.id + " - "+newTeachingUnit.name +" a été ajoutée.");
                 })
                 .catch((error) => {
-                    console.error("Failed to add teaching unit:", error);
+                    notifications.error("Échec de l'ajout de la matière", error.message);
                 })
+            notifications.promise(promise, {
+                loading: "Ajout de la matière en cours...",
+                success: "Matière ajoutée avec succès !",
+                error: "Échec de l'ajout de la matière."
+            })
         }
     }
 
@@ -81,7 +94,7 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className={"w-full max-h-[90vh] min-h-[300px]"}>
                 <DialogHeader>
-                    <DialogTitle>{selectedTeachingUnit ? "Modifier" : "Ajouter"} Matière {selectedLevelsObj?.name}</DialogTitle>
+                    <DialogTitle>{selectedTeachingUnit ? "Modifier" : "Ajouter"} Matière {selectedLevelsObj?.level.name}</DialogTitle>
                 </DialogHeader>
                 <ScrollArea className={"max-h-[80vh] w-full"}>
                     <Form {...form}>
@@ -146,9 +159,9 @@ export default function TeachingUnitForm({isOpen, setIsOpen, selectedLevelID, se
                                                             </FormControl>
                                                             <SelectContent>
                                                                 {Levels?.map((level) => (
-                                                                    <SelectItem key={level.id}
-                                                                                value={level.id.toString()}>
-                                                                        {level.name}
+                                                                    <SelectItem key={level.level.id}
+                                                                                value={level.level.id.toString()}>
+                                                                        {level.level.name}
                                                                     </SelectItem>
                                                                 ))}
                                                             </SelectContent>

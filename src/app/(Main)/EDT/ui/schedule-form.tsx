@@ -14,21 +14,20 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Checkbox} from "@/components/ui/checkbox"
 import {getTeachingUnits} from "@/services/TeachingUnit"
 import type {Teacher} from "@/Types/Teacher"
-import {getTeachers} from "@/services/Teacher"
 import type {Room} from "@/Types/Room"
-import {getRoomsService} from "@/services/Room"
 import {generateHours} from "@/Tools/ScheduleItem"
 import {
     useCurrentScheduleItemsStore,
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore,
 } from "@/Stores/ScheduleItem"
-import {useSelectedLevelStore} from "@/Stores/Level"
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog"
 import {addScheduleItemService, deleteScheduleItemService, updateScheduleItemService} from "@/services/ScheduleItem"
 import {ScheduleItemPostSchema} from "@/Types/ScheduleItem"
 import {useTeachingUnitStore} from "@/Stores/TeachingUnit"
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {LevelDetailsDTO} from "@/Types/LevelDTO";
+import {notifications} from "@/components/notifications";
 
 const hours = generateHours()
 
@@ -40,15 +39,33 @@ const ScheduleItemFormSchema = z.object({
     endTime: z.string().min(1, "Veuillez sélectionner l'heure de fin"),
     teachingUnitID: z.number({
         required_error: "Veuillez sélectionner une unité de cours",
-    }),
+    }).nullable(),
     teacherId: z.number({
         required_error: "Veuillez sélectionner un enseignant",
+    }).nullable(),
+    roomId: z.number({
+        required_error: "Veuillez sélectionner une salle",
     }),
-    roomId: z.number().nullable(),
     groupIds: z.array(z.string()).min(1, "Veuillez sélectionner au moins un groupe"),
 })
 
-export default function ScheduleForm() {
+interface props {
+    selectedLevelDetails: LevelDetailsDTO | null,
+    selectedTeacherId: number | null,
+    selectedRoomId: number | null,
+    levelDetailsList: LevelDetailsDTO[],
+    teacherList: Teacher[],
+    roomList: Room[],
+}
+
+export default function ScheduleForm({
+                                         selectedLevelDetails,
+                                         selectedTeacherId,
+                                         selectedRoomId,
+                                         levelDetailsList,
+                                         teacherList,
+                                         roomList
+                                     }: props) {
     const {open, setOpen} = useOpenScheduleItemFormStore()
     const [calendarOpen, setCalendarOpen] = useState(false)
     const teachingUnits = useTeachingUnitStore((s) => s.teachingUnits)
@@ -57,14 +74,12 @@ export default function ScheduleForm() {
     const getAvailableGroups = useCurrentScheduleItemsStore((s) => s.getAvailableGroups)
     const getAvailableTeachers = useCurrentScheduleItemsStore((s) => s.getAvailableTeachers)
     const getAvailableRooms = useCurrentScheduleItemsStore((s) => s.getAvailableRooms)
-    const [teachers, setTeachers] = useState<Teacher[]>([])
-    const [rooms, setRooms] = useState<Room[]>([])
     const currentScheduleItems = useCurrentScheduleItemsStore((s) => s.currentScheduleItems)
     const addScheduleItem = useCurrentScheduleItemsStore((s) => s.addScheduleItem)
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem)
     const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem)
-    const {selectedLevel} = useSelectedLevelStore()
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem)
+    const [selectedLevelDetailState, setselectedLevelDetailState] = useState<LevelDetailsDTO | null>(selectedLevelDetails)
 
     const defaultValues = {
         date: selectedScheduleItem?.startTime || undefined,
@@ -81,8 +96,8 @@ export default function ScheduleForm() {
                 hour12: false,
             }) || undefined,
         teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
-        teacherId: selectedScheduleItem?.Teacher.id || undefined,
-        roomId: selectedScheduleItem?.Room?.id || -1,
+        teacherId: selectedScheduleItem?.Teacher.id || selectedTeacherId || undefined,
+        roomId: selectedScheduleItem?.Room?.id || selectedRoomId || undefined,
         groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
     }
 
@@ -93,11 +108,14 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         form.reset(defaultValues)
-    }, [selectedScheduleItem])
+        if (selectedScheduleItem) {
+            const level = levelDetailsList.find(l => l.level.id === selectedScheduleItem.Groups[0]?.levelId) || null
+            setselectedLevelDetailState(level)
+        } else {
+            setselectedLevelDetailState(selectedLevelDetails)
+        }
+    }, [selectedLevelDetails, selectedTeacherId, selectedRoomId, selectedScheduleItem])
 
-    useEffect(()=>{
-        form.resetField("teachingUnitID")
-    },[selectedLevel])
 
     const watchedDate = form.watch("date")
     const watchedStartTime = form.watch("startTime")
@@ -114,22 +132,6 @@ export default function ScheduleForm() {
                     console.error("Erreur lors de la récupération des unités de cours :", error)
                 })
         }
-
-        getTeachers()
-            .then((teachersData) => {
-                setTeachers(teachersData)
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des enseignants :", error)
-            })
-
-        getRoomsService()
-            .then((roomsData) => {
-                setRooms(roomsData)
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des salles :", error)
-            })
     }, [])
 
     useEffect(() => {
@@ -162,42 +164,56 @@ export default function ScheduleForm() {
         endDateTime.setHours(endHour, endMinute, 0, 0)
     }
 
+    const teachingUnitByLevel = useMemo(() => {
+        return getTeachingUnitByLevel(selectedLevelDetailState?.level.id || null)
+    }, [selectedLevelDetailState, teachingUnits])
+
     const availableGroups = useMemo(() => {
-        if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableGroups(
             startDateTime,
             endDateTime,
-            selectedLevel.groups,
+            selectedLevelDetailState.groups,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime])
+    }, [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime])
 
     const availableTeachers = useMemo(() => {
-            if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+            if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
                 return []
             }
             return getAvailableTeachers(
                 startDateTime,
                 endDateTime,
-                teachers,
+                teacherList,
                 selectedScheduleItem,
             )
         }
-        , [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime, teachers])
+        , [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime, teacherList])
 
     const availableRooms = useMemo(() => {
-        if (!selectedLevel || !watchedDate || !watchedStartTime || !watchedEndTime) {
+        if (!selectedLevelDetailState || !watchedDate || !watchedStartTime || !watchedEndTime) {
             return []
         }
         return getAvailableRooms(
             startDateTime,
             endDateTime,
-            rooms,
+            roomList,
             selectedScheduleItem,
         )
-    }, [currentScheduleItems, selectedLevel, watchedDate, watchedStartTime, watchedEndTime, rooms])
+    }, [currentScheduleItems, selectedLevelDetailState, watchedDate, watchedStartTime, watchedEndTime, roomList])
+
+    useEffect(() => {
+        const currentTeachingUnitID = form.getValues("teachingUnitID")
+        if (
+            currentTeachingUnitID &&
+            !teachingUnitByLevel.find(uc => uc.id === currentTeachingUnitID)
+        ) {
+            form.setValue("teachingUnitID", null)
+        }
+    }, [teachingUnitByLevel, form])
 
     useEffect(() => {
         const availableGroupIds = availableGroups.map((g) => g.id)
@@ -210,8 +226,19 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         const availableTeacherIds = availableTeachers.map((t) => t.id)
-        if (form.getValues("teacherId") && !availableTeacherIds.includes(form.getValues("teacherId"))) {
-            form.resetField("teacherId")
+        const currentTeacherId = form.getValues("teacherId")
+        console.log(currentTeacherId, availableTeacherIds)
+        if (
+            currentTeacherId === null &&
+            selectedTeacherId &&
+            availableTeacherIds.includes(selectedTeacherId)
+        ) {
+            form.setValue("teacherId", selectedTeacherId)
+        } else if (
+            currentTeacherId &&
+            !availableTeacherIds.includes(currentTeacherId)
+        ) {
+            form.setValue("teacherId", null)
         }
     }, [availableTeachers, form])
 
@@ -226,7 +253,7 @@ export default function ScheduleForm() {
         return a.length === b.length && a.every((val) => b.includes(val)) && b.every((val) => a.includes(val))
     }
 
-    const selectedRoom = rooms.find((room) => room.id === form.watch("roomId"))
+    const selectedRoom = roomList.find((room) => room.id === form.watch("roomId"))
     const selectedGroups = availableGroups.filter((group) => form.watch("groupIds").includes(group.id.toString()))
     const totalGroupSize = selectedGroups.reduce((sum, group) => sum + group.size, 0)
     const capacityError = selectedRoom && totalGroupSize > selectedRoom.capacity
@@ -236,27 +263,30 @@ export default function ScheduleForm() {
         return day >= 1 && day <= 6
     }
 
-    const isPeriodComplete = watchedDate && watchedStartTime && watchedEndTime
-    const isSubmitDisabled = capacityError || !isPeriodComplete || Object.keys(form.formState.errors).length > 0
+    const canShowGroup = watchedDate && watchedStartTime && watchedEndTime && selectedLevelDetailState
+    const isSubmitDisabled = capacityError || !canShowGroup || Object.keys(form.formState.errors).length > 0
 
     const handleDelete = () => {
         if (!selectedScheduleItem) return
-        deleteScheduleItemService(selectedScheduleItem.id)
+        const promise = deleteScheduleItemService(selectedScheduleItem.id)
             .then((deletedScheduleItemID) => {
                 removeScheduleItem(deletedScheduleItemID)
                 form.reset()
                 setOpen(false)
+                notifications.success("Cours supprimé avec succès", "Le cours N°" + deletedScheduleItemID + " a été supprimé")
             })
             .catch((error) => {
-                console.error(" Error : ", error)
+                notifications.error("Erreur lors de la suppression du cours", error.message)
             })
+        notifications.promise(promise, {
+            loading: "Suppression du cours...",
+            success: "Cours supprimé avec succès !",
+            error: "Erreur lors de la suppression du cours."
+        })
     }
 
     const onSubmit = (values: z.infer<typeof ScheduleItemFormSchema>) => {
-        if (capacityError) {
-            return
-        }
-
+        if (capacityError) return
         try {
             const [startHour, startMinute] = values.startTime.split(":").map(Number)
             const [endHour, endMinute] = values.endTime.split(":").map(Number)
@@ -277,28 +307,44 @@ export default function ScheduleForm() {
             })
 
             if (selectedScheduleItem) {
-                updateScheduleItemService(selectedScheduleItem.id, scheduleItem)
+                const promise = updateScheduleItemService(selectedScheduleItem.id, scheduleItem)
                     .then((updatedItem) => {
                         updateScheduleItem(selectedScheduleItem.id, updatedItem)
                         form.reset()
                         setOpen(false)
+                        notifications.success("Cours mis à jour avec succès",
+                            " Le cours N°" + updatedItem.id + "de " + updatedItem.TeachingUnit.name +
+                            "avec Mr/Mme " + updatedItem.Teacher.name + " a été mis à jour.")
                     })
                     .catch((error) => {
-                        console.error(" Error : ", error)
+                        notifications.error("Erreur lors de la mise à jour du cours", error.message)
                     })
+                notifications.promise(promise, {
+                    loading: "Mise à jour du cours...",
+                    success: "Cours mis à jour avec succès !",
+                    error: "Erreur lors de la mise à jour du cours."
+                })
             } else {
-                addScheduleItemService(scheduleItem)
+                const promise = addScheduleItemService(scheduleItem)
                     .then((scheduleItem) => {
                         addScheduleItem(scheduleItem)
                         form.reset()
                         setOpen(false)
+                        notifications.success("Cours ajouté avec succès",
+                            " Le cours N°" + scheduleItem.id + "de " + scheduleItem.TeachingUnit.name +
+                            "avec Mr/Mme " + scheduleItem.Teacher.name + " a été ajouté.")
                     })
                     .catch((error) => {
-                        console.error(" Error : ", error)
+                        notifications.error("Erreur lors de l'ajout du cours", error.message)
                     })
+                notifications.promise(promise, {
+                    loading: "Ajout du cours...",
+                    success: "Cours ajouté avec succès !",
+                    error: "Erreur lors de l'ajout du cours."
+                })
             }
         } catch (e) {
-            console.error(" Error : ", e)
+            notifications.error("Erreur de validation", "Les données du cours sont invalides.")
         }
     }
 
@@ -309,9 +355,11 @@ export default function ScheduleForm() {
                     <DialogTitle className="text-xl font-medium">
                         {selectedScheduleItem ? "Modifier le cours" : "Nouveau cours"}
                     </DialogTitle>
-                    <p className="text-sm text-muted-foreground mt-1">Niveau {selectedLevel?.name}</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                        {selectedLevelDetails && `Niveau ${selectedLevelDetails.level.name}`}
+                    </p>
                 </DialogHeader>
-                <ScrollArea className="max-h-[80vh] w-full">
+                <ScrollArea className="max-h-[80vh] w-full px-2 pb-8">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mx-2">
                             <div className="space-y-4">
@@ -419,13 +467,33 @@ export default function ScheduleForm() {
 
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Groupes</h3>
-
+                                <Select value={selectedLevelDetailState?.level.id.toString()} onValueChange={(val) => {
+                                    const level = levelDetailsList.find(l => l.level.id.toString() === val) || null
+                                    setselectedLevelDetailState(level)
+                                }}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Sélectionner un niveau"/>
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {levelDetailsList.length > 0 ? levelDetailsList.map((levelDetails) => (
+                                            <SelectItem key={levelDetails.level.id}
+                                                        value={levelDetails.level.id.toString()}>
+                                                <div className="flex items-center gap-2">
+                                                    <span
+                                                        className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">{levelDetails.level.name}</span>
+                                                    <span>{levelDetails.level.name}</span>
+                                                </div>
+                                            </SelectItem>
+                                        )) : <div className="p-2 text-sm text-muted-foreground">Aucun niveau
+                                            disponible</div>}
+                                    </SelectContent>
+                                </Select>
                                 <FormField
                                     control={form.control}
                                     name="groupIds"
                                     render={() => (
                                         <FormItem>
-                                            {isPeriodComplete ? (
+                                            {canShowGroup ? (
                                                 <div className="space-y-3">
                                                     <p className="text-sm text-muted-foreground">
                                                         {availableGroups.length} groupe(s) disponible(s)
@@ -460,7 +528,7 @@ export default function ScheduleForm() {
                                                                                         <span
                                                                                             className="font-medium">{group.name}</span>
                                                                                         <span
-                                                                                            className="text-muted-foreground ml-2">({group.abr})</span>
+                                                                                            className="text-muted-foreground ml-2">({group.name})</span>
                                                                                     </div>
                                                                                     <span
                                                                                         className="text-sm text-muted-foreground">{group.size} étudiants</span>
@@ -476,7 +544,8 @@ export default function ScheduleForm() {
                                             ) : (
                                                 <div className="text-center py-12 text-muted-foreground">
                                                     <Users className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                                    <p className="text-sm">Définissez la période pour voir les groupes
+                                                    <p className="text-sm">Définissez la période et le niveau pour voir
+                                                        les groupes
                                                         disponibles</p>
                                                 </div>
                                             )}
@@ -488,7 +557,7 @@ export default function ScheduleForm() {
                             <div className="space-y-4">
                                 <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">Détails
                                     du cours</h3>
-                                {isPeriodComplete ? (
+                                {canShowGroup ? (
                                     <>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <FormField
@@ -507,7 +576,7 @@ export default function ScheduleForm() {
                                                                 </SelectTrigger>
                                                             </FormControl>
                                                             <SelectContent>
-                                                                {getTeachingUnitByLevel(selectedLevel?.id || null).map((uc) => (
+                                                                {teachingUnitByLevel.map((uc) => (
                                                                     <SelectItem key={uc.id} value={uc.id.toString()}>
                                                                         <div className="flex items-center gap-2">
                                                                             <span
@@ -603,7 +672,8 @@ export default function ScheduleForm() {
                                 ) : (
                                     <div className="text-center py-12 text-muted-foreground">
                                         <BookOpen className="h-8 w-8 mx-auto mb-3 opacity-50"/>
-                                        <p className="text-sm">Définissez la période pour configurer les détails du
+                                        <p className="text-sm">Définissez la période et le niveau pour configurer les
+                                            détails du
                                             cours</p>
                                     </div>
                                 )}
@@ -638,7 +708,10 @@ export default function ScheduleForm() {
                                 )}
 
                                 <div className="flex gap-3 ml-auto">
-                                    <Button type="button" variant="outline" onClick={() => form.reset()}>
+                                    <Button type="button" variant="outline" onClick={() => {
+                                        setselectedLevelDetailState(selectedLevelDetails)
+                                        form.reset()
+                                    }}>
                                         Réinitialiser
                                     </Button>
                                     <Button type="submit" disabled={isSubmitDisabled}>

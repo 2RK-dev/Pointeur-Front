@@ -13,6 +13,7 @@ import {useTeacherStore} from "@/Stores/Teacher";
 import TeacherForm from "@/app/(Main)/Teacher/ui/teacher-form";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {notifications} from "@/components/notifications";
 
 export default function Home() {
     const teachers = useTeacherStore((s) => s.teachers);
@@ -23,25 +24,37 @@ export default function Home() {
     const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     useEffect(() => {
-        getTeachers().then((data) =>
+        const promise = getTeachers().then((data) =>
             setTeachers(data)
         );
+        notifications.promise(promise,{
+            loading: "Chargement des enseignants...",
+            success: "Enseignants chargés avec succès !",
+            error: "Erreur lors du chargement des enseignants."
+        })
     }, []);
 
     const handleExportPDF = () => {
         const doc = new jsPDF();
         autoTable(doc, {
             head: [["Nom", "Abréviation"]],
-            body: teachers.map((teacher) => [teacher.name, teacher.abr]),
+            body: teachers?.map((teacher) => [teacher.name, teacher.abr]),
         });
         doc.save("liste_des_salles.pdf");
+        notifications.success("Exportation PDF réussie", "Le fichier PDF a été généré avec succès.");
     };
 
     const handleRemoveTeacher = (id: number) => {
-        removeTeacher(id).then((removedTeacherId) => {
+        const promise = removeTeacher(id).then((removedTeacherId) => {
             removeTeacherInStore(removedTeacherId);
+            notifications.success("Enseignant supprimé avec succès"," L'enseignant avec l'ID " + removedTeacherId + " a été supprimé.");
         }).catch((err) => {
-            console.error("Error deleting teacher:", err);
+            notifications.error("Erreur lors de la suppression de l'enseignant", err.message);
+        })
+        notifications.promise(promise,{
+            loading: "Suppression de l'enseignant...",
+            success: "Enseignant supprimé avec succès !",
+            error: "Erreur lors de la suppression de l'enseignant."
         })
     }
 
@@ -74,7 +87,7 @@ export default function Home() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {teachers.map((teacher) => (
+                            {teachers?.map((teacher) => (
                                 <TableRow key={teacher.id}>
                                     <TableCell>{teacher.name}</TableCell>
                                     <TableCell>{teacher.abr}</TableCell>

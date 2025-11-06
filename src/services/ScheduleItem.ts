@@ -2,9 +2,9 @@
 
 "use server";
 
-import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
+import { ScheduleItem, ScheduleItemPost, TranspositionResponse } from "@/Types/ScheduleItem";
 import {
-    createScheduleItem,
+    createScheduleItem, createScheduleItems,
     deleteScheduleItem,
     fetchScheduleItemsForLevel,
     updateScheduleItem
@@ -23,14 +23,7 @@ export async function getScheduleItems (startTime: Date, endTime: Date): Promise
 }
 
 export async function addScheduleItemService (scheduleItem: ScheduleItemPost): Promise<ScheduleItem> {
-    const requestBody: ICreateScheduleItem = {
-        startTime: scheduleItem.startTime,
-        endTime: scheduleItem.endTime,
-        groupIds: scheduleItem.GroupIds.map(s => parseInt(s, 10)),
-        teacherId: scheduleItem.TeacherId,
-        teachingUnitId: scheduleItem.TeachingUnitID,
-        roomId: scheduleItem.RoomId
-    };
+    const requestBody: ICreateScheduleItem = ScheduleItemMapper.iCreateItemFromItemPost(scheduleItem);
     const item = await createScheduleItem(requestBody);
     return ScheduleItemMapper.fromDto(item);
 }
@@ -43,7 +36,7 @@ export async function updateScheduleItemService (id: number, scheduleItem: Sched
         roomId: scheduleItem.RoomId,
         teacherId: scheduleItem.TeacherId,
         teachingUnitId: scheduleItem.TeachingUnitID
-    }
+    };
     const item = await updateScheduleItem(id, requestBody);
     return ScheduleItemMapper.fromDto(item);
 }
@@ -51,4 +44,16 @@ export async function updateScheduleItemService (id: number, scheduleItem: Sched
 export async function deleteScheduleItemService (id: number): Promise<number> {
     await deleteScheduleItem(id);
     return id;
+}
+
+export async function AddScheduleItemListService (scheduleItemList: ScheduleItemPost[]): Promise<TranspositionResponse> {
+    const requestBody: ICreateScheduleItem[] = scheduleItemList.map(ScheduleItemMapper.iCreateItemFromItemPost);
+    const bulkCreationResponse = await createScheduleItems(requestBody);
+    return {
+        successItems: bulkCreationResponse.successItems.map(ScheduleItemMapper.fromDto),
+        failedItems: bulkCreationResponse.failedItems.map(failed => ({
+            item: ScheduleItemMapper.itemPostFromICreateItem(failed.item),
+            reason: failed.reason
+        })),
+    }
 }

@@ -1,4 +1,9 @@
-import { ICreateScheduleItem, IScheduleItem, IUpdateScheduleItem } from "@/api/types";
+import {
+    IBulkScheduleItemCreationResponse,
+    ICreateScheduleItem,
+    IScheduleItem,
+    IUpdateScheduleItem
+} from "@/api/types";
 import { http } from "@/api/http/axios";
 import { DTO } from "@/api/schemas";
 
@@ -29,4 +34,9 @@ export async function updateScheduleItem (scheduleItemId: number, data: IUpdateS
 
 export async function deleteScheduleItem (scheduleItemId: number) {
     await http.pub.delete(`/schedule/${scheduleItemId}`);
+}
+
+export async function createScheduleItems (data: ICreateScheduleItem[]): Promise<IBulkScheduleItemCreationResponse> {
+    const {data: responseData} = await http.pub.post(`/schedule/batch`, data);
+    return DTO.BulkScheduleItemCreationResponseSchema.parse(responseData);
 }

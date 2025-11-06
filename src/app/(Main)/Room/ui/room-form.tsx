@@ -11,6 +11,7 @@ import {addRoomService, updateRoomService} from "@/services/Room";
 import {Room, RoomPost, RoomPostSchema} from "@/Types/Room";
 import {useRoomsStore} from "@/Stores/Room";
 import {useEffect} from "react";
+import {notifications} from "@/components/notifications";
 
 interface Props {
     isFormOpen: boolean
@@ -37,20 +38,32 @@ export default function RoomForm({isFormOpen, setIsFormOpen, selectedRoom}: Prop
 
     const onSubmit = (roomData: RoomPost) => {
         if(selectedRoom){
-            updateRoomService(selectedRoom.id, roomData).then((updatedRoom) => {
+            const promise = updateRoomService(selectedRoom.id, roomData).then((updatedRoom) => {
                 updateRoomInStore(selectedRoom.id,updatedRoom);
                 form.reset();
                 setIsFormOpen(false);
+                notifications.success("Salle mise à jour avec succès", " La salle N°" + updatedRoom.id + " - " + updatedRoom.name + " a été mise à jour.");
             }).catch((error) => {
-                console.error("Error updating room:", error);
+                notifications.error("Erreur lors de la mise à jour de la salle", error.message);
+            })
+            notifications.promise(promise,{
+                loading: "Mise à jour de la salle...",
+                success: "Salle mise à jour avec succès !",
+                error: "Erreur lors de la mise à jour de la salle."
             })
         }else{
-            addRoomService(roomData).then((newRoom) => {
+            const promise = addRoomService(roomData).then((newRoom) => {
                 addRoomInStore(newRoom);
                 form.reset();
                 setIsFormOpen(false);
+                notifications.success('Salle ajoutée avec succès', ' La salle N°' + newRoom.id + ' - ' + newRoom.name + ' a été ajoutée.');
             }).catch((error) => {
-                console.error("Error adding room:", error);
+                notifications.error("Erreur lors de l'ajout de la salle", error.message);
+            })
+            notifications.promise(promise,{
+                loading: "Ajout de la salle...",
+                success: "Salle ajoutée avec succès !",
+                error: "Erreur lors de l'ajout de la salle."
             })
         }
     }

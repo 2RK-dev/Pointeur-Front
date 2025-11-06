@@ -1,17 +1,31 @@
-import { IGroup, IRoom, IScheduleItem, ITeacher, ITeachingUnit } from "@/api/types";
-import { Group } from "@/Types/Group";
+import {IGroup,ICreateScheduleItem, ILevel, IRoom, IScheduleItem, ITeacher, ITeachingUnit} from "@/api/types";
+import { GroupDTO } from "@/Types/GroupDTO";
 import { Room } from "@/Types/Room";
 import { TeachingUnit } from "@/Types/TeachingUnit";
 import { Teacher } from "@/Types/Teacher";
-import { ScheduleItem } from "@/Types/ScheduleItem";
+import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
+import {LevelDTO} from "@/Types/LevelDTO";
 
-export const GroupMapper = {
-    fromDto (dto: IGroup): Group {
+export const LevelMapper = {
+    fromDto(dto: ILevel): LevelDTO{
         return {
             id: dto.id,
-            abr: dto.name,
             name: dto.name,
-            size: dto.size
+            abr: dto.abbreviation
+        }
+    }
+}
+
+export const GroupMapper = {
+    fromDto (dto: IGroup): GroupDTO {
+        return {
+            id: dto.id,
+            type: dto.type,
+            classe: dto.classe,
+            name: dto.name,
+            size: dto.size,
+            levelAbr: dto.level.name,
+            levelId: dto.level.id
         };
     },
 }
@@ -60,4 +74,24 @@ export const ScheduleItemMapper = {
             Groups: dto.groups.map(g => GroupMapper.fromDto(g))
         };
     },
+    iCreateItemFromItemPost (dto: ScheduleItemPost): ICreateScheduleItem {
+        return {
+            startTime: dto.startTime,
+            endTime: dto.endTime,
+            groupIds: dto.GroupIds.map(s => parseInt(s, 10)),
+            teacherId: dto.TeacherId,
+            teachingUnitId: dto.TeachingUnitID,
+            roomId: dto.RoomId
+        };
+    },
+    itemPostFromICreateItem (dto: ICreateScheduleItem): ScheduleItemPost {
+        return {
+            GroupIds: dto.groupIds.map(id => "" + id),
+            RoomId: dto.roomId,
+            TeacherId: dto.teacherId,
+            TeachingUnitID: dto.teachingUnitId,
+            endTime: dto.startTime,
+            startTime: dto.endTime
+        };
+    }
 }
