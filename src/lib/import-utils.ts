@@ -59,7 +59,7 @@ export async function parseJSONSources(file: File, fileId: string): Promise<Json
   const text = await file.text()
   const data = JSON.parse(text)
 
-  // Case 1: Array of objects (whole file is one table)
+  // Case 1: Array of objects (a whole file is one table)
   if (Array.isArray(data)) {
     if (data.length === 0) {
       throw new Error("Le fichier JSON est vide")
@@ -137,11 +137,9 @@ export function autoMapColumns(fileHeaders: string[], tableColumns: TableColumn[
   return fileHeaders.map((fileHeader) => {
     const normalizedFileHeader = normalizeColumnName(fileHeader)
 
-    // 1. Chercher une correspondance exacte
     let matchedColumn = tableColumns.find((col) => normalizeColumnName(col.name) === normalizedFileHeader)
     let confidence = matchedColumn ? 1.0 : 0
 
-    // 2. Si pas de correspondance exacte, chercher une correspondance partielle
     if (!matchedColumn) {
       matchedColumn = tableColumns.find((col) => {
         const normalizedColName = normalizeColumnName(col.name)
@@ -150,39 +148,6 @@ export function autoMapColumns(fileHeaders: string[], tableColumns: TableColumn[
       confidence = matchedColumn ? 0.8 : 0
     }
 
-    // 3. Correspondances spéciales communes avec meilleure détection
-    if (!matchedColumn) {
-      const specialMappings: Record<string, string[]> = {
-        email: ["mail", "e-mail", "courriel", "email", "emailaddress"],
-        first_name: ["prenom", "firstname", "fname", "prenomutilisateur", "nom1"],
-        last_name: ["nom", "lastname", "lname", "nomfamille", "nom2"],
-        phone: ["telephone", "tel", "mobile", "cellulaire", "phonenumber"],
-        created_at: ["date", "created", "creation", "datecreation", "createdat"],
-        updated_at: ["updated", "modification", "datemodification", "updatedat"],
-        price: ["prix", "cost", "cout", "montant", "tarif"],
-        quantity: ["quantite", "qty", "qte", "nombre", "amount"],
-        description: ["desc", "details", "info", "information"],
-        name: ["nom", "libelle", "titre", "title"],
-        id: ["identifiant", "code", "reference", "ref"],
-        user_id: ["userid", "utilisateurid", "idutilisateur"],
-        product_id: ["productid", "produitid", "idproduit"],
-        order_date: ["datecommande", "orderdate", "dateorder"],
-        total: ["montanttotal", "totalmontant", "somme"],
-        stock: ["inventaire", "disponible", "quantitedisponible"],
-      }
-
-      for (const [colName, aliases] of Object.entries(specialMappings)) {
-        if (aliases.some((alias) => normalizedFileHeader.includes(alias) || alias.includes(normalizedFileHeader))) {
-          matchedColumn = tableColumns.find((col) => col.name === colName)
-          if (matchedColumn) {
-            confidence = 0.7
-            break
-          }
-        }
-      }
-    }
-
-    // 4. Utiliser la similarité de Levenshtein pour les cas difficiles
     if (!matchedColumn) {
       let bestMatch: TableColumn | null = null
       let bestSimilarity = 0
@@ -268,7 +233,7 @@ export function generateImportSummary(importMappings: ImportMapping[], available
   });
 
   const mappingDetails = importMappings
-      .filter((m) => m.tableName !== null) // Ensure tableName is not null
+      .filter((m) => m.tableName !== null)
       .map((m) => {
         const table = availableTables.find((t) => t.name === m.tableName)!;
         const validation = validateMapping(m.columnMappings, table.columns);
