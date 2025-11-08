@@ -27,6 +27,7 @@ import {importData} from "@/services/DataTransfer";
 import {notifications} from "@/components/notifications";
 import {TranspositionResultBadges as ImportResultShow} from "@/app/(Main)/EDT/ui/transposition-result-badges";
 import {ResultImport} from "@/Types/glob";
+import {Checkbox} from "@/components/ui/checkbox";
 
 
 export function ImportInterface() {
@@ -39,6 +40,7 @@ export function ImportInterface() {
     const [showSummary, setShowSummary] = useState(false)
     const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(false);
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
+    const [isDeleteOldData, setIsDeleteOldData] = useState<boolean>(false);
 
     const handleFileTypeSelect = (type: FileType) => {
         setSelectedFileType(type)
@@ -154,29 +156,19 @@ export function ImportInterface() {
     const handleImport = async () => {
         const validMappings = importMappings.filter((m) => m.tableName && m.columnMappings.length > 0)
         if (validMappings.length === 0) return
-
         setIsProcessing(true)
         setImportStatus("idle")
-
-        try {
-            const promise = importData(files, validMappings).then((result)=>{
-                setResultImport(result);
-            })
-            notifications.promise(promise,{
-                loading: 'Importation en cours...',
-                success: 'Importation réussie !',
-                error: 'Erreur lors de l\'importation.',
-            })
-            setImportStatus("success")
-        } catch (error) {
-            setErrorMessage(error instanceof Error ? error.message : "Erreur lors de l'import")
-            setImportStatus("error")
-        } finally {
-            setIsProcessing(false)
-        }
+        const promise = importData(files, validMappings, isDeleteOldData).then((result) => {
+            setResultImport(result);
+        })
+        notifications.promise(promise, {
+            loading: 'Importation en cours...',
+            success: 'Importation réussie !',
+            error: 'Erreur lors de l\'importation.',
+        })
+        setImportStatus("success")
+        setIsProcessing(false)
     }
-
-
 
 
     const summary = generateImportSummary(importMappings, AVAILABLE_TABLES)
@@ -201,7 +193,31 @@ export function ImportInterface() {
     return (
         <div className="space-y-6">
 
-            <FileSelect selectedFileType={selectedFileType} handleFileTypeSelect={handleFileTypeSelect} />
+            <FileSelect selectedFileType={selectedFileType} handleFileTypeSelect={handleFileTypeSelect}/>
+
+            <Label
+                className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
+                <Checkbox
+                    id="toggle-2"
+                    defaultChecked
+                    checked={isDeleteOldData}
+                    onCheckedChange={() => {
+                        setIsDeleteOldData(!isDeleteOldData)
+                    }}
+                    className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+                />
+                <div className="grid gap-1.5 font-normal">
+                    <p className="text-sm leading-none font-medium">
+                        Supprimer les anciennes données avant importation
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                        Si cette option est activée, toutes les données existantes dans les tables ciblées seront
+                        supprimées avant l'importation des nouvelles données, y compris les données liées. Assurez-vous
+                        de sauvegarder vos données
+                        importantes avant de procéder.
+                    </p>
+                </div>
+            </Label>
 
             {selectedFileType && (
                 <>
