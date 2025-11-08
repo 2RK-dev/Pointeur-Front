@@ -6,26 +6,15 @@ import {
 	Book,
 	Command,
 	DoorClosed,
-	Frown,
 	GalleryVerticalEnd,
 	GraduationCap,
-	Layers,
 	School,
-	Settings2,
-	UserRound,
 } from "lucide-react";
 import * as React from "react";
 
-import { Logo } from "@/components/sidebar-comp/logo";
-import { NavMain } from "@/components/sidebar-comp/nav-main";
-import { NavUser } from "@/components/sidebar-comp/nav-user";
-import {
-	Sidebar,
-	SidebarContent,
-	SidebarFooter,
-	SidebarHeader,
-	SidebarRail,
-} from "@/components/ui/sidebar";
+import {Logo} from "@/components/sidebar-comp/logo";
+import {NavMain} from "@/components/sidebar-comp/nav-main";
+import {Sidebar, SidebarContent, SidebarHeader, SidebarRail,} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
@@ -99,14 +88,7 @@ const data = {
 			url: "/import-export",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
-		},
-
-		{
-			title: "Paramétre",
-			url: "/Setting",
-			icon: Settings2,
-			access: "Setting",
-		},
+		}
 	],
 };
 
@@ -123,9 +105,9 @@ export function AppSidebar({ userAccess, ...props }: AppSidebarProps) {
 			<SidebarContent>
 				<NavMain items={data.navMain} />
 			</SidebarContent>
-			<SidebarFooter>
-				<NavUser user={data.user} />
-			</SidebarFooter>
+			{/*<SidebarFooter>*/}
+			{/*	<NavUser user={data.user} />*/}
+			{/*</SidebarFooter>*/}
 			<SidebarRail />
 		</Sidebar>
 	);
