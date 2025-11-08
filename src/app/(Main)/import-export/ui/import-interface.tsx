@@ -11,7 +11,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {AlertCircle, CheckCircle2, Loader2, Table, Upload, X} from "lucide-react"
 import {ColumnMapper} from "@/app/(Main)/import-export/ui/import/column-mapper"
-import {ImportSummary} from "@/components/import-summary"
+import {ImportSummary} from "@/app/(Main)/import-export/ui/import/import-summary"
 import {
     autoMapColumns,
     generateImportSummary,
