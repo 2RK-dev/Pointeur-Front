@@ -20,68 +20,13 @@ import {
     parseJSONSources,
     validateMapping,
 } from "@/lib/import-utils"
-import type {FileSource, ImportMapping, TableSchema} from "@/lib/types"
+import type {FileSource, ImportMapping} from "@/lib/types"
 import FileSelect from "@/app/(Main)/import-export/ui/import/fileSelect";
-import {getFileIcon} from "@/app/(Main)/import-export/ui/import/importUtils";
+import {AVAILABLE_TABLES, FileType, getFileIcon} from "@/Tools/import";
 import {importData} from "@/services/Import";
 import {notifications} from "@/components/notifications";
-import {TranspositionResultBadges as Bruh} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {TranspositionResultBadges as ImportResultShow} from "@/app/(Main)/EDT/ui/transposition-result-badges";
 import {ResultImport} from "@/Types/glob";
-
-export const AVAILABLE_TABLES: TableSchema[] = [
-    {
-        name: "level",
-        label: "Niveaux d’enseignement",
-        columns: [
-            { name: "Id", type: "number" },
-            { name: "name", type: "string" },
-            { name: "abbreviation", type: "string" },
-        ]
-    },
-    {
-        name: "groups",
-        label: "Groupes d’étudiants",
-        columns: [
-            { name: "Id", type: "number" },
-            { name: "levelId", type: "number" },
-            { name: "name", type: "string" },
-            { name: "size", type: "number" },
-            { name: "type", type: "string" },
-            { name: "classe", type: "string" },
-        ]
-    },
-    {
-        name: "room",
-        label: "Salles de classe",
-        columns: [
-            { name: "Id", type: "number" },
-            { name: "name", type: "string" },
-            { name: "size", type: "number" },
-            { name: "abbreviation", type: "string" },
-        ]
-    },
-    {
-        name: "teacher",
-        label: "Enseignants",
-        columns: [
-            { name: "Id", type: "number" },
-            { name: "name", type: "string" },
-            { name: "abbreviation", type: "string" },
-        ]
-    },
-    {
-        name: "teachingUnit",
-        label: "Unités d’enseignement",
-        columns: [
-            { name: "Id", type: "number" },
-            { name: "levelId", type: "number" },
-            { name: "name", type: "string" },
-            { name: "abbreviation", type: "string" },
-        ]
-    }
-]
-
-type FileType = "csv" | "excel" | "json"
 
 
 export function ImportInterface() {
@@ -92,7 +37,7 @@ export function ImportInterface() {
     const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle")
     const [errorMessage, setErrorMessage] = useState<string>("")
     const [showSummary, setShowSummary] = useState(false)
-    const [bruhIsClosing, setBruhIsClosing] = useState(false);
+    const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(false);
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
 
     const handleFileTypeSelect = (type: FileType) => {
@@ -487,11 +432,11 @@ export function ImportInterface() {
                     </div>
                 </>
             )}
-            <Bruh
+            <ImportResultShow
                 successItems={resultImport?.success || []}
                 failedItems={resultImport?.failed || []}
-                isClosing={bruhIsClosing}
-                onClose={() => setBruhIsClosing(true)}
+                isClosing={importResultShowIsClosing}
+                onClose={() => setImportResultShowIsClosing(true)}
             />
         </div>
     )

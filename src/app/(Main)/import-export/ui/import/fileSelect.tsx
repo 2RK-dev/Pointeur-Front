@@ -1,7 +1,7 @@
 import {Card, CardContent} from "@/components/ui/card";
 import {Label} from "@/components/ui/label";
-import type {FileType} from "@/app/(Main)/import-export/ui/import/importUtils";
-import {fileType, getFileIcon} from "@/app/(Main)/import-export/ui/import/importUtils";
+import type {FileType} from "@/Tools/import";
+import {fileType, getFileIcon} from "@/Tools/import";
 
 interface props {
     selectedFileType: FileType | null;
