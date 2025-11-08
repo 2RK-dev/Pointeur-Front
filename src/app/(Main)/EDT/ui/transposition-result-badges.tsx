@@ -5,15 +5,8 @@ import {useState} from "react"
 import {Badge} from "@/components/ui/badge"
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
 import {Button} from "@/components/ui/button"
+import {FailedItem, SuccessItem} from "@/Types/glob";
 
-interface SuccessItem {
-    [key: string]: any
-}
-
-interface FailedItem {
-    item: any
-    reason: string
-}
 
 interface TranspositionResultBadgesProps {
     successItems: SuccessItem[]

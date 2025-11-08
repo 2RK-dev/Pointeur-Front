@@ -23,6 +23,10 @@ import {
 import type {FileSource, ImportMapping, TableSchema} from "@/lib/types"
 import FileSelect from "@/app/(Main)/import-export/ui/import/fileSelect";
 import {getFileIcon} from "@/app/(Main)/import-export/ui/import/importUtils";
+import {importData} from "@/services/Import";
+import {notifications} from "@/components/notifications";
+import {TranspositionResultBadges as Bruh} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {ResultImport} from "@/Types/glob";
 
 export const AVAILABLE_TABLES: TableSchema[] = [
     {
@@ -88,6 +92,8 @@ export function ImportInterface() {
     const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle")
     const [errorMessage, setErrorMessage] = useState<string>("")
     const [showSummary, setShowSummary] = useState(false)
+    const [bruhIsClosing, setBruhIsClosing] = useState(false);
+    const [resultImport, setResultImport] = useState<ResultImport | null>(null)
 
     const handleFileTypeSelect = (type: FileType) => {
         setSelectedFileType(type)
@@ -120,7 +126,10 @@ export function ImportInterface() {
                         const data = await parseCSV(fileSource.file)
                         newMappings.push({
                             sourceId: fileSource.id,
-                            sourceName: fileSource.file.name, sourceType: "csv",
+                            sourceName: fileSource.file.name,
+                            sourceFileName: fileSource.file.name,
+                            sourceSubFileName: null,
+                            sourceType: "csv",
                             tableName: null,
                             parsedData: data,
                             columnMappings: [],
@@ -133,6 +142,8 @@ export function ImportInterface() {
                         const newMappings: ImportMapping[] = sheets.map((sheet) => ({
                             sourceId: sheet.id,
                             sourceName: `${fileSource.file.name} - ${sheet.sheetName}`,
+                            sourceFileName: fileSource.file.name,
+                            sourceSubFileName: sheet.sheetName,
                             sourceType: "excel-sheet",
                             tableName: null,
                             parsedData: sheet.data,
@@ -146,6 +157,8 @@ export function ImportInterface() {
                         const newMappings: ImportMapping[] = sources.map((source) => ({
                             sourceId: source.id,
                             sourceName: source.key ? `${fileSource.file.name} - ${source.key}` : fileSource.file.name,
+                            sourceFileName: fileSource.file.name,
+                            sourceSubFileName: source.key,
                             sourceType: source.key ? "json-key" : "json-file",
                             tableName: null,
                             parsedData: source.data,
@@ -201,7 +214,14 @@ export function ImportInterface() {
         setImportStatus("idle")
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1500))
+            const promise = importData(files, validMappings).then((result)=>{
+                setResultImport(result);
+            })
+            notifications.promise(promise,{
+                loading: 'Importation en cours...',
+                success: 'Importation réussie !',
+                error: 'Erreur lors de l\'importation.',
+            })
             setImportStatus("success")
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : "Erreur lors de l'import")
@@ -231,6 +251,7 @@ export function ImportInterface() {
             </div>
         )
     }
+
 
     return (
         <div className="space-y-6">
@@ -466,6 +487,12 @@ export function ImportInterface() {
                     </div>
                 </>
             )}
+            <Bruh
+                successItems={resultImport?.success || []}
+                failedItems={resultImport?.failed || []}
+                isClosing={bruhIsClosing}
+                onClose={() => setBruhIsClosing(true)}
+            />
         </div>
     )
 }

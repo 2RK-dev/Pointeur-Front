@@ -44,6 +44,8 @@ export interface JsonSource {
 export interface ImportMapping {
   sourceId: string
   sourceName: string
+  sourceFileName: string
+  sourceSubFileName: string | null
   sourceType: "csv" | "excel-sheet" | "json-key" | "json-file"
   tableName: string | null
   parsedData: ParsedData
