@@ -1,9 +1,9 @@
 "use client"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ImportInterface } from "@/app/(Main)/import-export/ui/import-interface"
-import { ExportInterface } from "@/components/export-interface"
-import { Database, Upload, Download } from "lucide-react"
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
+import {ImportInterface} from "@/app/(Main)/import-export/ui/import-interface"
+import {ExportInterface} from "@/app/(Main)/import-export/ui/export-interface"
+import {Download, Upload} from "lucide-react"
 
 export default function DataManagementPage() {
   return (

@@ -65,7 +65,6 @@ export function TranspositionResultBadges({
                 </Popover>
             )}
 
-            {/* Bulle des échecs */}
             {failedItems.length > 0 && (
                 <Popover open={failedOpen} onOpenChange={setFailedOpen}>
                     <PopoverTrigger asChild>

@@ -20,7 +20,7 @@ export default function FileSelect({selectedFileType, handleFileTypeSelect}: pro
                     <Card
                         key={type}
                         className={` flex cursor-pointer hover:border-primary/50 h-16 ${
-                            selectedFileType === type ? "border-primary border-2 bg-primary/5 shadow-sm" : ""
+                            selectedFileType === type && "border-primary border-2 bg-primary/5 shadow-sm"
                         }`}
                         onClick={() => handleFileTypeSelect(type)}
                     >

@@ -23,7 +23,7 @@ import {
 import type {FileSource, ImportMapping} from "@/lib/types"
 import FileSelect from "@/app/(Main)/import-export/ui/import/fileSelect";
 import {AVAILABLE_TABLES, FileType, getFileIcon} from "@/Tools/import";
-import {importData} from "@/services/Import";
+import {importData} from "@/services/DataTransfer";
 import {notifications} from "@/components/notifications";
 import {TranspositionResultBadges as ImportResultShow} from "@/app/(Main)/EDT/ui/transposition-result-badges";
 import {ResultImport} from "@/Types/glob";
@@ -413,15 +413,6 @@ export function ImportInterface() {
                         >
                             Voir le résumé et confirmer
                         </Button>
-
-                        {importStatus === "success" && (
-                            <Alert className="border-green-500 bg-green-50 dark:bg-green-950 py-2">
-                                <CheckCircle2 className="h-4 w-4 text-green-600"/>
-                                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-                                    Import réussi ! {summary.totalRows} lignes ont été importées.
-                                </AlertDescription>
-                            </Alert>
-                        )}
 
                         {importStatus === "error" && (
                             <Alert variant="destructive" className="py-2">

@@ -107,21 +107,18 @@ export function ColumnMapper({
                     return (
                         <Card key={index} className="p-3">
                             <div className="grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] gap-3 items-center">
-                                {/* Colonne du fichier */}
                                 <div className="space-y-1">
                                     <Label className="text-xs text-muted-foreground">Colonne du fichier</Label>
                                     <div className="font-medium text-sm">{fileHeader}</div>
                                     {previewData.length > 0 && (
-                                        <div className="text-xs text-muted-foreground truncate">
+                                        <div className="text-xs text-muted-foreground truncate max-w-[200px]">
                                             Ex: {previewData[0][fileHeader]?.toString() || "—"}
                                         </div>
                                     )}
                                 </div>
 
-                                {/* Flèche */}
                                 <ArrowRight className="h-4 w-4 text-muted-foreground hidden md:block"/>
 
-                                {/* Colonne de la table */}
                                 <div className="space-y-1">
                                     <Label className="text-xs text-muted-foreground">Colonne de la table</Label>
                                     <Select

@@ -245,15 +245,15 @@ function levenshteinDistance(str1: string, str2: string): number {
 
 export function validateMapping(mapping: ColumnMapping[], tableColumns: TableColumn[]): MappingValidation {
   const mappedColumns = mapping.filter((m) => m.tableColumn !== null).map((m) => m.tableColumn)
-  const unmappedRequired = tableColumns.filter((col) => col.required && !mappedColumns.includes(col.name))
-  const unmappedOptional = tableColumns.filter((col) => !col.required && !mappedColumns.includes(col.name))
+  const unmappedRequired = tableColumns.filter((col) =>  !mappedColumns.includes(col.name))
+  const unmappedOptional = tableColumns.filter((col) =>  !mappedColumns.includes(col.name))
 
   return {
     isValid: unmappedRequired.length === 0,
     unmappedRequired: unmappedRequired.map((col) => col.name),
     unmappedOptional: unmappedOptional.map((col) => col.name),
     mappedCount: mappedColumns.length,
-    totalRequired: tableColumns.filter((col) => col.required).length,
+    totalRequired: tableColumns.length,
     totalColumns: tableColumns.length,
   }
 }
