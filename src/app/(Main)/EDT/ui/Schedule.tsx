@@ -62,9 +62,7 @@ export default function Schedule() {
             const {start, end} = selectedWeek;
             const promiseScheduleItem = getScheduleItems(start, end).then((items) => {
                 setCurrentScheduleItems(items);
-            }).catch((error) => {
-                console.error("Error fetching schedule items:", error);
-            });
+            })
             notifications.promise(promiseScheduleItem,{
                 loading: "Chargement des éléments du planning...",
                 success: "Éléments du planning chargés avec succès !",
@@ -79,8 +77,6 @@ export default function Schedule() {
                 if (levels.length > 0) {
                     setSelectedLevel(levels[0]);
                 }
-            }).catch((error) => {
-                console.error("Error fetching levels:", error);
             })
             notifications.promise(promiseLevel,{
                 loading: "Chargement des niveaux...",
@@ -97,9 +93,7 @@ export default function Schedule() {
                 if (teachers.length > 0) {
                     setSelectedTeacherId(teachers[0].id);
                 }
-            }).catch((error) => {
-                console.error("Error fetching teachers:", error);
-            });
+            })
             notifications.promise(promiseTeacher,{
                 loading: "Chargement des enseignants...",
                 success: "Enseignants chargés avec succès !",
@@ -115,8 +109,6 @@ export default function Schedule() {
                 if (rooms.length > 0) {
                     setSelectedRoomId(rooms[0].id);
                 }
-            }).catch((error) => {
-                console.error("Error fetching rooms:", error);
             })
             notifications.promise(promiseRoom,{
                 loading: "Chargement des salles...",

@@ -1,7 +1,6 @@
 export interface TableColumn {
   name: string
   type: "string" | "number" | "date" | "boolean"
-  required: boolean
 }
 
 export interface TableSchema {

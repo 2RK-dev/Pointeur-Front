@@ -9,64 +9,72 @@ import {Badge} from "@/components/ui/badge"
 import {Separator} from "@/components/ui/separator"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
-import {AlertCircle, CheckCircle2, FileJson, FileSpreadsheet, FileText, Loader2, Table, Upload, X} from "lucide-react"
-import {ColumnMapper} from "@/components/column-mapper"
+import {AlertCircle, CheckCircle2, Loader2, Table, Upload, X} from "lucide-react"
+import {ColumnMapper} from "@/app/(Main)/import-export/ui/import/column-mapper"
 import {ImportSummary} from "@/components/import-summary"
 import {
     autoMapColumns,
-    generateImportSummary, parseCSV,
+    generateImportSummary,
+    parseCSV,
     parseExcelSheets,
     parseJSONSources,
     validateMapping,
 } from "@/lib/import-utils"
-import type {ExcelSheetSource, FileSource, ImportMapping, JsonSource, TableSchema} from "@/lib/types"
+import type {FileSource, ImportMapping, TableSchema} from "@/lib/types"
 import FileSelect from "@/app/(Main)/import-export/ui/import/fileSelect";
 import {getFileIcon} from "@/app/(Main)/import-export/ui/import/importUtils";
 
-const AVAILABLE_TABLES: TableSchema[] = [
+export const AVAILABLE_TABLES: TableSchema[] = [
     {
-        name: "users",
-        label: "Utilisateurs",
+        name: "level",
+        label: "Niveaux d’enseignement",
         columns: [
-            {name: "id", type: "number", required: true},
-            {name: "email", type: "string", required: true},
-            {name: "first_name", type: "string", required: false},
-            {name: "last_name", type: "string", required: false},
-            {name: "created_at", type: "date", required: false},
-        ],
+            { name: "Id", type: "number" },
+            { name: "name", type: "string" },
+            { name: "abbreviation", type: "string" },
+        ]
     },
     {
-        name: "products",
-        label: "Produits",
+        name: "groups",
+        label: "Groupes d’étudiants",
         columns: [
-            {name: "id", type: "number", required: true},
-            {name: "name", type: "string", required: true},
-            {name: "description", type: "string", required: false},
-            {name: "price", type: "number", required: true},
-            {name: "stock", type: "number", required: false},
-        ],
+            { name: "Id", type: "number" },
+            { name: "levelId", type: "number" },
+            { name: "name", type: "string" },
+            { name: "size", type: "number" },
+            { name: "type", type: "string" },
+            { name: "classe", type: "string" },
+        ]
     },
     {
-        name: "orders",
-        label: "Commandes",
+        name: "room",
+        label: "Salles de classe",
         columns: [
-            {name: "id", type: "number", required: true},
-            {name: "user_id", type: "number", required: true},
-            {name: "product_id", type: "number", required: true},
-            {name: "quantity", type: "number", required: true},
-            {name: "total", type: "number", required: true},
-            {name: "order_date", type: "date", required: false},
-        ],
+            { name: "Id", type: "number" },
+            { name: "name", type: "string" },
+            { name: "size", type: "number" },
+            { name: "abbreviation", type: "string" },
+        ]
     },
     {
-        name: "categories",
-        label: "Catégories",
+        name: "teacher",
+        label: "Enseignants",
         columns: [
-            {name: "id", type: "number", required: true},
-            {name: "name", type: "string", required: true},
-            {name: "parent_id", type: "number", required: false},
-        ],
+            { name: "Id", type: "number" },
+            { name: "name", type: "string" },
+            { name: "abbreviation", type: "string" },
+        ]
     },
+    {
+        name: "teachingUnit",
+        label: "Unités d’enseignement",
+        columns: [
+            { name: "Id", type: "number" },
+            { name: "levelId", type: "number" },
+            { name: "name", type: "string" },
+            { name: "abbreviation", type: "string" },
+        ]
+    }
 ]
 
 type FileType = "csv" | "excel" | "json"
@@ -75,8 +83,6 @@ type FileType = "csv" | "excel" | "json"
 export function ImportInterface() {
     const [selectedFileType, setSelectedFileType] = useState<FileType | null>(null)
     const [files, setFiles] = useState<FileSource[]>([])
-    const [excelSheets, setExcelSheets] = useState<ExcelSheetSource[]>([])
-    const [jsonSources, setJsonSources] = useState<JsonSource[]>([])
     const [importMappings, setImportMappings] = useState<ImportMapping[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
     const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle")
@@ -86,8 +92,6 @@ export function ImportInterface() {
     const handleFileTypeSelect = (type: FileType) => {
         setSelectedFileType(type)
         setFiles([])
-        setExcelSheets([])
-        setJsonSources([])
         setImportMappings([])
         setShowSummary(false)
     }
@@ -126,7 +130,6 @@ export function ImportInterface() {
                 } else if (selectedFileType === "excel") {
                     for (const fileSource of newFiles) {
                         const sheets = await parseExcelSheets(fileSource.file, fileSource.id)
-                        setExcelSheets((prev) => [...prev, ...sheets])
                         const newMappings: ImportMapping[] = sheets.map((sheet) => ({
                             sourceId: sheet.id,
                             sourceName: `${fileSource.file.name} - ${sheet.sheetName}`,
@@ -140,7 +143,6 @@ export function ImportInterface() {
                 } else if (selectedFileType === "json") {
                     for (const fileSource of newFiles) {
                         const sources = await parseJSONSources(fileSource.file, fileSource.id)
-                        setJsonSources((prev) => [...prev, ...sources])
                         const newMappings: ImportMapping[] = sources.map((source) => ({
                             sourceId: source.id,
                             sourceName: source.key ? `${fileSource.file.name} - ${source.key}` : fileSource.file.name,
@@ -178,9 +180,13 @@ export function ImportInterface() {
     }
 
     const handleRemoveSource = (sourceId: string) => {
-        setImportMappings((prev) => prev.filter((m) => m.sourceId !== sourceId))
         setFiles((prev) => prev.filter((f) => f.id !== sourceId))
-
+        setImportMappings((prev) =>
+            prev.filter((m) =>
+                m.sourceId !== sourceId &&
+                !m.sourceId.startsWith(sourceId + "-")
+            )
+        )
     }
 
     const handleShowSummary = () => {
@@ -291,7 +297,6 @@ export function ImportInterface() {
                 </>
             )}
 
-            {/* Step 3: Map sources to tables */}
             {importMappings.length > 0 && (
                 <>
                     <Separator/>
@@ -349,8 +354,7 @@ export function ImportInterface() {
                                                                     <AlertCircle className="mr-1 h-3 w-3"/>
                                                                     Invalide
                                                                 </>
-                                                            )}
-                                                        </Badge>
+                                                            )}</Badge>
                                                     )}
                                                     <Button
                                                         variant="ghost"
@@ -412,7 +416,6 @@ export function ImportInterface() {
                 </>
             )}
 
-            {/* Step 4: Review and Import */}
             {canProceedToSummary && (
                 <>
                     <Separator/>
