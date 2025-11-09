@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React, {useEffect} from "react"
 import {useCallback, useState} from "react"
 import {Button} from "@/components/ui/button"
 import {Label} from "@/components/ui/label"
@@ -38,9 +38,24 @@ export function ImportInterface() {
     const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle")
     const [errorMessage, setErrorMessage] = useState<string>("")
     const [showSummary, setShowSummary] = useState(false)
-    const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(false);
+    const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(true);
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
     const [isDeleteOldData, setIsDeleteOldData] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (resultImport) {
+            setImportResultShowIsClosing(false);
+        } else {
+            setImportResultShowIsClosing(true);
+        }
+    }, [resultImport]);
+
+    const onClose = () => {
+        setImportResultShowIsClosing(true);
+        setTimeout(() => {
+            setResultImport(null);
+        }, 300);
+    }
 
     const handleFileTypeSelect = (type: FileType) => {
         setSelectedFileType(type)
@@ -160,6 +175,7 @@ export function ImportInterface() {
         setImportStatus("idle")
         const promise = importData(files, validMappings, isDeleteOldData).then((result) => {
             setResultImport(result);
+            setImportResultShowIsClosing(false);
         })
         notifications.promise(promise, {
             loading: 'Importation en cours...',
@@ -208,13 +224,11 @@ export function ImportInterface() {
                 />
                 <div className="grid gap-1.5 font-normal">
                     <p className="text-sm leading-none font-medium">
-                        Supprimer les anciennes données avant importation
+                        Remplacer en cas de conflit
                     </p>
                     <p className="text-muted-foreground text-sm">
-                        Si cette option est activée, toutes les données existantes dans les tables ciblées seront
-                        supprimées avant l'importation des nouvelles données, y compris les données liées. Assurez-vous
-                        de sauvegarder vos données
-                        importantes avant de procéder.
+                        Si activé, les données importées remplaceront celles existantes ayant le même ID. Sinon, les
+                        enregistrements conflictuels seront ignorés.
                     </p>
                 </div>
             </Label>
@@ -443,7 +457,7 @@ export function ImportInterface() {
                 successItems={resultImport?.success || []}
                 failedItems={resultImport?.failed || []}
                 isClosing={importResultShowIsClosing}
-                onClose={() => setImportResultShowIsClosing(true)}
+                onClose={onClose}
             />
         </div>
     )

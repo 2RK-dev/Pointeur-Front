@@ -39,7 +39,7 @@ export function ExportInterface() {
             const url = window.URL.createObjectURL(result)
             const a = document.createElement("a")
             a.href = url
-            a.download = `export.${exportFormat}`
+            a.download = `export.${exportFormat === "csv" ? "zip" : exportFormat}`
             document.body.appendChild(a)
             a.click()
             a.remove()

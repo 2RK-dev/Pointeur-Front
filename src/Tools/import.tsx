@@ -16,16 +16,16 @@ export const AVAILABLE_TABLES: TableSchema[] = [
         name: "level",
         label: "Niveaux d’enseignement",
         columns: [
-            { name: "Id", type: "number" },
+            { name: "id", type: "number" },
             { name: "name", type: "string" },
             { name: "abbreviation", type: "string" },
         ]
     },
     {
-        name: "groups",
+        name: "group",
         label: "Groupes d’étudiants",
         columns: [
-            { name: "Id", type: "number" },
+            { name: "id", type: "number" },
             { name: "levelId", type: "number" },
             { name: "name", type: "string" },
             { name: "size", type: "number" },
@@ -37,7 +37,7 @@ export const AVAILABLE_TABLES: TableSchema[] = [
         name: "room",
         label: "Salles de classe",
         columns: [
-            { name: "Id", type: "number" },
+            { name: "id", type: "number" },
             { name: "name", type: "string" },
             { name: "size", type: "number" },
             { name: "abbreviation", type: "string" },
@@ -47,16 +47,16 @@ export const AVAILABLE_TABLES: TableSchema[] = [
         name: "teacher",
         label: "Enseignants",
         columns: [
-            { name: "Id", type: "number" },
+            { name: "id", type: "number" },
             { name: "name", type: "string" },
             { name: "abbreviation", type: "string" },
         ]
     },
     {
-        name: "teachingUnit",
+        name: "teaching_unit",
         label: "Unités d’enseignement",
         columns: [
-            { name: "Id", type: "number" },
+            { name: "id", type: "number" },
             { name: "levelId", type: "number" },
             { name: "name", type: "string" },
             { name: "abbreviation", type: "string" },
