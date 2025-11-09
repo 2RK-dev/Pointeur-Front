@@ -40,6 +40,7 @@ export default function Home() {
             notifications.success("Salle supprimée avec succès", " La salle N°" + removedRoom + " a été supprimée.");
         }).catch((err) => {
             notifications.error("Erreur lors de la suppression de la salle", err.message);
+            throw err;
         })
         notifications.promise(promise, {
             loading: "Suppression de la salle...",

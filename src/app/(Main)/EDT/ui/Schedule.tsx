@@ -26,7 +26,7 @@ import {useRoomsStore} from "@/Stores/Room";
 import {getRoomsService} from "@/services/Room";
 import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
-import {TranspositionResultBadges} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 5;
@@ -57,20 +57,19 @@ export default function Schedule() {
     const [transpositionResponse, setTranspositionResponse] = useState<TranspositionResponse | null>();
     const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
+    const allWeeks = getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY);
+
     useEffect(() => {
-        if (selectedWeek){
-            const {start, end} = selectedWeek;
-            const promiseScheduleItem = getScheduleItems(start, end).then((items) => {
-                setCurrentScheduleItems(items);
-            }).catch((error) => {
-                console.error("Error fetching schedule items:", error);
-            });
-            notifications.promise(promiseScheduleItem,{
-                loading: "Chargement des éléments du planning...",
-                success: "Éléments du planning chargés avec succès !",
-                error: "Échec du chargement des éléments du planning."
-            })
-        }
+        const firstWeek = allWeeks[0];
+        const lastWeek = allWeeks[allWeeks.length - 1];
+        const promiseScheduleItem = getScheduleItems(firstWeek.start,lastWeek.end).then((items) => {
+            setCurrentScheduleItems(items);
+        })
+        notifications.promise(promiseScheduleItem, {
+            loading: "Chargement des éléments du planning...",
+            success: "Éléments du planning chargés avec succès !",
+            error: "Échec du chargement des éléments du planning."
+        })
 
 
         if (!levelList) {
@@ -79,10 +78,8 @@ export default function Schedule() {
                 if (levels.length > 0) {
                     setSelectedLevel(levels[0]);
                 }
-            }).catch((error) => {
-                console.error("Error fetching levels:", error);
             })
-            notifications.promise(promiseLevel,{
+            notifications.promise(promiseLevel, {
                 loading: "Chargement des niveaux...",
                 success: "Niveaux chargés avec succès !",
                 error: "Échec du chargement des niveaux."
@@ -97,10 +94,8 @@ export default function Schedule() {
                 if (teachers.length > 0) {
                     setSelectedTeacherId(teachers[0].id);
                 }
-            }).catch((error) => {
-                console.error("Error fetching teachers:", error);
-            });
-            notifications.promise(promiseTeacher,{
+            })
+            notifications.promise(promiseTeacher, {
                 loading: "Chargement des enseignants...",
                 success: "Enseignants chargés avec succès !",
                 error: "Échec du chargement des enseignants."
@@ -115,10 +110,8 @@ export default function Schedule() {
                 if (rooms.length > 0) {
                     setSelectedRoomId(rooms[0].id);
                 }
-            }).catch((error) => {
-                console.error("Error fetching rooms:", error);
             })
-            notifications.promise(promiseRoom,{
+            notifications.promise(promiseRoom, {
                 loading: "Chargement des salles...",
                 success: "Salles chargées avec succès !",
                 error: "Échec du chargement des salles."
@@ -182,7 +175,7 @@ export default function Schedule() {
                         <SelectValue placeholder="Sélectionner la semaine"/>
                     </SelectTrigger>
                     <SelectContent>
-                        {getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY).map((week, index) => (
+                        {allWeeks.map((week, index) => (
                             <SelectItem key={index} value={JSON.stringify(week)}>
                                 {
                                     `${week.start.toLocaleDateString('fr-FR', {
@@ -237,7 +230,7 @@ export default function Schedule() {
                                setTransposeResponse={setTranspositionResponse}
                     />
                 </>)}
-            <TranspositionResultBadges
+            <ImportResultShow
                 successItems={transpositionResponse?.successItems || []}
                 failedItems={transpositionResponse?.failedItems || []}
                 isClosing={isClosingTranspositionBadges}

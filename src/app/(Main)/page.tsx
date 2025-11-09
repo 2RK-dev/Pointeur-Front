@@ -1,7 +1,5 @@
-import Schedule from "@/app/(Main)/EDT/ui/Schedule";
+import {redirect} from "next/navigation";
 
 export default function page() {
-	return (
-		<Schedule/>
-	);
+	redirect("/EDT");
 }
