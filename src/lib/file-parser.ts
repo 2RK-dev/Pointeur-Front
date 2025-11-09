@@ -39,7 +39,7 @@ export async function parseExcel(file: File): Promise<Map<string, ParsedData>> {
 
   const sheetsData = new Map<string, ParsedData>()
 
-  workbook.SheetNames.forEach((sheetName) => {
+  workbook.SheetNames.forEach((sheetName: string) => {
     const worksheet = workbook.Sheets[sheetName]
     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][]
 
