@@ -28,7 +28,6 @@ export default function DataManagementPage() {
 
               <TabsContent value="import" className="mt-6">
                 <ImportInterface />
-
               </TabsContent>
 
               <TabsContent value="export" className="mt-6">
