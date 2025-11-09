@@ -175,7 +175,6 @@ export function ImportInterface() {
         setImportStatus("idle")
         const promise = importData(files, validMappings, isDeleteOldData).then((result) => {
             setResultImport(result);
-            setImportResultShowIsClosing(false);
         })
         notifications.promise(promise, {
             loading: 'Importation en cours...',
