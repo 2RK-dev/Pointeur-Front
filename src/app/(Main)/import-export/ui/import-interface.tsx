@@ -1,7 +1,6 @@
 "use client"
 
-import React, {useEffect} from "react"
-import {useCallback, useState} from "react"
+import React, {useCallback, useState} from "react"
 import {Button} from "@/components/ui/button"
 import {Label} from "@/components/ui/label"
 import {Alert, AlertDescription} from "@/components/ui/alert"
@@ -25,7 +24,7 @@ import FileSelect from "@/app/(Main)/import-export/ui/import/fileSelect";
 import {AVAILABLE_TABLES, FileType, getFileIcon} from "@/Tools/import";
 import {importData} from "@/services/DataTransfer";
 import {notifications} from "@/components/notifications";
-import {TranspositionResultBadges as ImportResultShow} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {ImportResultShow as ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {ResultImport} from "@/Types/glob";
 import {Checkbox} from "@/components/ui/checkbox";
 
@@ -42,18 +41,10 @@ export function ImportInterface() {
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
     const [isDeleteOldData, setIsDeleteOldData] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (resultImport) {
-            setImportResultShowIsClosing(false);
-        } else {
-            setImportResultShowIsClosing(true);
-        }
-    }, [resultImport]);
 
     const onClose = () => {
-        setImportResultShowIsClosing(true);
         setTimeout(() => {
-            setResultImport(null);
+            setImportResultShowIsClosing(true);
         }, 300);
     }
 
@@ -175,13 +166,14 @@ export function ImportInterface() {
         setImportStatus("idle")
         const promise = importData(files, validMappings, isDeleteOldData).then((result) => {
             setResultImport(result);
+            setImportStatus("success")
+            setImportResultShowIsClosing(false)
         })
         notifications.promise(promise, {
             loading: 'Importation en cours...',
             success: 'Importation réussie !',
             error: 'Erreur lors de l\'importation.',
         })
-        setImportStatus("success")
         setIsProcessing(false)
     }
 

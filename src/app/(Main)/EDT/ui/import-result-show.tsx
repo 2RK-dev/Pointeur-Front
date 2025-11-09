@@ -15,16 +15,15 @@ interface TranspositionResultBadgesProps {
     onClose: () => void
 }
 
-export function TranspositionResultBadges({
-                                              successItems,
-                                              failedItems,
-                                              isClosing,
-                                              onClose
-                                          }: TranspositionResultBadgesProps) {
+export function ImportResultShow({
+                                     successItems,
+                                     failedItems,
+                                     isClosing,
+                                     onClose
+                                 }: TranspositionResultBadgesProps) {
     const [successOpen, setSuccessOpen] = useState(false)
     const [failedOpen, setFailedOpen] = useState(false)
 
-    if (successItems.length === 0 && failedItems.length === 0) return null
 
     return (
         <div
@@ -105,6 +104,15 @@ export function TranspositionResultBadges({
                         </div>
                     </PopoverContent>
                 </Popover>
+            )}
+
+            {(successItems.length === 0 && failedItems.length === 0) && (
+                <Badge
+                    variant="outline"
+                    className="cursor-default border-gray-200 text-gray-700 gap-1.5"
+                >
+                    Aucun item traité
+                </Badge>
             )}
 
             <Button variant="ghost" size="icon" className="h-7 w-7" onClick={onClose}>

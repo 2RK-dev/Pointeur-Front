@@ -26,7 +26,7 @@ import {useRoomsStore} from "@/Stores/Room";
 import {getRoomsService} from "@/services/Room";
 import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
-import {TranspositionResultBadges} from "@/app/(Main)/EDT/ui/transposition-result-badges";
+import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 5;
@@ -230,7 +230,7 @@ export default function Schedule() {
                                setTransposeResponse={setTranspositionResponse}
                     />
                 </>)}
-            <TranspositionResultBadges
+            <ImportResultShow
                 successItems={transpositionResponse?.successItems || []}
                 failedItems={transpositionResponse?.failedItems || []}
                 isClosing={isClosingTranspositionBadges}
