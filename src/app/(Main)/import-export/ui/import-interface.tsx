@@ -7,7 +7,6 @@ import {Alert, AlertDescription} from "@/components/ui/alert"
 import {Badge} from "@/components/ui/badge"
 import {Separator} from "@/components/ui/separator"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {AlertCircle, CheckCircle2, Loader2, Table, Upload, X} from "lucide-react"
 import {ColumnMapper} from "@/app/(Main)/import-export/ui/import/column-mapper"
 import {ImportSummary} from "@/app/(Main)/import-export/ui/import/import-summary"
@@ -27,6 +26,7 @@ import {notifications} from "@/components/notifications";
 import {ImportResultShow as ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {ResultImport} from "@/Types/glob";
 import {Checkbox} from "@/components/ui/checkbox";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 
 
 export function ImportInterface() {
@@ -34,8 +34,6 @@ export function ImportInterface() {
     const [files, setFiles] = useState<FileSource[]>([])
     const [importMappings, setImportMappings] = useState<ImportMapping[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
-    const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle")
-    const [errorMessage, setErrorMessage] = useState<string>("")
     const [showSummary, setShowSummary] = useState(false)
     const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(true);
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
@@ -59,11 +57,7 @@ export function ImportInterface() {
         async (e: React.ChangeEvent<HTMLInputElement>) => {
             const selectedFiles = Array.from(e.target.files || [])
             if (selectedFiles.length === 0 || !selectedFileType) return
-
             setIsProcessing(true)
-            setImportStatus("idle")
-            setErrorMessage("")
-
             try {
                 const newFiles: FileSource[] = selectedFiles.map((file, index) => ({
                     id: `file-${Date.now()}-${index}`,
@@ -122,8 +116,7 @@ export function ImportInterface() {
                 }
 
             } catch (error) {
-                setErrorMessage(error instanceof Error ? error.message : "Erreur lors de la lecture du fichier")
-                setImportStatus("error")
+                notifications.error("Erreur lors du traitement des fichiers.", "Veuillez vérifier le format des fichiers et réessayer.")
             } finally {
                 setIsProcessing(false)
             }
@@ -163,10 +156,8 @@ export function ImportInterface() {
         const validMappings = importMappings.filter((m) => m.tableName && m.columnMappings.length > 0)
         if (validMappings.length === 0) return
         setIsProcessing(true)
-        setImportStatus("idle")
         const promise = importData(files, validMappings, isDeleteOldData).then((result) => {
             setResultImport(result);
-            setImportStatus("success")
             setImportResultShowIsClosing(false)
         })
         notifications.promise(promise, {
@@ -298,31 +289,34 @@ export function ImportInterface() {
                             </Badge>
                         </div>
 
-                        <div className="space-y-3">
+                        <Accordion type="single"
+                                   collapsible
+                                   className="w-full"
+                                   defaultValue={importMappings.length > 0 ? importMappings[0].sourceId : undefined}>
                             {importMappings.map((mapping, index) => {
                                 const table = AVAILABLE_TABLES.find((t) => t.name === mapping.tableName)
                                 const validation = table ? validateMapping(mapping.columnMappings, table.columns) : null
 
                                 return (
-                                    <Card
-                                        key={mapping.sourceId}
-                                        className={`transition-all ${
-                                            validation && !validation.isValid
-                                                ? "border-orange-500 shadow-sm"
-                                                : validation?.isValid
-                                                    ? "border-green-500/30"
-                                                    : ""
-                                        }`}
+                                    <AccordionItem value={mapping.sourceId}
+                                                   key={mapping.sourceId}
+                                                   className={`transition-all ${
+                                                       validation && !validation.isValid
+                                                           ? "border-orange-500 shadow-sm"
+                                                           : validation?.isValid
+                                                               ? "border-green-500/30"
+                                                               : ""
+                                                   }`}
                                     >
-                                        <CardHeader className="pb-2 pt-3 px-4">
-                                            <div className="flex items-start justify-between">
+                                        <AccordionTrigger className="pb-2 pt-3 px-4 ">
+                                            <div className="flex items-center justify-between mr-4 w-full">
                                                 <div className="flex items-center gap-2">
                                                     <Table className="h-4 w-4 text-muted-foreground"/>
                                                     <div>
-                                                        <CardTitle className="text-sm">{mapping.sourceName}</CardTitle>
-                                                        <CardDescription className="text-xs">
+                                                        <p className="text-sm">{mapping.sourceName}</p>
+                                                        <p className="text-xs">
                                                             {mapping.parsedData.rows.length} lignes détectées
-                                                        </CardDescription>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-2">
@@ -353,8 +347,8 @@ export function ImportInterface() {
                                                     </Button>
                                                 </div>
                                             </div>
-                                        </CardHeader>
-                                        <CardContent className="space-y-3 px-4 pb-4">
+                                        </AccordionTrigger>
+                                        <AccordionContent className="space-y-3 px-4 pb-4">
                                             <div className="space-y-2">
                                                 <Label className="text-xs">Table de destination</Label>
                                                 <Select
@@ -394,11 +388,11 @@ export function ImportInterface() {
                                                     />
                                                 </div>
                                             )}
-                                        </CardContent>
-                                    </Card>
+                                        </AccordionContent>
+                                    </AccordionItem>
                                 )
                             })}
-                        </div>
+                        </Accordion>
                     </div>
                 </>
             )}
@@ -409,8 +403,8 @@ export function ImportInterface() {
                     <div className="space-y-3">
                         {summary.invalidMappings > 0 ? (
                             <Alert variant="destructive" className="py-2">
-                                <AlertCircle className="h-4 w-4"/>
-                                <AlertDescription className="text-sm">
+                                <AlertDescription className="text-sm flex flex-row items-center gap-2">
+                                    <AlertCircle className="h-4 w-4"/>
                                     <strong>{summary.invalidMappings} source(s)</strong> ont des champs requis non
                                     mappés. Corrigez les
                                     mappings avant de continuer.
@@ -418,9 +412,8 @@ export function ImportInterface() {
                             </Alert>
                         ) : (
                             <Alert className="border-green-500 bg-green-50 dark:bg-green-950 py-2">
-                                <CheckCircle2 className="h-4 w-4 text-green-600"/>
-                                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-                                    Tous les mappings sont valides ! Prêt à
+                                <AlertDescription className="flex items-center gap-2 text-sm text-green-800 dark:text-green-200">
+                                    <CheckCircle2 className="h-4 w-4 text-green-600"/> Tous les mappings sont valides ! Prêt à
                                     importer <strong>{summary.totalRows} lignes</strong> dans{" "}
                                     <strong>{summary.validMappings} table(s)</strong>
                                 </AlertDescription>
@@ -435,12 +428,6 @@ export function ImportInterface() {
                             Voir le résumé et confirmer
                         </Button>
 
-                        {importStatus === "error" && (
-                            <Alert variant="destructive" className="py-2">
-                                <AlertCircle className="h-4 w-4"/>
-                                <AlertDescription className="text-sm">{errorMessage}</AlertDescription>
-                            </Alert>
-                        )}
                     </div>
                 </>
             )}
