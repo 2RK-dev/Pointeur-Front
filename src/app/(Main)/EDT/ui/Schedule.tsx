@@ -57,18 +57,19 @@ export default function Schedule() {
     const [transpositionResponse, setTranspositionResponse] = useState<TranspositionResponse | null>();
     const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
+    const allWeeks = getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY);
+
     useEffect(() => {
-        if (selectedWeek){
-            const {start, end} = selectedWeek;
-            const promiseScheduleItem = getScheduleItems(start, end).then((items) => {
-                setCurrentScheduleItems(items);
-            })
-            notifications.promise(promiseScheduleItem,{
-                loading: "Chargement des éléments du planning...",
-                success: "Éléments du planning chargés avec succès !",
-                error: "Échec du chargement des éléments du planning."
-            })
-        }
+        const firstWeek = allWeeks[0];
+        const lastWeek = allWeeks[allWeeks.length - 1];
+        const promiseScheduleItem = getScheduleItems(firstWeek.start,lastWeek.end).then((items) => {
+            setCurrentScheduleItems(items);
+        })
+        notifications.promise(promiseScheduleItem, {
+            loading: "Chargement des éléments du planning...",
+            success: "Éléments du planning chargés avec succès !",
+            error: "Échec du chargement des éléments du planning."
+        })
 
 
         if (!levelList) {
@@ -78,7 +79,7 @@ export default function Schedule() {
                     setSelectedLevel(levels[0]);
                 }
             })
-            notifications.promise(promiseLevel,{
+            notifications.promise(promiseLevel, {
                 loading: "Chargement des niveaux...",
                 success: "Niveaux chargés avec succès !",
                 error: "Échec du chargement des niveaux."
@@ -94,7 +95,7 @@ export default function Schedule() {
                     setSelectedTeacherId(teachers[0].id);
                 }
             })
-            notifications.promise(promiseTeacher,{
+            notifications.promise(promiseTeacher, {
                 loading: "Chargement des enseignants...",
                 success: "Enseignants chargés avec succès !",
                 error: "Échec du chargement des enseignants."
@@ -110,7 +111,7 @@ export default function Schedule() {
                     setSelectedRoomId(rooms[0].id);
                 }
             })
-            notifications.promise(promiseRoom,{
+            notifications.promise(promiseRoom, {
                 loading: "Chargement des salles...",
                 success: "Salles chargées avec succès !",
                 error: "Échec du chargement des salles."
@@ -174,7 +175,7 @@ export default function Schedule() {
                         <SelectValue placeholder="Sélectionner la semaine"/>
                     </SelectTrigger>
                     <SelectContent>
-                        {getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY).map((week, index) => (
+                        {allWeeks.map((week, index) => (
                             <SelectItem key={index} value={JSON.stringify(week)}>
                                 {
                                     `${week.start.toLocaleDateString('fr-FR', {
