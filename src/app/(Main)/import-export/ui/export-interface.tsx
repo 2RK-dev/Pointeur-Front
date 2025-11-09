@@ -31,6 +31,19 @@ export function ExportInterface() {
         }
     }
 
+    const getExtensionFormat = (format: FileType) => {
+        switch (format) {
+            case "csv":
+                return "zip"
+            case "json":
+                return "json"
+            case "excel":
+                return "xlsx"
+            default:
+                return "txt"
+        }
+    }
+
     const handleExport = async () => {
         if (selectedTables.length === 0) return
 
@@ -39,7 +52,7 @@ export function ExportInterface() {
             const url = window.URL.createObjectURL(result)
             const a = document.createElement("a")
             a.href = url
-            a.download = `export.${exportFormat === "csv" ? "zip" : exportFormat}`
+            a.download = `export.${getExtensionFormat(exportFormat)}`
             document.body.appendChild(a)
             a.click()
             a.remove()
