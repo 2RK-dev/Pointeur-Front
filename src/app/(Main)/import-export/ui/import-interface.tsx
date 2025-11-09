@@ -9,7 +9,6 @@ import {Separator} from "@/components/ui/separator"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select"
 import {AlertCircle, CheckCircle2, Loader2, Table, Upload, X} from "lucide-react"
 import {ColumnMapper} from "@/app/(Main)/import-export/ui/import/column-mapper"
-import {ImportSummary} from "@/app/(Main)/import-export/ui/import/import-summary"
 import {
     autoMapColumns,
     generateImportSummary,
@@ -34,7 +33,6 @@ export function ImportInterface() {
     const [files, setFiles] = useState<FileSource[]>([])
     const [importMappings, setImportMappings] = useState<ImportMapping[]>([])
     const [isProcessing, setIsProcessing] = useState(false)
-    const [showSummary, setShowSummary] = useState(false)
     const [importResultShowIsClosing, setImportResultShowIsClosing] = useState(true);
     const [resultImport, setResultImport] = useState<ResultImport | null>(null)
     const [isDeleteOldData, setIsDeleteOldData] = useState<boolean>(false);
@@ -50,7 +48,6 @@ export function ImportInterface() {
         setSelectedFileType(type)
         setFiles([])
         setImportMappings([])
-        setShowSummary(false)
     }
 
     const handleFileChange = useCallback(
@@ -148,10 +145,6 @@ export function ImportInterface() {
         )
     }
 
-    const handleShowSummary = () => {
-        setShowSummary(true)
-    }
-
     const handleImport = async () => {
         const validMappings = importMappings.filter((m) => m.tableName && m.columnMappings.length > 0)
         if (validMappings.length === 0) return
@@ -171,22 +164,6 @@ export function ImportInterface() {
 
     const summary = generateImportSummary(importMappings, AVAILABLE_TABLES)
     const canProceedToSummary = importMappings.some((m) => m.tableName && m.columnMappings.length > 0)
-
-    if (showSummary) {
-        return (
-            <div className="space-y-4">
-                <ImportSummary
-                    summary={summary}
-                    onBack={() => {
-                        setShowSummary(false)
-                    }}
-                    onConfirm={handleImport}
-                    isProcessing={isProcessing}
-                />
-            </div>
-        )
-    }
-
 
     return (
         <div className="space-y-6">
@@ -421,11 +398,22 @@ export function ImportInterface() {
                         )}
 
                         <Button
-                            onClick={handleShowSummary}
-                            disabled={summary.validMappings === 0}
+                            onClick={handleImport}
+                            disabled={isProcessing || summary.invalidMappings > 0}
                             className="transition-all hover:shadow-md"
                         >
-                            Voir le résumé et confirmer
+                            {isProcessing ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                                    Importation...
+                                </>
+                            ) : (
+                                <>
+                                    <Upload className="mr-2 h-4 w-4"/>
+                                    Démarrer l'importation
+                                </>
+                            )}
+
                         </Button>
 
                     </div>
