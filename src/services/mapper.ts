@@ -1,10 +1,20 @@
-import {IGroup,ICreateScheduleItem, ILevel, IRoom, IScheduleItem, ITeacher, ITeachingUnit} from "@/api/types";
+import {
+    ICreateScheduleItem,
+    IGroup,
+    IImportMapping,
+    ILevel,
+    IRoom,
+    IScheduleItem,
+    ITeacher,
+    ITeachingUnit
+} from "@/api/types";
 import { GroupDTO } from "@/Types/GroupDTO";
 import { Room } from "@/Types/Room";
 import { TeachingUnit } from "@/Types/TeachingUnit";
 import { Teacher } from "@/Types/Teacher";
 import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
-import {LevelDTO} from "@/Types/LevelDTO";
+import { LevelDTO } from "@/Types/LevelDTO";
+import { ImportMapping } from "@/lib/types";
 
 export const LevelMapper = {
     fromDto(dto: ILevel): LevelDTO{
@@ -93,5 +103,20 @@ export const ScheduleItemMapper = {
             endTime: dto.startTime,
             startTime: dto.endTime
         };
+    }
+}
+
+export const ImportMapper = {
+    parseMapping: (mapping: ImportMapping[]) => {
+        return mapping.reduce((acc: IImportMapping, m) => {
+            const {sourceFileName, sourceSubFileName, tableName, columnMappings} = m;
+            const sub = sourceSubFileName || "";
+            if (!acc.metadata[sourceFileName]) acc.metadata[sourceFileName] = {};
+            acc.metadata[sourceFileName][sub] = {
+                entityType: tableName || "",
+                headersMapping: Object.fromEntries(columnMappings.map(c => [c.fileColumn, c.tableColumn || ""])),
+            };
+            return acc;
+        }, {metadata: {}} as IImportMapping);
     }
 }

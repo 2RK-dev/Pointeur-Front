@@ -10,6 +10,7 @@ import {
 import { CreateTeacherSchema, TeacherSchema, UpdateTeacherSchema } from "./schemas/teacher";
 import { CreateTeachingUnitSchema, TeachingUnitSchema, UpdateTeachingUnitSchema } from "./schemas/teaching-unit";
 import { CreateLevelSchema, LevelSchema, UpdateLevelSchema } from "@/api/schemas/level";
+import { ImportSummarySchema } from "@/api/schemas/import";
 
 export type IGroup = z.infer<typeof GroupSchema>;
 export type IRoom = z.infer<typeof RoomSchema>;
@@ -31,3 +32,15 @@ export type ICreateLevel = z.infer<typeof CreateLevelSchema>;
 export type IUpdateLevel = z.infer<typeof UpdateLevelSchema>;
 export type ICreateGroup = z.infer<typeof CreateGroupSchema>;
 export type IUpdateGroupSchema = z.infer<typeof UpdateGroupSchema>;
+export interface ITableMapping {
+    entityType: string;
+    headersMapping: Record<string, string>;
+}
+export interface IImportMapping {
+    metadata: {
+        [fileName: string]: {
+            [subFileName: string]: ITableMapping;
+        };
+    };
+}
+export type IImportSummary = z.infer<typeof ImportSummarySchema>;
