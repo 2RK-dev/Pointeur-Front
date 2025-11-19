@@ -1,14 +1,21 @@
 "use client";
-import { useState } from "react";
-import {Toaster} from "sonner";
+import { Toaster } from "sonner";
+import { AppSidebar } from "@/components/sidebar-comp/app-sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <div>
-		<Toaster />
-		{children}
-	</div>;
+    return <SidebarProvider>
+        <AppSidebar userAccess={[]}/>
+        <SidebarInset>
+            <SidebarTrigger className="ml-4 mt-4 border border-gray-200 rounded-md "/>
+            <div>
+                <Toaster/>
+                {children}
+            </div>
+        </SidebarInset>
+    </SidebarProvider>;
 }
