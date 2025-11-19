@@ -1,6 +1,11 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+      args:
+        DOCKER_BUILDKIT: 1
     container_name: nextJS_app
     ports:
       - "${EXTERNAL_PORT}:3000"
