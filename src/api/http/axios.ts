@@ -10,6 +10,10 @@ const PUBLIC_ENDPOINTS: string[] = [
     "/auth/logout",
 ];
 
+const isPublicEndpoint = (url: string | undefined) => {
+    return url && PUBLIC_ENDPOINTS.some(endpoint => url.startsWith(endpoint));
+};
+
 /**
  * @param token if null, sets the auth state as logged out
  */
@@ -26,7 +30,7 @@ const pub = axios.create({
 async function refreshAccessToken (): Promise<string> {
     try {
         const {data: responseData} = await pub.post("/auth/refresh");
-        return DTO.LoginResponseSchema.parse(responseData).accessToken;
+        return DTO.LoginResponseSchema.parse(responseData).access_token;
     } catch (e) {
         if (axios.isAxiosError(e) && e.response?.status == 401) {
             console.info("Session expired, needs re-login");
@@ -38,7 +42,7 @@ async function refreshAccessToken (): Promise<string> {
 
 pub.interceptors.request.use(config => {
     if (config.url
-        && !PUBLIC_ENDPOINTS.some(url => config.url && url.startsWith(config.url))
+        && !isPublicEndpoint(config.url)
         && !loggedIn
     ) throw Error("SESSION_EXPIRED");
     if (accessToken) {
@@ -48,7 +52,7 @@ pub.interceptors.request.use(config => {
 });
 
 pub.interceptors.response.use(reponse => reponse, async error => {
-    if (axios.isAxiosError(error) && error.response?.status == 401 && error.config && error.config.url != "/auth/refresh") {
+    if (axios.isAxiosError(error) && error.response?.status == 401 && error.config && !isPublicEndpoint(error.config.url)) {
         let originalRequest = error.config;
         if (!originalRequest.is_a_retry) {
             if (!refreshPromise) {
@@ -69,4 +73,13 @@ pub.interceptors.response.use(reponse => reponse, async error => {
     } else return Promise.reject(error);
 })
 
-export const http = {pub, setAccessToken};
+async function initializeAuth(): Promise<void> {
+    try {
+        const token = await refreshAccessToken();
+        setAccessToken(token);
+    } catch (e) {
+        console.info("initializeAuth: no active session");
+    }
+}
+
+export const http = {pub, setAccessToken, initializeAuth};

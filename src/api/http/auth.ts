@@ -6,7 +6,9 @@ import { ILoginRequest, ILoginResponse } from "@/api/types";
 export async function login(data: ILoginRequest): Promise<ILoginResponse> {
     try {
         const {data: responseData} = await http.pub.post("/auth/login", data);
-        return DTO.LoginResponseSchema.parse(responseData);
+        const loginResponse = DTO.LoginResponseSchema.parse(responseData);
+        http.setAccessToken(loginResponse.access_token);
+        return loginResponse;
     } catch (e) {
         if (axios.isAxiosError(e) && e.response?.status == 401) {
             console.info("Login failed: Bad credentials")
