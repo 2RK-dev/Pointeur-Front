@@ -5,8 +5,8 @@ import { ILoginRequest, ILoginResponse } from "@/api/types";
 
 export async function login(data: ILoginRequest): Promise<ILoginResponse> {
     try {
-        const {data: responseData} = await http.pub.post("/auth/login", data);
-        const loginResponse = DTO.LoginResponseSchema.parse(responseData);
+        const response = await http.pub.post("/auth/login", data);
+        const loginResponse = DTO.LoginResponseSchema.parse(response.data);
         http.setAccessToken(loginResponse.access_token);
         return loginResponse;
     } catch (e) {

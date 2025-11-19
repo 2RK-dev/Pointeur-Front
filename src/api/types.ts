@@ -11,7 +11,7 @@ import { CreateTeacherSchema, TeacherSchema, UpdateTeacherSchema } from "./schem
 import { CreateTeachingUnitSchema, TeachingUnitSchema, UpdateTeachingUnitSchema } from "./schemas/teaching-unit";
 import { CreateLevelSchema, LevelSchema, UpdateLevelSchema } from "@/api/schemas/level";
 import { ImportSummarySchema } from "@/api/schemas/import";
-import { LoginRequestSchema, LoginResponseSchema } from "@/api/schemas/auth";
+import { LoginRequestSchema, LoginResponseSchema, UserInfoSchema } from "@/api/schemas/auth";
 
 export type IGroup = z.infer<typeof GroupSchema>;
 export type IRoom = z.infer<typeof RoomSchema>;
@@ -47,3 +47,4 @@ export interface IImportMapping {
 export type IImportSummary = z.infer<typeof ImportSummarySchema>;
 export type ILoginResponse = z.infer<typeof LoginResponseSchema>;
 export type ILoginRequest = z.infer<typeof LoginRequestSchema>;
+export type IUserInfo = z.infer<typeof UserInfoSchema>

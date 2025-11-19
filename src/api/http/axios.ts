@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { DTO } from "@/api/schemas";
+import { ILoginResponse, IUserInfo } from "@/api/types";
 
 let accessToken: string | null = null;
 let refreshPromise: Promise<void> | null = null;
@@ -8,6 +9,7 @@ let loggedIn: boolean = false;
 const PUBLIC_ENDPOINTS: string[] = [
     "/auth/login",
     "/auth/logout",
+    "/auth/refresh"
 ];
 
 const isPublicEndpoint = (url: string | undefined) => {
@@ -27,10 +29,10 @@ const pub = axios.create({
     withCredentials: true,
 });
 
-async function refreshAccessToken (): Promise<string> {
+async function refreshAccessToken (): Promise<ILoginResponse> {
     try {
         const {data: responseData} = await pub.post("/auth/refresh");
-        return DTO.LoginResponseSchema.parse(responseData).access_token;
+        return DTO.LoginResponseSchema.parse(responseData);
     } catch (e) {
         if (axios.isAxiosError(e) && e.response?.status == 401) {
             console.info("Session expired, needs re-login");
@@ -58,9 +60,9 @@ pub.interceptors.response.use(reponse => reponse, async error => {
             if (!refreshPromise) {
                 console.info("Access token may have expired, refreshing...");
                 refreshPromise = refreshAccessToken()
-                    .then((token) => {
+                    .then((loginResponse) => {
                         console.info("Access token successfully refreshed!")
-                        setAccessToken(token);
+                        setAccessToken(loginResponse.access_token);
                     })
                     .finally(() => refreshPromise = null);
             } else {
@@ -71,14 +73,17 @@ pub.interceptors.response.use(reponse => reponse, async error => {
             if (originalRequest) return await pub(originalRequest);
         } else return Promise.reject(error);
     } else return Promise.reject(error);
-})
+});
 
-async function initializeAuth(): Promise<void> {
+async function initializeAuth (): Promise<IUserInfo | null> {
     try {
-        const token = await refreshAccessToken();
-        setAccessToken(token);
+        const {access_token, user} = await refreshAccessToken();
+        console.info("[InitializeAuth] active session found");
+        setAccessToken(access_token);
+        return user;
     } catch (e) {
-        console.info("initializeAuth: no active session");
+        console.info("[InitializeAuth] no active session");
+        return null;
     }
 }
 

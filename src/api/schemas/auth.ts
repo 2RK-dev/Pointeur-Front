@@ -4,7 +4,7 @@ export const LoginRequestSchema = z.object({
     username: z.string(),
     password: z.string(),
 });
-const UserInfoSchema = z.object({
+export const UserInfoSchema = z.object({
     username: z.string(),
     role: z.string(),
 });

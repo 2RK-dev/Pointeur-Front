@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,8 @@ export default function LoginPage () {
         defaultValues: {username: "", password: ""},
     });
 
+    const redirect = useSearchParams().get("redirect") ?? "/";
+
     form.watch(() => {
         setError(null);
     });
@@ -31,7 +33,7 @@ export default function LoginPage () {
         setIsLoading(true);
         login(credentials).then(user => {
             form.reset();
-            router.push("/");
+            router.push(redirect);
         }).catch(err => {
             if (err instanceof Error && err.message === "BAD_CREDENTIALS") {
                 setError("Nom d'utilisateur ou mot de passe incorrect");
