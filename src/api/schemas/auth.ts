@@ -9,6 +9,6 @@ const UserInfoSchema = z.object({
     role: z.string(),
 });
 export const LoginResponseSchema = z.object({
-    accessToken: z.string(),
+    access_token: z.string(),
     user: UserInfoSchema
 });
