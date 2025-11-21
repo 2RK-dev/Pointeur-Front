@@ -79,7 +79,7 @@ export abstract class Auth implements HttpClientInterceptor {
     }
 
     abstract getAccessToken(): Promise<string | null>;
-    abstract setAccessToken(token: string): Promise<void>;
+    abstract setAccessToken(token: string | null): Promise<void>;
     abstract setLoggedIn(loggedIn: boolean): Promise<void>;
     abstract getRefreshLock(): Promise<RefreshLock | null>;
     abstract deleteRefreshLock(): Promise<void>;

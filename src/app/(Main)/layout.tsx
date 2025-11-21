@@ -2,6 +2,7 @@
 import { Toaster } from "sonner";
 import { AppSidebar } from "@/components/sidebar-comp/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import React from "react";
 
 export default function RootLayout({
 	children,

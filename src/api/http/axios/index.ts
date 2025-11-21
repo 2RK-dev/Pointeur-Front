@@ -29,5 +29,5 @@ async function initializeAuth (): Promise<IUserInfo | null> {
 export const http = {
     pub,
     initializeAuth,
-    setAccessToken: (token: string) => authWrapper.setAccessToken(token),
+    setAccessToken: (token: string | null) => authWrapper.setAccessToken(token),
 };

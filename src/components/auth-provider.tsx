@@ -2,35 +2,52 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/Stores/Auth";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { initializeAuth } from "@/services/Auth";
 import LoadingModal from "@/components/LoadingModal";
+
+const PUBLIC_PATHS = ["/auth/login"];
+
+const isPublicPath = (pathname: string) =>
+    PUBLIC_PATHS.some(path => pathname.startsWith(path));
 
 export const AuthProvider = ({children}: Readonly<{
     children: React.ReactNode;
 }>) => {
     const router = useRouter();
     const pathname = usePathname();
-    const {initialized, setInitialized, setUser} = useAuthStore();
+    const {user, setUser} = useAuthStore();
+    const [loading, setLoading] = useState<boolean>(!user);
+    const [shouldRender, setShouldRender] = useState<boolean>(false);
 
     useEffect(() => {
-        if (initialized) return;
+        if (user) return;
 
         initializeAuth()
             .then(user => {
-                setInitialized(true);
                 if (user) {
                     setUser(user);
-                } else if (pathname !== "/auth/login") {
-                    router.replace(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
+                    setShouldRender(true);
+                } else if (!isPublicPath(pathname)) {
+                    router.push(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
+                    return;
+                } else {
+                    setShouldRender(true);
                 }
             })
             .catch(error => {
                 console.error('Auth initialization failed:', error);
-                setInitialized(true);
-            });
-    }, [initialized, pathname, router, setInitialized, setUser]);
+                if (!isPublicPath(pathname)) {
+                    router.push(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
+                    return;
+                }
+            })
+            .finally(() => setLoading(false));
+    }, [user, setUser, pathname, router]);
 
-    return !initialized ? <LoadingModal isLoading={true} msg={"Loading..."}/> : <>{children}</>;
+    if (loading || !shouldRender) {
+        return <LoadingModal isLoading={true} msg="Loading..."/>;
+    }
 
+    return <>{children}</>;
 };

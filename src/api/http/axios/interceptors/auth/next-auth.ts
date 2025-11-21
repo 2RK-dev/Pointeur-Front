@@ -10,14 +10,16 @@ export class ServerAuth extends Auth {
         return cookieStore.get("access_token")?.value ?? null;
     }
 
-    async setAccessToken(token: string): Promise<void> {
+    async setAccessToken(token: string | null): Promise<void> {
         const cookieStore = await cookies();
-        cookieStore.set("access_token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 60 * 15
-        });
+        if (token) {
+            cookieStore.set("access_token", token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "lax",
+                maxAge: 60 * 15
+            });
+        } else cookieStore.delete("access_token");
     }
 
     async setLoggedIn(loggedIn: boolean): Promise<void> {
