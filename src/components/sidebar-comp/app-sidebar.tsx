@@ -1,20 +1,22 @@
 "use client";
 
 import {
-	ArrowRightLeft,
-	AudioWaveform,
-	Book,
-	Command,
-	DoorClosed,
-	GalleryVerticalEnd,
-	GraduationCap,
-	School,
+    ArrowRightLeft,
+    AudioWaveform,
+    Book,
+    Command,
+    DoorClosed,
+    GalleryVerticalEnd,
+    GraduationCap,
+    School,
 } from "lucide-react";
 import * as React from "react";
 
-import {Logo} from "@/components/sidebar-comp/logo";
-import {NavMain} from "@/components/sidebar-comp/nav-main";
-import {Sidebar, SidebarContent, SidebarHeader, SidebarRail,} from "@/components/ui/sidebar";
+import { Logo } from "@/components/sidebar-comp/logo";
+import { NavMain } from "@/components/sidebar-comp/nav-main";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
+import { NavUser } from "@/components/sidebar-comp/nav-user";
+import { useAuthStore } from "@/Stores/Auth";
 
 // This is sample data.
 const data = {
@@ -97,6 +99,8 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 export function AppSidebar({ userAccess, ...props }: AppSidebarProps) {
+    const {user} = useAuthStore();
+
 	return (
 		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>
@@ -105,9 +109,11 @@ export function AppSidebar({ userAccess, ...props }: AppSidebarProps) {
 			<SidebarContent>
 				<NavMain items={data.navMain} />
 			</SidebarContent>
-			{/*<SidebarFooter>*/}
-			{/*	<NavUser user={data.user} />*/}
-			{/*</SidebarFooter>*/}
+            {user && (
+                <SidebarFooter>
+                    <NavUser user={{name: user.username, avatar: "/avatars/shadcn.jpg"}}/>
+                </SidebarFooter>
+            )}
 			<SidebarRail />
 		</Sidebar>
 	);
