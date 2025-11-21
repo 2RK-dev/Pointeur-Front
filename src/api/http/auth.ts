@@ -7,7 +7,7 @@ export async function login(data: ILoginRequest): Promise<ILoginResponse> {
     try {
         const response = await http.pub.post("/auth/login", data);
         const loginResponse = DTO.LoginResponseSchema.parse(response.data);
-        http.setAccessToken(loginResponse.access_token);
+        await http.setAccessToken(loginResponse.access_token);
         return loginResponse;
     } catch (e) {
         if (axios.isAxiosError(e) && e.response?.status == 401) {
