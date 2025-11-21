@@ -19,4 +19,5 @@ export async function login(data: ILoginRequest): Promise<ILoginResponse> {
 
 export async function logout (): Promise<void> {
     await http.pub.post("/auth/logout");
+    await http.setAccessToken(null);
 }

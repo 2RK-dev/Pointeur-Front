@@ -13,6 +13,7 @@ import { Credentials, CredentialsSchema } from "@/Types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useAuthStore } from "@/Stores/Auth";
 
 export default function LoginPage () {
     const router = useRouter();
@@ -22,6 +23,7 @@ export default function LoginPage () {
         resolver: zodResolver(CredentialsSchema),
         defaultValues: {username: "", password: ""},
     });
+    const {setUser} = useAuthStore();
 
     const redirect = useSearchParams().get("redirect") ?? "/";
 
@@ -33,6 +35,7 @@ export default function LoginPage () {
         setIsLoading(true);
         login(credentials).then(user => {
             form.reset();
+            setUser(user);
             router.push(redirect);
         }).catch(err => {
             if (err instanceof Error && err.message === "BAD_CREDENTIALS") {
