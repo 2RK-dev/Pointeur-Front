@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,20 @@ export default function LoginPage () {
     });
     const {setUser} = useAuthStore();
 
-    const redirect = useSearchParams().get("redirect") ?? "/";
+    const rawRedirect = useSearchParams().get("redirect");
+
+    const redirect = useMemo(() => {
+        if (!rawRedirect) return "/";
+        const trimmed = rawRedirect.trim();
+        if (!trimmed.startsWith("/") || trimmed.startsWith("//")) return "/";
+        try {
+            if (decodeURIComponent(trimmed).match(/^(javascript|data|vbscript):/i)) return "/";
+        } catch {
+            return "/";
+        }
+
+        return trimmed;
+    }, [rawRedirect]);
 
     form.watch(() => {
         setError(null);

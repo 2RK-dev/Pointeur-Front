@@ -47,4 +47,4 @@ export interface IImportMapping {
 export type IImportSummary = z.infer<typeof ImportSummarySchema>;
 export type ILoginResponse = z.infer<typeof LoginResponseSchema>;
 export type ILoginRequest = z.infer<typeof LoginRequestSchema>;
-export type IUserInfo = z.infer<typeof UserInfoSchema>
+export type IUserInfo = z.infer<typeof UserInfoSchema>;

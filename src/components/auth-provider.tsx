@@ -40,6 +40,8 @@ export const AuthProvider = ({children}: Readonly<{
                 if (!isPublicPath(pathname)) {
                     router.push(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
                     return;
+                } else {
+                    setShouldRender(true);
                 }
             })
             .finally(() => setLoading(false));

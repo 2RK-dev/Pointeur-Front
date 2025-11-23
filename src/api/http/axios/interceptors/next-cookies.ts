@@ -46,9 +46,14 @@ export class CookieInterceptor implements HttpClientInterceptor {
                     const key = k.toLowerCase();
                     if (key === "secure") opts["secure"] = true;
                     else if (key === "httponly") opts.httpOnly = true;
-                    else if (key === "path") opts.path = v;
-                    else if (key === "max-age") opts.maxAge = parseInt(v);
-                    else if (key === "samesite") opts.sameSite = "strict";
+                    else if (key === "path" && v !== undefined) opts.path = v;
+                    else if (key === "max-age" && v !== undefined) opts.maxAge = parseInt(v);
+                    else if (key === "samesite") {
+                        const s = typeof v === "string" ? v.trim().toLowerCase() : "";
+                        if (s === "strict" || s === "lax" || s === "none") {
+                            opts.sameSite = s as "strict" | "lax" | "none";
+                        }
+                    }
                 }
 
                 store.set(opts);

@@ -37,6 +37,9 @@ export function NavUser({
         logout().then(() => {
             setIsLoggingOut(false);
             setUser(null);
+        }).catch(() => {
+            setIsLoggingOut(false);
+            console.error("Logout failed");
         })
     }
 
