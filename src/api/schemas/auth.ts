@@ -1,0 +1,14 @@
+import z from "zod";
+
+export const LoginRequestSchema = z.object({
+    username: z.string(),
+    password: z.string(),
+});
+export const UserInfoSchema = z.object({
+    username: z.string(),
+    role: z.string(),
+});
+export const LoginResponseSchema = z.object({
+    access_token: z.string(),
+    user: UserInfoSchema
+});
