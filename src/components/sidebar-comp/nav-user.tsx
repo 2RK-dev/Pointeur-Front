@@ -43,7 +43,6 @@ export function NavUser({
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 	const [showNewPassword, setShowNewPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -56,7 +55,6 @@ export function NavUser({
 		setCurrentPassword("");
 		setNewPassword("");
 		setConfirmPassword("");
-		setShowCurrentPassword(false);
 		setShowNewPassword(false);
 		setShowConfirmPassword(false);
 	};
@@ -67,9 +65,6 @@ export function NavUser({
 	};
 
 	const validatePasswordForm = (): string | null => {
-		if (!currentPassword.trim()) {
-			return "Le mot de passe actuel est requis";
-		}
 		if (!newPassword.trim()) {
 			return "Le nouveau mot de passe est requis";
 		}
