@@ -23,9 +23,9 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
 import { changeProfilePasswordService } from "@/services/profil";
-import {ChangePasswordFormValues, changePasswordSchema} from "@/Types/password"; // Assure-toi que ce service existe
+import {ChangePasswordFormValues, changePasswordSchema} from "@/Types/password";
+import {notifications} from "@/components/notifications";
 
 
 interface ChangePasswordDialogProps {
@@ -34,7 +34,6 @@ interface ChangePasswordDialogProps {
 }
 
 export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialogProps) {
-    const { toast } = useToast();
 
     const defaultValues = {
         currentPassword: "",
@@ -47,15 +46,20 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
         defaultValues: defaultValues,
     });
 
-    const onSubmit = async (data: ChangePasswordFormValues) => {
-        try {
-            await changeProfilePasswordService(data.currentPassword, data.newPassword);
-            toast({ title: "Succès", description: "Mot de passe mis à jour." });
-            handleClose();
-        } catch (error) {
-            console.error(error);
-            toast({ variant: "destructive", title: "Erreur", description: "Vérifiez votre mot de passe actuel." });
-        }
+    const onSubmit = (data: ChangePasswordFormValues) => {
+        const promise =changeProfilePasswordService(data.currentPassword, data.newPassword)
+            .then(() => {
+                notifications.success("Mot de passe mis à jour avec succès", "Votre mot de passe a été changé.");
+                handleClose();
+            })
+            .catch((error) => {
+                notifications.error("Erreur lors de la mise à jour de la salle", error.message);
+            });
+        notifications.promise(promise,{
+            loading: "Mise à jour de la salle...",
+            success: "Salle mise à jour avec succès !",
+            error: "Erreur lors de la mise à jour de la salle."
+        })
     };
 
     const handleClose = () => {
