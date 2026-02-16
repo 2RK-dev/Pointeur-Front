@@ -7,6 +7,7 @@ import { initializeAuth } from "@/services/Auth";
 import LoadingModal from "@/components/LoadingModal";
 
 const PUBLIC_PATHS = ["/auth/login"];
+const DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE === 'true';
 
 const isPublicPath = (pathname: string) =>
     PUBLIC_PATHS.some(path => pathname.startsWith(path));
@@ -21,6 +22,16 @@ export const AuthProvider = ({children}: Readonly<{
     const [shouldRender, setShouldRender] = useState<boolean>(false);
 
     useEffect(() => {
+        if (DEV_MODE && !user) {
+            setShouldRender(true);
+            setLoading(false);
+            setUser({
+               username: "dev_user",
+                role: "admin",
+            })
+            return;
+        }
+
         if (user) return;
 
         initializeAuth()
@@ -53,3 +64,4 @@ export const AuthProvider = ({children}: Readonly<{
 
     return <>{children}</>;
 };
+
