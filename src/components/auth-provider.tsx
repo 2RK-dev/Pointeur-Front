@@ -59,7 +59,7 @@ export const AuthProvider = ({children}: Readonly<{
     }, [user, setUser, pathname, router]);
 
     if (loading || !shouldRender) {
-        return <LoadingModal isLoading={true} msg="Loading..."/>;
+        return <LoadingModal isLoading={true} msg="Chargement..."/>;
     }
 
     return <>{children}</>;
