@@ -1,14 +1,14 @@
 "use client";
 
 import {
-    ArrowRightLeft,
-    AudioWaveform,
-    Book,
-    Command,
-    DoorClosed,
-    GalleryVerticalEnd,
-    GraduationCap,
-    School,
+	ArrowRightLeft,
+	AudioWaveform,
+	Book,
+	Command,
+	DoorClosed,
+	GalleryVerticalEnd,
+	GraduationCap, KeyRound,
+	School,
 } from "lucide-react";
 import * as React from "react";
 
@@ -18,7 +18,6 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } fr
 import { NavUser } from "@/components/sidebar-comp/nav-user";
 import { useAuthStore } from "@/Stores/Auth";
 
-// This is sample data.
 const data = {
 	user: {
 		name: "Ryan Lai",
@@ -90,6 +89,12 @@ const data = {
 			url: "/import-export",
 			icon: ArrowRightLeft,
 			access: "DataTransfere",
+		},
+		{
+			title: "Clés d'accès API",
+			url: "/Acces-Token",
+			icon: KeyRound,
+			access: "Acces-Token",
 		}
 	],
 };
