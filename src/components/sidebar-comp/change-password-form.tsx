@@ -53,12 +53,12 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
                 handleClose();
             })
             .catch((error) => {
-                notifications.error("Erreur lors de la mise à jour de la salle", error.message);
+                notifications.error("Erreur lors de la mise à jour du mot de passe", error.message);
             });
         notifications.promise(promise,{
-            loading: "Mise à jour de la salle...",
-            success: "Salle mise à jour avec succès !",
-            error: "Erreur lors de la mise à jour de la salle."
+            loading: "Changement de mot de passe...",
+            success: "Mot de passe mis à jour avec succès !",
+            error: "Erreur lors de la mise à jour du mot de passe"
         })
     };
 
