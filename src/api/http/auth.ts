@@ -1,7 +1,7 @@
 import { http } from "@/api/http/axios";
 import axios from "axios";
 import { DTO } from "@/api/schemas";
-import { ILoginRequest, ILoginResponse } from "@/api/types";
+import { ILoginRequest, ILoginResponse, IPasswordChange } from "@/api/types";
 
 export async function login(data: ILoginRequest): Promise<ILoginResponse> {
     try {
@@ -20,4 +20,8 @@ export async function login(data: ILoginRequest): Promise<ILoginResponse> {
 export async function logout (): Promise<void> {
     await http.pub.post("/auth/logout");
     await http.setAccessToken(null);
+}
+
+export async function changePassword (data: IPasswordChange): Promise<void> {
+    await http.pub.put("/auth/password", data);
 }
