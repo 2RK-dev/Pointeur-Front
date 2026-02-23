@@ -99,6 +99,19 @@ export function getAllNextWeeksFromDate(numberOfWeeks: number, startFrom: Date =
 }
 
 /**
+ * Transforme Week object to a human-readable string format "DD/MM/YYYY - DD/MM/YYYY".
+ *
+ * @param {Week} week - The week object containing start and end dates.
+ * @returns {string} A string representation of the week in the format "DD/MM/YYYY - DD/MM/YYYY".
+ */
+export function formatWeek(week: Week): string {
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
+    const startStr = week.start.toLocaleDateString('fr-FR', options);
+    const endStr = week.end.toLocaleDateString('fr-FR', options);
+    return `${startStr} - ${endStr}`;
+}
+
+/**
  * Calculates the diference in weeks between two dates.
  * @param {Date} date1 - The first date.
  * @param {Date} date2 - The second date.

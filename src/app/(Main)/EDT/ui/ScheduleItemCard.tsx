@@ -36,16 +36,17 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 				return '';
 		}
 	};
+
 	const formattedStartTime = scheduleItem.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 	const formattedEndTime = scheduleItem.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-	const groupsString = scheduleItem.Groups.map((g) => g.type + " " + g.classe + " " + g.name).join(", ");
+	const groupsString = scheduleItem.Groups.map((g) => g.type+ " " + g.classe+ " " + g.name).join(", ");
 
 	return (
 		<div
 			onClick={UpdateScheduleItem}
 			className={`
-				group relative flex flex-col p-2 rounded-md shadow-sm border border-black/10
-				cursor-pointer overflow-hidden transition-all duration-200 ease-in-out
+				group relative flex flex-col p-1.5 rounded-md shadow-sm border border-black/10
+				cursor-pointer transition-all duration-200 ease-in-out
 				hover:shadow-md hover:scale-[1.02] hover:z-10 hover:brightness-105
 				${getColorGroups(scheduleItem.Groups)}
 			`}
@@ -55,24 +56,26 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 				flexGrow: 0,
 				flexShrink: 0,
 			}}
-			title="Cliquez pour modifier"
 		>
-			<div className="flex justify-between items-start gap-2 mb-1">
-				<span className="font-bold text-[12px] leading-tight truncate">
-					{scheduleItem.TeachingUnit.abr}
-				</span>
-				<span className="font-semibold text-[11px] opacity-80 whitespace-nowrap bg-black/5 px-1 rounded">
-					{getDisplayModeLabel()}
-				</span>
-			</div>
-			<div className="flex items-center text-[11px] font-medium opacity-90 mb-1">
-				<svg className="w-3 h-3 mr-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-				</svg>
-				{formattedStartTime} - {formattedEndTime}
-			</div>
-			<div className="mt-auto pt-1 text-[10px] border-t border-black/10 opacity-80 truncate">
-				<span className="font-semibold">Grp :</span> {groupsString}
+			<div className="flex flex-col gap-1 w-full text-black/90 whitespace-normal break-words">
+
+				<div className="leading-tight">
+					<div className="font-bold text-[12px]">
+						{scheduleItem.TeachingUnit.abr}
+					</div>
+					<div className="font-semibold text-[11px] opacity-80 mt-0.5 inline-block bg-black/5 px-1 rounded">
+						{getDisplayModeLabel()}
+					</div>
+				</div>
+
+				<div className="text-[11px] font-medium opacity-90 leading-tight">
+					{formattedStartTime} - {formattedEndTime}
+				</div>
+
+				<div className="mt-auto pt-1 text-[10px] border-t border-black/10 opacity-80 leading-tight">
+					<span className="font-semibold">Grp :</span> {groupsString}
+				</div>
+
 			</div>
 		</div>
 	);
