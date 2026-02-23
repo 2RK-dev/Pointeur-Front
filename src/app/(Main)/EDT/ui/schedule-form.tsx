@@ -526,9 +526,9 @@ export default function ScheduleForm({
                                                                                     className="flex items-center justify-between">
                                                                                     <div>
                                                                                         <span
-                                                                                            className="font-medium">{group.name}</span>
+                                                                                            className="font-medium">{group.type+" "+group.name}</span>
                                                                                         <span
-                                                                                            className="text-muted-foreground ml-2">({group.name})</span>
+                                                                                            className="text-muted-foreground ml-2">({group.classe})</span>
                                                                                     </div>
                                                                                     <span
                                                                                         className="text-sm text-muted-foreground">{group.size} étudiants</span>
