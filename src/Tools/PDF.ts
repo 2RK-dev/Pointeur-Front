@@ -1,82 +1,29 @@
-import html2canvas from "html2canvas";
-import {jsPDF} from "jspdf";
+import html2pdf from 'html2pdf.js';
+import {notifications} from "@/components/notifications";
 
-export const generatePDF = () => {
-        const element = document.getElementById("edt-content")
-        if (!element) return
+export const generatePDF = (title:string) => {
+    const element = document.getElementById("edt-content");
+    if (!element) return;
 
+    const opt = {
+        margin:       10,
+        filename:     title,
+        image:        { type: 'png' as const, quality: 1 },
+        html2canvas:  {scale: 2, useCORS: true,},
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' as const },
+        pagebreak:    {mode: ['avoid-all', 'css', 'legacy']},
+    };
 
-        html2canvas(element, {
-            scale: 2,
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: "#ffffff",
-        }).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png")
-
-
-            const pdf = new jsPDF({
-                orientation: "landscape",
-                unit: "mm",
-            })
-
-
-            const pageWidth = pdf.internal.pageSize.getWidth()
-            const pageHeight = pdf.internal.pageSize.getHeight()
-
-
-            const margin = 10
-            const contentWidth = pageWidth - margin * 2
-            const contentHeight = pageHeight - margin * 2
-
-
-            const imgWidth = canvas.width
-            const imgHeight = canvas.height
-
-
-            const ratio = contentWidth / imgWidth
-            const scaledHeight = imgHeight * ratio
-
-            if (scaledHeight <= contentHeight) {
-                pdf.addImage(imgData, "PNG", margin, margin, contentWidth, scaledHeight)
-            } else {
-                let yPosition = 0
-                let pageNumber = 1
-
-                while (yPosition < imgHeight) {
-                    if (pageNumber > 1) {
-                        pdf.addPage()
-                    }
-
-                    const sectionHeight = Math.min(contentHeight / ratio, imgHeight - yPosition)
-
-                    const sectionCanvas = document.createElement("canvas")
-                    const sectionCtx = sectionCanvas.getContext("2d")
-
-                    sectionCanvas.width = imgWidth
-                    sectionCanvas.height = sectionHeight
-
-                    if (sectionCtx) {
-                        sectionCtx.drawImage(
-                            canvas,
-                            0,
-                            yPosition,
-                            imgWidth,
-                            sectionHeight,
-                            0,
-                            0,
-                            imgWidth,
-                            sectionHeight,
-                        )
-
-                        const sectionImgData = sectionCanvas.toDataURL("image/png")
-                        pdf.addImage(sectionImgData, "PNG", margin, margin, contentWidth, sectionHeight * ratio)
-                    }
-
-                    yPosition += sectionHeight
-                    pageNumber++
-                }
-            }
-            pdf.save("document.pdf")
-        })
-}
+    const promise = html2pdf().set(opt).from(element).save().then(()=>{
+        notifications.success("PDF généré avec succès !");
+        }
+    ).catch((error) => {
+        console.error("Erreur lors de la génération du PDF:", error);
+        notifications.error("Erreur lors de la génération du PDF.");
+    })
+    notifications.promise(promise,{
+        loading: "Génération du PDF en cours...",
+        success: "PDF généré avec succès !",
+        error: "Erreur lors de la génération du PDF."
+    })
+};

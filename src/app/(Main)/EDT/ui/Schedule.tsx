@@ -14,7 +14,7 @@ import {
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
-import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
+import {formatWeek, getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {LevelDetailsDTO} from "@/Types/LevelDTO";
 import {getLevelListService} from "@/services/Level";
 import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
@@ -177,16 +177,7 @@ export default function Schedule() {
                     <SelectContent>
                         {allWeeks.map((week, index) => (
                             <SelectItem key={index} value={JSON.stringify(week)}>
-                                {
-                                    `${week.start.toLocaleDateString('fr-FR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric'
-                                    })} - ${week.end.toLocaleDateString('fr-FR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric'
-                                    })}`}
+                                {formatWeek(week)}
                             </SelectItem>
                         ))}
                     </SelectContent>
@@ -202,7 +193,9 @@ export default function Schedule() {
                             }}>
                         <Copy/>
                     </Button>
-                    <Button disabled={!selectedWeek} onClick={generatePDF}>
+                    <Button disabled={!selectedWeek} onClick={()=>{
+                       generatePDF("Emploi du temps "+ selectedLevel?.level.abr + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf")
+                    }}>
                         <FileText/>
                     </Button>
                     <Button disabled={!selectedWeek}
