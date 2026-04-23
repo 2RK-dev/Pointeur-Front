@@ -1,6 +1,6 @@
 import {ScheduleItem} from "@/Types/ScheduleItem";
 import {getWidthPercentage} from "@/Tools/ScheduleItem";
-import {generateColorFromStrings} from "@/Tools/Color";
+import {getColorGroups} from "@/Tools/Color";
 import {
 	useDisplayScheduleItem,
 	useOpenScheduleItemFormStore,
@@ -38,10 +38,9 @@ export default function ScheduleItemCard({ scheduleItem,left }: Props) {
 
 	return (
 		<div
-			className={`border p-1 pb-2 rounded shadow-sm overflow-hidden cursor-pointer`}
+			className={`border p-1 pb-2 rounded shadow-sm overflow-hidden cursor-pointer ${getColorGroups(scheduleItem.Groups)}`}
 
 			style={{
-				backgroundColor: generateColorFromStrings(scheduleItem.Groups),
 				flexBasis: `${width}%`,
 				marginLeft: `${left}%`,
 				flexGrow: 0,
