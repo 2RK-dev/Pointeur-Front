@@ -18,6 +18,12 @@ export function generateColorFromStrings(inputs: GroupDTO[]): string {
         hash = hash & hash;
     }
 
+    hash ^= hash >>> 16;
+    hash = Math.imul(hash, 0x85ebca6b);
+    hash ^= hash >>> 13;
+    hash = Math.imul(hash, 0xc2b2ae35);
+    hash ^= hash >>> 16;
+
     const hue = Math.abs(hash) % 360;
 
     const saturation = 70;
