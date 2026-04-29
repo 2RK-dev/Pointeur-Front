@@ -1,6 +1,6 @@
 import { ScheduleItem } from "@/Types/ScheduleItem";
 import { getWidthPercentage } from "@/Tools/ScheduleItem";
-import { getColorGroups } from "@/Tools/Color";
+import { generateColorFromStrings } from "@/Tools/Color";
 import {
 	useDisplayScheduleItem,
 	useOpenScheduleItemFormStore,
@@ -48,10 +48,10 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 				group relative flex flex-col p-1.5 rounded-md shadow-sm border border-black/10
 				cursor-pointer transition-all duration-200 ease-in-out
 				hover:shadow-md hover:scale-[1.02] hover:z-10 hover:brightness-105
-				${getColorGroups(scheduleItem.Groups)}
 			`}
 			style={{
-				flexBasis: `${width}%`,
+                backgroundColor: generateColorFromStrings(scheduleItem.Groups),
+                flexBasis: `${width}%`,
 				marginLeft: `${left}%`,
 				flexGrow: 0,
 				flexShrink: 0,

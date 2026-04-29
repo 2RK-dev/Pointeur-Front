@@ -1,54 +1,46 @@
 import {GroupDTO} from "@/Types/GroupDTO";
 
-function generateUniqueColorScheme(words: string[]): string {
-    const normalizedWords = words
-        .map((word) => word.trim().toLowerCase())
-        .filter((word) => word.length > 0)
-        .sort()
+/**
+ * Generates a stable hexadecimal color from a list of groups.
+ *
+ * The result is deterministic: the same combination of `type`, `classe`, and
+ * `name` will always produce the same color.
+ *
+ * @param inputs List of groups used to build the color fingerprint.
+ * @returns A color in `#RRGGBB` format.
+ */
+export function generateColorFromStrings(inputs: GroupDTO[]): string {
+    const combinedInput = inputs.map(item => item.type + item.classe + item.name).join('|');
 
-    const combinedString = normalizedWords.join("|")
-
-    let hash = 0
-    for (let i = 0; i < combinedString.length; i++) {
-        const char = combinedString.charCodeAt(i)
-        hash = (hash << 5) - hash + char
-        hash = hash & hash
+    let hash = 0;
+    for (let i = 0; i < combinedInput.length; i++) {
+        hash = combinedInput.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash;
     }
-    const colorSchemes = [
-        "bg-sky-100 hover:bg-sky-200",
-        "bg-rose-100 hover:bg-rose-200",
-        "bg-emerald-100 hover:bg-emerald-200",
-        "bg-amber-100 hover:bg-amber-200",
-        "bg-indigo-100 hover:bg-indigo-200",
-        "bg-pink-100 hover:bg-pink-200",
-        "bg-lime-100 hover:bg-lime-200",
-        "bg-teal-100 hover:bg-teal-200",
-        "bg-cyan-100 hover:bg-cyan-200",
-        "bg-purple-100 hover:bg-purple-200",
-        "bg-yellow-50 hover:bg-yellow-100",
-        "bg-orange-100 hover:bg-orange-200",
-        "bg-fuchsia-100 hover:bg-fuchsia-200",
-        "bg-violet-100 hover:bg-violet-200",
-        "bg-red-100 hover:bg-red-200",
-        "bg-green-100 hover:bg-green-200",
-        "bg-blue-100 hover:bg-blue-200",
-        "bg-neutral-100 hover:bg-neutral-200",
-        "bg-stone-100 hover:bg-stone-200",
-        "bg-slate-100 hover:bg-slate-200",
-        "bg-zinc-100 hover:bg-zinc-200",
-        "bg-gray-100 hover:bg-gray-200",
-        "bg-yellow-100 hover:bg-yellow-200",
-        "bg-orange-50 hover:bg-orange-100",
-    ];
 
-    const colorIndex = Math.abs(hash) % colorSchemes.length
-    return colorSchemes[colorIndex]
+    const hue = Math.abs(hash) % 360;
+
+    const saturation = 70;
+    const lightness = 80;
+
+    return hslToHex(hue, saturation, lightness);
 }
 
-export function getColorGroups(groups: GroupDTO[]): string {
-    if (groups.length === 0) {
-        return "bg-gray-100 hover:bg-gray-200 text-gray-800 hover:text-gray-900";
-    }
-    const groupNames = groups.map((group) => group.name);
-    return generateUniqueColorScheme(groupNames);
+/**
+ * Converts an HSL color to hexadecimal format.
+ *
+ * @param h Hue (0-360).
+ * @param s Saturation (0-100).
+ * @param l Lightness (0-100).
+ * @returns A color in `#RRGGBB` format.
+ */
+function hslToHex(h: number, s: number, l: number): string {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = (n: number) => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
 }
