@@ -29,8 +29,10 @@ import {Room} from "@/Types/Room";
 import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
 
-const NUMBER_OF_WEEK_TO_DISPLAY = 5;
+const NUMBER_OF_WEEK_TO_DISPLAY = 7;
+const WEEKS_AGO = 2;
 const TODAY = new Date();
+TODAY.setDate(TODAY.getDate() - (WEEKS_AGO * 7));
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
