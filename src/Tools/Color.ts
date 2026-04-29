@@ -10,7 +10,7 @@ import {GroupDTO} from "@/Types/GroupDTO";
  * @returns A color in `#RRGGBB` format.
  */
 export function generateColorFromStrings(inputs: GroupDTO[]): string {
-    const combinedInput = inputs.map(item => item.type + item.classe + item.name).join('|');
+    const combinedInput = inputs.map(item => item.type + item.classe + item.name).sort().join('|');
 
     let hash = 0;
     for (let i = 0; i < combinedInput.length; i++) {
