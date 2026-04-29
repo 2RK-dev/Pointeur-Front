@@ -39,7 +39,7 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 
 	const formattedStartTime = scheduleItem.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 	const formattedEndTime = scheduleItem.endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-	const groupsString = scheduleItem.Groups.map((g) => g.type+ " " + g.classe+ " " + g.name).join(", ");
+	const groupsStrings = scheduleItem.Groups.map((g) => g.type+ " " + g.classe+ " " + g.name).join(", ");
 
 	return (
 		<div
@@ -73,7 +73,7 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 				</div>
 
 				<div className="mt-auto pt-1 text-[10px] border-t border-black/10 opacity-80 leading-tight">
-					<span className="font-semibold">Grp :</span> {groupsString}
+					<span className="font-semibold">Grp :</span> {groupsStrings}
 				</div>
 
 			</div>
