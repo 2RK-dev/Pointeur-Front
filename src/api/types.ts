@@ -11,7 +11,8 @@ import { CreateTeacherSchema, TeacherSchema, UpdateTeacherSchema } from "./schem
 import { CreateTeachingUnitSchema, TeachingUnitSchema, UpdateTeachingUnitSchema } from "./schemas/teaching-unit";
 import { CreateLevelSchema, LevelSchema, UpdateLevelSchema } from "@/api/schemas/level";
 import { ImportSummarySchema } from "@/api/schemas/import";
-import { LoginRequestSchema, LoginResponseSchema, UserInfoSchema } from "@/api/schemas/auth";
+import { LoginRequestSchema, LoginResponseSchema, PasswordChangeSchema, UserInfoSchema } from "@/api/schemas/auth";
+import { ApiKeyResponseSchema, ApiKeyResponseWithRawTokenSchema, CreateApiKeySchema } from "@/api/schemas/api-key";
 
 export type IGroup = z.infer<typeof GroupSchema>;
 export type IRoom = z.infer<typeof RoomSchema>;
@@ -48,3 +49,7 @@ export type IImportSummary = z.infer<typeof ImportSummarySchema>;
 export type ILoginResponse = z.infer<typeof LoginResponseSchema>;
 export type ILoginRequest = z.infer<typeof LoginRequestSchema>;
 export type IUserInfo = z.infer<typeof UserInfoSchema>;
+export type IPasswordChange = z.infer<typeof PasswordChangeSchema>;
+export type ICreateApiKey = z.infer<typeof CreateApiKeySchema>;
+export type IApiKeyResponseWithRawToken = z.infer<typeof ApiKeyResponseWithRawTokenSchema>;
+export type IApiKeyResponse = z.infer<typeof ApiKeyResponseSchema>;

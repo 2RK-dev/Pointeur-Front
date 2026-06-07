@@ -47,7 +47,7 @@ export function CreateTokenDialog({ onTokenCreated }: createTokenDialogProps) {
     const onSubmit = async (input: CreateTokenFormValues) => {
         createNewTokens(input.name).then((data)=>{
             const { token, ...tokenData } = data;
-            setGeneratedToken(tokenData.prefix+token);
+            setGeneratedToken(token);
             onTokenCreated(tokenData);
             notifications.success("Token créé", "Votre token d'accès API a été généré avec succès.");
         }).catch(()=>{

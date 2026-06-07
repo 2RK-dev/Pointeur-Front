@@ -1,4 +1,5 @@
 import {
+    IApiKeyResponse, IApiKeyResponseWithRawToken,
     ICreateScheduleItem,
     IGroup,
     IImportMapping,
@@ -15,6 +16,7 @@ import { Teacher } from "@/Types/Teacher";
 import { ScheduleItem, ScheduleItemPost } from "@/Types/ScheduleItem";
 import { LevelDTO } from "@/Types/LevelDTO";
 import { ImportMapping } from "@/lib/types";
+import { ApiToken, ApiTokenResponse } from "@/Types/token";
 
 export const LevelMapper = {
     fromDto(dto: ILevel): LevelDTO{
@@ -114,9 +116,32 @@ export const ImportMapper = {
             if (!acc.metadata[sourceFileName]) acc.metadata[sourceFileName] = {};
             acc.metadata[sourceFileName][sub] = {
                 entityType: tableName || "",
-                headersMapping: Object.fromEntries(columnMappings.map(c => [c.fileColumn, c.tableColumn || ""])),
+                headersMapping: Object.fromEntries(columnMappings
+                    .filter(c => !!c)
+                    .map(c => [c.fileColumn, c.tableColumn || ""])
+                ),
             };
             return acc;
         }, {metadata: {}} as IImportMapping);
     }
+}
+
+export const ApiTokenMapper = {
+    fromDto (dto: IApiKeyResponse): ApiToken {
+        return {
+            name: dto.name,
+            id: dto.id + "",
+            prefix: dto.prefix,
+            createdAt: new Date(dto.createdAt),
+        }
+    },
+    fromDtoWithRawToken (dto: IApiKeyResponseWithRawToken): ApiTokenResponse {
+        return {
+            token: dto.rawToken,
+            name: dto.name,
+            id: dto.id + "",
+            prefix: dto.prefix,
+            createdAt: new Date(dto.createdAt)
+        }
+    },
 }

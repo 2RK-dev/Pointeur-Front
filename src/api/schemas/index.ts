@@ -6,6 +6,7 @@ import { TeacherSchema } from "./teacher";
 import { TeachingUnitSchema } from "./teaching-unit";
 import { LoginResponseSchema } from "@/api/schemas/auth";
 import { ImportSummarySchema } from "@/api/schemas/import";
+import { ApiKeyResponseSchema, ApiKeyResponseWithRawTokenSchema } from "@/api/schemas/api-key";
 
 export const DTO = {
     CreateScheduleItemSchema,
@@ -19,4 +20,6 @@ export const DTO = {
     BulkScheduleItemCreationResponseSchema,
     LoginResponseSchema,
     ImportSummarySchema,
+    ApiKeyResponseWithRawTokenSchema,
+    ApiKeyResponseSchema
 }

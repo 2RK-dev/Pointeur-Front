@@ -12,3 +12,8 @@ export const LoginResponseSchema = z.object({
     access_token: z.string(),
     user: UserInfoSchema
 });
+export const PasswordChangeSchema = z.object({
+    old: z.string(),
+    new: z.string(),
+    confirm: z.string(),
+});
