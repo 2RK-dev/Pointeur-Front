@@ -57,8 +57,11 @@ export default function EdtEncapsuler() {
 				{DAYS.map(
 					(day, index: number) =>
 						index > 0 && (
-							<div key={day} className="flex border-b-2 relative py-2">
-								<div className="w-20 flex items-center justify-center font-semibold">
+							<div
+								key={day}
+								className="flex border-b-2 relative p-2"
+							>
+								<div className="w-20 flex items-center justify-start font-semibold">
 									{day}
 								</div>
 								<div className="flex-1 relative">

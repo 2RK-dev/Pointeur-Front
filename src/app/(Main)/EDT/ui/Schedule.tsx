@@ -14,7 +14,7 @@ import {
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
 import {generatePDF} from "@/Tools/PDF";
-import {getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
+import {formatWeek, getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {LevelDetailsDTO} from "@/Types/LevelDTO";
 import {getLevelListService} from "@/services/Level";
 import {TranspositionResponse, Week, WeekSchema} from "@/Types/ScheduleItem";
@@ -29,8 +29,10 @@ import {Room} from "@/Types/Room";
 import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
 
-const NUMBER_OF_WEEK_TO_DISPLAY = 5;
+const NUMBER_OF_WEEK_TO_DISPLAY = 7;
+const WEEKS_AGO = 2;
 const TODAY = new Date();
+TODAY.setDate(TODAY.getDate() - (WEEKS_AGO * 7));
 
 export default function Schedule() {
     const {currentScheduleItems, setCurrentScheduleItems} = useCurrentScheduleItemsStore();
@@ -177,16 +179,7 @@ export default function Schedule() {
                     <SelectContent>
                         {allWeeks.map((week, index) => (
                             <SelectItem key={index} value={JSON.stringify(week)}>
-                                {
-                                    `${week.start.toLocaleDateString('fr-FR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric'
-                                    })} - ${week.end.toLocaleDateString('fr-FR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: 'numeric'
-                                    })}`}
+                                {formatWeek(week)}
                             </SelectItem>
                         ))}
                     </SelectContent>
@@ -202,7 +195,9 @@ export default function Schedule() {
                             }}>
                         <Copy/>
                     </Button>
-                    <Button disabled={!selectedWeek} onClick={generatePDF}>
+                    <Button disabled={!selectedWeek} onClick={()=>{
+                       generatePDF("Emploi du temps "+ selectedLevel?.level.abr + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf")
+                    }}>
                         <FileText/>
                     </Button>
                     <Button disabled={!selectedWeek}
