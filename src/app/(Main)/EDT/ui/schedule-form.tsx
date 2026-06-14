@@ -18,6 +18,7 @@ import type {Room} from "@/Types/Room"
 import {generateHours} from "@/Tools/ScheduleItem"
 import {
     useCurrentScheduleItemsStore,
+    useCopiedScheduleItemStore,
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore,
 } from "@/Stores/ScheduleItem"
@@ -79,27 +80,34 @@ export default function ScheduleForm({
     const updateScheduleItem = useCurrentScheduleItemsStore((s) => s.updateScheduleItem)
     const removeScheduleItem = useCurrentScheduleItemsStore((s) => s.removeScheduleItem)
     const selectedScheduleItem = useSelectedScheduleItemStore((s) => s.selectedScheduleItem)
+    const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem)
+    const copiedScheduleItem = useCopiedScheduleItemStore((s) => s.copiedScheduleItem)
+    const setCopiedScheduleItem = useCopiedScheduleItemStore((s) => s.setCopiedScheduleItem)
     const [selectedLevelDetailState, setselectedLevelDetailState] = useState<LevelDetailsDTO | null>(selectedLevelDetails)
 
-    const defaultValues = {
-        date: selectedScheduleItem?.startTime || undefined,
-        startTime:
-            selectedScheduleItem?.startTime.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false,
-            }) || undefined,
-        endTime:
-            selectedScheduleItem?.endTime.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false,
-            }) || undefined,
-        teachingUnitID: selectedScheduleItem?.TeachingUnit.id || undefined,
-        teacherId: selectedScheduleItem?.Teacher.id || selectedTeacherId || undefined,
-        roomId: selectedScheduleItem?.Room?.id || selectedRoomId || undefined,
-        groupIds: selectedScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
-    }
+    const sourceScheduleItem = selectedScheduleItem ?? copiedScheduleItem
+
+    const defaultValues = useMemo(() => {
+        return {
+            date: sourceScheduleItem?.startTime || undefined,
+            startTime:
+                sourceScheduleItem?.startTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                }) || undefined,
+            endTime:
+                sourceScheduleItem?.endTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                }) || undefined,
+            teachingUnitID: sourceScheduleItem?.TeachingUnit.id || undefined,
+            teacherId: sourceScheduleItem?.Teacher.id || selectedTeacherId || undefined,
+            roomId: sourceScheduleItem?.Room?.id || selectedRoomId || undefined,
+            groupIds: sourceScheduleItem?.Groups.map((grp) => grp.id.toString()) || [],
+        }
+    }, [sourceScheduleItem, selectedTeacherId, selectedRoomId])
 
     const form = useForm<z.infer<typeof ScheduleItemFormSchema>>({
         resolver: zodResolver(ScheduleItemFormSchema),
@@ -108,13 +116,13 @@ export default function ScheduleForm({
 
     useEffect(() => {
         form.reset(defaultValues)
-        if (selectedScheduleItem) {
-            const level = levelDetailsList.find(l => l.level.id === selectedScheduleItem.Groups[0]?.levelId) || null
+        if (sourceScheduleItem) {
+            const level = levelDetailsList.find(l => l.level.id === sourceScheduleItem.Groups[0]?.levelId) || null
             setselectedLevelDetailState(level)
         } else {
             setselectedLevelDetailState(selectedLevelDetails)
         }
-    }, [selectedLevelDetails, selectedTeacherId, selectedRoomId, selectedScheduleItem])
+    }, [selectedLevelDetails, selectedTeacherId, selectedRoomId, sourceScheduleItem, defaultValues, form])
 
 
     const watchedDate = form.watch("date")
@@ -271,6 +279,7 @@ export default function ScheduleForm({
         const promise = deleteScheduleItemService(selectedScheduleItem.id)
             .then((deletedScheduleItemID) => {
                 removeScheduleItem(deletedScheduleItemID)
+                setCopiedScheduleItem(null)
                 form.reset()
                 setOpen(false)
                 notifications.success("Cours supprimé avec succès", "Le cours N°" + deletedScheduleItemID + " a été supprimé")
@@ -310,6 +319,7 @@ export default function ScheduleForm({
                 const promise = updateScheduleItemService(selectedScheduleItem.id, scheduleItem)
                     .then((updatedItem) => {
                         updateScheduleItem(selectedScheduleItem.id, updatedItem)
+                        setCopiedScheduleItem(null)
                         form.reset()
                         setOpen(false)
                         notifications.success("Cours mis à jour avec succès",
@@ -328,6 +338,7 @@ export default function ScheduleForm({
                 const promise = addScheduleItemService(scheduleItem)
                     .then((scheduleItem) => {
                         addScheduleItem(scheduleItem)
+                        setCopiedScheduleItem(null)
                         form.reset()
                         setOpen(false)
                         notifications.success("Cours ajouté avec succès",
@@ -349,14 +360,19 @@ export default function ScheduleForm({
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={(nextOpen) => {
+            setOpen(nextOpen)
+            if (!nextOpen) {
+                setCopiedScheduleItem(null)
+            }
+        }}>
             <DialogContent className="max-w-2xl w-full max-h-[90vh] min-h-[300px]">
                 <DialogHeader>
                     <DialogTitle className="text-xl font-medium">
-                        {selectedScheduleItem ? "Modifier le cours" : "Nouveau cours"}
+                        {selectedScheduleItem ? "Modifier le cours" : copiedScheduleItem ? "Dupliquer le cours" : "Nouveau cours"}
                     </DialogTitle>
                     <p className="text-sm text-muted-foreground mt-1">
-                        {selectedLevelDetails && `Niveau ${selectedLevelDetails.level.name}`}
+                        {selectedLevelDetailState && `Niveau ${selectedLevelDetailState.level.name}`}
                     </p>
                 </DialogHeader>
                 <ScrollArea className="max-h-[80vh] w-full px-2 pb-8">
@@ -702,9 +718,21 @@ export default function ScheduleForm({
 
                             <div className="flex justify-between pt-6 border-t">
                                 {selectedScheduleItem && (
-                                    <Button type="button" variant="destructive" onClick={handleDelete}>
-                                        Supprimer
-                                    </Button>
+                                    <div className="flex gap-3">
+                                        <Button
+                                            type="button"
+                                            variant="secondary"
+                                            onClick={() => {
+                                                setCopiedScheduleItem(selectedScheduleItem)
+                                                setSelectedScheduleItem(null)
+                                            }}
+                                        >
+                                            Dupliquer
+                                        </Button>
+                                        <Button type="button" variant="destructive" onClick={handleDelete}>
+                                            Supprimer
+                                        </Button>
+                                    </div>
                                 )}
 
                                 <div className="flex gap-3 ml-auto">

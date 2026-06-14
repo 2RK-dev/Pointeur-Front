@@ -8,6 +8,7 @@ import EdtEncapsuler from "./EdtEncapsuler";
 import ScheduleForm from "@/app/(Main)/EDT/ui/schedule-form";
 import {
     useCurrentScheduleItemsStore,
+    useCopiedScheduleItemStore,
     useDisplayScheduleItem,
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore
@@ -44,6 +45,7 @@ export default function Schedule() {
         setScheduleItemsByRoom
     } = useDisplayScheduleItem();
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+    const setCopiedScheduleItem = useCopiedScheduleItemStore((s) => s.setCopiedScheduleItem);
     const roomList = useRoomsStore((s) => s.rooms);
     const setRoomList = useRoomsStore((s) => s.setRooms);
     const [selectedWeek, setSelectedWeek] = useState<Week>();
@@ -202,6 +204,7 @@ export default function Schedule() {
                     </Button>
                     <Button disabled={!selectedWeek}
                             onClick={() => {
+                                setCopiedScheduleItem(null);
                                 setSelectedScheduleItem(null);
                                 setOpenForm(true)
                             }}>

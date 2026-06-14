@@ -1,7 +1,11 @@
 import { ScheduleItem } from "@/Types/ScheduleItem";
 import { getWidthPercentage } from "@/Tools/ScheduleItem";
 import { generateColorFromStrings } from "@/Tools/Color";
+import {Button} from "@/components/ui/button";
+import {Copy} from "lucide-react";
+import type {MouseEvent} from "react";
 import {
+	useCopiedScheduleItemStore,
 	useDisplayScheduleItem,
 	useOpenScheduleItemFormStore,
 	useSelectedScheduleItemStore
@@ -15,12 +19,21 @@ interface Props {
 export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 	const displayMode = useDisplayScheduleItem((s) => s.displayMode);
 	const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+	const setCopiedScheduleItem = useCopiedScheduleItemStore((s) => s.setCopiedScheduleItem);
 	const setOpen = useOpenScheduleItemFormStore((s) => s.setOpen);
 
 	const width = getWidthPercentage(scheduleItem.startTime, scheduleItem.endTime);
 
 	const UpdateScheduleItem = () => {
+		setCopiedScheduleItem(null);
 		setSelectedScheduleItem(scheduleItem);
+		setOpen(true);
+	};
+
+	const DuplicateScheduleItem = (event: MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
+		setSelectedScheduleItem(null);
+		setCopiedScheduleItem(scheduleItem);
 		setOpen(true);
 	};
 
@@ -56,7 +69,16 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 				flexGrow: 0,
 				flexShrink: 0,
 			}}
-		>
+			>
+			<Button
+				type="button"
+				variant="ghost"
+				size="icon"
+				className="absolute right-1 top-1 h-7 w-7 opacity-0 transition-opacity group-hover:opacity-100 bg-white/70 hover:bg-white"
+				onClick={DuplicateScheduleItem}
+			>
+				<Copy className="h-4 w-4" />
+			</Button>
 			<div className="flex flex-col gap-1 w-full text-black/90 whitespace-normal break-words">
 
 				<div className="leading-tight">
