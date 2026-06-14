@@ -45,29 +45,55 @@ export const hours = [
 export default function EdtEncapsuler() {
 
 	return (
-		<div className="border rounded-lg overflow-x-auto">
-			<div className="relative min-w-[800px]">
-				<div className="flex border-b h-8">
-					<div className="min-w-20 "></div>
-					{hours.map((heure, index) => {
-						return RenderHours(hours, heure, index);
-					})}
+		<div className="border rounded-xl overflow-x-auto bg-card/20 backdrop-blur-sm shadow-sm scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
+			<div className="relative min-w-[900px]">
+				{/* Timeline Header */}
+				<div className="flex border-b h-10 items-center bg-muted/30">
+					<div className="w-24 flex-shrink-0 border-r border-muted h-full"></div>
+					<div className="flex-1 flex h-full items-center px-1">
+						{hours.map((heure, index) => {
+							return RenderHours(hours, heure, index);
+						})}
+					</div>
 				</div>
 
+				{/* Days Rows */}
 				{DAYS.map(
 					(day, index: number) =>
 						index > 0 && (
 							<div
 								key={day}
-								className="flex border-b-2 relative p-2"
+								className="flex border-b relative hover:bg-muted/5 transition-colors"
 							>
-								<div className="w-20 flex items-center justify-start font-semibold">
-									{day}
+								{/* Day Header Column */}
+								<div className="w-24 flex-shrink-0 flex flex-col items-center justify-center font-bold border-r border-muted bg-muted/15 text-muted-foreground select-none py-4 text-center">
+									<span className="uppercase tracking-wider text-[11px]">{day.substring(0, 3)}</span>
+									<span className="text-[9px] font-medium opacity-50">{day}</span>
 								</div>
-								<div className="flex-1 relative">
-									<ScheduleDisplay
-										jourIndex={index}
-									/>
+
+								{/* Grid & Cards Column */}
+								<div className="flex-1 relative py-3 px-1 min-h-[80px]">
+									{/* Vertical grid lines backdrop */}
+									<div className="absolute inset-y-0 left-1 right-1 flex pointer-events-none">
+										{hours.map((heure, idx) => {
+											if (idx === hours.length - 1) return null;
+											const style = getStyleHours(hours, heure, idx);
+											return (
+												<div
+													key={`grid-${idx}`}
+													className="border-l border-dashed border-muted/30 h-full w-full"
+													style={style}
+												/>
+											);
+										})}
+									</div>
+
+									{/* Schedule items */}
+									<div className="relative z-10 h-full flex flex-col justify-center">
+										<ScheduleDisplay
+											jourIndex={index}
+										/>
+									</div>
 								</div>
 							</div>
 						)
@@ -97,12 +123,12 @@ const PenultimateHours = (
 	return (
 		<div
 			key={`heure-${index}`}
-			className="flex space-x-2 justify-between"
+			className="flex space-x-2 justify-between px-1"
 			style={{ ...style }}>
-			<div className="text-sm font-semibold" style={{ ...style }}>
+			<div className="text-xs font-bold text-muted-foreground">
 				{hour}
 			</div>
-			<div className="text-sm font-semibold text-end" style={{ ...style }}>
+			<div className="text-xs font-bold text-muted-foreground text-end">
 				{hours[index + 1]}
 			</div>
 		</div>
@@ -115,7 +141,7 @@ const NormalHours = (
 	style: React.CSSProperties
 ) => {
 	return (
-		<div key={`heure-${index}`} className="text-sm font-semibold" style={style}>
+		<div key={`heure-${index}`} className="text-xs font-bold text-muted-foreground px-1" style={style}>
 			{hour}
 		</div>
 	);

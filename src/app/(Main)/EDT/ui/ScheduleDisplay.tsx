@@ -18,7 +18,7 @@ export default function ScheduleDisplay({jourIndex}: ScheduleDisplayProps) {
         <div className="flex flex-col w-full gap-2">
             {rows.map((row, rowIndex) => {
                     let lastEnd: Date | undefined = undefined;
-                    return (<div key={rowIndex} className="relative w-full flex gap-1 min-h-[60px]">
+                    return (<div key={rowIndex} className="relative w-full flex min-h-[60px]">
                         {row.map((scheduleItem, index) => {
                             let gapMin;
                             if (lastEnd) {
