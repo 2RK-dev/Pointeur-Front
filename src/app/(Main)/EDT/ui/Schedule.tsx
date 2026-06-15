@@ -163,6 +163,28 @@ export default function Schedule() {
         }, 300);
     }
 
+    const handleExportPDF = () => {
+        let subtitle = "";
+        if (displayMode === "Student") {
+            subtitle = selectedLevel ? `Niveau : ${selectedLevel.level.name}` : "";
+        } else if (displayMode === "Teacher") {
+            const teacher = teacherList?.find(t => t.id === selectedTeacherId);
+            subtitle = teacher ? `Enseignant : ${teacher.name}` : "";
+        } else if (displayMode === "Room") {
+            const room = roomList?.find(r => r.id === selectedRoomId);
+            subtitle = room ? `Salle : ${room.name}` : "";
+        }
+
+        generatePDF(
+            "Emploi du temps " + (selectedLevel?.level.abr || "") + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf",
+            {
+                title: "Emploi du Temps",
+                subtitle: subtitle,
+                week: selectedWeek ? formatWeek(selectedWeek) : ""
+            }
+        );
+    };
+
     return (
         <div className="p-4 w-full max-w-7xl mx-auto space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2">
@@ -256,9 +278,7 @@ export default function Schedule() {
                                 variant="outline"
                                 size="sm"
                                 className="flex-1 sm:flex-initial gap-1.5 bg-background/50"
-                                onClick={()=>{
-                                   generatePDF("Emploi du temps "+ (selectedLevel?.level.abr || "") + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf")
-                                }}
+                                onClick={handleExportPDF}
                                 title="Exporter l'emploi du temps en PDF">
                             <FileText className="h-4 w-4"/>
                             <span className="hidden sm:inline">Exporter PDF</span>
