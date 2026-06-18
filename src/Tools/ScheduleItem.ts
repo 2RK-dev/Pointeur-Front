@@ -1,8 +1,8 @@
 import {ScheduleItem, ScheduleItemPost, ScheduleItemPostSchema, Week} from "@/Types/ScheduleItem";
 
-const DAY_START_MINUTES = 7 * 60;
-const DAY_END_MINUTES = 18 * 60;
-const DAY_DURATION = DAY_END_MINUTES - DAY_START_MINUTES;
+export const DAY_START_MINUTES = 7 * 60;
+export const DAY_END_MINUTES = 18 * 60;
+export const DAY_DURATION = DAY_END_MINUTES - DAY_START_MINUTES;
 
 export const DAYS: string[] = [
     "Dimanche",
@@ -54,8 +54,20 @@ export function calculateRowAssignments(scheduleItems: ScheduleItem[]) {
     return rows;
 }
 
-function getTimeInMinutes(date: Date): number {
+export function getTimeInMinutes(date: Date): number {
     return date.getHours() * 60 + date.getMinutes();
+}
+
+function clampPercentage(value: number): number {
+    return Math.min(100, Math.max(0, value));
+}
+
+export function getDayOffsetPercentage(time: Date): number {
+    return clampPercentage(((getTimeInMinutes(time) - DAY_START_MINUTES) / DAY_DURATION) * 100);
+}
+
+export function getDaySpanPercentage(start: Date, end: Date): number {
+    return clampPercentage(((getTimeInMinutes(end) - getTimeInMinutes(start)) / DAY_DURATION) * 100);
 }
 
 /**
@@ -69,8 +81,7 @@ export function getWidthPercentageFor(duration: number): number {
 }
 
 export function getWidthPercentage(start: Date, end: Date): number {
-    const duration = getTimeInMinutes(end) - getTimeInMinutes(start);
-    return getWidthPercentageFor(duration);
+    return getDaySpanPercentage(start, end);
 }
 
 /**

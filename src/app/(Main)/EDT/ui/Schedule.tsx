@@ -3,17 +3,17 @@
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import {CirclePlus, Copy, FileText} from "lucide-react";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import EdtEncapsuler from "./EdtEncapsuler";
 import ScheduleForm from "@/app/(Main)/EDT/ui/schedule-form";
 import {
     useCurrentScheduleItemsStore,
+    useCopiedScheduleItemStore,
     useDisplayScheduleItem,
     useOpenScheduleItemFormStore,
     useSelectedScheduleItemStore
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
-import {generatePDF} from "@/Tools/PDF";
 import {formatWeek, getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {LevelDetailsDTO} from "@/Types/LevelDTO";
 import {getLevelListService} from "@/services/Level";
@@ -28,6 +28,9 @@ import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
 import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
+import {PrintTemplate} from "@/hooks/useReactToPrint";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 7;
 const WEEKS_AGO = 2;
@@ -44,6 +47,7 @@ export default function Schedule() {
         setScheduleItemsByRoom
     } = useDisplayScheduleItem();
     const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
+    const setCopiedScheduleItem = useCopiedScheduleItemStore((s) => s.setCopiedScheduleItem);
     const roomList = useRoomsStore((s) => s.rooms);
     const setRoomList = useRoomsStore((s) => s.setRooms);
     const [selectedWeek, setSelectedWeek] = useState<Week>();
@@ -59,7 +63,17 @@ export default function Schedule() {
     const [transpositionResponse, setTranspositionResponse] = useState<TranspositionResponse | null>();
     const [isClosingTranspositionBadges, setIsClosingTranspositionBadges] = useState<boolean>(false);
 
-    const allWeeks = getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY);
+    const allWeeks = useMemo(() => getAllNextWeeksFromDate(NUMBER_OF_WEEK_TO_DISPLAY, TODAY), []);
+
+    useEffect(() => {
+        if (!selectedWeek && allWeeks.length > 0) {
+            const now = new Date();
+            const currentWeekIndex = allWeeks.findIndex(
+                (week) => now >= week.start && now <= week.end
+            );
+            setSelectedWeek(currentWeekIndex !== -1 ? allWeeks[currentWeekIndex] : allWeeks[2] || allWeeks[0]);
+        }
+    }, [allWeeks, selectedWeek]);
 
     useEffect(() => {
         const firstWeek = allWeeks[0];
@@ -122,7 +136,7 @@ export default function Schedule() {
             setSelectedRoomId(roomList[0].id);
         }
 
-    }, [selectedWeek]);
+    }, []);
 
 
     useEffect(() => {
@@ -151,66 +165,162 @@ export default function Schedule() {
         }, 300);
     }
 
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    const handlePrint = useReactToPrint({
+        contentRef,
+        documentTitle: "Emploi_du_temps_" + (selectedLevel?.level.abr || "") + "_" + (selectedWeek ? formatWeek(selectedWeek) : ""),
+    });
+
+    const handleExportPDF = () => {
+        if (!selectedWeek) return;
+
+               const promise = new Promise<void>((resolve, reject) => {
+            try {
+                handlePrint();
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        });
+
+        notifications.promise(promise, {
+            loading: "Préparation de la mise en page...",
+            success: "Fenêtre d'impression ouverte !",
+            error: "Erreur lors de l'ouverture de l'impression."
+        });
+    };
+
+
     return (
-        <div className="p-4  min-w-[1250px]">
-            <div>
-                <Select value={displayMode} onValueChange={(val) => {
-                    setDisplayMode(val as "Student" | "Teacher" | "Room");
-                }}>
-                    <SelectTrigger className="w-[180px] mb-4">
-                        <SelectValue placeholder="Sélectionner la vue"/>
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="Student">Vue Étudiant</SelectItem>
-                        <SelectItem value="Teacher">Vue Enseignant</SelectItem>
-                        <SelectItem value="Room">Vue Salle</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
-            <div className="mb-4 flex justify-between items-center">
-                <Select
-                    value={JSON.stringify(selectedWeek)}
-                    onValueChange={(value) => {
-                        setSelectedWeek(WeekSchema.parse(JSON.parse(value)));
-                    }}>
-                    <SelectTrigger className="w-[300px]">
-                        <SelectValue placeholder="Sélectionner la semaine"/>
-                    </SelectTrigger>
-                    <SelectContent>
-                        {allWeeks.map((week, index) => (
-                            <SelectItem key={index} value={JSON.stringify(week)}>
-                                {formatWeek(week)}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel}
-                                 setSelectedRoom={setSelectedRoomId}
-                                 levelDetailList={levelList} teacherList={teacherList} roomList={roomList}
-                />
-                <div className=" space-x-4">
-                    <Button disabled={!selectedWeek}
-                            onClick={() => {
-                                setIsTransposeModalOpen(true);
-                            }}>
-                        <Copy/>
-                    </Button>
-                    <Button disabled={!selectedWeek} onClick={()=>{
-                       generatePDF("Emploi du temps "+ selectedLevel?.level.abr + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf")
-                    }}>
-                        <FileText/>
-                    </Button>
-                    <Button disabled={!selectedWeek}
-                            onClick={() => {
-                                setSelectedScheduleItem(null);
-                                setOpenForm(true)
-                            }}>
-                        <CirclePlus/>
-                    </Button>
+        <div className="p-4 w-full max-w-7xl mx-auto space-y-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-2">
+                <div>
+                    <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                        Emploi du Temps
+                    </h1>
+                    <p className="text-sm text-muted-foreground mt-1">
+                        Gérez et visualisez vos plannings de cours par étudiant, enseignant ou salle.
+                    </p>
                 </div>
             </div>
-            <div className="flex flex-col space-y-4" id="edt-content">
-                <EdtEncapsuler/>
+
+            <div className="bg-card/40 backdrop-blur-md border border-muted/50 rounded-xl p-4 shadow-sm flex flex-col xl:flex-row gap-4 justify-between items-stretch xl:items-center">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div className="flex rounded-lg border bg-muted/50 p-1 self-start">
+                        <button
+                            type="button"
+                            onClick={() => setDisplayMode("Student")}
+                            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+                                displayMode === "Student"
+                                    ? "bg-background shadow text-foreground"
+                                    : "text-muted-foreground hover:text-foreground"
+                            }`}
+                        >
+                            Vue Étudiant
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setDisplayMode("Teacher")}
+                            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+                                displayMode === "Teacher"
+                                    ? "bg-background shadow text-foreground"
+                                    : "text-muted-foreground hover:text-foreground"
+                            }`}
+                        >
+                            Vue Enseignant
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setDisplayMode("Room")}
+                            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+                                displayMode === "Room"
+                                    ? "bg-background shadow text-foreground"
+                                    : "text-muted-foreground hover:text-foreground"
+                            }`}
+                        >
+                            Vue Salle
+                        </button>
+                    </div>
+
+                    <div className="flex items-center">
+                        <SelectComponent setSelectedTeacher={setSelectedTeacherId} setSelectedLevel={setSelectedLevel}
+                                         setSelectedRoom={setSelectedRoomId}
+                                         levelDetailList={levelList} teacherList={teacherList} roomList={roomList}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 xl:ml-auto">
+                    <Select
+                        value={selectedWeek ? JSON.stringify(selectedWeek) : undefined}
+                        onValueChange={(value) => {
+                            setSelectedWeek(WeekSchema.parse(JSON.parse(value)));
+                        }}>
+                        <SelectTrigger className="w-full sm:w-[260px] bg-background/50">
+                            <SelectValue placeholder="Sélectionner la semaine"/>
+                        </SelectTrigger>
+                        <SelectContent>
+                            {allWeeks.map((week, index) => (
+                                <SelectItem key={index} value={JSON.stringify(week)}>
+                                    {formatWeek(week)}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+
+                    <div className="flex items-center gap-2">
+                        <Button disabled={!selectedWeek}
+                                variant="outline"
+                                size="sm"
+                                className="flex-1 sm:flex-initial gap-1.5 bg-background/50"
+                                onClick={() => {
+                                    setIsTransposeModalOpen(true);
+                                }}
+                                title="Transposer le planning vers une autre semaine">
+                            <Copy className="h-4 w-4"/>
+                            <span className="hidden sm:inline">Transposer</span>
+                        </Button>
+                        <Button disabled={!selectedWeek}
+                                variant="outline"
+                                size="sm"
+                                className="flex-1 sm:flex-initial gap-1.5 bg-background/50"
+                                onClick={handleExportPDF}
+                                title="Exporter l'emploi du temps en PDF">
+                            <FileText className="h-4 w-4"/>
+                            <span className="hidden sm:inline">Exporter PDF</span>
+                        </Button>
+                        <Button disabled={!selectedWeek}
+                                size="sm"
+                                className="flex-1 sm:flex-initial gap-1.5 bg-primary shadow-sm hover:bg-primary/95"
+                                onClick={() => {
+                                    setCopiedScheduleItem(null);
+                                    setSelectedScheduleItem(null);
+                                    setOpenForm(true)
+                                }}
+                                title="Ajouter un nouveau cours au planning">
+                            <CirclePlus className="h-4 w-4"/>
+                            <span className="hidden sm:inline">Nouveau cours</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            <div ref={contentRef}>
+                <PrintTemplate
+                    options={{
+                        title: "Emploi du Temps",
+                        subtitle: displayMode === "Student"
+                            ? (selectedLevel ? `Niveau : ${selectedLevel.level.name}` : "")
+                            : displayMode === "Teacher"
+                                ? (teacherList?.find(t => t.id === selectedTeacherId) ? `Enseignant : ${teacherList.find(t => t.id === selectedTeacherId)?.name}` : "")
+                                : (roomList?.find(r => r.id === selectedRoomId) ? `Salle : ${roomList.find(r => r.id === selectedRoomId)?.name}` : ""),
+                        week: selectedWeek ? formatWeek(selectedWeek) : ""
+                    }}
+                >
+                    <div className="flex flex-col space-y-4">
+                        <EdtEncapsuler/>
+                    </div>
+                </PrintTemplate>
             </div>
             {selectedWeek && (
                 <>
@@ -303,7 +413,7 @@ function SelectComponent({
             else if (displayMode === "Room") setSelectedRoom(parseInt(value));
             setSelectedValue(value);
         }}>
-            <SelectTrigger className="w-[250px] mb-4">
+            <SelectTrigger className="w-[250px] bg-background/50">
                 <SelectValue placeholder={"Sélectionner un " + getDisplayLabel(displayMode)}/>
             </SelectTrigger>
             <SelectContent>

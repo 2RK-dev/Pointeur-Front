@@ -1,5 +1,5 @@
 import {useDisplayScheduleItem} from "@/Stores/ScheduleItem";
-import {calculateRowAssignments, getWidthPercentageFor} from "@/Tools/ScheduleItem";
+import {calculateRowAssignments, getDayOffsetPercentage} from "@/Tools/ScheduleItem";
 import ScheduleItemCard from "@/app/(Main)/EDT/ui/ScheduleItemCard";
 
 interface ScheduleDisplayProps {
@@ -17,26 +17,18 @@ export default function ScheduleDisplay({jourIndex}: ScheduleDisplayProps) {
     return (
         <div className="flex flex-col w-full gap-2">
             {rows.map((row, rowIndex) => {
-                    let lastEnd: Date | undefined = undefined;
-                    return (<div key={rowIndex} className="relative w-full flex gap-1 min-h-[60px]">
-                        {row.map((scheduleItem, index) => {
-                            let gapMin;
-                            if (lastEnd) {
-                                gapMin = (scheduleItem.startTime.getTime() - lastEnd.getTime()) / 60000;
-                            } else {
-                                gapMin = (scheduleItem.startTime.getTime() - new Date(scheduleItem.startTime).setHours(7, 0, 0, 0)) / 60000;
-                            }
-                            lastEnd = scheduleItem.endTime;
-                            return (
-                                <ScheduleItemCard
-                                    key={index}
-                                    scheduleItem={scheduleItem}
-                                    left={getWidthPercentageFor(gapMin)}
-                                />
-                            );
-                        })}
-                    </div>)
-                }
+                return (
+                    <div key={rowIndex} className="relative w-full h-[105px]">
+                        {row.map((scheduleItem, index) => (
+                            <ScheduleItemCard
+                                key={index}
+                                scheduleItem={scheduleItem}
+                                left={getDayOffsetPercentage(scheduleItem.startTime)}
+                            />
+                        ))}
+                    </div>
+                );
+            }
             )}
         </div>
     );

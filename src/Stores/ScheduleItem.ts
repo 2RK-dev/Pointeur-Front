@@ -122,6 +122,16 @@ export const useSelectedScheduleItemStore = create<SelectedScheduleItemStore>((s
     setSelectedScheduleItem: (item: ScheduleItem | null) => set({selectedScheduleItem: item}),
 }));
 
+interface CopiedScheduleItemStore {
+    copiedScheduleItem: ScheduleItem | null;
+    setCopiedScheduleItem: (item: ScheduleItem | null) => void;
+}
+
+export const useCopiedScheduleItemStore = create<CopiedScheduleItemStore>((set) => ({
+    copiedScheduleItem: null,
+    setCopiedScheduleItem: (item: ScheduleItem | null) => set({copiedScheduleItem: item}),
+}));
+
 interface OpenScheduleItemForm {
     open: boolean;
     setOpen: (open: boolean) => void;
