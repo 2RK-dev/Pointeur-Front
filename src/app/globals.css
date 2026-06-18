@@ -68,3 +68,24 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.printing-template {
+	display: none;
+}
+
+@media print {
+	@page {
+		size: A4 landscape;
+		margin: 0;
+	}
+
+	.printing-template {
+		display: block !important;
+	}
+
+	body {
+		background-color: #ffffff !important;
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+}

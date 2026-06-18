@@ -14,7 +14,6 @@ import {
     useSelectedScheduleItemStore
 } from "@/Stores/ScheduleItem";
 import {getScheduleItems} from "@/services/ScheduleItem";
-import {generatePDF} from "@/Tools/PDF";
 import {formatWeek, getAllNextWeeksFromDate} from "@/Tools/ScheduleItem";
 import {LevelDetailsDTO} from "@/Types/LevelDTO";
 import {getLevelListService} from "@/services/Level";
@@ -29,6 +28,9 @@ import {Teacher} from "@/Types/Teacher";
 import {Room} from "@/Types/Room";
 import {ImportResultShow} from "@/app/(Main)/EDT/ui/import-result-show";
 import {notifications} from "@/components/notifications";
+import {PrintTemplate} from "@/hooks/useReactToPrint";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const NUMBER_OF_WEEK_TO_DISPLAY = 7;
 const WEEKS_AGO = 2;
@@ -163,27 +165,32 @@ export default function Schedule() {
         }, 300);
     }
 
-    const handleExportPDF = () => {
-        let subtitle = "";
-        if (displayMode === "Student") {
-            subtitle = selectedLevel ? `Niveau : ${selectedLevel.level.name}` : "";
-        } else if (displayMode === "Teacher") {
-            const teacher = teacherList?.find(t => t.id === selectedTeacherId);
-            subtitle = teacher ? `Enseignant : ${teacher.name}` : "";
-        } else if (displayMode === "Room") {
-            const room = roomList?.find(r => r.id === selectedRoomId);
-            subtitle = room ? `Salle : ${room.name}` : "";
-        }
+    const contentRef = useRef<HTMLDivElement>(null);
 
-        generatePDF(
-            "Emploi du temps " + (selectedLevel?.level.abr || "") + " " + (selectedWeek ? formatWeek(selectedWeek) : "") + ".pdf",
-            {
-                title: "Emploi du Temps",
-                subtitle: subtitle,
-                week: selectedWeek ? formatWeek(selectedWeek) : ""
+    const handlePrint = useReactToPrint({
+        contentRef,
+        documentTitle: "Emploi_du_temps_" + (selectedLevel?.level.abr || "") + "_" + (selectedWeek ? formatWeek(selectedWeek) : ""),
+    });
+
+    const handleExportPDF = () => {
+        if (!selectedWeek) return;
+
+               const promise = new Promise<void>((resolve, reject) => {
+            try {
+                handlePrint();
+                resolve();
+            } catch (error) {
+                reject(error);
             }
-        );
+        });
+
+        notifications.promise(promise, {
+            loading: "Préparation de la mise en page...",
+            success: "Fenêtre d'impression ouverte !",
+            error: "Erreur lors de l'ouverture de l'impression."
+        });
     };
+
 
     return (
         <div className="p-4 w-full max-w-7xl mx-auto space-y-6">
@@ -298,8 +305,22 @@ export default function Schedule() {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col space-y-4" id="edt-content">
-                <EdtEncapsuler/>
+            <div ref={contentRef}>
+                <PrintTemplate
+                    options={{
+                        title: "Emploi du Temps",
+                        subtitle: displayMode === "Student"
+                            ? (selectedLevel ? `Niveau : ${selectedLevel.level.name}` : "")
+                            : displayMode === "Teacher"
+                                ? (teacherList?.find(t => t.id === selectedTeacherId) ? `Enseignant : ${teacherList.find(t => t.id === selectedTeacherId)?.name}` : "")
+                                : (roomList?.find(r => r.id === selectedRoomId) ? `Salle : ${roomList.find(r => r.id === selectedRoomId)?.name}` : ""),
+                        week: selectedWeek ? formatWeek(selectedWeek) : ""
+                    }}
+                >
+                    <div className="flex flex-col space-y-4">
+                        <EdtEncapsuler/>
+                    </div>
+                </PrintTemplate>
             </div>
             {selectedWeek && (
                 <>
