@@ -1,5 +1,5 @@
 import ScheduleDisplay from "@/app/(Main)/EDT/ui/ScheduleDisplay";
-import {DAYS} from "@/Tools/ScheduleItem";
+import {DAY_DURATION, DAYS} from "@/Tools/ScheduleItem";
 
 export function timeToMinutes(time: string): number {
 	const [hours, minutes] = time.split(":").map(Number);
@@ -23,11 +23,11 @@ const getStyleHours = (
 
 	const largeurPourcentage =
 		differenceEnMinutes !== null
-			? Math.min((differenceEnMinutes / 120) * 100, 100)
+			? (differenceEnMinutes / DAY_DURATION) * 100
 			: 100;
 
 	const style: React.CSSProperties = {
-		flexBasis: `${largeurPourcentage}%`,
+		flex: `0 0 ${largeurPourcentage}%`,
 	};
 	return style;
 };
@@ -75,13 +75,13 @@ export default function EdtEncapsuler() {
 								<div className="flex-1 relative py-3 px-1 min-h-[80px]">
 									{/* Vertical grid lines backdrop */}
 									<div className="absolute inset-y-0 left-1 right-1 flex pointer-events-none">
-										{hours.map((heure, idx) => {
-											if (idx === hours.length - 1) return null;
-											const style = getStyleHours(hours, heure, idx);
-											return (
+									{hours.map((hour, idx) => {
+										if (idx === hours.length - 1) return null;
+										const style = getStyleHours(hours, hour, idx);
+										return (
 												<div
 													key={`grid-${idx}`}
-													className="border-l border-dashed border-muted/30 h-full w-full"
+													className="border-l border-dashed border-muted/30 h-full shrink-0"
 													style={style}
 												/>
 											);
@@ -89,7 +89,7 @@ export default function EdtEncapsuler() {
 									</div>
 
 									{/* Schedule items */}
-									<div className="relative z-10 h-full flex flex-col justify-center">
+									<div className="relative z-10 h-full">
 										<ScheduleDisplay
 											jourIndex={index}
 										/>
@@ -123,12 +123,12 @@ const PenultimateHours = (
 	return (
 		<div
 			key={`heure-${index}`}
-			className="flex space-x-2 justify-between px-1"
-			style={{ ...style }}>
-			<div className="text-xs font-bold text-muted-foreground">
+			className="relative h-full shrink-0"
+			style={style}>
+			<div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground z-10 px-1">
 				{hour}
 			</div>
-			<div className="text-xs font-bold text-muted-foreground text-end">
+			<div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground z-10 px-1">
 				{hours[index + 1]}
 			</div>
 		</div>
@@ -141,8 +141,10 @@ const NormalHours = (
 	style: React.CSSProperties
 ) => {
 	return (
-		<div key={`heure-${index}`} className="text-xs font-bold text-muted-foreground px-1" style={style}>
-			{hour}
+		<div key={`heure-${index}`} className="relative h-full shrink-0" style={style}>
+			<div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground z-10 px-1">
+				{hour}
+			</div>
 		</div>
 	);
 };

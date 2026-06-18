@@ -60,12 +60,10 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 	return (
 		<div
 			onClick={UpdateScheduleItem}
-			className="group relative flex flex-col p-2.5 rounded-xl border transition-all duration-200 ease-in-out cursor-pointer hover:shadow-md hover:z-10 select-none overflow-hidden h-[105px]"
+			className="group absolute top-0 flex flex-col p-2.5 rounded-xl border transition-all duration-200 ease-in-out cursor-pointer hover:shadow-md hover:z-10 select-none overflow-hidden h-[105px]"
 			style={{
-				flexBasis: `${width}%`,
-				marginLeft: `${left}%`,
-				flexGrow: 0,
-				flexShrink: 0,
+				left: `${left}%`,
+				width: `${width}%`,
 				borderLeft: `4px solid ${dynamicColor}`,
 				backgroundColor: `${dynamicColor}08`,
 			}}
