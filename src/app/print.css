@@ -1,0 +1,23 @@
+/* print.css — import this globally, only applies during print */
+@media print {
+  .edt-print-root,
+  .edt-print-root * {
+    overflow: visible !important;
+  }
+
+  .edt-print-root {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .edt-print-inner {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Each day row must never be split across pages */
+  .edt-day-row {
+    break-inside: avoid;
+    page-break-inside: avoid; /* Firefox still wants the old prop */
+  }
+}
