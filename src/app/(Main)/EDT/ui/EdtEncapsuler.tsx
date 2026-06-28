@@ -45,8 +45,8 @@ export const hours = [
 export default function EdtEncapsuler() {
 
 	return (
-		<div className="border rounded-xl overflow-x-auto bg-card/20 backdrop-blur-sm shadow-sm scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
-			<div className="relative min-w-[900px]">
+		<div className="border rounded-xl overflow-x-auto bg-card/20 backdrop-blur-sm shadow-sm scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent edt-print-root">
+			<div className="relative min-w-[900px] edt-print-inner">
 				{/* Timeline Header */}
 				<div className="flex border-b h-10 items-center bg-muted/30">
 					<div className="w-24 flex-shrink-0 border-r border-muted h-full"></div>
@@ -63,7 +63,7 @@ export default function EdtEncapsuler() {
 						index > 0 && (
 							<div
 								key={day}
-								className="flex border-b relative hover:bg-muted/5 transition-colors"
+								className="flex border-b relative hover:bg-muted/5 transition-colors edt-day-row"
 							>
 								{/* Day Header Column */}
 								<div className="w-24 flex-shrink-0 flex flex-col items-center justify-center font-bold border-r border-muted bg-muted/15 text-muted-foreground select-none py-4 text-center">
