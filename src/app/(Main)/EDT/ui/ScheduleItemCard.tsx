@@ -3,6 +3,7 @@ import { getWidthPercentage } from "@/Tools/ScheduleItem";
 import { generateColorFromStrings } from "@/Tools/Color";
 import { Button } from "@/components/ui/button";
 import { Copy, Clock, MapPin, User, Users, GraduationCap } from "lucide-react";
+import { useRef, useEffect } from "react";
 import type { MouseEvent } from "react";
 import {
 	useCopiedScheduleItemStore,
@@ -14,13 +15,46 @@ import {
 interface Props {
 	scheduleItem: ScheduleItem;
 	left: number;
+	cardIndex?: number;
+	onHeightChange?: (cardIndex: number, height: number) => void;
 }
 
-export default function ScheduleItemCard({ scheduleItem, left }: Props) {
+export default function ScheduleItemCard({ scheduleItem, left, cardIndex, onHeightChange }: Props) {
 	const displayMode = useDisplayScheduleItem((s) => s.displayMode);
 	const setSelectedScheduleItem = useSelectedScheduleItemStore((s) => s.setSelectedScheduleItem);
 	const setCopiedScheduleItem = useCopiedScheduleItemStore((s) => s.setCopiedScheduleItem);
 	const setOpen = useOpenScheduleItemFormStore((s) => s.setOpen);
+
+	const topSectionRef = useRef<HTMLDivElement>(null);
+	const bottomSectionRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!topSectionRef.current || !bottomSectionRef.current || !onHeightChange || cardIndex === undefined) return;
+
+		const measure = () => {
+			const topHeight = topSectionRef.current?.offsetHeight || 0;
+			const bottomHeight = bottomSectionRef.current?.offsetHeight || 0;
+			// padding: p-2.5 is 10px top/bottom (20px total)
+			// border: 1px top/bottom (2px total)
+			// spacing between sections (12px)
+			const contentHeight = topHeight + bottomHeight + 20 + 2 + 12;
+			const finalHeight = Math.max(contentHeight, 105);
+			onHeightChange(cardIndex, finalHeight);
+		};
+
+		measure();
+
+		const resizeObserver = new ResizeObserver(() => {
+			measure();
+		});
+
+		resizeObserver.observe(topSectionRef.current);
+		resizeObserver.observe(bottomSectionRef.current);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, [onHeightChange, cardIndex, displayMode, scheduleItem.Groups]);
 
 	const width = getWidthPercentage(scheduleItem.startTime, scheduleItem.endTime);
 
@@ -60,7 +94,7 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 	return (
 		<div
 			onClick={UpdateScheduleItem}
-			className="group absolute top-0 flex flex-col p-2.5 rounded-xl border transition-all duration-200 ease-in-out cursor-pointer hover:shadow-md hover:z-10 select-none overflow-hidden h-[105px]"
+			className="group absolute top-0 flex flex-col p-2.5 rounded-xl border transition-all duration-200 ease-in-out cursor-pointer hover:shadow-md hover:z-10 select-none overflow-hidden h-full"
 			style={{
 				left: `${left}%`,
 				width: `${width}%`,
@@ -80,7 +114,7 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 
 			<div className="flex flex-col justify-between h-full w-full text-slate-700 dark:text-slate-200 text-left">
 
-				<div className="space-y-1">
+				<div ref={topSectionRef} className="space-y-1">
 					<div className="pr-5">
 						<h4 className="font-bold text-[13px] tracking-tight text-slate-900 dark:text-white line-clamp-1 leading-none">
 							{scheduleItem.TeachingUnit.abr}
@@ -95,19 +129,19 @@ export default function ScheduleItemCard({ scheduleItem, left }: Props) {
 					</div>
 				</div>
 
-				<div className="space-y-1.5">
+				<div ref={bottomSectionRef} className="space-y-1.5">
 					<div className="text-[11px] font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1 leading-none">
 						<Clock className="h-3 w-3 text-slate-500" />
 						<span>{formattedStartTime} - {formattedEndTime}</span>
 					</div>
 
-					<div className="flex items-center gap-1 border-t border-slate-200/60 dark:border-slate-700/60 pt-1.5 overflow-hidden">
-						<GraduationCap className="h-3 w-3 text-slate-400 flex-shrink-0" />
-						<div className="flex gap-1 overflow-hidden truncate mask-linear-gradient w-full">
+					<div className="flex items-start gap-1 border-t border-slate-200/60 dark:border-slate-700/60 pt-1.5">
+						<GraduationCap className="h-3 w-3 text-slate-400 flex-shrink-0 mt-0.5" />
+						<div className="flex flex-wrap gap-1 w-full">
 							{groupsArray.map((group, index) => (
 								<span
 									key={index}
-									className="text-[9px] font-bold tracking-wide uppercase px-1 py-0.5 bg-slate-200/70 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded flex-shrink-0"
+									className="text-[9px] font-bold tracking-wide uppercase px-1 py-0.5 bg-slate-200/70 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded"
 								>
                             {group}
                          </span>
